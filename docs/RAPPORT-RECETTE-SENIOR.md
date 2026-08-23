@@ -64,4 +64,4 @@ La branche de travail doit être taguée après la passe finale et le commit pub
 
 ## 7. Conclusion
 
-**Décision senior : PASS pour staging contrôlé ; NO-GO pour production immédiate ; conformité CDC complète encore en cours.** Les corrections prioritaires ont été appliquées et leurs tests de validation sont présents. Le ZIP installable et l’archive de preuves sont générés ; la prochaine étape est la régression finale consolidée puis la synchronisation du code assaini sur GitHub. Les Lots 4 à 9 ne doivent commencer qu’après confirmation de la stratégie de staging.
+**Décision senior : PASS pour staging contrôlé ; NO-GO pour production immédiate ; conformité CDC complète encore en cours.** Les corrections prioritaires ont été appliquées, la régression finale consolidée est passée, le ZIP installable et l’archive de preuves sont générés, et le code assaini est publié sur GitHub. Les Lots 4 à 9 ne doivent commencer qu’après confirmation de la stratégie de staging.
