@@ -79,4 +79,4 @@ La procédure staging recommandée est : sauvegarde vérifiée, installation du 
 
 ## 8. Conclusion senior
 
-**Verdict : PASS pour staging contrôlé ; NO-GO pour production immédiate ; conformité CDC complète non déclarée.** Les intégrations réelles demandées sont maintenant installées et testées dans la sandbox. La prochaine étape rationnelle est la revue détaillée des Lots 4 à 9, puis la génération d’un nouveau package et d’un commit public intégrant uniquement les changements approuvés et assainis.
+**Verdict : PASS pour staging contrôlé ; NO-GO pour production immédiate ; conformité CDC complète non déclarée.** Les intégrations réelles demandées sont maintenant installées et testées dans la sandbox. La raison détaillée du statut non audité des Lots 4 à 9, lot par lot, est publiée dans [`AUDIT-LOTS-4-9-STATUS.md`](AUDIT-LOTS-4-9-STATUS.md). La prochaine étape est d’exécuter cette matrice exigence par exigence dès que le CDC v3 détaillé est disponible dans un format exploitable.
