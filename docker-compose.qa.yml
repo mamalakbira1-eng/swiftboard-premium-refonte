@@ -1,0 +1,67 @@
+services:
+  db:
+    image: mariadb:10.11
+    environment:
+      MARIADB_DATABASE: ${SB_DB_NAME:-wordpress}
+      MARIADB_USER: ${SB_DB_USER:-wordpress}
+      MARIADB_PASSWORD: ${SB_DB_PASSWORD:-change-me-local}
+      MARIADB_ROOT_PASSWORD: ${SB_DB_ROOT_PASSWORD:-change-me-root-local}
+    volumes:
+      - swiftboard_qa_db:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mariadb-admin ping -h localhost -u${SB_DB_USER:-wordpress} -p${SB_DB_PASSWORD:-change-me-local}"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
+  wordpress:
+    image: wordpress:6.8-php8.3-apache
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "${SB_PORT:-8088}:80"
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: ${SB_DB_USER:-wordpress}
+      WORDPRESS_DB_PASSWORD: ${SB_DB_PASSWORD:-change-me-local}
+      WORDPRESS_DB_NAME: ${SB_DB_NAME:-wordpress}
+      WORDPRESS_DEBUG: "1"
+      WORDPRESS_CONFIG_EXTRA: |
+        define('WP_ENVIRONMENT_TYPE', 'local');
+        define('WP_DEBUG_LOG', true);
+        define('WP_DEBUG_DISPLAY', false);
+        define('DISALLOW_FILE_EDIT', true);
+    volumes:
+      - swiftboard_qa_wp:/var/www/html
+      - ./swiftboard:/var/www/html/wp-content/themes/swiftboard:ro
+      - ./scripts:/opt/swiftboard/scripts:ro
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost/wp-login.php >/dev/null"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
+  wpcli:
+    image: wordpress:cli-php8.3
+    depends_on:
+      wordpress:
+        condition: service_healthy
+    user: "33:33"
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: ${SB_DB_USER:-wordpress}
+      WORDPRESS_DB_PASSWORD: ${SB_DB_PASSWORD:-change-me-local}
+      WORDPRESS_DB_NAME: ${SB_DB_NAME:-wordpress}
+      WORDPRESS_DEBUG: "1"
+      WP_CLI_CACHE_DIR: /tmp/.wp-cli
+    volumes:
+      - swiftboard_qa_wp:/var/www/html
+      - ./swiftboard:/var/www/html/wp-content/themes/swiftboard:ro
+      - ./scripts:/opt/swiftboard/scripts:ro
+    working_dir: /var/www/html
+    entrypoint: ["wp"]
+
+volumes:
+  swiftboard_qa_db:
+  swiftboard_qa_wp:

@@ -1,0 +1,14 @@
+.DS_Store
+.env
+.env.*
+!.env.example
+*.sql
+*.zip
+*.tar.gz
+node_modules/
+qa/test-results/
+qa/playwright-report/
+reports/
+baseline/
+wp-content/
+*.log
