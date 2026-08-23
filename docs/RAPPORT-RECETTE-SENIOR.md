@@ -69,7 +69,9 @@ La conformité complète au CDC v3 reste conditionnelle aux points suivants :
 
 ## 7. Package et traçabilité
 
-Le package installable précédent contient uniquement le thème sous la forme `swiftboard/`. Les nouveaux fichiers de recette avancée sont conservés dans la sandbox afin de permettre la validation et seront synchronisés au dépôt public uniquement après audit de secrets et commit séparé.
+Le package installable final `deliverables/swiftboard-premium-v11.0.6-senior-extensions.zip` contient uniquement le thème validé sous la forme `swiftboard/`, avec 309 fichiers. Son SHA-256 est `b7e8c0d956ebbc1bee67cdbf95b0d1783aa1f9194c5ef5c6b12cf8e3755ea4f9`. L’archive a été testée par `unzip -t`.
+
+Les nouveaux fichiers de recette avancée sont également synchronisés au dépôt public après audit de secrets et commit séparé.
 
 Les preuves locales sont dans `reports/extensions/`, `reports/multisite/`, `reports/oauth/` et les suites Playwright correspondantes. Le plan d’extension est documenté dans `reports/sandbox-extension-plan.md`. Les snapshots SQL et les volumes Docker restent privés.
 
