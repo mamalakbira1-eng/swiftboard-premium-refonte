@@ -1,0 +1,159 @@
+/*
+ * SwiftBoard — CSS archive (non charge).
+ *
+ * Ces regles ciblaient des classes absentes du balisage rendu. Elles ne
+ * sont PAS supprimees : si un template reintroduit une de ces classes,
+ * recopier le bloc concerne dans le fichier indique en commentaire.
+ *
+ * Archive le 17/08/2026
+ */
+
+/* Provenance : assets/css/main.css — selecteur .sb-home-hero-content */
+.sb-home-hero-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+/* Provenance : assets/css/main.css — selecteur .sb-home-hero-stats */
+.sb-home-hero-stats {
+        gap: 16px;
+        justify-content: center;
+    }
+
+/* Provenance : assets/css/main.css — selecteur .sb-sidebar-about-name */
+/* About box */
+.sb-sidebar-about-name {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 4px;
+}
+
+/* Provenance : assets/css/main.css — selecteur .sb-sort-pill */
+[data-theme="dark"] .sb-sort-pill {
+    background: var(--color-bg-alt);
+    border-color: var(--color-border);
+    color: var(--color-text-muted);
+}
+
+/* Provenance : assets/css/main.css — selecteur .sb-sort-pill */
+[data-theme="dark"] .sb-sort-pill.active {
+    background: var(--color-primary);
+    color: #fff;
+    border-color: var(--color-primary);
+}
+
+/* Provenance : assets/css/main.css — selecteur .sb-topic-title */
+[data-theme="dark"] .sb-topic-title a {
+    color: var(--color-text);
+}
+
+/* Provenance : assets/css/main.css — selecteur .sb-topic-title */
+[data-theme="dark"] .sb-topic-title a:hover {
+    color: var(--color-primary);
+}
+
+/* Provenance : assets/css/main.css — selecteur .sb-topic-meta */
+[data-theme="dark"] .sb-topic-meta {
+    color: var(--color-text-muted);
+}
+
+/* Provenance : assets/css/main.css — selecteur .sb-topic-meta */
+/* Ensure sufficient color contrast for muted text */
+.sb-topic-meta,
+.sb-text-muted,
+.card-meta {
+    color: #525252; /* 7:1 contrast on white, was #6b6b75 (4.5:1) */
+}
+
+/* Provenance : assets/css/main.css — selecteur .sb-footer */
+[data-theme="dark"] .sb-footer {
+    background: var(--color-bg-alt);
+    border-color: var(--color-border);
+}
+
+/* Provenance : assets/css/main.css — selecteur .sb-breadcrumb-separator */
+[dir="rtl"] .sb-breadcrumb-separator {
+    transform: scaleX(-1);
+}
+
+/* Provenance : assets/css/main.css — selecteur .sb-text-muted */
+/* Ensure sufficient color contrast for muted text */
+.sb-topic-meta,
+.sb-text-muted,
+.card-meta {
+    color: #525252; /* 7:1 contrast on white, was #6b6b75 (4.5:1) */
+}
+
+/* Provenance : assets/css/main.css — selecteur .sb-vote-column */
+.sb-vote-column {
+        width: 32px;
+        padding: 8px 4px;
+    }
+
+/* Provenance : assets/css/main.css — selecteur .sb-vote-column */
+.sb-vote-column {
+        width: 36px;
+    }
+
+/* Provenance : assets/css/main.css — selecteur .sb-card-title */
+.sb-card-title {
+        font-size: 0.9rem;
+    }
+
+/* Provenance : assets/css/main.css — selecteur .sb-card-title */
+.sb-card-title {
+        font-size: 0.95rem;
+    }
+
+/* Provenance : assets/css/main.css — selecteur .sb-card-excerpt */
+.sb-card-excerpt {
+        font-size: 0.8rem;
+        -webkit-line-clamp: 2;
+    }
+
+/* Provenance : assets/css/reddit-refonte.css — selecteur .sb-r-action */
+/* Pilules commentaires / partager / repost */
+.sb-r-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 36px;
+    padding: 0 14px;
+    border: 0;
+    border-radius: var(--sb-r-radius-pill);
+    background: var(--color-bg-alt);
+    color: var(--color-text-light);
+    font-size: .8rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Provenance : assets/css/reddit-refonte.css — selecteur .sb-r-action */
+.sb-r-action { height: 34px; padding: 0 12px; }
+
+/* Provenance : assets/css/reddit-refonte.css — selecteur .sb-r-aside-links */
+/* Liens de pied de sidebar — capture 4 */
+.sb-r-aside-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 12px;
+    padding: 8px 16px 16px;
+    font-size: .72rem;
+}
+
+/* Provenance : assets/css/reddit-refonte.css — selecteur .sb-r-nav-badge */
+/* --- Pastille de communaute dans la nav laterale --- */
+.sb-r-nav-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    color: var(--color-text-on-primary);
+    font-size: .62rem;
+    font-weight: 700;
+}

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SwiftBoard 11.0.5 — Envato User Guide</title>
+<style>body{font:16px/1.6 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;max-width:1000px;margin:auto;padding:32px;color:#172033}h1,h2{color:#0b4f8a;line-height:1.2}h2{margin-top:2.4rem;border-bottom:1px solid #d9e2ec;padding-bottom:8px}code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,monospace}code{background:#eef3f7;padding:2px 5px;border-radius:4px}pre{background:#101820;color:#e8f1f7;padding:16px;overflow:auto;border-radius:8px}table{width:100%;border-collapse:collapse;margin:16px 0}th,td{border:1px solid #cbd5e1;text-align:left;padding:9px;vertical-align:top}th{background:#eaf2f8}.note{border-left:4px solid #1769aa;background:#f0f7fc;padding:12px 16px}.warn{border-left:4px solid #b45309;background:#fff8eb;padding:12px 16px}</style>
+</head>
+<body>
+<h1>SwiftBoard 11.0.5</h1>
+<p><strong>Envato customer guide</strong> — A Reddit-style WordPress forum theme for bbPress.</p>
+<div class="note"><strong>Package scope.</strong> This archive contains the installable theme. WordPress, bbPress, SMTP, OAuth provider accounts, Redis, a CDN and hosting services are not included and must be configured separately.</div>
+<h2>1. Requirements and installation</h2>
+<table><tr><th>Component</th><th>Baseline</th></tr><tr><td>WordPress</td><td>6.4 or later; verify the production version before deployment.</td></tr><tr><td>PHP</td><td>8.0 or later. PHP 8.4 is the primary QA runtime for this release.</td></tr><tr><td>bbPress</td><td>Required for forums, topics and replies.</td></tr><tr><td>HTTPS</td><td>Strongly recommended, and required for secure OAuth and production authentication.</td></tr></table>
+<p>Install WordPress on staging first. Install and activate bbPress. In <strong>Appearance → Themes → Add New → Upload Theme</strong>, upload <code>swiftboard-v11.0.5-envato-installable.zip</code>, install it and activate SwiftBoard. Go to <strong>Settings → Permalinks</strong> and click <strong>Save Changes</strong> once. Verify that the forum archive, forum, topic, reply, search, profile and login pages load before importing content.</p>
+<h2>2. bbPress, roles and permissions</h2>
+<p>Create forums from <strong>Forums → New Forum</strong>. Verify at least one published forum, topic and reply. The expected role model is visitor, member, author, moderator and administrator. Give moderators only the bbPress moderation capabilities they need. Never grant administrator rights to make a forum feature work.</p>
+<table><tr><th>Role</th><th>Expected behavior</th></tr><tr><td>Visitor</td><td>Read public content. Vote mutations must be rejected.</td></tr><tr><td>Member</td><td>Create permitted content and use authenticated mutations with a valid REST nonce.</td></tr><tr><td>Author</td><td>Member behavior plus the WordPress author capabilities granted by the site owner.</td></tr><tr><td>Moderator</td><td>Moderate bbPress content without administrator access.</td></tr><tr><td>Administrator</td><td>Configure the site, import data and manage security settings.</td></tr></table>
+<h2>3. Migration V2 and bulk import</h2>
+<p>Migration V2 preserves stable source identifiers and imported dates. Import topics and replies, build the source-to-WordPress ID map, then apply reply relationships and mentions in a second pass. Rows may be out of order.</p>
+<pre>source_reply_id,source_topic_id,content,author,reply_to_source_id,date
+r-100,t-10,"First reply",alice,r-90,2026-01-04T12:30:00Z</pre>
+<p>The CSV date is the content publication date; upload time does not replace it. Votes are imported as anonymous aggregate counts. Voter identities are not imported. Topic views use the dedicated SwiftBoard view value and may include an explicit imported bonus. Karma follows the SwiftBoard bonus contract and is not silently converted into an absolute final score.</p>
+<h2>4. Images</h2>
+<p>Use HTTPS image URLs and confirm that you have permission to redistribute them. The importer and upload flow must validate MIME type, extension, size and dimensions. Never import executable files as images. Keep a record of image licenses for commercial distribution.</p>
+<h2>5. Vote security contract</h2>
+<p>The documented contract is: an unauthenticated visitor receives <code>401</code>; an authenticated user without the required REST nonce receives <code>403</code>; an authenticated user with the required capability, valid nonce and valid parameters receives <code>200</code>. Anonymous aggregate counts may be migrated, but voter identities are not stored by this contract.</p>
+<h2>6. OAuth and social login</h2>
+<p>Keep provider secrets outside the theme package. Use HTTPS, a state value bound to the initiating session, provider-subject verification, a strict redirect URI and server-side token validation. Do not place client secrets in JavaScript, CSV files, screenshots or support requests.</p>
+<h2>7. SMTP, notifications and WP-Cron</h2>
+<p>Configure SMTP with a maintained WordPress mail solution or your host. On staging, test password reset, account notifications, moderation notices and digest emails using a sink mailbox. Verify WP-Cron or a system cron for digest, notifications, cleanup and cache maintenance. Do not put SMTP credentials in the theme or the developer archive.</p>
+<h2>8. Cache, CDN and security headers</h2>
+<p>Do not share-cache private pages or user-specific nonces. Configure cache variation by cookie and purge rules after mutations. Add the following header at the reverse proxy or web server for SwiftBoard static assets:</p>
+<pre>add_header X-Content-Type-Options "nosniff" always;</pre>
+<p>Verify JavaScript, CSS, AVIF/WebP and font responses through the real staging domain after CDN purge:</p>
+<pre>curl --fail --silent --show-error --head \
+  https://staging.example.com/wp-content/themes/swiftboard/assets/js/main.js \
+  | grep -i '^X-Content-Type-Options: *nosniff$'</pre>
+<h2>9. Privacy, GDPR, uninstall and rollback</h2>
+<p>Back up database, theme files, uploads and configuration before an upgrade or destructive action. Export and delete a test account on staging. A theme switch must not silently delete SwiftBoard or bbPress data. Use the explicit administrator-confirmed cleanup procedure and retain a restorable backup. Test a complete rollback before production.</p>
+<h2>10. Troubleshooting</h2>
+<table><tr><th>Problem</th><th>Check first</th></tr><tr><td>Forum URLs return 404</td><td>Activate bbPress and save permalinks.</td></tr><tr><td>OAuth fails</td><td>Check HTTPS, redirect URI, state validation and server time.</td></tr><tr><td>Emails are missing</td><td>Check SMTP credentials, sender policy, delivery logs and spam quarantine.</td></tr><tr><td>Users see private data</td><td>Temporarily disable shared cache and check cookies, Vary and purge rules.</td></tr><tr><td>Import stops</td><td>Check memory, timeout, upload limits and resume from the last stable source ID.</td></tr><tr><td>Dark mode looks wrong</td><td>Clear browser/CDN caches and verify CSS variables and contrast.</td></tr></table>
+<h2>11. Support and release information</h2>
+<p>When contacting support, include SwiftBoard version, WordPress, PHP, bbPress, browser, URL path, reproducible steps and a redacted log. Never send passwords, OAuth secrets, SMTP credentials, cookies or full database exports.</p>
+<p>SwiftBoard 11.0.5 includes search output escaping, OAuth and vote hardening, non-destructive theme lifecycle handling, WPCS/PHPUnit QA improvements and bounded DAST tooling. The developer archive contains the engineering reports and CI files; the Envato archive is the installable customer package.</p>
+</body>
+</html>

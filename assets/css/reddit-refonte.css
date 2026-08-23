@@ -1,0 +1,2063 @@
+@charset "UTF-8";
+/* ==========================================================================
+   SwiftBoard — Refonte UI inspirée Reddit (2026)
+   Remplace l'overlay v11.0.5 (637 lignes) de main.css.
+
+   Principes :
+   1. AUCUN display:none sur du contenu. Le mobile réagence, il ne masque pas.
+   2. AUCUNE couleur en dur. Tout passe par les tokens --color-* du thème,
+      donc le Customizer reste pleinement opérant.
+   3. AUCUN !important, hors deux resets de sécurité explicitement commentés.
+   4. Breakpoints unifiés : 480 / 768 / 1024. Rien d'autre.
+   ========================================================================== */
+
+:root {
+    --sb-r-gap: 16px;
+    --sb-r-radius: 16px;
+    --sb-r-radius-pill: 999px;
+    --sb-r-card-pad: 12px;
+    --sb-r-nav-w: 272px;
+    --sb-r-aside-w: 316px;
+    --sb-r-feed-max: 760px;
+    --sb-r-header-h: 56px;
+    --sb-r-hover: var(--color-bg-hover);
+    --sb-r-join-bg: var(--color-text);
+    --sb-r-join-fg: var(--color-bg);
+    --sb-r-cta-bg: var(--color-danger);
+    --sb-r-cta-fg: #fff;
+}
+
+/* --------------------------------------------------------------------------
+   1. GRILLE 3 COLONNES  (desktop connecté = capture 5)
+   nav gauche | feed centré | aside droite
+   -------------------------------------------------------------------------- */
+/* Grille 2 colonnes par defaut : feed + aside.
+   C'est la structure reellement rendue par front-page.php, qui n'emet pas
+   de nav laterale. La 3e colonne n'est activee que si .sb-r-nav existe. */
+.sb-home-container {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) var(--sb-r-aside-w);
+    gap: 24px;
+    align-items: start;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 16px 24px 48px;
+}
+
+/* Variante 3 colonnes : uniquement quand une nav laterale est presente. */
+.sb-home-container:has(> .sb-r-nav),
+.sb-home-container:has(> .sb-r-signup-card) {
+    grid-template-columns: var(--sb-r-nav-w) minmax(0, 1fr) var(--sb-r-aside-w);
+    max-width: 1600px;
+}
+
+.sb-home-main {
+    width: 100%;
+    max-width: var(--sb-r-feed-max);
+    margin: 0 auto;
+    min-width: 0; /* laisse le feed rétrécir sans déborder */
+}
+
+/* --------------------------------------------------------------------------
+   2. NAV GAUCHE  (capture 5 : Accueil / Populaires / Actualités / Explorer)
+   -------------------------------------------------------------------------- */
+.sb-r-nav {
+    position: sticky;
+    top: calc(var(--sb-r-header-h) + 8px);
+    max-height: calc(100vh - var(--sb-r-header-h) - 16px);
+    overflow-y: auto;
+    padding: 8px 0;
+    scrollbar-width: thin;
+}
+
+.sb-r-nav-list { list-style: none; margin: 0; padding: 0 8px; }
+
+.sb-r-nav-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    color: var(--color-text);
+    text-decoration: none;
+    font-size: .94rem;
+    line-height: 1.2;
+}
+
+.sb-r-nav-link:hover,
+.sb-r-nav-link:focus-visible { background: var(--sb-r-hover); }
+
+.sb-r-nav-link[aria-current="page"] {
+    background: var(--color-bg-alt);
+    font-weight: 600;
+}
+
+.sb-r-nav-icon { flex: 0 0 20px; font-size: 1.15rem; line-height: 1; }
+
+.sb-r-nav-sep {
+    height: 1px;
+    margin: 12px 16px;
+    background: var(--color-border-light);
+    border: 0;
+}
+
+.sb-r-nav-heading {
+    padding: 8px 22px 4px;
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+}
+
+/* --------------------------------------------------------------------------
+   3. BARRE DE TRI  (« Meilleurs / Partout / disposition »)
+   -------------------------------------------------------------------------- */
+.sb-sort-bar,
+.sb-home-main .sb-sort-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    /* La base historique posait position:sticky + z-index:50 + ombre ici, ce qui
+       faisait chevaucher la barre sur la première carte. On repasse en flux. */
+    position: static;
+    z-index: auto;
+    box-shadow: none;
+    padding: 4px 0 12px;
+    margin-bottom: 8px;
+    background: transparent;
+    border: 0;
+    border-radius: 0;
+    border-bottom: 1px solid var(--color-border-light);
+}
+
+.sb-sort-tabs {
+    display: flex;
+    gap: 4px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    overscroll-behavior-inline: contain;
+}
+.sb-sort-tabs::-webkit-scrollbar { width: 0; height: 0; }
+
+.sb-sort-tab {
+    flex: 0 0 auto;
+    padding: 8px 14px;
+    border-radius: var(--sb-r-radius-pill);
+    font-size: .875rem;
+    font-weight: 600;
+    color: var(--color-text-light);
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.sb-sort-tab:hover { background: var(--sb-r-hover); }
+.sb-sort-tab.active { background: var(--color-bg-alt); color: var(--color-text); }
+
+/* --------------------------------------------------------------------------
+   4. CARTE DE POST  (captures 1/3/4/5)
+   Carte plate séparée par un filet, arrondie au survol — le style Reddit 2026.
+   -------------------------------------------------------------------------- */
+.sb-home-card,
+.sb-post-card {
+    position: relative;
+    /* La carte reelle contient .sb-post-votes + .sb-post-body cote a cote.
+       On garde donc une rangee flex : passer en block detachait la colonne
+       de vote du contenu et la etirait sur toute la hauteur. */
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 8px;
+    padding: var(--sb-r-card-pad) 8px;
+    border: 0;
+    border-bottom: 1px solid var(--color-border-light);
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    transition: background .12s ease;
+}
+
+@media (hover: hover) {
+    .sb-home-card:hover,
+    .sb-post-card:hover {
+        background: var(--color-bg-alt);
+        border-radius: var(--sb-r-radius);
+        border-bottom-color: transparent;
+    }
+}
+
+/* Ligne méta : avatar · r/sub · temps · bouton Rejoindre · ··· */
+.sb-post-meta-top {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    font-size: .75rem;
+    color: var(--color-text-muted);
+    flex-wrap: wrap;
+}
+
+.sb-forum-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 600;
+    color: var(--color-text);
+    text-decoration: none;
+}
+.sb-forum-pill:hover { text-decoration: underline; }
+
+.sb-forum-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    color: var(--color-text-on-primary);
+    font-size: .65rem;
+    font-weight: 700;
+}
+
+.sb-meta-sep { color: var(--color-text-muted); }
+
+/* Bouton « Rejoindre » noir arrondi — captures 1, 3, 5 */
+.sb-r-join {
+    margin-inline-start: auto;
+    padding: 6px 16px;
+    border: 0;
+    border-radius: var(--sb-r-radius-pill);
+    background: var(--sb-r-join-bg);
+    color: var(--sb-r-join-fg);
+    font-size: .8rem;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+}
+.sb-r-join:hover { opacity: .85; }
+
+.sb-post-title {
+    margin: 0 0 8px;
+    font-size: 1.15rem;
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--color-text);
+}
+.sb-post-title a { color: inherit; text-decoration: none; }
+
+.sb-post-excerpt,
+.sb-post-content {
+    font-size: .9rem;
+    line-height: 1.5;
+    color: var(--color-text-light);
+}
+
+/* Image : bloc de prévisualisation dédié, jamais rognée sur le texte */
+.sb-post-image-link { display: block; margin: 8px 0; }
+
+.sb-post-image {
+    display: block;
+    width: 100%;
+    max-height: 520px;
+    object-fit: cover;
+    border-radius: var(--sb-r-radius);
+    border: 1px solid var(--color-border-light);
+    background: var(--color-bg-alt);
+}
+
+/* --------------------------------------------------------------------------
+   5. BARRE D'ACTIONS EN PILULES  (capture 1 : ⬆2,1k⬇ · 💬58 · ↻1 · ↗Part.)
+   -------------------------------------------------------------------------- */
+.sb-post-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+.sb-post-actions::-webkit-scrollbar { width: 0; height: 0; }
+.sb-post-actions > * { flex: 0 0 auto; }
+
+/* Groupe de vote en pilule horizontale — UNIQUEMENT dans la barre d'actions.
+   Quand .sb-post-votes est un enfant direct de la carte (colonne de vote
+   laterale, structure historique de reddit-layout.php), on n'y touche pas :
+   la regle ci-dessous ne cible que le cas "dans la barre d'actions". */
+.sb-post-actions > .sb-post-votes {
+    display: inline-flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    width: auto;
+    min-width: 0;
+    padding: 2px;
+    border-radius: var(--sb-r-radius-pill);
+    background: var(--color-bg-alt);
+}
+
+.sb-post-actions > .sb-post-votes .sb-vote-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 32px;
+    width: 32px;
+    min-width: 32px;
+    height: 32px;
+    padding: 0;
+    overflow: visible;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--color-text-light);
+    cursor: pointer;
+    font-size: .8rem;
+    line-height: 1;
+    transform: none;
+}
+.sb-post-actions > .sb-post-votes .sb-vote-btn:hover { background: var(--color-bg-hover); }
+.sb-post-actions > .sb-post-votes .sb-vote-btn.up.active {
+    background: var(--color-upvote);
+    color: var(--color-text-on-primary);
+    transform: none;
+}
+.sb-post-actions > .sb-post-votes .sb-vote-btn.down.active {
+    background: var(--color-downvote);
+    color: var(--color-text-on-primary);
+    transform: none;
+}
+
+.sb-post-actions > .sb-post-votes .sb-vote-count {
+    min-width: 2.5ch;
+    padding: 0 2px;
+    text-align: center;
+    font-size: .8rem;
+    font-weight: 700;
+    line-height: 1;
+    white-space: nowrap;
+    color: var(--color-text);
+}
+.sb-vote-count.up   { color: var(--color-upvote); }
+.sb-vote-count.down { color: var(--color-downvote); }
+
+
+.sb-r-action:hover { background: var(--color-bg-hover); color: var(--color-text); }
+
+/* --------------------------------------------------------------------------
+   6. ASIDE DROITE  (capture 4 « Communautés populaires » / capture 5 « Récentes »)
+   -------------------------------------------------------------------------- */
+.sb-home-sidebar {
+    position: sticky;
+    top: calc(var(--sb-r-header-h) + 8px);
+    max-height: calc(100vh - var(--sb-r-header-h) - 16px);
+    overflow-y: auto;
+    scrollbar-width: thin;
+}
+
+.sb-sidebar-card {
+    margin-bottom: var(--sb-r-gap);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--sb-r-radius);
+    background: var(--color-bg-alt);
+    overflow: hidden;
+}
+
+.sb-sidebar-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 14px 16px 6px;
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    background: transparent;
+}
+
+/* La variante `.sb-header-blue` ne peint plus de bandeau : voir bloc 13,
+   parite Reddit (titres de section en petites majuscules grises). */
+
+.sb-sidebar-card-body { padding: 4px 8px 12px; }
+
+.sb-sidebar-forum-item,
+.sb-sidebar-hot-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px;
+    border-radius: 10px;
+    color: var(--color-text);
+    text-decoration: none;
+}
+.sb-sidebar-forum-item:hover,
+.sb-sidebar-hot-item:hover { background: var(--sb-r-hover); }
+
+.sb-sidebar-forum-icon {
+    flex: 0 0 32px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: var(--color-primary);
+}
+
+.sb-sidebar-forum-info { min-width: 0; }
+
+.sb-sidebar-forum-name {
+    display: block;
+    font-size: .84rem;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sb-sidebar-forum-count { font-size: .72rem; color: var(--color-text-muted); }
+
+
+.sb-r-aside-links a { color: var(--color-text-muted); text-decoration: none; }
+.sb-r-aside-links a:hover { text-decoration: underline; }
+
+/* --------------------------------------------------------------------------
+   7. CARTE DE CONVERSION ANONYME  (capture 4, colonne gauche)
+   -------------------------------------------------------------------------- */
+.sb-r-signup-card {
+    position: sticky;
+    top: calc(var(--sb-r-header-h) + 8px);
+    padding: 20px;
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--sb-r-radius);
+    background: var(--color-bg-alt);
+    text-align: center;
+}
+
+.sb-r-signup-title {
+    margin: 0 0 16px;
+    font-size: 1.3rem;
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.sb-r-signup-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 12px 16px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--sb-r-radius-pill);
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-size: .9rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+}
+.sb-r-signup-btn:hover { background: var(--color-bg-hover); }
+
+.sb-r-signup-legal {
+    margin-top: 12px;
+    font-size: .72rem;
+    line-height: 1.5;
+    color: var(--color-text-muted);
+}
+.sb-r-signup-legal a { color: var(--color-link); }
+
+/* CTA « Se connecter » orange plein — captures 3 et 4 */
+.sb-r-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 18px;
+    border: 0;
+    border-radius: var(--sb-r-radius-pill);
+    background: var(--sb-r-cta-bg);
+    color: var(--sb-r-cta-fg);
+    font-size: .875rem;
+    font-weight: 700;
+    text-decoration: none;
+    cursor: pointer;
+}
+.sb-r-cta:hover { filter: brightness(.92); }
+
+/* --------------------------------------------------------------------------
+   8. HERO — conservé, densifié. Jamais masqué.
+   -------------------------------------------------------------------------- */
+.sb-home-hero-compact {
+    margin-bottom: var(--sb-r-gap);
+    border-radius: var(--sb-r-radius);
+    background: var(--color-primary);
+    color: var(--color-text-on-primary);
+    overflow: hidden;
+}
+
+.sb-home-hero-compact-inner {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 20px;
+}
+
+.sb-home-hero-name,
+.sb-home-hero-desc { color: var(--color-text-on-primary); }
+.sb-home-hero-desc { opacity: .9; font-size: .85rem; }
+
+.sb-home-hero-logo-icon {
+    flex: 0 0 44px;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--color-primary-dark);
+    color: var(--color-text-on-primary);
+}
+
+.sb-home-hero-compact .sb-home-btn-secondary {
+    background: var(--color-bg);
+    border-color: var(--color-bg);
+    color: var(--color-primary-dark);
+}
+
+/* ==========================================================================
+   9. RESPONSIVE — on réagence, on ne masque JAMAIS
+   ========================================================================== */
+
+/* ---- ≤ 1024 px : l'aside droite passe SOUS le feed (au lieu de disparaître) */
+@media (max-width: 1024px) {
+    .sb-home-container {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 20px;
+    }
+
+    .sb-home-container:has(> .sb-r-nav),
+    .sb-home-container:has(> .sb-r-signup-card) {
+        grid-template-columns: var(--sb-r-nav-w) minmax(0, 1fr);
+    }
+
+    .sb-home-sidebar {
+        grid-column: 1 / -1;
+        position: static;
+        max-height: none;
+        overflow: visible;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: var(--sb-r-gap);
+        margin-top: 24px;
+    }
+
+    .sb-home-sidebar .sb-sidebar-card { margin-bottom: 0; }
+}
+
+/* ---- ≤ 768 px : la nav gauche devient un rail horizontal scrollable */
+@media (max-width: 768px) {
+    /* Le selecteur :has() du palier 1024 est plus specifique : il faut le
+       reprendre ici, sinon la nav garde sa colonne de 272px et ecrase le
+       feed (mesure : 40px de large a 360px). */
+    .sb-home-container,
+    .sb-home-container:has(> .sb-r-nav),
+    .sb-home-container:has(> .sb-r-signup-card) {
+        grid-template-columns: minmax(0, 1fr);
+        padding: 8px 12px 40px;
+        gap: 0;
+    }
+
+    .sb-r-nav {
+        position: static;
+        max-height: none;
+        margin-bottom: 12px;
+        border-bottom: 1px solid var(--color-border-light);
+
+        /* overflow-x: hidden et non « visible ».
+           La liste interne defile horizontalement (overflow-x: auto). Avec un
+           parent en « visible », le depassement s'echappe du conteneur et
+           elargit toute la page : le visiteur peut faire glisser le site
+           entier vers la gauche. Constate en mobile 374 px : 503 px de
+           contenu pour 374 px d'ecran, .sb-r-nav-link en cause.
+           min-width: 0 est indispensable : sans lui, un enfant de grille
+           refuse de retrecir sous la largeur de son contenu. */
+        min-width: 0;
+        overflow-x: hidden;
+        overflow-y: visible;
+    }
+
+    .sb-r-nav-list {
+        display: flex;
+        gap: 6px;
+        /* Le defilement reste possible DANS le rail, sans deborder au-dehors. */
+        max-width: 100%;
+        overflow-x: auto;
+        scrollbar-width: none;
+        padding: 0 0 10px;
+        overscroll-behavior-inline: contain;
+    }
+    .sb-r-nav-list::-webkit-scrollbar { width: 0; height: 0; }
+
+    .sb-r-nav-link {
+        flex: 0 0 auto;
+        padding: 8px 14px;
+        border-radius: var(--sb-r-radius-pill);
+        background: var(--color-bg-alt);
+        font-size: .85rem;
+        white-space: nowrap;
+    }
+
+    /* Titres de section et séparateurs : superflus en rail horizontal.
+       Seuls éléments retirés — ce sont des ornements, pas du contenu. */
+    .sb-r-nav-heading,
+    .sb-r-nav-sep { display: none; }
+
+    /* La carte d'inscription rejoint le flux, en tête de feed */
+    .sb-r-signup-card {
+        position: static;
+        margin-bottom: var(--sb-r-gap);
+    }
+
+    .sb-post-title { font-size: 1.05rem; }
+
+    .sb-post-image { max-height: 420px; }
+
+    /* Sidebar en une colonne sous le feed — toutes les cartes restent visibles */
+    .sb-home-sidebar { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* ---- ≤ 480 px : densité maximale, contenu toujours intégral */
+@media (max-width: 480px) {
+    .sb-home-container { padding: 8px 8px 32px; }
+
+    .sb-home-card,
+    .sb-post-card { padding: 12px 8px; }
+
+    .sb-post-title { font-size: 1rem; }
+
+    .sb-home-hero-compact-inner {
+        flex-wrap: wrap;
+        padding: 14px 16px;
+    }
+
+
+
+    .sb-vote-btn { width: 30px; height: 30px; }
+
+    .sb-post-image { max-height: 340px; border-radius: 12px; }
+}
+
+/* ==========================================================================
+   10. MODE SOMBRE — via le contrat data-theme existant, aucune couleur en dur
+   ========================================================================== */
+:root[data-theme="dark"] {
+    --sb-r-join-bg: var(--color-bg);
+    --sb-r-join-fg: var(--color-text);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+        --sb-r-join-bg: var(--color-bg);
+        --sb-r-join-fg: var(--color-text);
+    }
+}
+
+/* Contraste WCAG AA du panneau avatar bbPress en sombre — via tokens */
+:root[data-theme="dark"] .entry-content fieldset.bbp-form,
+:root[data-theme="dark"] .entry-content .sb-avatar-picker {
+    background: var(--color-bg-card);
+    color: var(--color-text);
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .entry-content fieldset.bbp-form,
+    :root:not([data-theme="light"]) .entry-content .sb-avatar-picker {
+        background: var(--color-bg-card);
+        color: var(--color-text);
+    }
+}
+
+/* ==========================================================================
+   11. ACCESSIBILITÉ
+   ========================================================================== */
+.sb-r-nav-link:focus-visible,
+.sb-sort-tab:focus-visible,
+.sb-r-action:focus-visible,
+.sb-vote-btn:focus-visible,
+.sb-r-join:focus-visible,
+.sb-r-cta:focus-visible,
+.sb-r-signup-btn:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .sb-home-card,
+    .sb-post-card,
+    .sb-r-action,
+    .sb-vote-btn { transition: none; }
+}
+
+/* ==========================================================================
+   12. AJUSTEMENTS SUR STRUCTURE REELLE DU THEME
+   Constates en auditant une installation en production : la carte rendue par
+   reddit-layout.php est `.sb-post-votes` + `.sb-post-body`, et non la barre
+   d'actions horizontale de la maquette. Ces regles alignent les deux.
+   ========================================================================== */
+
+/* Colonne de vote laterale : compacte, collee en haut, jamais etiree. */
+.sb-post-card > .sb-post-votes,
+.sb-home-card > .sb-post-votes {
+    flex: 0 0 auto;
+    align-self: flex-start;
+    width: 40px;
+    min-width: 40px;
+    padding: 2px 0;
+    gap: 0;
+    background: transparent;
+    border-radius: var(--sb-r-radius-pill);
+}
+
+.sb-post-card > .sb-post-votes .sb-vote-btn,
+.sb-home-card > .sb-post-votes .sb-vote-btn {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    padding: 0;
+    border-radius: 50%;
+    transform: none;
+}
+
+.sb-post-card > .sb-post-votes .sb-vote-count,
+.sb-home-card > .sb-post-votes .sb-vote-count {
+    padding: 2px 0;
+    font-size: .78rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+/* Le corps occupe tout l'espace restant sans deborder. */
+.sb-post-card > .sb-post-body,
+.sb-home-card > .sb-post-body {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+/* Vote sur mobile : le theme rend DEUX systemes de vote par carte —
+   `.sb-post-votes` (colonne laterale, desktop) et `.sb-card-votes-inline`
+   (rangee compacte, prevue pour le mobile). La base masque la colonne en
+   petit ecran precisement pour eviter le doublon.
+   Verifie sur une installation WordPress 7.0.4 + bbPress 2.6.14 : reafficher
+   la colonne faisait apparaitre les fleches EN DOUBLE. On conserve donc le
+   comportement d'origine, en s'assurant que la variante inline est bien
+   visible et lisible — la fonction de vote reste accessible partout. */
+@media (max-width: 640px) {
+    .sb-post-card,
+    .sb-home-card {
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .sb-post-card > .sb-post-body,
+    .sb-home-card > .sb-post-body { width: 100%; }
+
+    .sb-post-actions .sb-card-votes-inline {
+        display: inline-flex;
+        align-items: center;
+        gap: 2px;
+        padding: 2px;
+        border-radius: var(--sb-r-radius-pill);
+        background: var(--color-bg-alt);
+    }
+
+    .sb-post-actions .sb-comment-vote-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 30px;
+        min-width: 30px;
+        height: 30px;
+        border: 0;
+        border-radius: 50%;
+        background: transparent;
+        color: var(--color-text-light);
+        cursor: pointer;
+    }
+
+    .sb-post-actions .sb-comment-vote-count {
+        min-width: 2ch;
+        text-align: center;
+        font-size: .78rem;
+        font-weight: 700;
+    }
+}
+
+/* ==========================================================================
+   13. NEUTRALISATION CHROMATIQUE — parite Reddit
+   Reference : captures Reddit 2026 (reference/reddit-desktop-connecte.png).
+   Reddit n'emploie AUCUN aplat de couleur sur les surfaces : fond blanc,
+   cartes bordees de gris, titres de section en petites majuscules grises.
+   La couleur est reservee aux ACTIONS (bouton primaire, vote actif).
+   Les tokens --color-* restent la source unique : le Customizer continue
+   de piloter la couleur de marque, qui ne sert plus qu'aux accents.
+   ========================================================================== */
+
+/* --- Hero : de la banniere pleine couleur a un simple bandeau discret --- */
+.sb-home-hero-compact {
+    margin-bottom: 12px;
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--sb-r-radius);
+    background: var(--color-bg);
+    color: var(--color-text);
+}
+
+.sb-home-hero-compact-inner {
+    gap: 12px;
+    padding: 12px 16px;
+    /* Le degrade de marque est porte par `-inner`, pas par le conteneur. */
+    background: none;
+    background-color: transparent;
+    background-image: none;
+    color: var(--color-text);
+}
+
+.sb-home-hero-compact .sb-home-hero-name {
+    color: var(--color-text);
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.sb-home-hero-compact .sb-home-hero-desc {
+    color: var(--color-text-muted);
+    opacity: 1;
+    font-size: .8rem;
+}
+
+/* Seule pastille coloree conservee : elle joue le role de logo. */
+.sb-home-hero-compact .sb-home-hero-logo-icon {
+    flex: 0 0 36px;
+    width: 36px;
+    height: 36px;
+    background: var(--color-primary);
+    color: var(--color-text-on-primary);
+}
+
+/* Le bouton d'action garde la couleur de marque : c'est une ACTION. */
+.sb-home-hero-compact .sb-home-btn-primary,
+.sb-home-hero-compact .sb-home-btn-secondary {
+    padding: 7px 16px;
+    border-radius: var(--sb-r-radius-pill);
+    font-size: .82rem;
+    font-weight: 700;
+}
+
+.sb-home-hero-compact .sb-home-btn-secondary {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: var(--color-text-on-primary);
+}
+
+.sb-home-hero-compact .sb-home-btn-secondary:hover,
+.sb-home-hero-compact .sb-home-btn-secondary:focus-visible {
+    background: var(--color-primary-hover);
+    border-color: var(--color-primary-hover);
+    color: var(--color-text-on-primary);
+}
+
+/* --- Sidebar : en-tetes en petites majuscules grises, plus de bandeaux --- */
+.sb-home-sidebar .sb-sidebar-card {
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--sb-r-radius);
+    background: var(--color-bg);
+}
+
+.sb-home-sidebar .sb-sidebar-card-header,
+.sb-home-sidebar .sb-sidebar-card-header.sb-header-blue {
+    padding: 14px 16px 4px;
+    /* La base peint ces en-tetes avec un linear-gradient : `background-color`
+       seul ne l'efface pas, il faut neutraliser background-image. */
+    background: none;
+    background-color: transparent;
+    background-image: none;
+    /* La base forcait color:#fff pour du texte sur bandeau colore. Le bandeau
+       ayant disparu, ce blanc devenait invisible sur fond blanc. */
+    color: var(--color-text-muted);
+    font-size: .72rem;
+    font-weight: 600;
+    letter-spacing: .02em;
+    text-transform: uppercase;
+    border: 0;
+}
+
+.sb-home-sidebar .sb-sidebar-card-body { padding: 4px 8px 10px; }
+
+/* Rangees de sidebar : survol gris neutre, jamais colore. */
+.sb-home-sidebar .sb-sidebar-forum-item:hover,
+.sb-home-sidebar .sb-sidebar-hot-item:hover { background: var(--color-bg-alt); }
+
+/* --- Flairs : etiquettes discretes, pas des pilules pleines --- */
+.sb-post-card .sb-post-flair,
+.sb-home-card .sb-post-flair {
+    padding: 2px 8px;
+    border-radius: var(--sb-r-radius-pill);
+    background: var(--color-bg-alt);
+    color: var(--color-text-muted);
+    font-size: .68rem;
+    font-weight: 600;
+    text-transform: none;
+    letter-spacing: 0;
+}
+
+/* --- Barre de tri : onglet actif en gris, comme Reddit --- */
+.sb-home-main .sb-sort-tab.active,
+.sb-sort-tab.active {
+    background: var(--color-bg-alt);
+    color: var(--color-text);
+}
+
+/* --- Heros de forum et de profil ---
+   Les degrades etaient codes en STYLE INLINE dans les templates PHP, donc
+   impossibles a surcharger en CSS sans !important, et insensibles au
+   Customizer. Les attributs ont ete retires des templates ; la presentation
+   revient ici, en surface neutre bordee. */
+.sb-subreddit-hero,
+.sb-profile-hero {
+    margin-bottom: 16px;
+    padding: 20px;
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--sb-r-radius);
+    background: var(--color-bg);
+    color: var(--color-text);
+}
+
+.sb-subreddit-hero a,
+.sb-profile-hero a { color: var(--color-link); }
+
+
+
+/* --- Largeur utile de la page d'accueil ---
+   `.site-content` plafonne a --max-width (1024px), pensé pour une mise en
+   page a deux colonnes. Avec la nav laterale il reste trois colonnes a loger :
+   le feed tombait a 316px. On libere la contrainte UNIQUEMENT sur la page
+   d'accueil, la ou la grille trois colonnes existe. */
+.sb-home > .sb-home-container { max-width: 1600px; }
+
+/* Toute page portant la grille trois colonnes a besoin de la largeur :
+   accueil, blog ET pages bbPress (forum, sujet). Sans cela le feed tombait
+   a ~160px sur une page de forum et les titres se brisaient mot par mot. */
+body.home .site-content,
+body.blog .site-content,
+body.single-forum .site-content,
+body.post-type-archive-forum .site-content,
+body.bbpress .site-content,
+body.forum-template .site-content {
+    max-width: 1600px;
+    padding-inline: 16px;
+}
+
+/* --- Bouton « Rejoindre » sur la carte ---
+   Rendu par bbPress (lien d'abonnement natif), stylise ici en pilule noire
+   alignee a droite, comme sur chaque carte Reddit. On habille le lien genere
+   plutot que d'ajouter un bouton decoratif : l'action reste fonctionnelle. */
+.sb-r-join-wrap {
+    margin-inline-start: auto;
+    flex: 0 0 auto;
+}
+
+.sb-r-join-wrap a,
+.sb-post-meta-top .subscription-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 16px;
+    border: 1px solid var(--sb-r-join-bg);
+    border-radius: var(--sb-r-radius-pill);
+    background: var(--sb-r-join-bg);
+    color: var(--sb-r-join-fg);
+    font-size: .78rem;
+    font-weight: 700;
+    line-height: 1.3;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.sb-r-join-wrap a:hover,
+.sb-r-join-wrap a:focus-visible { opacity: .85; text-decoration: none; }
+
+/* Etat « deja rejoint » : contour seul, comme Reddit. */
+.sb-r-join-wrap.is-joined a {
+    background: transparent;
+    color: var(--color-text);
+    border-color: var(--color-border);
+}
+
+@media (max-width: 480px) {
+    .sb-r-join-wrap a { padding: 4px 12px; font-size: .72rem; }
+}
+
+/* ==========================================================================
+   14. ICONOGRAPHIE VECTORIELLE + MENU DE CARTE
+   Les emojis dependaient de la police systeme : rendu different par OS,
+   couleur non heritee, alignement instable. Remplaces par des SVG inline
+   (voir inc/icons.php) qui suivent `currentColor` et la taille du texte.
+   ========================================================================== */
+
+.sb-i {
+    flex: 0 0 auto;
+    display: inline-block;
+    vertical-align: -.18em;
+}
+
+/* --- Nav laterale : icone + libelle alignes --- */
+.sb-r-nav-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    color: var(--color-text-light);
+}
+
+.sb-r-nav-link[aria-current="page"] .sb-r-nav-icon { color: var(--color-primary); }
+
+/* Prefixe « r/ » des communautes : plus de pastille coloree. */
+.sb-r-nav-prefix {
+    color: var(--color-text-muted);
+    font-weight: 600;
+}
+
+/* --- Onglets de tri : le SVG remplace l'emoji --- */
+.sb-sort-tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* --- En-tetes de sidebar : icone discrete devant le titre --- */
+.sb-sidebar-card-header {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.sb-sidebar-card-header .sb-i { opacity: .75; }
+
+/* --- Prefixe r/ dans la sidebar : neutre, sans rond de couleur --- */
+.sb-home-sidebar .sb-sidebar-forum-icon {
+    width: auto;
+    height: auto;
+    flex: 0 0 auto;
+    border-radius: 0;
+    background: none;
+    color: var(--color-text-muted);
+    font-size: .84rem;
+    font-weight: 600;
+}
+
+/* --- Flairs : icone + libelle --- */
+.sb-post-flair {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* ==========================================================================
+   15. MENU « ⋯ » DE CARTE
+   Les liens de moderation bbPress (Modifier, Fusionner, Fermer, Epingler,
+   Corbeille, Indesirable) etaient imprimes a plat dans la barre d'actions.
+   Ils sont desormais replies dans ce menu, sous un separateur.
+   ========================================================================== */
+
+.sb-actions-overflow { position: relative; }
+
+.sb-more-menu {
+    position: absolute;
+    inset-inline-end: 0;
+    top: calc(100% + 6px);
+    z-index: 30;
+    display: none;
+    flex-direction: column;
+    min-width: 210px;
+    padding: 6px;
+    border: 1px solid var(--color-border-light);
+    border-radius: 12px;
+    background: var(--color-bg-card);
+    box-shadow: 0 8px 24px rgb(0 0 0 / .12);
+}
+
+.sb-actions-overflow.is-open .sb-more-menu,
+.sb-more-toggle[aria-expanded="true"] + .sb-more-menu { display: flex; }
+
+/* Chaque entree : pleine largeur, icone a gauche, libelle lisible. */
+.sb-more-menu > a,
+.sb-more-menu > .sb-more-mod > a,
+.sb-more-menu > button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 9px 10px;
+    border: 0;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--color-text);
+    font-size: .84rem;
+    font-weight: 500;
+    text-align: start;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.sb-more-menu > a:hover,
+.sb-more-menu > .sb-more-mod > a:hover,
+.sb-more-menu > button:hover { background: var(--color-bg-hover); }
+
+.sb-more-label { white-space: nowrap; }
+
+/* Bloc de moderation : separe visuellement des actions universelles. */
+.sb-more-sep {
+    display: block;
+    height: 1px;
+    margin: 6px 4px;
+    background: var(--color-border-light);
+}
+
+.sb-more-mod {
+    display: flex;
+    flex-direction: column;
+}
+
+.sb-more-mod a { font-size: .8rem; color: var(--color-text-light); }
+
+/* Bouton « S'inscrire » du header : action de conversion principale,
+   toujours visible pour un visiteur anonyme (parite Reddit). */
+.sb-r-signup-btn-header {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 18px;
+    border: 0;
+    border-radius: var(--sb-r-radius-pill);
+    background: var(--sb-r-cta-bg);
+    color: var(--sb-r-cta-fg);
+    font-size: .875rem;
+    font-weight: 700;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.sb-r-signup-btn-header:hover,
+.sb-r-signup-btn-header:focus-visible { filter: brightness(.92); color: var(--sb-r-cta-fg); }
+
+/* ==========================================================================
+   16. PAGE COMMUNAUTE — en-tete pleine largeur + colonne « A propos »
+   Reference : reference/sub-desktop-anonyme.png.
+   Chez Reddit la banniere s'etend sur le feed ET la colonne de droite, et
+   les actions (Creer une publication / Rejoindre) se posent au-dessus de la
+   sidebar. Le hero vit donc HORS de .sb-home-container.
+   ========================================================================== */
+
+.sb-subreddit-hero {
+    max-width: 1600px;
+    margin: 0 auto 8px;
+    padding: 16px 24px 0;
+}
+
+.sb-subreddit-banner {
+    height: 128px;
+    border-radius: var(--sb-r-radius);
+    background-color: var(--color-primary-light);
+    background-image:
+        radial-gradient(circle at 22% 32%, rgb(255 255 255 / .5) 4px, transparent 4px),
+        radial-gradient(circle at 72% 68%, rgb(255 255 255 / .3) 4px, transparent 4px);
+    background-size: 46px 46px, 62px 62px;
+}
+
+/* Barre titre + actions : les actions filent a droite, au-dessus de la
+   colonne de droite, exactement comme sur la reference. */
+.sb-subreddit-bar {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: -20px;
+}
+
+.sb-subreddit-identity {
+    display: flex;
+    align-items: flex-end;
+    gap: 16px;
+    min-width: 0;
+}
+
+.sb-subreddit-avatar {
+    flex: 0 0 76px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 76px;
+    height: 76px;
+    border: 4px solid var(--color-bg);
+    border-radius: 50%;
+    background: var(--color-primary);
+    color: var(--color-text-on-primary);
+    font-size: 1.7rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.sb-subreddit-title {
+    margin: 0 0 6px;
+    color: var(--color-text);
+    font-size: 1.9rem;
+    font-weight: 700;
+    line-height: 1.15;
+    /* Le titre ne doit jamais se briser mot par mot : il occupe la largeur
+       disponible et se tronque proprement au-dela. */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sb-subreddit-r { color: var(--color-text-muted); font-weight: 600; }
+
+.sb-subreddit-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+
+/* Bouton secondaire « Creer une publication » : contour, pas d'aplat. */
+.sb-r-btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--sb-r-radius-pill);
+    background: transparent;
+    color: var(--color-text);
+    font-size: .82rem;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.sb-r-btn-ghost:hover { background: var(--color-bg-alt); color: var(--color-text); }
+
+/* --- Colonne « A propos » --- */
+.sb-about-title {
+    margin: 4px 0 8px;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-text);
+}
+
+.sb-about-desc {
+    margin: 0 0 14px;
+    color: var(--color-text-light);
+    font-size: .84rem;
+    line-height: 1.5;
+}
+
+.sb-about-facts {
+    list-style: none;
+    margin: 0 0 14px;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.sb-about-facts li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--color-text-muted);
+    font-size: .8rem;
+}
+
+/* Stats en gros chiffres, comme « 16 M / 1 M » sur la reference. */
+.sb-about-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding-top: 12px;
+    border-top: 1px solid var(--color-border-light);
+}
+
+.sb-about-stat { display: flex; flex-direction: column; }
+
+.sb-about-stat strong {
+    color: var(--color-text);
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.sb-about-stat span {
+    color: var(--color-text-muted);
+    font-size: .72rem;
+}
+
+/* Favoris : pastilles pleine largeur. */
+.sb-about-links { display: flex; flex-direction: column; gap: 8px; }
+
+.sb-r-chip {
+    display: block;
+    padding: 9px 14px;
+    border-radius: var(--sb-r-radius-pill);
+    background: var(--color-bg-alt);
+    color: var(--color-text);
+    font-size: .82rem;
+    font-weight: 600;
+    text-align: center;
+    text-decoration: none;
+}
+
+.sb-r-chip:hover { background: var(--color-bg-hover); color: var(--color-text); }
+
+/* Regles numerotees. */
+.sb-about-rules {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    counter-reset: sb-rule;
+}
+
+.sb-about-rules li {
+    display: flex;
+    gap: 12px;
+    padding: 10px 4px;
+    border-bottom: 1px solid var(--color-border-light);
+    color: var(--color-text);
+    font-size: .82rem;
+    line-height: 1.45;
+}
+
+.sb-about-rules li:last-child { border-bottom: 0; }
+
+.sb-rule-num {
+    flex: 0 0 18px;
+    color: var(--color-text-muted);
+    font-size: .78rem;
+}
+
+@media (max-width: 768px) {
+    .sb-subreddit-hero { padding: 8px 12px 0; }
+    .sb-subreddit-banner { height: 84px; }
+
+    .sb-subreddit-bar { align-items: flex-start; margin-top: -16px; }
+
+    .sb-subreddit-avatar {
+        flex-basis: 58px;
+        width: 58px;
+        height: 58px;
+        font-size: 1.3rem;
+    }
+
+    .sb-subreddit-title { font-size: 1.35rem; white-space: normal; }
+
+    /* Les actions passent sous le titre au lieu de le comprimer. */
+    .sb-subreddit-actions { width: 100%; margin-bottom: 0; }
+    .sb-r-btn-ghost { flex: 1 1 auto; justify-content: center; }
+}
+
+/* ==========================================================================
+   17. VOTE HORIZONTAL — parite Reddit sur TOUTES les largeurs
+   Reference : reference/sub-desktop-anonyme.png.
+   Reddit place le vote dans la barre d'actions, en ligne sous le titre :
+   « ⬆ 1 ⬇ | 💬 0 | ↗ Partager ». Le thème rendait DEUX systemes : une
+   colonne verticale a gauche de la carte (desktop) et une rangee inline
+   (mobile). On generalise la rangee inline et on retire la colonne : c'est
+   la difference la plus visible entre le feed du theme et celui de Reddit.
+   Le balisage n'est pas touche — les deux blocs restent emis, donc aucun
+   gestionnaire JS ni etat serveur n'est casse.
+   ========================================================================== */
+
+.sb-post-card > .sb-post-votes,
+.sb-home-card > .sb-post-votes {
+    display: none;
+}
+
+.sb-post-card,
+.sb-home-card {
+    flex-direction: column;
+    gap: 0;
+}
+
+.sb-post-card > .sb-post-body,
+.sb-home-card > .sb-post-body {
+    width: 100%;
+    min-width: 0;
+}
+
+/* Groupe de vote inline : une pilule grise, fleches + compteur alignes. */
+.sb-post-actions .sb-card-votes-inline {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    padding: 2px;
+    border-radius: var(--sb-r-radius-pill);
+    background: var(--color-bg-alt);
+}
+
+.sb-post-actions .sb-comment-vote-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    min-width: 32px;
+    height: 32px;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--color-text-light);
+    cursor: pointer;
+}
+
+.sb-post-actions .sb-comment-vote-btn:hover { background: var(--color-bg-hover); }
+.sb-post-actions .sb-comment-vote-btn.up.active { background: var(--color-upvote); color: #fff; }
+.sb-post-actions .sb-comment-vote-btn.down.active { background: var(--color-downvote); color: #fff; }
+
+.sb-post-actions .sb-comment-vote-count {
+    min-width: 2ch;
+    padding: 0 2px;
+    text-align: center;
+    font-size: .8rem;
+    font-weight: 700;
+    color: var(--color-text);
+}
+
+/* Les autres actions adoptent la meme pilule. */
+.sb-post-actions .sb-action-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 36px;
+    padding: 0 12px;
+    border: 0;
+    border-radius: var(--sb-r-radius-pill);
+    background: var(--color-bg-alt);
+    color: var(--color-text-light);
+    font-size: .8rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.sb-post-actions .sb-action-btn:hover { background: var(--color-bg-hover); color: var(--color-text); }
+
+/* Dans le menu deroulant, les entrees restent pleine largeur. */
+.sb-more-menu .sb-action-btn {
+    width: 100%;
+    height: auto;
+    justify-content: flex-start;
+    background: transparent;
+    border-radius: 8px;
+}
+
+/* ==========================================================================
+   18. CARTE D'INSCRIPTION (colonne gauche, visiteur anonyme)
+   Reference : reference/sub-desktop-anonyme.png — Reddit remplace la
+   navigation par un appel a l'inscription tant que le visiteur n'est pas
+   connecte. C'est la premiere action de conversion de la page.
+   ========================================================================== */
+
+.sb-r-signup-card {
+    position: sticky;
+    top: calc(var(--sb-r-header-h) + 12px);
+    padding: 20px 18px;
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--sb-r-radius);
+    background: var(--color-bg-alt);
+    text-align: center;
+}
+
+.sb-r-signup-title {
+    margin: 0 0 18px;
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--color-text);
+}
+
+.sb-r-signup-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 11px 16px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--sb-r-radius-pill);
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-size: .86rem;
+    font-weight: 600;
+    text-align: start;
+    text-decoration: none;
+}
+
+.sb-r-signup-btn:hover { background: var(--color-bg-hover); color: var(--color-text); }
+
+.sb-r-signup-mark {
+    flex: 0 0 22px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--color-bg-alt);
+    color: var(--color-text-muted);
+    font-size: .75rem;
+    font-weight: 700;
+}
+
+.sb-r-signup-login {
+    display: inline-block;
+    margin-top: 4px;
+    color: var(--color-link);
+    font-size: .82rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.sb-r-signup-login:hover { text-decoration: underline; }
+
+.sb-r-signup-legal {
+    margin: 14px 0 0;
+    color: var(--color-text-muted);
+    font-size: .7rem;
+    line-height: 1.5;
+}
+
+/* ==========================================================================
+   19. LIGNE AUTEUR « u/pseudo »
+   ========================================================================== */
+
+.sb-post-author {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    min-width: 0;
+}
+
+.sb-post-author img {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex: 0 0 20px;
+}
+
+.sb-author-link {
+    color: var(--color-text);
+    font-size: .78rem;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sb-author-link:hover { text-decoration: underline; color: var(--color-text); }
+
+.sb-u-prefix { color: var(--color-text-muted); font-weight: 500; }
+
+/* Sur mobile la carte d'inscription rejoint le flux, en tete de feed. */
+@media (max-width: 768px) {
+    .sb-r-signup-card {
+        position: static;
+        margin-bottom: var(--sb-r-gap);
+    }
+}
+
+/* ==========================================================================
+   20. ONGLETS « FLUX / A PROPOS » + PASTILLE DE RECHERCHE
+   Reference : reference/sub-mobile-anonyme.png (onglets) et
+   reference/sub-desktop-anonyme.png (pastille r/nom dans la recherche).
+   ========================================================================== */
+
+.sb-forum-tabs {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 14px;
+    padding: 0 4px;
+}
+
+.sb-forum-tab {
+    padding: 8px 16px;
+    border-radius: var(--sb-r-radius-pill);
+    color: var(--color-text-light);
+    font-size: .875rem;
+    font-weight: 600;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.sb-forum-tab:hover { background: var(--color-bg-alt); color: var(--color-text); }
+
+.sb-forum-tab.active {
+    background: var(--color-bg-alt);
+    color: var(--color-text);
+}
+
+/* Vue « A propos » : le feed s'efface, la colonne d'information passe
+   en pleine largeur. Aucun contenu n'est supprime — seule la mise en
+   avant change, et le feed reste a un clic. */
+.sb-home-container.is-vue-apropos .sb-home-main { display: none; }
+
+.sb-home-container.is-vue-apropos .sb-home-sidebar {
+    grid-column: 2 / -1;
+    position: static;
+    max-height: none;
+    overflow: visible;
+}
+
+@media (max-width: 768px) {
+    .sb-home-container.is-vue-apropos .sb-home-sidebar { grid-column: 1 / -1; }
+}
+
+/* --- Pastille de portee dans la barre de recherche --- */
+.sb-search-scope {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    flex: 0 0 auto;
+    max-width: 45%;
+    margin-inline-end: 6px;
+    padding: 4px 6px 4px 10px;
+    border-radius: var(--sb-r-radius-pill);
+    background: var(--color-bg);
+    border: 1px solid var(--color-border-light);
+}
+
+.sb-search-scope-label {
+    color: var(--color-text);
+    font-size: .78rem;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.sb-search-scope-clear {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 18px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--color-bg-alt);
+    color: var(--color-text-muted);
+    font-size: .8rem;
+    line-height: 1;
+    text-decoration: none;
+}
+
+.sb-search-scope-clear:hover {
+    background: var(--color-bg-hover);
+    color: var(--color-text);
+}
+
+/* La barre de recherche s'elargit pour accueillir la pastille. */
+.header-search { flex: 1 1 auto; max-width: 640px; }
+
+.header-search .search-form {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.header-search .search-form label { flex: 1 1 auto; min-width: 0; }
+.header-search .search-field { width: 100%; }
+
+@media (max-width: 768px) {
+    /* Sur mobile la pastille mangerait tout le champ : on garde le
+       placeholder contextuel, qui porte la meme information. */
+    .sb-search-scope { display: none; }
+}
+
+/* Le header etait limite a 1024px alors que le contenu s'etend jusqu'a
+   1600px : la barre de recherche etait comprimee a ~240px et le header
+   paraissait decale par rapport au reste de la page. On aligne les deux. */
+.header-inner {
+    max-width: 1600px;
+    gap: 16px;
+    /* Sans marge laterale explicite, les actions de droite depassaient le
+       viewport a 1024px (mesure : bord droit a 1076px). */
+    padding-inline: 16px;
+    box-sizing: border-box;
+}
+
+/* En dessous de 1100px, la barre de recherche cede la place aux actions
+   plutot que de les pousser hors de l'ecran. */
+@media (max-width: 1100px) {
+    .header-search { max-width: 300px; }
+
+    /* Le header porte logo + recherche + menu + 2 boutons : a 1024px la
+       somme depassait le viewport (bord droit mesure a 1076px). Le menu
+       principal reste accessible par le bouton hamburger, deja present. */
+    .site-header .main-navigation { display: none; }
+
+    /* Le menu doit rester atteignable : on active le bouton hamburger,
+       que la base ne montrait qu'en dessous de son propre palier. */
+    .site-header .menu-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        order: -1;
+    }
+
+    .header-inner { flex-wrap: nowrap; }
+    .site-branding { min-width: 0; }
+    .site-title { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+}
+
+@media (max-width: 900px) {
+    .header-search { max-width: 220px; }
+    .sb-search-scope { display: none; }
+}
+
+/* ==========================================================================
+   21. PAGE SUJET — grille trois colonnes et fil de commentaires
+   Reference : reference/topic-desktop-anonyme.png.
+   Le template etait rendu en pleine largeur, sans colonne laterale : c'etait
+   la seule page du site sans reperes de navigation.
+   ========================================================================== */
+
+body.single-topic .site-content,
+body.topic-template .site-content,
+.sb-topic-page { max-width: 1600px; }
+
+/* Fleche de retour vers la communaute, comme sur la reference. */
+.sb-topic-back {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.sb-back-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--color-bg-alt);
+    color: var(--color-text);
+    text-decoration: none;
+}
+
+.sb-back-btn:hover { background: var(--color-bg-hover); color: var(--color-text); }
+
+.sb-topic-back-label {
+    color: var(--color-text);
+    font-size: .88rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.sb-topic-back-label:hover { text-decoration: underline; color: var(--color-text); }
+
+/* En-tete de la section commentaires : compteur a gauche, tri a droite. */
+.sb-comments-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 18px 0 12px;
+    padding-top: 14px;
+    border-top: 1px solid var(--color-border-light);
+}
+
+.sb-comments-count { font-size: .95rem; font-weight: 700; color: var(--color-text); }
+
+.sb-comment-sort { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
+
+.sb-comment-sort-btn {
+    padding: 5px 11px;
+    border-radius: var(--sb-r-radius-pill);
+    color: var(--color-text-light);
+    font-size: .78rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.sb-comment-sort-btn:hover { background: var(--color-bg-alt); color: var(--color-text); }
+.sb-comment-sort-btn.active { background: var(--color-bg-alt); color: var(--color-text); }
+
+/* Champ « Rejoindre la conversation » : encadre bien visible. */
+.sb-comment-compose {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.sb-comment-compose-input {
+    width: 100%;
+    min-height: 46px;
+    padding: 12px 16px;
+    border: 1px solid var(--color-border);
+    border-radius: 22px;
+    background: var(--color-bg);
+    color: var(--color-text);
+    font-family: inherit;
+    font-size: .88rem;
+    resize: vertical;
+}
+
+.sb-comment-compose-input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+}
+
+.sb-comment-compose-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.sb-comment-action {
+    padding: 7px 16px;
+    border: 0;
+    border-radius: var(--sb-r-radius-pill);
+    background: var(--color-bg-alt);
+    color: var(--color-text);
+    font-size: .82rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.sb-comment-submit-primary {
+    background: var(--color-primary);
+    color: var(--color-text-on-primary);
+}
+
+.sb-comment-compose-avatar-mock {
+    flex: 0 0 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    color: var(--color-text-on-primary);
+    font-weight: 700;
+}
+
+/* --- Fil de commentaires imbriques --- */
+.sb-comment {
+    position: relative;
+    padding: 12px 0;
+}
+
+/* L'imbrication n'est PAS structurelle : les reponses sont des freres
+   decales par `margin-left` inline et identifies par `data-depth`. La ligne
+   de rattachement doit donc s'appuyer sur cet attribut, pas sur un selecteur
+   descendant — qui ne correspondait a rien. */
+.sb-comment[data-depth]:not([data-depth="1"]) {
+    padding-inline-start: 16px;
+    border-inline-start: 2px solid var(--color-border-light);
+}
+
+.sb-comment[data-depth]:not([data-depth="1"]):hover {
+    border-inline-start-color: var(--color-border);
+}
+
+/* Barre de repli : cliquable sur toute la hauteur du fil, comme Reddit. */
+.sb-comment-collapse-bar {
+    position: absolute;
+    inset-inline-start: -2px;
+    top: 34px;
+    bottom: 8px;
+    width: 12px;
+    cursor: pointer;
+    background: transparent;
+}
+
+.sb-comment-collapse-bar:hover { background: linear-gradient(to right, var(--color-border) 0 2px, transparent 2px); }
+
+.sb-comment-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+    font-size: .78rem;
+    color: var(--color-text-muted);
+}
+
+.sb-comment-head img,
+.sb-comment-avatar {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex: 0 0 24px;
+}
+
+.sb-comment-author { color: var(--color-text); font-weight: 600; text-decoration: none; }
+.sb-comment-author:hover { text-decoration: underline; }
+
+.sb-comment-body {
+    color: var(--color-text);
+    font-size: .9rem;
+    line-height: 1.55;
+}
+
+.sb-comment-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 8px;
+    flex-wrap: wrap;
+}
+
+@media (max-width: 640px) {
+    .sb-comment .sb-comment {
+        margin-inline-start: 10px;
+        padding-inline-start: 10px;
+    }
+    .sb-comments-header { align-items: flex-start; flex-direction: column; }
+}
+
+/* Insigne de grade : SVG inline, aligne avec le libelle du badge.
+   Auparavant un emoji, donc dependant d'une police installee cote client. */
+.sb-grade-i {
+    flex: 0 0 auto;
+    vertical-align: -.12em;
+}
+
+.swiftboard-grade-badge,
+.sb-grade-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    white-space: nowrap;
+}
+
+/* ==========================================================================
+   22. JETONS DU CUSTOMIZER — CABLAGE (lot L5.1)
+   --------------------------------------------------------------------------
+   Ces variables etaient ECRITES par le Customizer et les metabox de forum,
+   mais AUCUNE regle ne les lisait : le client publiait une couleur et la page
+   ne bougeait pas. Verifie en test dynamique (tools/verifier-customizer.mjs).
+
+   On CABLE les jetons plutot que de retirer les reglages : un reglage retire
+   est une fonctionnalite perdue pour l'acheteur, et la valeur peut deja etre
+   surchargee par un theme enfant ou le CSS additionnel.
+   ========================================================================== */
+
+/* --sb-forum-accent : couleur propre a chaque communaute, saisie dans la
+   metabox du forum. Repli sur la couleur primaire si le forum n'en definit
+   aucune, pour que la regle reste valable hors page de forum. */
+.sb-subreddit-hero,
+.sb-forum-hero {
+    border-top: 3px solid var(--sb-forum-accent, var(--color-primary));
+}
+
+.sb-forum-tab.active {
+    border-bottom-color: var(--sb-forum-accent, var(--color-primary));
+}
+
+/* --sb-avatar-fallback-bg : couleur des avatars sans image. Le fond etait
+   peint en dur avec --color-primary, ce qui rendait le reglage inoperant. */
+.sb-avatar-fallback,
+.avatar-mock,
+.sb-avatar-themed {
+    background: var(--sb-avatar-fallback-bg, var(--color-primary));
+}
+
+/* --color-accent-hover : etat survol des actions principales. Le jeton etait
+   defini dans main.css et emis par inc/admin.php sans jamais etre consomme. */
+.sb-join-btn:hover,
+.btn-primary:hover,
+.sb-btn-primary:hover {
+    background: var(--color-accent-hover, var(--color-primary));
+}
+
+/* --color-secondary : second ton des degrades. Declare des main.css:21 avec
+   le commentaire « Bleu clair pour gradients », mais jamais lu. */
+.sb-home-hero-compact,
+.sb-subreddit-banner {
+    background-image: linear-gradient(
+        135deg,
+        var(--color-primary),
+        var(--color-secondary, var(--color-primary))
+    );
+}
+
+/* ==========================================================================
+   23. CONTENU LIBRE — GARDE-FOU CONTRE LE DEBORDEMENT (lot L6)
+   --------------------------------------------------------------------------
+   Constate sur le site client, en mobile 374 px : 462 px de contenu, la page
+   glissait lateralement. En cause : .entry-content, c'est-a-dire le contenu
+   redige dans l'editeur (tableaux, blocs de code, images, longues URL).
+
+   Ce contenu n'est PAS ecrit par le theme : il vient de l'utilisateur. On ne
+   peut donc pas compter sur sa mise en forme. La regle ci-dessous borne ce
+   qui deborde, sans jamais masquer d'information : les elements larges
+   defilent DANS leur cadre au lieu de pousser la page entiere.
+   ========================================================================== */
+
+.entry-content,
+.entry-summary,
+.sb-post-body,
+.bbp-topic-content,
+.bbp-reply-content {
+    /* Indispensable dans une grille ou un flex : sans cela, un enfant refuse
+       de retrecir sous la largeur de son contenu. */
+    min-width: 0;
+    max-width: 100%;
+    /* Une URL sans espace ne doit pas elargir la colonne. */
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+/* Medias : jamais plus larges que leur colonne. */
+.entry-content img,
+.entry-content video,
+.entry-content iframe,
+.entry-content embed,
+.entry-content object,
+.sb-post-body img,
+.bbp-reply-content img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Tableaux et code : on les fait defiler DANS leur cadre plutot que de les
+   tronquer. Le contenu reste integralement accessible. */
+.entry-content table,
+.entry-content pre,
+.sb-post-body table,
+.sb-post-body pre,
+.bbp-reply-content pre {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Filet de securite au niveau de la page : une seule ligne, aucun effet sur
+   une page deja correcte, mais elle empeche tout element imprevu de rendre
+   le site glissant sur mobile. */
+@media (max-width: 640px) {
+    html,
+    body {
+        overflow-x: hidden;
+    }
+}

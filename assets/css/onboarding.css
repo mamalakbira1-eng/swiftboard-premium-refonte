@@ -1,0 +1,269 @@
+@charset "UTF-8";
+/* SwiftBoard — Styles de la modale d'onboarding Reddit-like */
+
+.sb-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgb(0 0 0 / 0.65);
+    backdrop-filter: blur(4px);
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.sb-modal-overlay[hidden] {
+    display: none !important;
+}
+
+.sb-modal-content {
+    background: #fff;
+    color: #1e232a;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 500px;
+    padding: 2rem;
+    position: relative;
+    box-shadow: 0 16px 40px rgb(0 0 0 / 0.25);
+    animation: sbModalIn 0.25s ease-out;
+}
+
+@keyframes sbModalIn {
+    from { opacity: 0; transform: translateY(12px) scale(0.97); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.sb-modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: transparent;
+    border: none;
+    font-size: 1.75rem;
+    color: #6a737d;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.sb-modal-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.sb-modal-logo {
+    background: #0073aa;
+    color: #fff;
+    font-weight: 700;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    font-size: 1.25rem;
+}
+
+.sb-modal-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.sb-step-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1.25rem;
+}
+
+.sb-gender-choices {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.sb-onb-gender-btn {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.05rem;
+    font-weight: 600;
+    background: #f5f7fa;
+    border: 2px solid #e1e4e8;
+    border-radius: 12px;
+    color: #24292e;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.15s ease;
+}
+
+.sb-onb-gender-btn:hover,
+.sb-onb-gender-btn.selected {
+    background: #eef2f8;
+    border-color: #0073aa;
+    color: #0073aa;
+}
+
+.sb-avatars-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.sb-onb-avatar-btn {
+    background: #f5f7fa;
+    border: 2px solid transparent;
+    border-radius: 50%;
+    padding: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s ease;
+}
+
+.sb-onb-avatar-btn img {
+    border-radius: 50%;
+    display: block;
+}
+
+.sb-onb-avatar-btn:hover,
+.sb-onb-avatar-btn.selected {
+    border-color: #0073aa;
+    transform: scale(1.08);
+    background: #eef2f8;
+}
+
+.sb-social-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+}
+
+.sb-onb-social-btn {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #d1d5da;
+    background: #fff;
+    color: #24292e;
+    transition: background 0.15s ease;
+}
+
+.sb-onb-social-btn.sb-btn-google:hover {
+    background: #f6f8fa;
+}
+
+.sb-onb-social-btn.sb-btn-github {
+    background: #24292e;
+    color: #fff;
+    border-color: #24292e;
+}
+
+.sb-onb-social-btn.sb-btn-github:hover {
+    background: #1b1f23;
+}
+
+.sb-onb-social-btn.sb-btn-facebook {
+    background: #1877f2;
+    color: #fff;
+    border-color: #1877f2;
+}
+
+.sb-onb-social-btn.sb-btn-facebook:hover {
+    background: #166fe5;
+}
+
+.sb-onb-separator {
+    text-align: center;
+    margin: 1rem 0;
+    position: relative;
+}
+
+.sb-onb-separator::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: #e1e4e8;
+    z-index: 1;
+}
+
+.sb-onb-separator span {
+    background: #fff;
+    padding: 0 0.75rem;
+    color: #6a737d;
+    font-size: 0.85rem;
+    position: relative;
+    z-index: 2;
+}
+
+.sb-onb-email-form {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.sb-onb-input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: 2px solid #e1e4e8;
+    border-radius: 10px;
+    font-size: 0.95rem;
+}
+
+.sb-onb-submit {
+    padding: 0.75rem 1.25rem;
+    background: #0073aa;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.sb-step-footer {
+    text-align: center;
+    margin-top: 1.25rem;
+}
+
+.sb-onb-skip-link,
+.sb-onb-back-btn {
+    background: none;
+    border: none;
+    color: #0073aa;
+    font-size: 0.9rem;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.sb-onb-status {
+    margin-top: 1rem;
+    padding: 0.75rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.sb-onb-status.error {
+    background: #ffeef0;
+    color: #b31d28;
+}
+
+.sb-onb-status.success {
+    background: #e6ffed;
+    color: #22863a;
+}

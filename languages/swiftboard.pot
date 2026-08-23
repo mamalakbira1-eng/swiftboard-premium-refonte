@@ -1,0 +1,2424 @@
+# Copyright (C) 2026 SwiftBoard Team
+# This file is distributed under the GPL-2.0-or-later license.
+msgid ""
+msgstr ""
+"Project-Id-Version: SwiftBoard 7.0.0\n"
+"Report-Msgid-Bugs-To: https://swiftboard.dev/support\n"
+"POT-Creation-Date: 2026-08-06T00:00:00+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: SwiftBoard i18n Scanner\n"
+"X-Domain: swiftboard\n"
+
+msgid "#%d"
+msgstr ""
+
+msgid "#1 (auteur)"
+msgstr ""
+
+msgid "%1$s — discussions et entraide sur %2$s."
+msgstr ""
+
+msgid "%d commentaire"
+msgstr ""
+
+msgid "%d commentaires"
+msgstr ""
+
+msgid "%d notification non lue"
+msgstr ""
+
+msgid "%d notifications non lues"
+msgstr ""
+
+msgid "%d résultat trouvé"
+msgstr ""
+
+msgid "%d résultats trouvés"
+msgstr ""
+
+msgid "%s membres"
+msgstr ""
+
+msgid "%s élément"
+msgstr ""
+
+msgid "%s éléments"
+msgstr ""
+
+msgid "%s — forum communautaire : discussions, entraide et partage."
+msgstr ""
+
+msgid "&mdash; Sans forum &mdash;"
+msgstr ""
+
+msgid "(%d utilisateurs actifs)"
+msgstr ""
+
+msgid "(manuel)"
+msgstr ""
+
+msgid "24 dernières heures"
+msgstr ""
+
+msgid "30 derniers jours"
+msgstr ""
+
+msgid "7 derniers jours"
+msgstr ""
+
+msgid "Abonnements"
+msgstr ""
+
+msgid "Abonnements de %s"
+msgstr ""
+
+msgid "Abonné"
+msgstr ""
+
+msgid "Accorder à cet utilisateur les privilèges super-admin du réseau."
+msgstr ""
+
+msgid "Accueil"
+msgstr ""
+
+msgid "Accès refusé — permissions insuffisantes."
+msgstr ""
+
+msgid "Accès refusé."
+msgstr ""
+
+msgid "Action"
+msgstr ""
+
+msgid "Action effectuée."
+msgstr ""
+
+msgid "Actions"
+msgstr ""
+
+msgid "Activer la collecte RUM anonymisée (Core Web Vitals)"
+msgstr ""
+
+msgid "Activer la modale d\'Onboarding Reddit (3 étapes)"
+msgstr ""
+
+msgid "Activer la montée automatique"
+msgstr ""
+
+msgid "Activer le cache de pages anonyme sur disque"
+msgstr ""
+
+msgid "Activer le digest"
+msgstr ""
+
+msgid "Activer le système de Votes & Karma"
+msgstr ""
+
+msgid "Activer les boutons upvote/downvote sur les sujets"
+msgstr ""
+
+msgid "Activité (7 jours)"
+msgstr ""
+
+msgid "Admin"
+msgstr ""
+
+msgid "Affiche les sujets les plus populaires (votes + réponses)."
+msgstr ""
+
+msgid "Affiche les sujets les plus populaires du forum (par réponses ou par votes)."
+msgstr ""
+
+msgid "Afficher l\'auteur"
+msgstr ""
+
+msgid "Afficher le compteur de votes"
+msgstr ""
+
+msgid "Afficher les avatars des membres"
+msgstr ""
+
+msgid "Afficher les badges de grade (Rookie à VIP)"
+msgstr ""
+
+msgid "Afficher les votes"
+msgstr ""
+
+msgid "Affiché à côté du copyright. Laisser vide pour masquer."
+msgstr ""
+
+msgid "Affichée dans la carte \"À propos\" du forum."
+msgstr ""
+
+msgid "Ajouter une image"
+msgstr ""
+
+msgid "Aller au contenu"
+msgstr ""
+
+msgid "Annuaire des Subreddits"
+msgstr ""
+
+msgid "Annuaire visuel des sous-forums."
+msgstr ""
+
+msgid "Annuler"
+msgstr ""
+
+msgid "Annuler le changement de mot de passe"
+msgstr ""
+
+msgid "Anonyme"
+msgstr ""
+
+msgid "Aperçu"
+msgstr ""
+
+msgid "Apparaît sur les pages du blog"
+msgstr ""
+
+msgid "Apparaît sur les pages du forum"
+msgstr ""
+
+msgid "Apparence"
+msgstr ""
+
+msgid "Approuvées"
+msgstr ""
+
+msgid "Archives de %s"
+msgstr ""
+
+msgid "Archives du %s"
+msgstr ""
+
+msgid "Arrondi des Cartes (Border Radius)"
+msgstr ""
+
+msgid "Article"
+msgstr ""
+
+msgid "Articles"
+msgstr ""
+
+msgid "Articles dans %s"
+msgstr ""
+
+msgid "Athlète"
+msgstr ""
+
+msgid "Attribuer des grades"
+msgstr ""
+
+msgid "Aucun article trouvé."
+msgstr ""
+
+msgid "Aucun badge personnalisé créé. Vous pouvez en définir ici."
+msgstr ""
+
+msgid "Aucun choix ? Vous aurez automatiquement votre initiale sur fond bleu."
+msgstr ""
+
+msgid "Aucun fichier envoyé."
+msgstr ""
+
+msgid "Aucun forum n\'a été créé pour le moment."
+msgstr ""
+
+msgid "Aucun résultat trouvé"
+msgstr ""
+
+msgid "Aucun résultat trouvé. Essayez avec d\'autres mots-clés."
+msgstr ""
+
+msgid "Aucun signalement en attente. Excellent !"
+msgstr ""
+
+msgid "Aucun sujet chaud pour le moment."
+msgstr ""
+
+msgid "Aucun sujet dans ce forum pour le moment."
+msgstr ""
+
+msgid "Aucun sujet dans cette liste pour le moment."
+msgstr ""
+
+msgid "Aucun sujet pour le moment."
+msgstr ""
+
+msgid "Aucun sujet sauvegardé."
+msgstr ""
+
+msgid "Aucun sujet trouvé."
+msgstr ""
+
+msgid "Aucun sujet."
+msgstr ""
+
+msgid "Aucun trophée pour le moment. Participez pour en débloquer ! 🏆"
+msgstr ""
+
+msgid "Aucun utilisateur actif."
+msgstr ""
+
+msgid "Aucun utilisateur."
+msgstr ""
+
+msgid "Aucun vote négatif."
+msgstr ""
+
+msgid "Aucun vote."
+msgstr ""
+
+msgid "Aucune action enregistrée."
+msgstr ""
+
+msgid "Aucune activité récente à afficher."
+msgstr ""
+
+msgid "Aucune image en attente"
+msgstr ""
+
+msgid "Aucune image."
+msgstr ""
+
+msgid "Aucune notification"
+msgstr ""
+
+msgid "Aucune notification pour le moment."
+msgstr ""
+
+msgid "Aucune réponse cette semaine."
+msgstr ""
+
+msgid "Aucune réponse pour le moment. Soyez le premier à répondre !"
+msgstr ""
+
+msgid "Aucune réponse reçue pour le moment."
+msgstr ""
+
+msgid "Aucune réponse trouvée."
+msgstr ""
+
+msgid "Aucune réponse."
+msgstr ""
+
+msgid "Audit Log"
+msgstr ""
+
+msgid "Auteur"
+msgstr ""
+
+msgid "Auteur ID :"
+msgstr ""
+
+msgid "Auto (selon préférence système)"
+msgstr ""
+
+msgid "Auto dès %1$s — plancher import %2$s"
+msgstr ""
+
+msgid "Auto-promotion"
+msgstr ""
+
+msgid "Avatar"
+msgstr ""
+
+msgid "Badges Custom"
+msgstr ""
+
+msgid "Balises %s et attributs autorisés :"
+msgstr ""
+
+msgid "Bandeau CTA Onboarding (Modale 1 clic)"
+msgstr ""
+
+msgid "Barre de Recherche Héroïque"
+msgstr ""
+
+msgid "Barre latérale"
+msgstr ""
+
+msgid "Barre latérale du forum"
+msgstr ""
+
+msgid "Batch processing :"
+msgstr ""
+
+msgid "Bienvenue sur notre forum communautaire. Participez aux discussions !"
+msgstr ""
+
+msgid "Blocage après X images rejetées en 24h."
+msgstr ""
+
+msgid "Blog"
+msgstr ""
+
+msgid "Bonjour"
+msgstr ""
+
+msgid "Bonjour %s,\n\n"
+msgstr ""
+
+msgid "Bonus karma de %s"
+msgstr ""
+
+msgid "Cache SwiftBoard vidé : %d page(s)."
+msgstr ""
+
+msgid "Ce compte ne peut pas être supprimé depuis le profil."
+msgstr ""
+
+msgid "Ce forum est fermé aux nouveaux contenus, mais vos permissions vous permettent tout de même de publier."
+msgstr ""
+
+msgid "Ce forum est marqué comme fermé aux nouveaux sujets."
+msgstr ""
+
+msgid "Ce grade vous débloque de nouvelles permissions (uploads, votes, création de sujets...).\n"
+msgstr ""
+
+msgid "Ce sujet est marqué comme fermé aux nouvelles réponses."
+msgstr ""
+
+msgid "Cela ne supprime pas vos sujets. Seul le mot-clé est supprimé."
+msgstr ""
+
+msgid "Cette action est irréversible."
+msgstr ""
+
+msgid "Cette année"
+msgstr ""
+
+msgid "Cette image a déjà été uploadée."
+msgstr ""
+
+msgid "Cette réponse n\'appartient pas à ce sujet."
+msgstr ""
+
+msgid "Changer de thème"
+msgstr ""
+
+msgid "Changer le grade"
+msgstr ""
+
+msgid "Changez les noms"
+msgstr ""
+
+msgid "Chargement…"
+msgstr ""
+
+msgid "Chef"
+msgstr ""
+
+msgid "Chercher"
+msgstr ""
+
+msgid "Choisissez un mot de passe robuste (min. 8 caractères)."
+msgstr ""
+
+msgid "Choisissez un nouveau mot de passe."
+msgstr ""
+
+msgid "Choisissez votre avatar"
+msgstr ""
+
+msgid "Choisissez votre avatar :"
+msgstr ""
+
+msgid "Clair"
+msgstr ""
+
+msgid "Classement réputation"
+msgstr ""
+
+msgid "Clés de sécurité"
+msgstr ""
+
+msgid "Combien de points vaut 1 réponse reçue sur un de mes sujets. Défaut : 1."
+msgstr ""
+
+msgid "Combien de points vaut 1 upvote reçu. Défaut : 1."
+msgstr ""
+
+msgid "Commentaires"
+msgstr ""
+
+msgid "Commenter"
+msgstr ""
+
+msgid "Composant actif"
+msgstr ""
+
+msgid "Compte"
+msgstr ""
+
+msgid "Configuration"
+msgstr ""
+
+msgid "Confirmation manquante. Le compte n\'a pas été supprimé."
+msgstr ""
+
+msgid "Confirmer le mot de passe"
+msgstr ""
+
+msgid "Confirmez votre mot de passe :"
+msgstr ""
+
+msgid "Connectez-vous pour participer aux discussions."
+msgstr ""
+
+msgid "Connecté en tant que %1$s %2$s. %3$s"
+msgstr ""
+
+msgid "Connexion"
+msgstr ""
+
+msgid "Contenu"
+msgstr ""
+
+msgid "Contenu & Personnalisation"
+msgstr ""
+
+msgid "Contenu de la page"
+msgstr ""
+
+msgid "Contenu du forum"
+msgstr ""
+
+msgid "Contenu invalide."
+msgstr ""
+
+msgid "Copier les abonnés vers le nouveau sujet"
+msgstr ""
+
+msgid "Copier les favoris vers le nouveau sujet"
+msgstr ""
+
+msgid "Copier les mots-clés vers le nouveau sujet"
+msgstr ""
+
+msgid "Corbeille"
+msgstr ""
+
+msgid "Couleur Primaire (Boutons & Liens)"
+msgstr ""
+
+msgid "Couleur Secondaire (Badges & Accents)"
+msgstr ""
+
+msgid "Couleur accent"
+msgstr ""
+
+msgid "Couleur d\'Accentuation"
+msgstr ""
+
+msgid "Couleur d\'accent"
+msgstr ""
+
+msgid "Couleur des boutons, liens actifs, upvotes (défaut : rouge Reddit)."
+msgstr ""
+
+msgid "Couleur principale"
+msgstr ""
+
+msgid "Couleur principale du forum (badges, hero, liens actifs)."
+msgstr ""
+
+msgid "Création d\'un topic + 1 réponse (pour déclencher le hook"
+msgstr ""
+
+msgid "Création de 3 utilisateurs (1 auteur + 2 votants) au grade Rookie"
+msgstr ""
+
+msgid "Créer"
+msgstr ""
+
+msgid "Créer le forum"
+msgstr ""
+
+msgid "Créer le premier sujet"
+msgstr ""
+
+msgid "Créer un compte"
+msgstr ""
+
+msgid "Créer un forum dans « %s »"
+msgstr ""
+
+msgid "Créer un nouveau forum"
+msgstr ""
+
+msgid "Créer un sujet"
+msgstr ""
+
+msgid "Créer un sujet dans ce forum"
+msgstr ""
+
+msgid "Créez des trophées sur mesure (ex: Bug Hunter, Fondateur, Expert WP) à décerner à vos membres."
+msgstr ""
+
+msgid "Date"
+msgstr ""
+
+msgid "Date invalide"
+msgstr ""
+
+msgid "Dates étalées"
+msgstr ""
+
+msgid "Dernier :"
+msgstr ""
+
+msgid "Derniers Sujets Résolus (✔ Solved)"
+msgstr ""
+
+msgid "Derniers Sujets par Forum ID"
+msgstr ""
+
+msgid "Derniers sujets filtrés par Forum ID (' . $limit . ' sujets)."
+msgstr ""
+
+msgid "Dernière activité %s"
+msgstr ""
+
+msgid "Dernière activité : %s"
+msgstr ""
+
+msgid "Description :"
+msgstr ""
+
+msgid "Description étendue"
+msgstr ""
+
+msgid "Destination"
+msgstr ""
+
+msgid "Dimensions trop grandes (max 10000×10000)."
+msgstr ""
+
+msgid "Discord Dark"
+msgstr ""
+
+msgid "Disposition Forum par Défaut"
+msgstr ""
+
+msgid "Downvoter"
+msgstr ""
+
+msgid "Downvotes"
+msgstr ""
+
+msgid "Déconnexion"
+msgstr ""
+
+msgid "Décrivez votre question en une phrase…"
+msgstr ""
+
+msgid "Démarré par"
+msgstr ""
+
+msgid "Démarré par : %1$s"
+msgstr ""
+
+msgid "Déplacer"
+msgstr ""
+
+msgid "Déplacer la réponse"
+msgstr ""
+
+msgid "Déplacer la réponse « %s »"
+msgstr ""
+
+msgid "Déplacé : %s"
+msgstr ""
+
+msgid "Désabonnement confirmé"
+msgstr ""
+
+msgid "Désolé, la page que vous cherchez n\'existe pas ou a été déplacée."
+msgstr ""
+
+msgid "Désépingler"
+msgstr ""
+
+msgid "Détaillez votre question…"
+msgstr ""
+
+msgid "E-mail"
+msgstr ""
+
+msgid "Email"
+msgstr ""
+
+msgid "Email (non publié) (requis) :"
+msgstr ""
+
+msgid "Email digest"
+msgstr ""
+
+msgid "Emails envoyés par cycle (5-100). Défaut :"
+msgstr ""
+
+msgid "Emoji ou URL d\'image carrée (64×64 recommandé)."
+msgstr ""
+
+msgid "En réponse à :"
+msgstr ""
+
+msgid "Encore %1$d points pour atteindre %2$s"
+msgstr ""
+
+msgid "Enregistrer"
+msgstr ""
+
+msgid "Enregistrer le bonus"
+msgstr ""
+
+msgid "Enregistrer les modifications"
+msgstr ""
+
+msgid "Envoyés"
+msgstr ""
+
+msgid "Erreur de base de données."
+msgstr ""
+
+msgid "Erreur de chargement"
+msgstr ""
+
+msgid "Essayez une autre recherche."
+msgstr ""
+
+msgid "Favoris"
+msgstr ""
+
+msgid "Favoris de %s"
+msgstr ""
+
+msgid "Femme mature"
+msgstr ""
+
+msgid "Fermer"
+msgstr ""
+
+msgid "Fermé"
+msgstr ""
+
+msgid "Fichier CSV ou XLSX :"
+msgstr ""
+
+msgid "Fichier corrompu ou non image."
+msgstr ""
+
+msgid "Fichier trop volumineux (max 10 Mo)."
+msgstr ""
+
+msgid "Fil d\'ariane"
+msgstr ""
+
+msgid "Fil d\'ariane du forum"
+msgstr ""
+
+msgid "Filtrer"
+msgstr ""
+
+msgid "Filtrer par date"
+msgstr ""
+
+msgid "Filtrer par forum"
+msgstr ""
+
+msgid "Flux des dernières discussions marquées ✔ Résolu."
+msgstr ""
+
+msgid "Footer"
+msgstr ""
+
+msgid "Forcer HTTPS"
+msgstr ""
+
+msgid "Format attendu :"
+msgstr ""
+
+msgid "Forum"
+msgstr ""
+
+msgid "Forum (ID, 0 = tous) :"
+msgstr ""
+
+msgid "Forum :"
+msgstr ""
+
+msgid "Forum de discussion"
+msgstr ""
+
+msgid "Forum de discussion communautaire"
+msgstr ""
+
+msgid "Forum de discussion —"
+msgstr ""
+
+msgid "Forum parent :"
+msgstr ""
+
+msgid "Forums"
+msgstr ""
+
+msgid "Forums de %s — discussions et entraide."
+msgstr ""
+
+msgid "Forums suivis"
+msgstr ""
+
+msgid "Fusionner"
+msgstr ""
+
+msgid "Fusionner avec ce sujet :"
+msgstr ""
+
+msgid "Fusionner le mot-clé"
+msgstr ""
+
+msgid "Fusionner le sujet"
+msgstr ""
+
+msgid "Fusionner le sujet « %s »"
+msgstr ""
+
+msgid "Fusionner les abonnés au sujet"
+msgstr ""
+
+msgid "Fusionner les favoris"
+msgstr ""
+
+msgid "Fusionner les mots-clés"
+msgstr ""
+
+msgid "Félicitations ! Vous venez d'être promu au grade %s sur %s.\n"
+msgstr ""
+
+msgid "Félicitations, vous avez été promu !"
+msgstr ""
+
+msgid "Garder un journal de cette modification"
+msgstr ""
+
+msgid "Gardien"
+msgstr ""
+
+msgid "Grade"
+msgstr ""
+
+msgid "Grade actuel"
+msgstr ""
+
+msgid "Grade de %s"
+msgstr ""
+
+msgid "Grade de départ (0 karma)"
+msgstr ""
+
+msgid "Grade final :"
+msgstr ""
+
+msgid "Grade initial :"
+msgstr ""
+
+msgid "Grade maximal atteint — félicitations !"
+msgstr ""
+
+msgid "Grade maximum atteint 🎉"
+msgstr ""
+
+msgid "Grade précédent : %s\n"
+msgstr ""
+
+msgid "Grades"
+msgstr ""
+
+msgid "Grades & karma"
+msgstr ""
+
+msgid "Grille d\'Avatars des Membres (Wall)"
+msgstr ""
+
+msgid "Grille visuelle d\'avatars des membres de la communauté."
+msgstr ""
+
+msgid "Guide de création du Service Account"
+msgstr ""
+
+msgid "Générer un mot de passe"
+msgstr ""
+
+msgid "Gérer le mot-clé « %s »"
+msgstr ""
+
+msgid "Hebdomadaire"
+msgstr ""
+
+msgid "Heure d\'envoi"
+msgstr ""
+
+msgid "Heure locale du serveur."
+msgstr ""
+
+msgid "Hot"
+msgstr ""
+
+msgid "Icône du forum"
+msgstr ""
+
+msgid "Identifiant"
+msgstr ""
+
+msgid "Identifiant ou e-mail"
+msgstr ""
+
+msgid "Identifiants incorrects. Réessayez."
+msgstr ""
+
+msgid "Identité"
+msgstr ""
+
+msgid "Il n\'y a aucun autre sujet dans ce forum avec lequel fusionner."
+msgstr ""
+
+msgid "Image"
+msgstr ""
+
+msgid "Image ID"
+msgstr ""
+
+msgid "Image approuvée. Elle est maintenant visible."
+msgstr ""
+
+msgid "Image convertie en AVIF et en attente de modération. Économie : %d%% (%s → %s)"
+msgstr ""
+
+msgid "Image de bannière en haut du forum (recommandé : 1200×200)."
+msgstr ""
+
+msgid "Image de couverture"
+msgstr ""
+
+msgid "Image en attente de modération"
+msgstr ""
+
+msgid "Image introuvable ou déjà modérée."
+msgstr ""
+
+msgid "Image rejetée et supprimée du serveur."
+msgstr ""
+
+msgid "Image trop petite (min 50×50 pixels)."
+msgstr ""
+
+msgid "Images"
+msgstr ""
+
+msgid "Images approuvées"
+msgstr ""
+
+msgid "Images en attente"
+msgstr ""
+
+msgid "Images en attente de validation"
+msgstr ""
+
+msgid "Images forum"
+msgstr ""
+
+msgid "Import en cours. Veuillez patienter ~30 secondes pour que les forums et profils démo s\'installent."
+msgstr ""
+
+msgid "Import en masse"
+msgstr ""
+
+msgid "Impossible de convertir l\'image. Contactez l\'administrateur."
+msgstr ""
+
+msgid "Impossible de modifier le vote."
+msgstr ""
+
+msgid "Impossible de retirer le vote."
+msgstr ""
+
+msgid "Impossible d’enregistrer le vote (conflit ou erreur base)."
+msgstr ""
+
+msgid "Indiquez votre e-mail pour réinitialiser votre mot de passe."
+msgstr ""
+
+msgid "Informations sur l\'auteur"
+msgstr ""
+
+msgid "Inscription"
+msgstr ""
+
+msgid "Inscrit depuis : %s"
+msgstr ""
+
+msgid "Inscrit le"
+msgstr ""
+
+msgid "Inscrit le %s"
+msgstr ""
+
+msgid "Installez bbPress pour activer le forum."
+msgstr ""
+
+msgid "Inter (Moderne sans-serif)"
+msgstr ""
+
+msgid "Intervalle entre votes (secondes)"
+msgstr ""
+
+msgid "JPEG, PNG, WebP ou AVIF — %d image par jour, modérée avant publication."
+msgstr ""
+
+msgid "JPEG, PNG, WebP ou AVIF — %d images par jour, modérées avant publication."
+msgstr ""
+
+msgid "Je comprends que cette action est définitive."
+msgstr ""
+
+msgid "Jour d\'envoi"
+msgstr ""
+
+msgid "Journal des révisions"
+msgstr ""
+
+msgid "Karma"
+msgstr ""
+
+msgid "Karma (bonus)"
+msgstr ""
+
+msgid "Kunoichi rose"
+msgstr ""
+
+msgid "Kunoichi tresses"
+msgstr ""
+
+msgid "La fusion de mots-clés est irréversible."
+msgstr ""
+
+msgid "La suppression d\'un mot-clé est définitive."
+msgstr ""
+
+msgid "Laisser un commentaire"
+msgstr ""
+
+msgid "Laissez le slug vide pour en générer un automatiquement."
+msgstr ""
+
+msgid "Le forum « %s » est fermé aux nouveaux contenus."
+msgstr ""
+
+msgid "Le mot de passe doit faire au moins 8 caractères."
+msgstr ""
+
+msgid "Le nom d\'utilisateur ne peut pas être modifié."
+msgstr ""
+
+msgid "Le plugin bbPress n\'est pas installé ou activé."
+msgstr ""
+
+msgid "Le type de fichier ne correspond pas à son contenu."
+msgstr ""
+
+msgid "Les mots de passe ne correspondent pas."
+msgstr ""
+
+msgid "Les nouveaux utilisateurs reçoivent ce grade automatiquement."
+msgstr ""
+
+msgid "Les réponses des deux sujets sont fusionnées chronologiquement, selon leur date de publication. Les sujets peuvent être décalés d\'une seconde pour maintenir l\'ordre chronologique."
+msgstr ""
+
+msgid "Lien de confirmation expiré. Rechargez la page et recommencez."
+msgstr ""
+
+msgid "Lien de désabonnement invalide ou expiré."
+msgstr ""
+
+msgid "Liens, hover (défaut : bleu Reddit)."
+msgstr ""
+
+msgid "Limit login attempts"
+msgstr ""
+
+msgid "Limite de votes quotidienne atteinte."
+msgstr ""
+
+msgid "Limite quotidienne atteinte (%d images/jour). Réessayez demain."
+msgstr ""
+
+msgid "Limite quotidienne par utilisateur"
+msgstr ""
+
+msgid "Limite totale par utilisateur"
+msgstr ""
+
+msgid "Limite uploads / jour"
+msgstr ""
+
+msgid "Limite uploads totale"
+msgstr ""
+
+msgid "Liste des discussions les plus actives de la communauté."
+msgstr ""
+
+msgid "M\'avertir des nouvelles réponses par email"
+msgstr ""
+
+msgid "Manuel — annoncé %1$s — plancher import %2$s"
+msgstr ""
+
+msgid "Masquer"
+msgstr ""
+
+msgid "Masquer le mot de passe"
+msgstr ""
+
+msgid "Membre supprimé"
+msgstr ""
+
+msgid "Membres"
+msgstr ""
+
+msgid "Membres votants"
+msgstr ""
+
+msgid "Menu"
+msgstr ""
+
+msgid "Menu forum"
+msgstr ""
+
+msgid "Menu utilisateur"
+msgstr ""
+
+msgid "Mes notifications"
+msgstr ""
+
+msgid "Mes subreddits"
+msgstr ""
+
+msgid "Mes sujets"
+msgstr ""
+
+msgid "Message"
+msgstr ""
+
+msgid "Messages minimum pour uploader"
+msgstr ""
+
+msgid "Messages minimum requis"
+msgstr ""
+
+msgid "Mettre à jour"
+msgstr ""
+
+msgid "Mettre à jour l\'utilisateur"
+msgstr ""
+
+msgid "Mettre à jour le profil"
+msgstr ""
+
+msgid "Minimal Light"
+msgstr ""
+
+msgid "Mode clair/sombre"
+msgstr ""
+
+msgid "Modification de « %s »"
+msgstr ""
+
+msgid "Modifier"
+msgstr ""
+
+msgid "Modifier le profil de %s"
+msgstr ""
+
+msgid "Modifier le slug change son permalien. Les liens vers l\'ancien slug cesseront de fonctionner."
+msgstr ""
+
+msgid "Modifier le sujet"
+msgstr ""
+
+msgid "Modo"
+msgstr ""
+
+msgid "Modérateurs du forum :"
+msgstr ""
+
+msgid "Modération images"
+msgstr ""
+
+msgid "Modérer maintenant →"
+msgstr ""
+
+msgid "Mon profil"
+msgstr ""
+
+msgid "Mot de passe"
+msgstr ""
+
+msgid "Mot de passe incorrect. Le compte n\'a pas été supprimé."
+msgstr ""
+
+msgid "Mot de passe oublié"
+msgstr ""
+
+msgid "Mot-clé existant :"
+msgstr ""
+
+msgid "Mots de passe admin"
+msgstr ""
+
+msgid "Mots-clés"
+msgstr ""
+
+msgid "Mots-clés :"
+msgstr ""
+
+msgid "Médecin"
+msgstr ""
+
+msgid "Méthode de déplacement"
+msgstr ""
+
+msgid "Méthode de scission"
+msgstr ""
+
+msgid "Navigation des commentaires"
+msgstr ""
+
+msgid "Navigation pied de page"
+msgstr ""
+
+msgid "Navigation principale"
+msgstr ""
+
+msgid "Navigation profil"
+msgstr ""
+
+msgid "Navigation rapide"
+msgstr ""
+
+msgid "Ninja argenté"
+msgstr ""
+
+msgid "Ninja flamme"
+msgstr ""
+
+msgid "Ninja joyeux"
+msgstr ""
+
+msgid "Ninja masqué"
+msgstr ""
+
+msgid "Ninja orange"
+msgstr ""
+
+msgid "Ninja sage"
+msgstr ""
+
+msgid "Ninja sensei"
+msgstr ""
+
+msgid "Ninja étudiant"
+msgstr ""
+
+msgid "Nom"
+msgstr ""
+
+msgid "Nom (requis) :"
+msgstr ""
+
+msgid "Nom :"
+msgstr ""
+
+msgid "Nom d\'utilisateur"
+msgstr ""
+
+msgid "Nom du forum (longueur max : %d) :"
+msgstr ""
+
+msgid "Nom expéditeur"
+msgstr ""
+
+msgid "Nombre d\'éléments à afficher"
+msgstr ""
+
+msgid "Nombre de sujets :"
+msgstr ""
+
+msgid "Nombre maximum d\'images qu\'un utilisateur peut uploader par jour."
+msgstr ""
+
+msgid "Nombre total maximum d\'images par utilisateur (toutes confondues)."
+msgstr ""
+
+msgid "Non"
+msgstr ""
+
+msgid "Note"
+msgstr ""
+
+msgid "Note Hostinger :"
+msgstr ""
+
+msgid "Notification email"
+msgstr ""
+
+msgid "Notifications"
+msgstr ""
+
+msgid "Nouveau"
+msgstr ""
+
+msgid "Nouveau forum"
+msgstr ""
+
+msgid "Nouveau grade : %s\n"
+msgstr ""
+
+msgid "Nouveau sujet dans %s intitulé :"
+msgstr ""
+
+msgid "Nouveau sujet de discussion"
+msgstr ""
+
+msgid "Offset"
+msgstr ""
+
+msgid "Opt-in utilisateur :"
+msgstr ""
+
+msgid "Options -Indexes"
+msgstr ""
+
+msgid "Options supplémentaires"
+msgstr ""
+
+msgid "Oui"
+msgstr ""
+
+msgid "Ouvert"
+msgstr ""
+
+msgid "Ouvrir"
+msgstr ""
+
+msgid "Overview"
+msgstr ""
+
+msgid "Page %1$s / %2$s"
+msgstr ""
+
+msgid "Page introuvable"
+msgstr ""
+
+msgid "Page non trouvée"
+msgstr ""
+
+msgid "Page précédente"
+msgstr ""
+
+msgid "Page suivante"
+msgstr ""
+
+msgid "Pagination de la page"
+msgstr ""
+
+msgid "Partager"
+msgstr ""
+
+msgid "Participations"
+msgstr ""
+
+msgid "Participations de %s"
+msgstr ""
+
+msgid "Permissions insuffisantes."
+msgstr ""
+
+msgid "Permissions personnalisées"
+msgstr ""
+
+msgid "Personnalisez les couleurs, polices, dispositions et modules de votre forum Reddit-like."
+msgstr ""
+
+msgid "Pertinence"
+msgstr ""
+
+msgid "Pied de page"
+msgstr ""
+
+msgid "Plugins"
+msgstr ""
+
+msgid "Plus anciens"
+msgstr ""
+
+msgid "Plus de réponses"
+msgstr ""
+
+msgid "Plus de sujets"
+msgstr ""
+
+msgid "Plus de votes"
+msgstr ""
+
+msgid "Plus d’actions"
+msgstr ""
+
+msgid "Plus récents"
+msgstr ""
+
+msgid "Plus récents (activité)"
+msgstr ""
+
+msgid "Plus récents (création)"
+msgstr ""
+
+msgid "Poids d\'un upvote reçu"
+msgstr ""
+
+msgid "Poids d\'une réponse reçue"
+msgstr ""
+
+msgid "Police d\'écriture du Forum"
+msgstr ""
+
+msgid "Poppins (Géométrique)"
+msgstr ""
+
+msgid "Post"
+msgstr ""
+
+msgid "Posté par"
+msgstr ""
+
+msgid "Pour : %s"
+msgstr ""
+
+msgid "Pour conserver ce sujet comme sujet principal, ouvrez l\'autre sujet et utilisez l\'outil de fusion depuis celui-ci."
+msgstr ""
+
+msgid "Pour vous désabonner,"
+msgstr ""
+
+msgid "Preset Design (10/10)"
+msgstr ""
+
+msgid "Profil"
+msgstr ""
+
+msgid "Profil de %1$s – %2$s"
+msgstr ""
+
+msgid "Profil de %s"
+msgstr ""
+
+msgid "Progression vers le grade suivant"
+msgstr ""
+
+msgid "Propulsé par"
+msgstr ""
+
+msgid "Protection"
+msgstr ""
+
+msgid "Protégé"
+msgstr ""
+
+msgid "Précédent"
+msgstr ""
+
+msgid "Prénom"
+msgstr ""
+
+msgid "Pseudo"
+msgstr ""
+
+msgid "Publier"
+msgstr ""
+
+msgid "Publier la réponse"
+msgstr ""
+
+msgid "Publier le sujet"
+msgstr ""
+
+msgid "Publié par"
+msgstr ""
+
+msgid "Publiées"
+msgstr ""
+
+msgid "Publiés"
+msgstr ""
+
+msgid "Période :"
+msgstr ""
+
+msgid "Qualité AVIF"
+msgstr ""
+
+msgid "Qualité AVIF (0-100)"
+msgstr ""
+
+msgid "Quelqu\'un"
+msgstr ""
+
+msgid "Quitter"
+msgstr ""
+
+msgid "Quota horaire :"
+msgstr ""
+
+msgid "Rafraîchir les stats"
+msgstr ""
+
+msgid "Raison (optionnel)"
+msgstr ""
+
+msgid "Rang"
+msgstr ""
+
+msgid "Recherche"
+msgstr ""
+
+msgid "Recherche de réponses"
+msgstr ""
+
+msgid "Recherche de sujets"
+msgstr ""
+
+msgid "Rechercher"
+msgstr ""
+
+msgid "Rechercher :"
+msgstr ""
+
+msgid "Rechercher dans le forum"
+msgstr ""
+
+msgid "Rechercher dans le forum :"
+msgstr ""
+
+msgid "Rechercher dans le forum…"
+msgstr ""
+
+msgid "Rechercher dans les réponses…"
+msgstr ""
+
+msgid "Rechercher dans les sujets…"
+msgstr ""
+
+msgid "Rechercher des réponses :"
+msgstr ""
+
+msgid "Rechercher des sujets :"
+msgstr ""
+
+msgid "Rechercher sur le forum..."
+msgstr ""
+
+msgid "Rechercher sur le site"
+msgstr ""
+
+msgid "Rechercher…"
+msgstr ""
+
+msgid "Recommandé : 50-70."
+msgstr ""
+
+msgid "Reddit Blue (Default)"
+msgstr ""
+
+msgid "Reformulez"
+msgstr ""
+
+msgid "Rejetées"
+msgstr ""
+
+msgid "Rejoignez la communauté en quelques secondes."
+msgstr ""
+
+msgid "Rejoindre"
+msgstr ""
+
+msgid "Rejoindre la communauté en 1 clic"
+msgstr ""
+
+msgid "Renommer"
+msgstr ""
+
+msgid "Renommer le mot-clé"
+msgstr ""
+
+msgid "Replier le fil"
+msgstr ""
+
+msgid "Rester"
+msgstr ""
+
+msgid "Rester connecté"
+msgstr ""
+
+msgid "Retour au forum"
+msgstr ""
+
+msgid "Rising"
+msgstr ""
+
+msgid "Roboto (Classique Clean)"
+msgstr ""
+
+msgid "Règles du forum"
+msgstr ""
+
+msgid "Rédigez votre réponse…"
+msgstr ""
+
+msgid "Réglages"
+msgstr ""
+
+msgid "Réglages SwiftBoard (Envato)"
+msgstr ""
+
+msgid "Réglages enregistrés."
+msgstr ""
+
+msgid "Réglages upload"
+msgstr ""
+
+msgid "Réinitialiser mon mot de passe"
+msgstr ""
+
+msgid "Répartition"
+msgstr ""
+
+msgid "Répondre"
+msgstr ""
+
+msgid "Répondre à : %s"
+msgstr ""
+
+msgid "Répondre à la discussion"
+msgstr ""
+
+msgid "Réponse du forum"
+msgstr ""
+
+msgid "Réponses"
+msgstr ""
+
+msgid "Réponses (7j)"
+msgstr ""
+
+msgid "Réponses anonymes"
+msgstr ""
+
+msgid "Réponses créées"
+msgstr ""
+
+msgid "Réponses créées : %s"
+msgstr ""
+
+msgid "Réponses créées par %s"
+msgstr ""
+
+msgid "Réponses créées sur le forum"
+msgstr ""
+
+msgid "Réponses reçues"
+msgstr ""
+
+msgid "Réponses récentes"
+msgstr ""
+
+msgid "Réponses spam"
+msgstr ""
+
+msgid "Répéter le nouveau mot de passe"
+msgstr ""
+
+msgid "Résultats de recherche"
+msgstr ""
+
+msgid "Résultats de recherche pour : %s"
+msgstr ""
+
+msgid "Résultats pour : %s"
+msgstr ""
+
+msgid "Rôle du blog"
+msgstr ""
+
+msgid "Rôle du forum"
+msgstr ""
+
+msgid "Rôle réseau"
+msgstr ""
+
+msgid "Rôle sur le forum : %s"
+msgstr ""
+
+msgid "Rôle utilisateur"
+msgstr ""
+
+msgid "S\'inscrire"
+msgstr ""
+
+msgid "Saisissez des mots-clés pour rechercher dans le forum."
+msgstr ""
+
+msgid "Saisissez un titre..."
+msgstr ""
+
+msgid "Saisissez à nouveau votre nouveau mot de passe."
+msgstr ""
+
+msgid "Sauvegarder"
+msgstr ""
+
+msgid "Sauvegardes"
+msgstr ""
+
+msgid "Sauvegardés"
+msgstr ""
+
+msgid "Scinder"
+msgstr ""
+
+msgid "Scinder le sujet"
+msgstr ""
+
+msgid "Scinder le sujet « %s »"
+msgstr ""
+
+msgid "Scinder un sujet le coupe en deux à partir de la réponse sélectionnée. Vous pouvez en faire un nouveau sujet, ou fusionner ces réponses avec un sujet existant."
+msgstr ""
+
+msgid "Scission : %s"
+msgstr ""
+
+msgid "Score"
+msgstr ""
+
+msgid "Score de réputation : %d points\n"
+msgstr ""
+
+msgid "Score final :"
+msgstr ""
+
+msgid "Score minimum pour passer de Membre à Pro. Défaut : 500 (échelle annoncée v5.3.8)."
+msgstr ""
+
+msgid "Score minimum pour passer de Rookie à Membre. Défaut : 5."
+msgstr ""
+
+msgid "Score réputation"
+msgstr ""
+
+msgid "Se connecter"
+msgstr ""
+
+msgid "Se déconnecter ?"
+msgstr ""
+
+msgid "Search Console"
+msgstr ""
+
+msgid "Section privée."
+msgstr ""
+
+msgid "Service Account JSON"
+msgstr ""
+
+msgid "Seuil Membre → Pro"
+msgstr ""
+
+msgid "Seuil Rookie → Membre"
+msgstr ""
+
+msgid "Seuil de rejets (anti-spam)"
+msgstr ""
+
+msgid "Si vous choisissez l\'option « sujet existant », les réponses seront fusionnées chronologiquement selon leur date de publication."
+msgstr ""
+
+msgid "Si vous choisissez un sujet existant, les réponses seront ordonnées par leur date de création."
+msgstr ""
+
+msgid "Sidebar Blog"
+msgstr ""
+
+msgid "Sidebar Forum"
+msgstr ""
+
+msgid "Signalement envoyé aux modérateurs."
+msgstr ""
+
+msgid "Signalements"
+msgstr ""
+
+msgid "Signaler"
+msgstr ""
+
+msgid "Site web :"
+msgstr ""
+
+msgid "Site web : %s"
+msgstr ""
+
+msgid "Skip si vide :"
+msgstr ""
+
+msgid "Slug :"
+msgstr ""
+
+msgid "Sombre"
+msgstr ""
+
+msgid "Soumission automatique"
+msgstr ""
+
+msgid "Sous-forums : ✅"
+msgstr ""
+
+msgid "Sous-forums : ❌"
+msgstr ""
+
+msgid "Spam"
+msgstr ""
+
+msgid "Statistiques Animées du Forum"
+msgstr ""
+
+msgid "Statistiques du forum"
+msgstr ""
+
+msgid "Status"
+msgstr ""
+
+msgid "Statut"
+msgstr ""
+
+msgid "Statut :"
+msgstr ""
+
+msgid "Style & Apparence (Reddit-like)"
+msgstr ""
+
+msgid "Suivant"
+msgstr ""
+
+msgid "Suivre"
+msgstr ""
+
+msgid "Sujet :"
+msgstr ""
+
+msgid "Sujet de l\'email"
+msgstr ""
+
+msgid "Sujet du forum"
+msgstr ""
+
+msgid "Sujet introuvable"
+msgstr ""
+
+msgid "Sujet parent"
+msgstr ""
+
+msgid "Sujets"
+msgstr ""
+
+msgid "Sujets : ✅"
+msgstr ""
+
+msgid "Sujets : ❌"
+msgstr ""
+
+msgid "Sujets Chauds (Hot Feed)"
+msgstr ""
+
+msgid "Sujets créés"
+msgstr ""
+
+msgid "Sujets créés : %s"
+msgstr ""
+
+msgid "Sujets créés par %s"
+msgstr ""
+
+msgid "Sujets créés sur le forum"
+msgstr ""
+
+msgid "Sujets en attente"
+msgstr ""
+
+msgid "Sujets favoris"
+msgstr ""
+
+msgid "Sujets les plus populaires triés par score de réputation."
+msgstr ""
+
+msgid "Sujets où l\'utilisateur a participé"
+msgstr ""
+
+msgid "Sujets populaires"
+msgstr ""
+
+msgid "Sujets récents"
+msgstr ""
+
+msgid "Sujets suivis"
+msgstr ""
+
+msgid "Supprimer"
+msgstr ""
+
+msgid "Supprimer définitivement mon compte"
+msgstr ""
+
+msgid "Supprimer le mot-clé"
+msgstr ""
+
+msgid "Supprimer mon compte"
+msgstr ""
+
+msgid "Supprimé"
+msgstr ""
+
+msgid "SwiftBoard"
+msgstr ""
+
+msgid "SwiftBoard :"
+msgstr ""
+
+msgid "SwiftBoard : Annuaire Subreddits"
+msgstr ""
+
+msgid "SwiftBoard : Barre de Recherche Héroïque"
+msgstr ""
+
+msgid "SwiftBoard : Statistiques Forum"
+msgstr ""
+
+msgid "SwiftBoard : Sujets Chauds"
+msgstr ""
+
+msgid "SwiftBoard : Top Contributeurs"
+msgstr ""
+
+msgid "SwiftBoard Dashboard"
+msgstr ""
+
+msgid "SwiftBoard Forum"
+msgstr ""
+
+msgid "SwiftBoard Forum (Reddit-like)"
+msgstr ""
+
+msgid "SwiftBoard v2.0.0 — Thème WordPress forum ultra-performant, design Reddit-inspired, SEO + LLM-ready."
+msgstr ""
+
+msgid "SwiftBoard · Sujets populaires"
+msgstr ""
+
+msgid "SwiftBoard — Réglages"
+msgstr ""
+
+msgid "SwiftBoard — Sujets chauds"
+msgstr ""
+
+msgid "System de votes"
+msgstr ""
+
+msgid "Système par défaut (Ultra rapide - 0 requête)"
+msgstr ""
+
+msgid "Sécurité"
+msgstr ""
+
+msgid "Sélectionnez le sujet avec lequel fusionner. Le sujet de destination restera le sujet principal, et celui-ci deviendra une réponse."
+msgstr ""
+
+msgid "Sélectionnez un avatar (facultatif) :"
+msgstr ""
+
+msgid "Séparés par des virgules"
+msgstr ""
+
+msgid "Tableau de Réputation & Grades"
+msgstr ""
+
+msgid "Taille AVIF"
+msgstr ""
+
+msgid "Taille de batch"
+msgstr ""
+
+msgid "Taille originale"
+msgstr ""
+
+msgid "Tendances"
+msgstr ""
+
+msgid "Test auto-promotion"
+msgstr ""
+
+msgid "Testez d\'abord avec"
+msgstr ""
+
+msgid "Tests & maintenance"
+msgstr ""
+
+msgid "Texte du Bouton (Ouvre la Modale d\'Onboarding)"
+msgstr ""
+
+msgid "Texte personnalisé du footer"
+msgstr ""
+
+msgid "Thème par défaut"
+msgstr ""
+
+msgid "Titre"
+msgstr ""
+
+msgid "Titre :"
+msgstr ""
+
+msgid "Titre du Widget"
+msgstr ""
+
+msgid "Titre du sujet"
+msgstr ""
+
+msgid "Top"
+msgstr ""
+
+msgid "Top Contributeurs"
+msgstr ""
+
+msgid "Top contributeurs communautaires (Karma & Grades)."
+msgstr ""
+
+msgid "Top répondeurs"
+msgstr ""
+
+msgid "Top semaine"
+msgstr ""
+
+msgid "Topic ID :"
+msgstr ""
+
+msgid "Total"
+msgstr ""
+
+msgid "Total : %1$s (▲%2$s reçus + 💬%3$s reçues)"
+msgstr ""
+
+msgid "Total activité"
+msgstr ""
+
+msgid "Total traité"
+msgstr ""
+
+msgid "Total votes"
+msgstr ""
+
+msgid "Tous"
+msgstr ""
+
+msgid "Tous droits réservés."
+msgstr ""
+
+msgid "Tous les derniers sujets de discussion du forum."
+msgstr ""
+
+msgid "Tous les forums"
+msgstr ""
+
+msgid "Tous les liens pointant vers ce mot-clé cesseront de fonctionner."
+msgstr ""
+
+msgid "Tous les statuts"
+msgstr ""
+
+msgid "Tout lire"
+msgstr ""
+
+msgid "Tout marquer comme lu"
+msgstr ""
+
+msgid "Toutes"
+msgstr ""
+
+msgid "Toutes les dates"
+msgstr ""
+
+msgid "Toutes les images ont été modérées."
+msgstr ""
+
+msgid "Trier les résultats"
+msgstr ""
+
+msgid "Trier les sujets"
+msgstr ""
+
+msgid "Trier par :"
+msgstr ""
+
+msgid "Trois modèles prêts à remplir dans Excel :"
+msgstr ""
+
+msgid "Trop d\'images rejetées récemment. Contactez un administrateur."
+msgstr ""
+
+msgid "Trop d\'uploads. Attendez 1 minute entre chaque image."
+msgstr ""
+
+msgid "Trop de requêtes. Réessayez dans 1 minute."
+msgstr ""
+
+msgid "Trop de requêtes. Réessayez dans une minute."
+msgstr ""
+
+msgid "Trop de tentatives échouées. Réessayez dans 15 minutes."
+msgstr ""
+
+msgid "Two Factor"
+msgstr ""
+
+msgid "Type de forum :"
+msgstr ""
+
+msgid "Une erreur est survenue."
+msgstr ""
+
+msgid "Une fois par semaine"
+msgstr ""
+
+msgid "Une règle par ligne. Numérotation automatique."
+msgstr ""
+
+msgid "Updates"
+msgstr ""
+
+msgid "Upload d\'images"
+msgstr ""
+
+msgid "Uploads :"
+msgstr ""
+
+msgid "Uploads illimités"
+msgstr ""
+
+msgid "Uploads total :"
+msgstr ""
+
+msgid "Uploads/jour :"
+msgstr ""
+
+msgid "Upvoter"
+msgstr ""
+
+msgid "Upvotes"
+msgstr ""
+
+msgid "Upvotes reçus"
+msgstr ""
+
+msgid "Utile"
+msgstr ""
+
+msgid "Utilisateur"
+msgstr ""
+
+msgid "Utilisateurs"
+msgstr ""
+
+msgid "Utilisateurs enregistrés"
+msgstr ""
+
+msgid "Utiliser un sujet existant dans ce forum :"
+msgstr ""
+
+msgid "Variable :"
+msgstr ""
+
+msgid "Vers"
+msgstr ""
+
+msgid "Veuillez patienter entre deux votes."
+msgstr ""
+
+msgid "Vider le cache SwiftBoard"
+msgstr ""
+
+msgid "Visibilité :"
+msgstr ""
+
+msgid "Voici le résumé de votre activité sur le forum cette semaine."
+msgstr ""
+
+msgid "Voir"
+msgstr ""
+
+msgid "Voir le sujet"
+msgstr ""
+
+msgid "Voir tous les sujets →"
+msgstr ""
+
+msgid "Vos informations :"
+msgstr ""
+
+msgid "Votes"
+msgstr ""
+
+msgid "Votes :"
+msgstr ""
+
+msgid "Votes illimités"
+msgstr ""
+
+msgid "Votes réalistes"
+msgstr ""
+
+msgid "Votes/jour :"
+msgstr ""
+
+msgid "Votre compte peut publier du contenu HTML sans restriction."
+msgstr ""
+
+msgid "Votre identifiant doit être unique et ne pourra pas être modifié ultérieurement."
+msgstr ""
+
+msgid "Votre réponse"
+msgstr ""
+
+msgid "Votre réponse a été publiée"
+msgstr ""
+
+msgid "Votre sujet a été publié"
+msgstr ""
+
+msgid "Voulez-vous vraiment fusionner le mot-clé « %s » dans celui spécifié ?"
+msgstr ""
+
+msgid "Voulez-vous vraiment supprimer le mot-clé « %s » ? Cette action est définitive."
+msgstr ""
+
+msgid "Vous avez atteint votre limite totale de %d images. Contactez un administrateur."
+msgstr ""
+
+msgid "Vous devez %s pour créer un sujet."
+msgstr ""
+
+msgid "Vous devez %s pour répondre à ce sujet."
+msgstr ""
+
+msgid "Vous devez avoir au moins %d messages pour uploader des images."
+msgstr ""
+
+msgid "Vous devez être connecté pour créer de nouveaux forums."
+msgstr ""
+
+msgid "Vous devez être connecté pour voter."
+msgstr ""
+
+msgid "Vous n\'avez pas la permission d\'accéder à cette page."
+msgstr ""
+
+msgid "Vous n\'avez pas la permission de modifier ce sujet."
+msgstr ""
+
+msgid "Vous n\'avez pas la permission de modifier cette réponse."
+msgstr ""
+
+msgid "Vous ne pouvez pas créer de nouveaux forums."
+msgstr ""
+
+msgid "Vous ne pouvez pas modifier ce sujet."
+msgstr ""
+
+msgid "Vous ne pouvez pas modifier cette réponse."
+msgstr ""
+
+msgid "Vous ne recevrez plus le digest hebdomadaire. Vous pouvez vous réabonner à tout moment depuis votre profil."
+msgstr ""
+
+msgid "Vous ne suivez aucun sujet."
+msgstr ""
+
+msgid "Vous pouvez transformer cette réponse en nouveau sujet, ou la fusionner dans un sujet existant."
+msgstr ""
+
+msgid "Vous êtes maintenant"
+msgstr ""
+
+msgid "Vue Cartes (Reddit-style)"
+msgstr ""
+
+msgid "Vue Compacte (Dense)"
+msgstr ""
+
+msgid "Vue d\'ensemble de l\'activité de la communauté."
+msgstr ""
+
+msgid "Vue d\'ensemble de votre forum communautaire"
+msgstr ""
+
+msgid "[%s] 🎉 Vous êtes maintenant %s !"
+msgstr ""
+
+msgid "a répondu à"
+msgstr ""
+
+msgid "commentaires"
+msgstr ""
+
+msgid "dans : %1$s"
+msgstr ""
+
+msgid "dans le forum"
+msgstr ""
+
+msgid "dans un forum de groupe"
+msgstr ""
+
+msgid "dès %d"
+msgstr ""
+
+msgid "en réponse à :"
+msgstr ""
+
+msgid "il y a %d h"
+msgstr ""
+
+msgid "il y a %d j"
+msgstr ""
+
+msgid "il y a %d min"
+msgstr ""
+
+msgid "inscrit le"
+msgstr ""
+
+msgid "participants"
+msgstr ""
+
+msgid "réponse"
+msgstr ""
+
+msgid "réponses"
+msgstr ""
+
+msgid "sujets"
+msgstr ""
+
+msgid "vous connecter"
+msgstr ""
+
+msgid "À propos"
+msgstr ""
+
+msgid "Échelle des grades : Rookie 0 • Membre 5 • Pro 500 • Modérateur 2000 • VIP 5000."
+msgstr ""
+
+msgid "Économie"
+msgstr ""
+
+msgid "Économie AVIF ("
+msgstr ""
+
+msgid "Éditer"
+msgstr ""
+
+msgid "Édition du profil"
+msgstr ""
+
+msgid "Épingler"
+msgstr ""
+
+msgid "État"
+msgstr ""
+
+msgid "État des protections de sécurité actives sur votre site."
+msgstr ""
+
+msgid "à l\'instant"
+msgstr ""
+
+msgid "— Aucun parent —"
+msgstr ""
+
+msgid "— L'équipe %s"
+msgstr ""
+
+msgid "← Retour au forum"
+msgstr ""
+
+msgid "▲ 1 upvote reçu = %1$d karma — sur un sujet OU un commentaire, même valeur · 💬 1 commentaire reçu sur vos sujets = %2$d karma · les partages ne comptent pas"
+msgstr ""
+
+msgid "⚙️ Réglages"
+msgstr ""
+
+msgid "🎨 Personnalisation SwiftBoard"
+msgstr ""
+
+msgid "🏅 Grades"
+msgstr ""
+
+msgid "🏆 Badges Custom"
+msgstr ""
+
+msgid "🏆 Gamification : Création de Badges Custom"
+msgstr ""
+
+msgid "🏆 Top semaine"
+msgstr ""
+
+msgid "💬 Dernières réponses à mes sujets"
+msgstr ""
+
+msgid "📊 Classement"
+msgstr ""
+
+msgid "📥 Import en masse"
+msgstr ""
+
+msgid "📧 Email digest"
+msgstr ""
+
+msgid "🔍 Search Console"
+msgstr ""
+
+msgid "🔥 Sujets Chauds"
+msgstr ""
+
+msgid "🔥 Sujets chauds"
+msgstr ""
+
+msgid "🚩 Modération : Contenus Signalés"
+msgstr ""
+
+msgid "🚩 Signalements"
+msgstr ""
+
+msgid "🧪 Test auto-promo"
+msgstr ""

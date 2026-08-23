@@ -1,0 +1,173 @@
+@charset "UTF-8";
+/*
+ * SwiftBoard — Feuille de style personnalisée pour BuddyPress / BuddyBoss Platform
+ *
+ * Harmonise 100% des pages BuddyPress (Membres, Activité, Groupes, Profils BP)
+ * avec le design Reddit-like (Cartes blanches, bordures nettes, boutons pilules, Dark mode natif).
+ *
+ * @package SwiftBoard
+ * @since 6.0.0
+ */
+
+#buddypress,
+.buddypress-wrap {
+    font-family: inherit;
+    color: inherit;
+    margin: 1.5rem 0;
+}
+
+/* 1. Navigation & Onglets BuddyPress -> Boutons Pilules SwiftBoard */
+#buddypress .bp-navs ul,
+#buddypress .item-list-tabs ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    border-bottom: none;
+    margin-bottom: 1.5rem;
+    padding: 0;
+    list-style: none;
+}
+
+#buddypress .bp-navs ul li,
+#buddypress .item-list-tabs ul li {
+    margin: 0;
+}
+
+#buddypress .bp-navs ul li a,
+#buddypress .item-list-tabs ul li a {
+    display: inline-block;
+    padding: 0.55rem 1.15rem;
+    background: #f5f7fa;
+    color: #444d56;
+    border: 1px solid #e1e4e8;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: all 0.15s ease;
+}
+
+#buddypress .bp-navs ul li.selected a,
+#buddypress .bp-navs ul li.current a,
+#buddypress .item-list-tabs ul li.selected a,
+#buddypress .item-list-tabs ul li.current a,
+#buddypress .bp-navs ul li a:hover,
+#buddypress .item-list-tabs ul li a:hover {
+    background: #0073aa;
+    color: #fff;
+    border-color: #0073aa;
+}
+
+/* 2. Cartes Membres & Annuaire (/members/) -> Grille Reddit-like */
+#buddypress .members-list,
+#buddypress .item-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+#buddypress .members-list li,
+#buddypress .item-list li {
+    background: #fff;
+    border: 1px solid #e1e4e8;
+    border-radius: 12px;
+    padding: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 0.04);
+    transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+#buddypress .members-list li:hover,
+#buddypress .item-list li:hover {
+    border-color: #0073aa;
+}
+
+#buddypress .item-avatar img.avatar {
+    border-radius: 50%;
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    border: 2px solid #e1e4e8;
+}
+
+/* 3. Flux d'Activité (/activity/) -> Cartes de fil Reddit */
+#buddypress .activity-list li.activity-item {
+    background: #fff;
+    border: 1px solid #e1e4e8;
+    border-radius: 12px;
+    padding: 1.25rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 0.04);
+}
+
+#buddypress .activity-header {
+    font-size: 0.95rem;
+    color: #586069;
+    margin-bottom: 0.75rem;
+}
+
+#buddypress .activity-header a {
+    color: #0073aa;
+    font-weight: 600;
+}
+
+#buddypress .activity-inner {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: #24292e;
+    margin: 0.75rem 0;
+}
+
+/* 4. Boutons d'action BuddyPress -> Styles Pilule SwiftBoard */
+#buddypress button,
+#buddypress a.button,
+#buddypress input[type="submit"],
+#buddypress input[type="button"],
+#buddypress input[type="reset"] {
+    background: #0073aa;
+    color: #fff;
+    border: 1px solid transparent;
+    border-radius: 20px;
+    padding: 0.5rem 1.25rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.15s ease;
+}
+
+#buddypress button:hover,
+#buddypress a.button:hover,
+#buddypress input[type="submit"]:hover {
+    background: #005a87;
+    color: #fff;
+}
+
+/* 5. Support Dark Mode Natif (Clair / Sombre / Auto) */
+body.dark-mode #buddypress .bp-navs ul li a,
+body.dark-mode #buddypress .item-list-tabs ul li a {
+    background: #21262d;
+    color: #c9d1d9;
+    border-color: #30363d;
+}
+
+body.dark-mode #buddypress .members-list li,
+body.dark-mode #buddypress .item-list li,
+body.dark-mode #buddypress .activity-list li.activity-item {
+    background: #1e232a;
+    border-color: #30363d;
+    color: #c9d1d9;
+    box-shadow: 0 4px 12px rgb(0 0 0 / 0.3);
+}
+
+body.dark-mode #buddypress .activity-inner {
+    color: #f0f6fc;
+}
+
+body.dark-mode #buddypress .activity-header {
+    color: #8b949e;
+}

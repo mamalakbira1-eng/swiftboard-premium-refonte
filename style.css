@@ -1,0 +1,25 @@
+/*
+Theme Name: SwiftBoard
+Theme URI: https://swiftboard.dev/
+Author: SwiftBoard Team
+Author URI: https://swiftboard.dev/
+Copyright: 2026 SwiftBoard Team
+Description: SwiftBoard is a Reddit-like WordPress forum theme built for bbPress. Ultra-performant (0 jQuery, 26KB gzipped CSS, private page-cache, RUM Core Web Vitals), secure (CSP hashes, audit trail), GDPR self-delete, full gamification (Rookie to VIP), cursor pagination for 100k topics, FULLTEXT search, BBPress 100% coverage, BuddyPress/BuddyBoss ready, Elementor & Gutenberg compatible, RTL & translation ready.
+Version: 11.0.6
+Requires PHP: 8.0
+Requires at least: 6.4
+Tested up to: 7.0
+License: GPL-2.0-or-later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: swiftboard
+Domain Path: /languages
+Tags: forum, bbpress, buddypress, buddyboss, reddit, community, performance, seo, accessibility-ready, translation-ready, rtl-language-support, custom-colors, threaded-comments, dark-mode, gamification
+
+=== Performance Profile ===
+- Zero jQuery dependency on front-end for anonymous visitors
+- CSS: 21KB gzipped (main.css) + 5KB (reddit-refonte.css) = 26KB on the front page
+- System font stack, no webfont to download
+- Private page-cache for anonymous (uploads/swiftboard-cache), 304 + ETag
+- Anti-FOUC theme loader, RUM Core Web Vitals (LCP/CLS/INP/TTFB) sampled 10%
+- AVIF/WebP conversion on upload, moderation, quota atomic
+*/

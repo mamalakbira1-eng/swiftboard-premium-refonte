@@ -1,0 +1,182 @@
+[
+  {
+    "id": 101,
+    "local_id": 1,
+    "title": "General",
+    "parent": 0,
+    "parent_wp": 0,
+    "description": "Discussions générales et annonces de la communauté SwiftBoard",
+    "color": "#006cbd"
+  },
+  {
+    "id": 102,
+    "local_id": 2,
+    "title": "Welcome",
+    "parent": 1,
+    "parent_wp": 101,
+    "description": "Bienvenue ! Présentez-vous et découvrez les règles de la communauté.",
+    "color": "#006cbd"
+  },
+  {
+    "id": 103,
+    "local_id": 3,
+    "title": "Discussion Générale",
+    "parent": 1,
+    "parent_wp": 101,
+    "description": "Discussions diverses, entraide et partage d'expériences.",
+    "color": "#0090e0"
+  },
+  {
+    "id": 104,
+    "local_id": 4,
+    "title": "Feedback",
+    "parent": 1,
+    "parent_wp": 101,
+    "description": "Vos retours pour améliorer SwiftBoard, idées et suggestions.",
+    "color": "#10B981"
+  },
+  {
+    "id": 105,
+    "local_id": 5,
+    "title": "Tech",
+    "parent": 0,
+    "parent_wp": 0,
+    "description": "Tout sur la tech, dev, WordPress et performance.",
+    "color": "#7C3AED"
+  },
+  {
+    "id": 106,
+    "local_id": 6,
+    "title": "WordPress",
+    "parent": 5,
+    "parent_wp": 105,
+    "description": "Astuces WordPress, thèmes, plugins, optimisation.",
+    "color": "#006cbd"
+  },
+  {
+    "id": 107,
+    "local_id": 7,
+    "title": "Elementor",
+    "parent": 5,
+    "parent_wp": 105,
+    "description": "Design avec Elementor, widgets custom, performance.",
+    "color": "#F97316"
+  },
+  {
+    "id": 108,
+    "local_id": 8,
+    "title": "Performance",
+    "parent": 5,
+    "parent_wp": 105,
+    "description": "Core Web Vitals, cache, CDN, RUM, optimisation.",
+    "color": "#059669"
+  },
+  {
+    "id": 109,
+    "local_id": 9,
+    "title": "Security",
+    "parent": 5,
+    "parent_wp": 105,
+    "description": "Sécurité WordPress, CSP, headers, hardening.",
+    "color": "#DC2626"
+  },
+  {
+    "id": 110,
+    "local_id": 10,
+    "title": "Gaming",
+    "parent": 0,
+    "parent_wp": 0,
+    "description": "Communauté gaming, actus, entraide.",
+    "color": "#EC4899"
+  },
+  {
+    "id": 111,
+    "local_id": 11,
+    "title": "Valorant",
+    "parent": 10,
+    "parent_wp": 110,
+    "description": "Stratégies Valorant, lineups, team.",
+    "color": "#EF4444"
+  },
+  {
+    "id": 112,
+    "local_id": 12,
+    "title": "Minecraft",
+    "parent": 10,
+    "parent_wp": 110,
+    "description": "Constructions, redstone, serveurs Minecraft.",
+    "color": "#10B981"
+  },
+  {
+    "id": 113,
+    "local_id": 13,
+    "title": "Crypto",
+    "parent": 0,
+    "parent_wp": 0,
+    "description": "Blockchain, Bitcoin, Ethereum, DeFi.",
+    "color": "#F59E0B"
+  },
+  {
+    "id": 114,
+    "local_id": 14,
+    "title": "Bitcoin",
+    "parent": 13,
+    "parent_wp": 113,
+    "description": "Bitcoin news, hodl, Lightning Network.",
+    "color": "#F97316"
+  },
+  {
+    "id": 115,
+    "local_id": 15,
+    "title": "Ethereum",
+    "parent": 13,
+    "parent_wp": 113,
+    "description": "Ethereum, smart contracts, Layer 2.",
+    "color": "#627EEA"
+  },
+  {
+    "id": 116,
+    "local_id": 16,
+    "title": "Design",
+    "parent": 0,
+    "parent_wp": 0,
+    "description": "UI/UX, Figma, design system, inspiration.",
+    "color": "#8B5CF6"
+  },
+  {
+    "id": 117,
+    "local_id": 17,
+    "title": "UI/UX",
+    "parent": 16,
+    "parent_wp": 116,
+    "description": "Interface utilisateur, expérience, prototypes.",
+    "color": "#06B6D4"
+  },
+  {
+    "id": 118,
+    "local_id": 18,
+    "title": "Figma",
+    "parent": 16,
+    "parent_wp": 116,
+    "description": "Plugins Figma, auto-layout, collaboration.",
+    "color": "#A855F7"
+  },
+  {
+    "id": 119,
+    "local_id": 19,
+    "title": "Support",
+    "parent": 0,
+    "parent_wp": 0,
+    "description": "Aide, bug reports, questions débutants.",
+    "color": "#0EA5E9"
+  },
+  {
+    "id": 120,
+    "local_id": 20,
+    "title": "Memes",
+    "parent": 0,
+    "parent_wp": 0,
+    "description": "Memes, humour, off-topic mais bienveillant.",
+    "color": "#EC4899"
+  }
+]

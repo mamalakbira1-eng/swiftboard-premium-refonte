@@ -1,0 +1,17 @@
+{
+  "version": "7.0.0",
+  "widgets": [
+    {
+      "id": "swiftboard_hot_topics-1",
+      "title": "\ud83d\udd25 Sujets chauds",
+      "period": "7d",
+      "limit": 5
+    },
+    {
+      "id": "swiftboard_popular_topics-1",
+      "title": "Sujets populaires",
+      "number": 5,
+      "sort_by": "replies"
+    }
+  ]
+}

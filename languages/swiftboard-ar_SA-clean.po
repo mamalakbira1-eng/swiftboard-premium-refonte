@@ -1,0 +1,364 @@
+# SwiftBoard Arabic Translation
+# Copyright (C) 2026 SwiftBoard
+# This file is distributed under GPL-2.0-or-later.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: SwiftBoard 7.2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-07 12:00+0000\n"
+"PO-Revision-Date: 2026-08-07 12:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: Arabic\n"
+"Language: ar_SA\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5);\n"
+
+msgid "Accueil"
+msgstr "الرئيسية"
+
+msgid "Forum"
+msgstr "المنتدى"
+
+msgid "Forums"
+msgstr "المنتديات"
+
+msgid "Rechercher..."
+msgstr "بحث..."
+
+msgid "Connexion"
+msgstr "تسجيل الدخول"
+
+msgid "Inscription"
+msgstr "التسجيل"
+
+msgid "Notifications"
+msgstr "الإشعارات"
+
+msgid "Se déconnecter"
+msgstr "تسجيل الخروج"
+
+msgid "Nouveau sujet"
+msgstr "موضوع جديد"
+
+msgid "Modifier"
+msgstr "تعديل"
+
+msgid "Supprimer"
+msgstr "حذف"
+
+msgid "Enregistrer"
+msgstr "حفظ"
+
+msgid "Annuler"
+msgstr "إلغاء"
+
+msgid "Confirmer"
+msgstr "تأكيد"
+
+msgid "Chargement..."
+msgstr "جارٍ التحميل..."
+
+msgid "Aucun résultat"
+msgstr "لا توجد نتائج"
+
+msgid "Upvoter"
+msgstr "تصويت إيجابي"
+
+msgid "Downvoter"
+msgstr "تصويت سلبي"
+
+msgid "à l'instant"
+msgstr "الآن"
+
+msgid "Date invalide"
+msgstr "تاريخ غير صالح"
+
+msgid "Forum de discussion communautaire"
+msgstr "منتدى نقاشات مجتمعي"
+
+msgid "Pas encore de sujet."
+msgstr "لا توجد مواضيع بعد."
+
+msgid "Rookie"
+msgstr "مبتدئ"
+
+msgid "Member"
+msgstr "عضو"
+
+msgid "Pro"
+msgstr "محترف"
+
+msgid "Moderator"
+msgstr "مشرف"
+
+msgid "VIP"
+msgstr "مميز"
+
+msgid "Meilleure réponse"
+msgstr "أفضل رد"
+
+msgid "Signaler"
+msgstr "إبلاغ"
+
+msgid "Messages"
+msgstr "المشاركات"
+
+msgid "Badges"
+msgstr "الشارات"
+
+msgid "Karma"
+msgstr "السمعة"
+
+msgid "Sujets chauds"
+msgstr "المواضيع الرائجة"
+
+msgid "Top répondeurs"
+msgstr "أفضل المعلقين"
+
+msgid "Communautés"
+msgstr "المجتمعات"
+
+msgid "Navigation principale"
+msgstr "التنقل الرئيسي"
+
+msgid "Navigation pied de page"
+msgstr "تذييل التنقل"
+
+msgid "Menu forum"
+msgstr "قائمة المنتدى"
+
+msgid "Couleur principale"
+msgstr "اللون الرئيسي"
+
+msgid "Mode sombre"
+msgstr "الوضع الداكن"
+
+msgid "Politique de confidentialité"
+msgstr "سياسة الخصوصية"
+
+msgid "Exporter mes données"
+msgstr "تصدير بياناتي"
+
+msgid "Supprimer mon compte"
+msgstr "حذف حسابي"
+
+msgid "Réponse"
+msgid_plural "Réponses"
+msgstr[0] "رد"
+msgstr[1] "رد"
+msgstr[2] "ردان"
+msgstr[3] "ردود"
+msgstr[4] "ردود"
+msgstr[5] "ردود"
+
+msgid "Sujet"
+msgid_plural "Sujets"
+msgstr[0] "موضوع"
+msgstr[1] "موضوع"
+msgstr[2] "موضوعان"
+msgstr[3] "مواضيع"
+msgstr[4] "مواضيع"
+msgstr[5] "مواضيع"
+
+msgid "il y a %d min"
+msgid_plural "il y a %d min"
+msgstr[0] "الآن"
+msgstr[1] "منذ دقيقة"
+msgstr[2] "منذ دقيقتين"
+msgstr[3] "منذ %d دقائق"
+msgstr[4] "منذ %d دقيقة"
+msgstr[5] "منذ %d دقيقة"
+
+msgid "il y a %d h"
+msgid_plural "il y a %d h"
+msgstr[0] "الآن"
+msgstr[1] "منذ ساعة"
+msgstr[2] "منذ ساعتين"
+msgstr[3] "منذ %d ساعات"
+msgstr[4] "منذ %d ساعة"
+msgstr[5] "منذ %d ساعة"
+
+msgid "il y a %d j"
+msgid_plural "il y a %d j"
+msgstr[0] "الآن"
+msgstr[1] "منذ يوم"
+msgstr[2] "منذ يومين"
+msgstr[3] "منذ %d أيام"
+msgstr[4] "منذ %d يوم"
+msgstr[5] "منذ %d يوم"
+
+
+msgid "Change language?"
+msgstr "تغيير اللغة؟"
+
+msgid "This site is also available in %s. Would you like to switch?"
+msgstr "هذا الموقع متاح أيضًا باللغة %s. هل ترغب في التبديل؟"
+
+msgid "Switch"
+msgstr "تبديل"
+
+msgid "Stay here"
+msgstr "البقاء هنا"
+
+msgid "You can change this anytime in the header."
+msgstr "يمكنك تغيير ذلك في أي وقت من الرأس."
+
+msgid "Sujets chauds de la semaine"
+msgstr "المواضيع الرائجة لهذا الأسبوع"
+
+msgid "Aucun sujet dans ce forum pour le moment."
+msgstr "لا توجد مواضيع في هذا المنتدى حاليًا."
+
+msgid "Trop de requêtes. Réessayez dans 1 minute."
+msgstr "طلبات كثيرة جدًا. أعد المحاولة خلال دقيقة."
+
+msgid "Créer le premier sujet"
+msgstr "إنشاء أول موضوع"
+
+msgid "vous connecter"
+msgstr "تسجيل الدخول"
+
+msgid "Vous devez %s pour créer un sujet."
+msgstr "يجب عليك %s لإنشاء موضوع."
+
+msgid "sujets"
+msgstr "مواضيع"
+
+msgid "réponses"
+msgstr "ردود"
+
+msgid "réponse"
+msgstr "رد"
+
+msgid "Dernier :"
+msgstr "آخر:"
+
+msgid "Bienvenue sur notre forum communautaire. Participez aux discussions !"
+msgstr "مرحبًا بكم في منتدى مجتمعنا. شاركوا في النقاشات!"
+
+msgid "Forum de discussion"
+msgstr "منتدى النقاش"
+
+msgid "Utilisateurs en ligne"
+msgstr "المستخدمون المتصلون"
+
+msgid "en ligne"
+msgstr "متصل"
+
+msgid "%d utilisateurs en ligne"
+msgstr "%d مستخدم متصل"
+
+msgid "Comment souhaitez-vous qu'on vous identifie ?"
+msgstr "كيف ترغب أن نعرفك؟"
+
+msgid "Choisissez votre avatar par défaut :"
+msgstr "اختر صورتك الرمزية الافتراضية:"
+
+msgid "Finalisez votre inscription en un clic :"
+msgstr "أكمل تسجيلك بنقرة واحدة:"
+
+
+msgid "Votre compte et vos données personnelles ont été supprimés."
+msgstr "تم حذف حسابك وبياناتك الشخصية."
+
+msgid "Vos messages restent visibles de façon anonyme."
+msgstr "تبقى رسائلك مرئية بشكل مجهول."
+
+msgid "Confirmez votre mot de passe :"
+msgstr "أكد كلمة المرور الخاصة بك:"
+
+msgid "Je comprends que cette action est définitive."
+msgstr "أفهم أن هذا الإجراء نهائي."
+
+msgid "Supprimer définitivement mon compte"
+msgstr "حذف حسابي نهائيًا"
+
+msgid "Mot de passe incorrect. Le compte n'a pas été supprimé."
+msgstr "كلمة المرور غير صحيحة. لم يتم حذف الحساب."
+
+msgid "Confirmation manquante. Le compte n'a pas été supprimé."
+msgstr "التأكيد مفقود. لم يتم حذف الحساب."
+
+msgid "Lien de confirmation expiré. Rechargez la page et recommencez."
+msgstr "انتهت صلاحية رابط التأكيد. أعد تحميل الصفحة وحاول مرة أخرى."
+
+msgid "Ce compte ne peut pas être supprimé depuis le profil."
+msgstr "لا يمكن حذف هذا الحساب من الملف الشخصي."
+
+msgid "S'abonner"
+msgstr "اشترك"
+
+msgid "Partager"
+msgstr "مشاركة"
+
+msgid "Sauvegarder"
+msgstr "حفظ"
+
+msgid "Suivre"
+msgstr "متابعة"
+
+msgid "Plus d'actions"
+msgstr "المزيد من الإجراءات"
+
+msgid "Répondre"
+msgstr "رد"
+
+msgid "Profil"
+msgstr "الملف الشخصي"
+
+msgid "Aucune réponse."
+msgstr "لا توجد ردود."
+
+msgid "Aucun sujet."
+msgstr "لا توجد مواضيع."
+
+msgid "commentaires"
+msgstr "تعليقات"
+
+msgid "par"
+msgstr "بواسطة"
+
+msgid "Réponse à"
+msgstr "رد على"
+
+msgid "Sécurité"
+msgstr "الأمان"
+
+msgid "Sujets"
+msgstr "المواضيع"
+
+msgid "Réponses"
+msgstr "الردود"
+
+msgid "Votes"
+msgstr "الأصوات"
+
+msgid "Images"
+msgstr "الصور"
+
+msgid "Utilisateurs"
+msgstr "المستخدمون"
+
+msgid "Overview"
+msgstr "نظرة عامة"
+
+msgid "Réglages"
+msgstr "الإعدادات"
+
+msgid "Grades"
+msgstr "الرتب"
+
+msgid "Accès refusé."
+msgstr "تم رفض الوصول."
+
+msgid "Accès refusé — permissions insuffisantes."
+msgstr "تم رفض الوصول — صلاحيات غير كافية."
+
+msgid "Recherche..."
+msgstr "بحث..."
+
+msgid "Rechercher"
+msgstr "بحث"

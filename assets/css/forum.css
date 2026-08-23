@@ -1,0 +1,1513 @@
+@charset "UTF-8";
+/* ==========================================================================
+   SwiftBoard v2 — Styles Forum (bbPress) — Design Reddit-inspired
+   ========================================================================== */
+
+/* ==========================================================================
+   1. FORUM ARCHIVE / INDEX
+   ========================================================================== */
+.forum-header {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-md);
+    padding: var(--space-xl) var(--space-xl) var(--space-lg);
+    margin-bottom: var(--space-lg);
+    position: relative;
+    overflow: hidden;
+}
+
+.forum-header::before {
+    content: '';
+    position: absolute;
+    top: 0; inset-inline: 0;
+    height: 0.375rem;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+}
+
+.forum-title {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: var(--space-sm);
+    margin-top: var(--space-xs);
+    letter-spacing: -0.02em;
+}
+
+.forum-description {
+    color: var(--color-text-light);
+    font-size: 1rem;
+    margin: 0;
+}
+.forum-content { /* container */ }
+
+/* ==========================================================================
+   2. LISTE DES FORUMS (cartes style Reddit subreddit list)
+   ========================================================================== */
+.bbp-forums-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.bbp-forum {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-lg);
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    margin-bottom: var(--space-sm);
+    transition: border-color 0.12s ease, background 0.12s ease, transform 0.12s ease;
+    text-decoration: none;
+    color: inherit;
+}
+
+.bbp-forum:hover {
+    border-color: var(--color-accent);
+    background: var(--color-bg-hover);
+    text-decoration: none;
+    transform: translateY(-1px);
+}
+
+.bbp-forum-icon {
+    flex-shrink: 0;
+    width: 3rem;
+    height: 3rem;
+    background: var(--color-primary-light);
+    color: var(--color-primary-text);
+    border-radius: var(--radius-full);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1.25rem;
+}
+
+.bbp-forum-body {
+    flex: 1;
+    min-width: 0;
+}
+
+.bbp-forum-title {
+    font-size: 1.25rem;
+    margin-bottom: var(--space-xs);
+    font-weight: 700;
+    line-height: 1.3;
+    overflow-wrap: break-word;
+}
+
+.bbp-forum-title a {
+    color: var(--color-link);
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.bbp-forum-title a:hover {
+    color: var(--color-accent);
+    text-decoration: none;
+}
+
+.bbp-forum-description {
+    color: var(--color-text-light);
+    font-size: 0.875rem;
+    margin-bottom: var(--space-md);
+    line-height: 1.5;
+}
+
+.bbp-forum-meta {
+    display: flex;
+    gap: var(--space-lg);
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    flex-wrap: wrap;
+}
+
+.bbp-forum-topic-count,
+.bbp-forum-reply-count,
+.bbp-forum-freshness {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-weight: 600;
+}
+.bbp-forum-topic-count::before { content: '💬'; opacity: 0.7; }
+.bbp-forum-reply-count::before { content: '↩'; opacity: 0.7; }
+.bbp-forum-freshness::before { content: '🕒'; opacity: 0.7; }
+
+/* ==========================================================================
+   3. LISTE DES TOPICS — style Reddit feed
+   ========================================================================== */
+.bbp-topics-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.topic-item,
+.bbp-topic {
+    display: flex;
+    align-items: flex-start;
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-md);
+    padding: var(--space-md) var(--space-lg);
+    margin-bottom: var(--space-sm);
+    transition: border-color 0.12s ease;
+}
+
+.topic-item:hover,
+.bbp-topic:hover {
+    border-color: var(--color-border);
+}
+
+.topic-vote {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 var(--space-sm);
+    margin-inline-end: var(--space-md);
+    min-width: 2.5rem;
+    flex-shrink: 0;
+}
+
+.topic-body {
+    flex: 1;
+    min-width: 0;
+}
+.topic-header { margin-bottom: var(--space-xs); }
+
+.topic-title {
+    font-size: 1.125rem;
+    margin-bottom: 0;
+    font-weight: 600;
+    line-height: 1.35;
+    overflow-wrap: break-word;
+    hyphens: auto;
+}
+
+.topic-title a {
+    color: var(--color-text);
+    text-decoration: none;
+}
+.topic-title a:hover { color: var(--color-accent); }
+
+.topic-meta {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-sm);
+    display: flex;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+    align-items: center;
+}
+.topic-meta a { color: var(--color-text-light); font-weight: 600; text-decoration: none; }
+.topic-meta a:hover { color: var(--color-accent); }
+.topic-meta-sep { color: var(--color-text-muted); }
+.topic-meta time { color: var(--color-text-muted); }
+
+.topic-stats {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    display: flex;
+    gap: var(--space-lg);
+    align-items: center;
+    font-weight: 600;
+}
+
+.bbp-topic-freshness {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+}
+
+.bbp-topic-freshness a {
+    color: var(--color-text-light);
+    text-decoration: none;
+}
+
+/* ==========================================================================
+   4. PAGE TOPIC (sujet unique + réponses)
+   ========================================================================== */
+.bbp-topic-header {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-md);
+    padding: var(--space-xl) var(--space-xl) var(--space-lg);
+    margin-bottom: var(--space-md);
+    position: relative;
+    overflow: hidden;
+}
+
+.bbp-topic-header::before {
+    content: '';
+    position: absolute;
+    top: 0; inset-inline: 0;
+    height: 0.25rem;
+    background: var(--color-primary);
+}
+
+.bbp-topic-title {
+    font-size: 1.75rem;
+    font-weight: 800;
+    margin-bottom: var(--space-md);
+    margin-top: var(--space-xs);
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    padding-bottom: var(--space-md);
+    border-bottom: 2px solid var(--color-primary);
+}
+
+.bbp-topic-meta {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    display: flex;
+    gap: var(--space-sm);
+    flex-wrap: nowrap;
+    align-items: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.bbp-topic-meta > span:first-child {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+}
+.bbp-topic-meta strong { color: var(--color-text); }
+
+/* Réponses — Reddit-style threaded comments */
+.bbp-reply {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-md);
+    overflow: visible;
+}
+
+.bbp-reply-header {
+    background: transparent;
+    padding: var(--space-md) var(--space-lg) 0;
+    border-bottom: none;
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+}
+
+.bbp-reply-author {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-weight: 700;
+    color: var(--color-text);
+    font-size: 0.875rem;
+}
+
+.bbp-author-avatar {
+    display: inline-block;
+    margin-inline-end: var(--space-xs);
+    vertical-align: middle;
+}
+
+.bbp-author-avatar img {
+    border-radius: var(--radius-full);
+    width: 24px; height: 24px;
+    display: inline-block;
+    object-fit: cover;
+}
+
+.avatar-mock {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px; height: 28px;
+    border-radius: var(--radius-full);
+    background: var(--color-accent);
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin-inline-end: var(--space-xs);
+    vertical-align: middle;
+}
+
+.bbp-author-role {
+    display: inline-block;
+    background: var(--color-accent-light);
+    color: #005a9e;
+    padding: 1px var(--space-sm);
+    border-radius: var(--radius-full);
+    font-weight: 700;
+    font-size: 0.65rem;
+    margin-inline-start: var(--space-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+/*
+ * Le role bbPress est masque pour les utilisateurs sans autorite
+ * (swiftboard_filter_display_role) : le grade SwiftBoard est alors le seul
+ * badge. bbPress emet malgre tout le conteneur, qui laisserait une pastille
+ * vide de 2px avec fond et padding. :empty la supprime proprement, sans
+ * toucher au template bbPress.
+ */
+.bbp-author-role:empty {
+    display: none;
+}
+
+.bbp-author-role.moderator {
+    background: var(--color-success-bg);
+    color: #2d5a0c;
+}
+
+.bbp-author-role.admin {
+    background: var(--color-danger-bg);
+    color: #991b1b;
+}
+
+.bbp-reply-meta-time {
+    color: var(--color-text-muted);
+    font-size: var(--font-size-xs);
+}
+
+.bbp-reply-content {
+    padding: var(--space-md) var(--space-lg) var(--space-lg);
+    font-size: 0.9375rem;
+    line-height: 1.65;
+    max-width: 100%;
+    color: var(--color-text);
+}
+.bbp-reply-content p { margin-bottom: var(--space-md); }
+.bbp-reply-content p:last-child { margin-bottom: 0; }
+.bbp-reply-content code { font-size: 0.85em; }
+
+.bbp-reply-content blockquote {
+    margin: var(--space-sm) 0;
+    padding: var(--space-xs) var(--space-md);
+}
+
+.bbp-reply-content a, .bbp-topic-content a, .entry-content a {
+    color: var(--color-link);
+    text-decoration: underline;  /* Pour règle link-in-text-block WCAG */
+    text-underline-offset: 2px;
+}
+
+.bbp-reply-content a:hover, .bbp-topic-content a:hover, .entry-content a:hover {
+    color: var(--color-link-hover);
+}
+.bbp-reply-content img { max-width: 100%; height: auto; border-radius: var(--radius-md); }
+
+.bbp-reply-actions {
+    display: flex;
+
+    /* Sans flex-wrap, les quatre boutons (Utile / Sauvegarder / Suivre /
+       Cacher) restent sur une ligne et debordent de la fenetre : mesure a
+       390 px avant correction, la barre s'etendait jusqu'a 692 px, soit un
+       defilement horizontal sur toute la page du sujet. */
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-lg) var(--space-md);
+    font-size: 0.75rem;
+    border-top: 1px solid var(--color-border-light);
+    margin-top: 0;
+}
+
+.bbp-reply-action {
+    background: transparent;
+    border: none;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--radius-full);
+    font-size: var(--font-size-xs);
+    font-weight: 700;
+    font-family: inherit;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-xs);
+    transition: background 0.12s, color 0.12s;
+}
+
+.bbp-reply-action:hover {
+    background: var(--color-bg-hover);
+    color: var(--color-text);
+}
+
+/* Auteur info sidebar */
+.bbp-author-info {
+    margin-top: var(--space-sm);
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+}
+
+/* Spoilers */
+.bbp-spoiler {
+    background: var(--color-bg-alt);
+    border: 1px dashed var(--color-border);
+    padding: var(--space-md);
+    border-radius: var(--radius-md);
+    margin: var(--space-md) 0;
+}
+
+.bbp-spoiler summary {
+    cursor: pointer;
+    font-weight: 700;
+    color: var(--color-text-light);
+}
+.bbp-spoiler[open] summary { margin-bottom: var(--space-sm); }
+
+/* ==========================================================================
+   5. FORMULAIRES FORUM
+   ========================================================================== */
+.bbp-topic-form,
+.bbp-reply-form {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    margin-top: var(--space-md);
+}
+
+.bbp-topic-form legend,
+.bbp-reply-form legend {
+    font-size: var(--font-size-md);
+    font-weight: 700;
+    margin-bottom: var(--space-md);
+    padding: 0;
+    color: var(--color-text);
+}
+
+.bbp-topic-form label,
+.bbp-reply-form label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: var(--space-xs);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-light);
+}
+
+.bbp-topic-form input[type="text"],
+.bbp-reply-form input[type="text"] {
+    width: 100%;
+    padding: var(--space-sm) var(--space-md);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    font-family: var(--font-sans);
+    font-size: var(--font-size-sm);
+    margin-bottom: var(--space-md);
+    background: var(--color-bg-input);
+    color: var(--color-text);
+    transition: border-color 0.12s, box-shadow 0.12s;
+}
+
+.bbp-topic-form input[type="text"]:focus,
+.bbp-reply-form input[type="text"]:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px var(--color-accent-light);
+}
+
+.bbp-topic-form textarea,
+.bbp-reply-form textarea {
+    width: 100%;
+    min-height: 180px;
+    padding: var(--space-md);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    font-family: var(--font-sans);
+    font-size: var(--font-size-sm);
+    line-height: 1.6;
+    resize: vertical;
+    background: var(--color-bg-input);
+    color: var(--color-text);
+    transition: border-color 0.12s, box-shadow 0.12s;
+}
+
+.bbp-topic-form textarea:focus,
+.bbp-reply-form textarea:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px var(--color-accent-light);
+}
+
+.bbp-topic-form input[type="submit"],
+.bbp-reply-form input[type="submit"],
+#bbp_topic_submit,
+#bbp_reply_submit {
+    background: var(--color-primary);
+    color: #fff;
+    border: none;
+    padding: var(--space-sm) var(--space-xl);
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    font-weight: 700;
+    font-family: var(--font-sans);
+    font-size: var(--font-size-sm);
+    transition: background 0.12s ease, transform 0.08s ease;
+}
+
+.bbp-topic-form input[type="submit"]:hover,
+.bbp-reply-form input[type="submit"]:hover,
+#bbp_topic_submit:hover,
+#bbp_reply_submit:hover {
+    background: var(--color-primary-hover);
+}
+
+.bbp-topic-form input[type="submit"]:active,
+.bbp-reply-form input[type="submit"]:active,
+#bbp_topic_submit:active,
+#bbp_reply_submit:active {
+    transform: scale(0.98);
+}
+
+/* TinyMCE */
+.wp-editor-container {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    margin-bottom: var(--space-md);
+    background: var(--color-bg-input);
+}
+
+.quicktags-toolbar {
+    background: var(--color-bg-alt);
+    border-bottom: 1px solid var(--color-border-light);
+    padding: var(--space-xs);
+}
+
+.quicktags-toolbar input {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    padding: 2px var(--space-sm);
+    font-size: var(--font-size-xs);
+    cursor: pointer;
+    margin: 1px;
+    font-family: var(--font-sans);
+    color: var(--color-text);
+}
+
+/* ==========================================================================
+   6. STATISTIQUES FORUM
+   ========================================================================== */
+.bbp-statistics {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-md);
+    padding: var(--space-xl);
+    margin-bottom: var(--space-md);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+    gap: var(--space-xl);
+    font-size: 0.875rem;
+}
+.bbp-statistics dl { margin: 0; text-align: center; }
+
+.bbp-statistics dt {
+    font-weight: 600;
+    color: var(--color-text-muted);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: var(--space-xs);
+}
+
+.bbp-statistics dd {
+    font-size: 1.75rem;
+    font-weight: 800;
+    color: var(--color-primary-text);
+    margin: 0;
+    letter-spacing: -0.02em;
+}
+
+/* ==========================================================================
+   7. RECHERCHE FORUM
+   ========================================================================== */
+#bbp-search-form {
+    margin-bottom: var(--space-md);
+    display: flex;
+    gap: var(--space-sm);
+}
+
+#bbp-search-form input[type="text"],
+#bbp-search-form input[type="search"] {
+    flex: 1;
+    padding: var(--space-sm) var(--space-md);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
+    font-family: var(--font-sans);
+    font-size: var(--font-size-sm);
+    background: var(--color-bg-input);
+    color: var(--color-text);
+}
+
+#bbp_search_submit {
+    background: var(--color-primary);
+    color: #fff;
+    border: none;
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    font-weight: 700;
+    font-family: var(--font-sans);
+    font-size: var(--font-size-sm);
+}
+
+/* ==========================================================================
+   8. BREADCRUMB FORUM
+   ========================================================================== */
+.bbp-breadcrumb {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-md);
+    padding: var(--space-sm) 0;
+}
+
+.bbp-breadcrumb ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    align-items: center;
+}
+
+.bbp-breadcrumb li:not(:last-child)::after {
+    content: '›';
+    margin: 0 var(--space-xs);
+    color: var(--color-text-muted);
+}
+
+.bbp-breadcrumb a {
+    color: var(--color-text-light);
+    text-decoration: none;
+    font-weight: 600;
+}
+.bbp-breadcrumb a:hover { color: var(--color-accent); }
+
+/* ==========================================================================
+   9. PAGINATION FORUM
+   ========================================================================== */
+.bbp-pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-md);
+    margin: var(--space-md) 0;
+    font-size: var(--font-size-xs);
+}
+
+.bbp-pagination-count {
+    color: var(--color-text-muted);
+    font-weight: 600;
+}
+
+.bbp-pagination-links {
+    display: flex;
+    gap: var(--space-xs);
+    list-style: none;
+    padding: 0;
+}
+
+.bbp-pagination-links a,
+.bbp-pagination-links span {
+    padding: var(--space-xs) var(--space-md);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
+    font-size: 0.8rem;
+    text-decoration: none;
+    color: var(--color-text);
+    font-weight: 600;
+    background: var(--color-bg-card);
+    min-width: 2.25rem;
+    min-height: 2.25rem;
+    text-align: center;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bbp-pagination-links .current {
+    background: var(--color-primary);
+    color: #fff;
+    border-color: var(--color-primary-text);
+}
+
+.bbp-pagination-links a:hover {
+    background: var(--color-bg-hover);
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+}
+
+/* ==========================================================================
+   10. NOTICES
+   ========================================================================== */
+.bbp-template-notice {
+    padding: var(--space-sm) var(--space-md);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-md);
+    font-size: var(--font-size-sm);
+    border-inline-start: 3px solid;
+    background: var(--color-bg-alt);
+}
+
+.bbp-template-notice.info {
+    background: var(--color-accent-light);
+    border-color: var(--color-accent);
+    color: #005a9e;
+}
+
+.bbp-template-notice.info a {
+    color: #005a9e;
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+.bbp-template-notice.error {
+    background: var(--color-danger-bg);
+    border-color: var(--color-danger);
+    color: var(--color-danger);
+}
+
+.bbp-template-notice.success {
+    background: var(--color-success-bg);
+    border-color: var(--color-success);
+    color: var(--color-success);
+}
+
+.bbp-template-notice.warning {
+    background: var(--color-warning-bg);
+    border-color: var(--color-warning);
+    color: var(--color-warning);
+}
+.bbp-template-notice a { font-weight: 700; color: #005a9e; }  /* Bleu foncé pour contraste WCAG AA */
+
+/* ==========================================================================
+   11. ÉTATS connecté / déconnecté
+   ========================================================================== */
+.bbp-logged-in {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-light);
+    margin-bottom: var(--space-md);
+    padding: var(--space-sm) var(--space-md);
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-md);
+}
+.bbp-logged-in a { font-weight: 700; color: var(--color-link); }
+
+.bbp-no-topic,
+.bbp-no-reply {
+    text-align: center;
+    padding: var(--space-2xl);
+    color: var(--color-text-light);
+    font-size: var(--font-size-md);
+    background: var(--color-bg-card);
+    border: 1px dashed var(--color-border);
+    border-radius: var(--radius-md);
+}
+
+/* ==========================================================================
+   12. SIDEBAR FORUM
+   ========================================================================== */
+.forum-sidebar { margin-top: 0; }
+
+.forum-sidebar .widget {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border-light);
+}
+
+/* ==========================================================================
+   13. AVATARS
+   ========================================================================== */
+.avatar {
+    border-radius: var(--radius-full);
+    width: 48px; height: 48px;
+    object-fit: cover;
+}
+.avatar-small { width: 24px; height: 24px; }
+.avatar-fallback { display: inline-block; vertical-align: middle; }
+
+/* ==========================================================================
+   14. RESPONSIVE FORUM
+   ========================================================================== */
+@media (width <= 768px) {
+    .bbp-reply-content { padding: var(--space-sm); }
+
+    /* .bbp-topic-meta reste sur une ligne comme desktop — wrap naturel seulement si débordement */
+    .bbp-pagination {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .bbp-statistics { grid-template-columns: repeat(2, 1fr); }
+
+    .bbp-forum {
+        flex-wrap: wrap;
+        padding: var(--space-md);
+    }
+
+    .topic-item, .bbp-topic {
+        flex-flow: column wrap;
+        align-items: stretch;
+    }
+
+    .topic-vote {
+        flex-direction: row;
+        width: 100%;
+        margin: 0 0 var(--space-sm) 0;
+        padding: 0;
+        gap: var(--space-sm);
+        min-width: 0;
+        justify-content: flex-start;
+    }
+
+    .topic-body {
+        width: 100%;
+    }
+
+    /* Touch targets plus larges sur mobile (44x44 min) */
+    .vote-btn {
+        min-width: 44px;
+        min-height: 44px;
+        padding: var(--space-sm) var(--space-md);
+    }
+
+    .bbp-reply-action {
+        min-height: 40px;
+        padding: 0.5rem var(--space-md);
+    }
+}
+
+@media (width <= 480px) {
+    .bbp-topic-title { font-size: var(--font-size-lg); }
+
+    /* .bbp-reply-header reste en ligne — wrap naturel seulement si débordement */
+    .bbp-statistics { grid-template-columns: 1fr; }
+}
+
+/* ==========================================================================
+   15. LLM MARKUP
+   ========================================================================== */
+.bbp-reply-content,
+.bbp-topic-content,
+.forum-content {
+    overflow: visible;
+    overflow-wrap: break-word;
+}
+
+/* ==========================================================================
+   16. CLASSES BBPRESS PAR DÉFAUT (couverture complète v2.2)
+   ========================================================================== */
+
+/* Wrapper principal bbPress */
+.bbp-body,
+.bbp-body ul,
+.bbp-body li {
+    background: transparent;
+    list-style: none;
+}
+
+/* Headers de boucle bbPress (utilisés par les templates par défaut) */
+.bbp-forum-header,
+.bbp-topic-header,
+.bbp-reply-header {
+    background: var(--color-bg-alt);
+    border-bottom: 1px solid var(--color-border-light);
+    padding: var(--space-sm) var(--space-md);
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+}
+
+/* Meta info (date, auteur, etc. dans les listes) */
+.bbp-meta {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-sm);
+    display: flex;
+    gap: var(--space-md);
+    flex-wrap: wrap;
+}
+
+.bbp-meta a {
+    color: var(--color-text-light);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.bbp-meta a:hover {
+    color: var(--color-accent);
+}
+
+/* Liens admin (édition, suppression, etc.) */
+.bbp-admin-links {
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+    display: inline-flex;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+    margin-top: var(--space-xs);
+}
+
+.bbp-admin-links a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    padding: 2px var(--space-xs);
+    border-radius: var(--radius-sm);
+    transition: background 0.12s, color 0.12s;
+}
+
+.bbp-admin-links a:hover {
+    background: var(--color-bg-hover);
+    color: var(--color-primary-text);
+}
+
+/* Row alternance */
+.bbp-body .odd,
+.bbp-body .even,
+#bbpress-forums .odd,
+#bbpress-forums .even {
+    background: var(--color-bg-card);
+    padding: var(--space-md);
+    border-bottom: 1px solid var(--color-border-light);
+}
+
+/* Forum row dans boucle par défaut */
+.bbp-forum-info,
+.bbp-forum-topic-count,
+.bbp-forum-reply-count,
+.bbp-forum-freshness {
+    padding: var(--space-sm);
+    font-size: 0.875rem;
+}
+
+.bbp-forum-info a {
+    color: var(--color-text);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.bbp-forum-info a:hover {
+    color: var(--color-accent);
+}
+
+.bbp-forum-topic-count,
+.bbp-forum-reply-count {
+    color: var(--color-text-muted);
+    text-align: center;
+}
+
+/* ==========================================================================
+   17. FORMULAIRES (form-topic, form-reply)
+   ========================================================================== */
+.bbp-form {
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+.bbp-form legend {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-text);
+    padding: 0;
+    margin-bottom: var(--space-md);
+}
+
+.bbp-form .bbp-form-field {
+    margin-bottom: var(--space-md);
+}
+
+.bbp-form .bbp-form-field > p {
+    margin: 0;
+}
+
+.bbp-form label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: var(--space-xs);
+    font-size: 0.875rem;
+    color: var(--color-text-light);
+}
+
+.bbp-form label .required {
+    color: var(--color-danger);
+    margin-inline-start: 2px;
+}
+
+.bbp-form input[type="text"],
+.bbp-form input[type="email"],
+.bbp-form input[type="password"] {
+    width: 100%;
+    padding: var(--space-sm) var(--space-md);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    background: var(--color-bg-input);
+    color: var(--color-text);
+    transition: border-color 0.12s, box-shadow 0.12s;
+}
+
+.bbp-form input[type="text"]:focus,
+.bbp-form input[type="email"]:focus,
+.bbp-form input[type="password"]:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px var(--color-accent-light);
+}
+
+.bbp-form textarea {
+    width: 100%;
+    min-height: 180px;
+    padding: var(--space-md);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    resize: vertical;
+    background: var(--color-bg-input);
+    color: var(--color-text);
+}
+
+.bbp-form textarea:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px var(--color-accent-light);
+}
+
+.bbp-form .bbp-form-checkbox label {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-weight: 500;
+}
+
+.bbp-form .bbp-form-checkbox input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--color-primary-text);
+    cursor: pointer;
+}
+
+.bbp-submit-wrapper {
+    margin-top: var(--space-lg);
+    display: flex;
+    gap: var(--space-sm);
+}
+
+/* ==========================================================================
+   18. PROFIL UTILISATEUR
+   ========================================================================== */
+.user-profile-wrapper {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+.user-profile-header {
+    display: flex;
+    gap: var(--space-lg);
+    padding: var(--space-xl);
+    background: linear-gradient(135deg, var(--color-primary-light), transparent);
+    border-bottom: 1px solid var(--color-border-light);
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+
+.user-profile-avatar {
+    flex-shrink: 0;
+}
+
+.user-profile-avatar img,
+.user-profile-avatar .avatar {
+    width: 96px;
+    height: 96px;
+    border-radius: var(--radius-full);
+    border: 3px solid var(--color-bg-card);
+    box-shadow: var(--shadow-md);
+    object-fit: cover;
+}
+
+.user-profile-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.user-profile-name {
+    font-size: 1.75rem;
+    font-weight: 800;
+    margin: 0 0 var(--space-xs);
+    line-height: 1.2;
+}
+
+.user-profile-handle {
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+    margin: 0 0 var(--space-md);
+}
+
+.user-profile-bio {
+    font-size: 0.9375rem;
+    color: var(--color-text-light);
+    line-height: 1.55;
+    margin-bottom: var(--space-md);
+}
+
+.user-profile-stats {
+    display: flex;
+    gap: var(--space-xl);
+    padding-top: var(--space-md);
+    border-top: 1px solid var(--color-border-light);
+    flex-wrap: wrap;
+}
+
+.user-stat {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-stat strong {
+    font-size: 1.25rem;
+    color: var(--color-primary-text);
+    font-weight: 800;
+}
+
+.user-stat span {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.user-profile-nav {
+    display: flex;
+    border-bottom: 1px solid var(--color-border-light);
+    padding: 0 var(--space-xl);
+    overflow-x: auto;
+    gap: var(--space-xs);
+}
+
+.user-nav-link {
+    padding: var(--space-md) var(--space-md);
+    color: var(--color-text-muted);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.875rem;
+    border-bottom: 2px solid transparent;
+    transition: color 0.12s, border-color 0.12s;
+    white-space: nowrap;
+}
+
+.user-nav-link:hover {
+    color: var(--color-text);
+    text-decoration: none;
+}
+
+.user-nav-link.active {
+    color: var(--color-primary-text);
+    border-bottom-color: var(--color-primary-text);
+}
+
+.user-profile-body {
+    padding: var(--space-xl);
+    min-height: 200px;
+}
+
+.user-profile-empty {
+    text-align: center;
+    color: var(--color-text-muted);
+    padding: var(--space-2xl);
+    background: var(--color-bg-alt);
+    border-radius: var(--radius-md);
+    border: 1px dashed var(--color-border);
+}
+
+/* ==========================================================================
+   19. AVATAR MINI (dans banners)
+   ========================================================================== */
+.avatar-mini {
+    display: inline-block;
+    vertical-align: middle;
+    margin-inline-end: var(--space-xs);
+}
+
+.avatar-mini img,
+.avatar-mini .avatar {
+    width: 20px;
+    height: 20px;
+    border-radius: var(--radius-full);
+    vertical-align: middle;
+}
+
+/* ==========================================================================
+   20. RESPONSIVE (formulaires + profil)
+   ========================================================================== */
+@media (width <= 768px) {
+    .user-profile-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: var(--space-lg);
+    }
+
+    .user-profile-stats {
+        justify-content: center;
+        gap: var(--space-lg);
+    }
+
+    .user-profile-nav {
+        padding: 0 var(--space-md);
+    }
+
+    .user-profile-body {
+        padding: var(--space-md);
+    }
+
+    .bbp-submit-wrapper {
+        flex-direction: column;
+    }
+
+    .bbp-submit-wrapper .btn-primary {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* ==========================================================================
+   21. WIDGET SUJETS POPULAIRES
+   ========================================================================== */
+.swiftboard-popular-topics-widget {
+    /* Container hérite de .widget */
+}
+
+.swiftboard-popular-topics-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.popular-topic-item {
+    padding: var(--space-sm) 0;
+    border-bottom: 1px solid var(--color-border-light);
+}
+
+.popular-topic-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.popular-topic-item:first-child {
+    padding-top: 0;
+}
+
+.popular-topic-link {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    text-decoration: none;
+    color: inherit;
+    padding: 2px 0;
+    transition: color 0.12s ease;
+}
+
+.popular-topic-link:hover {
+    text-decoration: none;
+}
+
+.popular-topic-link:hover .popular-topic-title {
+    color: var(--color-primary-text);
+}
+
+.popular-topic-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-text);
+    line-height: 1.35;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    transition: color 0.12s ease;
+}
+
+.popular-topic-meta {
+    display: flex;
+    gap: var(--space-sm);
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+    font-weight: 600;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.popular-topic-votes {
+    color: var(--color-primary-text);
+}
+
+.popular-topic-author {
+    color: var(--color-text-light);
+}
+
+.popular-topic-time {
+    color: var(--color-text-muted);
+}
+
+
+/* ========================================================================
+   SWIFTBOARD PREMIUM FEED v11.0.5
+   Preserve all existing vote, share, save, follow and reply hooks.
+   ======================================================================== */
+.topic-item,
+.bbp-topic {
+    position: relative;
+    gap: 0;
+    padding: 18px 20px 16px 12px;
+    margin-bottom: 14px;
+    border: 1px solid var(--sb-line, var(--color-border-light));
+    border-radius: var(--sb-radius-card, 14px);
+    box-shadow: 0 2px 8px rgb(16 34 51 / 0.035);
+    transition: border-color .18s ease, box-shadow .18s ease, transform .18s ease;
+}
+
+.topic-item:hover,
+.bbp-topic:hover {
+    border-color: color-mix(in srgb, var(--color-primary) 42%, var(--sb-line, #e4e9ef));
+    box-shadow: 0 8px 22px rgb(16 34 51 / 0.08);
+    transform: translateY(-1px);
+}
+
+.topic-vote {
+    min-width: 48px;
+    gap: 3px;
+    padding: 2px 8px 0 2px;
+    margin-inline-end: 14px;
+    border-inline-end: 1px solid var(--sb-line, var(--color-border-light));
+}
+
+.topic-vote button,
+.topic-vote a {
+    min-width: 36px;
+    min-height: 34px;
+    border-radius: 9px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.topic-vote button:hover,
+.topic-vote button:focus-visible,
+.topic-vote a:hover,
+.topic-vote a:focus-visible {
+    background: var(--sb-blue-100, var(--color-primary-light));
+}
+
+.topic-body { padding-inline-start: 2px; }
+.topic-header { margin-bottom: 6px; }
+
+.topic-title {
+    font-size: clamp(1.05rem, 1.8vw, 1.28rem);
+    font-weight: 750;
+    letter-spacing: -.012em;
+    line-height: 1.3;
+}
+
+.topic-title a { color: var(--sb-ink, var(--color-text)); }
+.topic-title a:hover { color: var(--sb-blue-700, var(--color-primary-hover)); }
+
+.topic-meta {
+    gap: 6px 10px;
+    margin-bottom: 10px;
+    color: var(--sb-muted, var(--color-text-muted));
+    line-height: 1.35;
+}
+
+.topic-meta a { color: var(--color-primary-text); }
+.topic-meta-sep { opacity: .55; }
+
+.topic-stats {
+    gap: 8px;
+    padding-top: 10px;
+    border-top: 1px solid var(--sb-line, var(--color-border-light));
+    font-size: .78rem;
+}
+
+.topic-stats > * {
+    min-height: 32px;
+    padding: 5px 9px;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.topic-stats > *:hover { background: var(--sb-blue-100, var(--color-primary-light)); }
+
+.bbp-topic-header {
+    border-radius: var(--sb-radius-card, 14px);
+    border: 1px solid var(--sb-line, var(--color-border-light));
+    box-shadow: 0 2px 8px rgb(16 34 51 / .04);
+}
+
+.bbp-topic-title {
+    border-bottom: 1px solid var(--sb-line, var(--color-border-light));
+    font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+/* Remove decorative emoji pseudo-elements from product chrome.
+   User-authored emoji content remains untouched. */
+.bbp-forum-topic-count::before,
+.bbp-forum-reply-count::before,
+.bbp-forum-freshness::before { content: none; }
+
+@media (max-width: 768px) {
+    .topic-item,
+    .bbp-topic {
+        padding: 14px 14px 12px 10px;
+        border-radius: 12px;
+        margin-bottom: 10px;
+    }
+
+    .topic-vote {
+        min-width: 40px;
+        padding-inline-end: 6px;
+        margin-inline-end: 10px;
+    }
+
+    .topic-vote button,
+    .topic-vote a { min-width: 32px; min-height: 32px; }
+    .topic-meta { font-size: .72rem; }
+    .topic-stats { gap: 4px; overflow-x: auto; scrollbar-width: none; }
+    .topic-stats > * { flex: 0 0 auto; }
+}
+
+/* Final cascade correction: premium widget chrome wins over legacy blue bars. */
+.widget-title,
+.widget .widget-title {
+    background: transparent;
+    color: var(--sb-ink, var(--color-text));
+    border-bottom: 1px solid var(--sb-line, var(--color-border-light));
+    border-radius: 0;
+    padding: 15px 18px;
+    font-size: .78rem;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+}
+
+.widget-title::before,
+.widget .widget-title::before {
+    content: '';
+    display: inline-block;
+    width: 4px;
+    height: 16px;
+    margin-inline-end: 9px;
+    border-radius: 999px;
+    background: var(--sb-blue-600, var(--color-primary));
+    vertical-align: -3px;
+}

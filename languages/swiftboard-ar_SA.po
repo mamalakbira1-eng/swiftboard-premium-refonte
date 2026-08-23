@@ -1,0 +1,2656 @@
+# SwiftBoard Arabic Translation
+# Copyright (C) 2026 SwiftBoard
+# This file is distributed under GPL-2.0-or-later.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: SwiftBoard 7.2.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-07 12:00+0000\n"
+"PO-Revision-Date: 2026-08-07 12:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: Arabic\n"
+"Language: ar_SA\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5);\n"
+
+msgid "Accueil"
+msgstr "الرئيسية"
+
+msgid "Forum"
+msgstr "المنتدى"
+
+msgid "Forums"
+msgstr "المنتديات"
+
+msgid "Rechercher..."
+msgstr "بحث..."
+
+msgid "Connexion"
+msgstr "تسجيل الدخول"
+
+msgid "Inscription"
+msgstr "التسجيل"
+
+msgid "Notifications"
+msgstr "الإشعارات"
+
+msgid "Se déconnecter"
+msgstr "تسجيل الخروج"
+
+msgid "Nouveau sujet"
+msgstr "موضوع جديد"
+
+msgid "Modifier"
+msgstr "تعديل"
+
+msgid "Supprimer"
+msgstr "حذف"
+
+msgid "Enregistrer"
+msgstr "حفظ"
+
+msgid "Annuler"
+msgstr "إلغاء"
+
+msgid "Confirmer"
+msgstr "تأكيد"
+
+msgid "Chargement..."
+msgstr "جارٍ التحميل..."
+
+msgid "Aucun résultat"
+msgstr "لا توجد نتائج"
+
+msgid "Upvoter"
+msgstr "تصويت إيجابي"
+
+msgid "Downvoter"
+msgstr "تصويت سلبي"
+
+msgid "à l'instant"
+msgstr "الآن"
+
+msgid "Date invalide"
+msgstr "تاريخ غير صالح"
+
+msgid "Forum de discussion communautaire"
+msgstr "منتدى نقاشات مجتمعي"
+
+msgid "Pas encore de sujet."
+msgstr "لا توجد مواضيع بعد."
+
+msgid "Rookie"
+msgstr "مبتدئ"
+
+msgid "Member"
+msgstr "عضو"
+
+msgid "Pro"
+msgstr "محترف"
+
+msgid "Moderator"
+msgstr "مشرف"
+
+msgid "VIP"
+msgstr "مميز"
+
+msgid "Meilleure réponse"
+msgstr "أفضل رد"
+
+msgid "Signaler"
+msgstr "إبلاغ"
+
+msgid "Messages"
+msgstr "المشاركات"
+
+msgid "Badges"
+msgstr "الشارات"
+
+msgid "Karma"
+msgstr "السمعة"
+
+msgid "Sujets chauds"
+msgstr "المواضيع الرائجة"
+
+msgid "Top répondeurs"
+msgstr "أفضل المعلقين"
+
+msgid "Communautés"
+msgstr "المجتمعات"
+
+msgid "Navigation principale"
+msgstr "التنقل الرئيسي"
+
+msgid "Navigation pied de page"
+msgstr "تذييل التنقل"
+
+msgid "Menu forum"
+msgstr "قائمة المنتدى"
+
+msgid "Couleur principale"
+msgstr "اللون الرئيسي"
+
+msgid "Mode sombre"
+msgstr "الوضع الداكن"
+
+msgid "Politique de confidentialité"
+msgstr "سياسة الخصوصية"
+
+msgid "Exporter mes données"
+msgstr "تصدير بياناتي"
+
+msgid "Supprimer mon compte"
+msgstr "حذف حسابي"
+
+msgid "Réponse"
+msgid_plural "Réponses"
+msgstr[0] "رد"
+msgstr[1] "رد"
+msgstr[2] "ردان"
+msgstr[3] "ردود"
+msgstr[4] "ردود"
+msgstr[5] "ردود"
+
+msgid "Sujet"
+msgid_plural "Sujets"
+msgstr[0] "موضوع"
+msgstr[1] "موضوع"
+msgstr[2] "موضوعان"
+msgstr[3] "مواضيع"
+msgstr[4] "مواضيع"
+msgstr[5] "مواضيع"
+
+msgid "il y a %d min"
+msgid_plural "il y a %d min"
+msgstr[0] "الآن"
+msgstr[1] "منذ دقيقة"
+msgstr[2] "منذ دقيقتين"
+msgstr[3] "منذ %d دقائق"
+msgstr[4] "منذ %d دقيقة"
+msgstr[5] "منذ %d دقيقة"
+
+msgid "il y a %d h"
+msgid_plural "il y a %d h"
+msgstr[0] "الآن"
+msgstr[1] "منذ ساعة"
+msgstr[2] "منذ ساعتين"
+msgstr[3] "منذ %d ساعات"
+msgstr[4] "منذ %d ساعة"
+msgstr[5] "منذ %d ساعة"
+
+msgid "il y a %d j"
+msgid_plural "il y a %d j"
+msgstr[0] "الآن"
+msgstr[1] "منذ يوم"
+msgstr[2] "منذ يومين"
+msgstr[3] "منذ %d أيام"
+msgstr[4] "منذ %d يوم"
+msgstr[5] "منذ %d يوم"
+
+
+msgid "Change language?"
+msgstr "تغيير اللغة؟"
+
+msgid "This site is also available in %s. Would you like to switch?"
+msgstr "هذا الموقع متاح أيضًا باللغة %s. هل ترغب في التبديل؟"
+
+msgid "Switch"
+msgstr "تبديل"
+
+msgid "Stay here"
+msgstr "البقاء هنا"
+
+msgid "You can change this anytime in the header."
+msgstr "يمكنك تغيير ذلك في أي وقت من الرأس."
+
+msgid "Sujets chauds de la semaine"
+msgstr "المواضيع الرائجة لهذا الأسبوع"
+
+msgid "Aucun sujet dans ce forum pour le moment."
+msgstr "لا توجد مواضيع في هذا المنتدى حاليًا."
+
+msgid "Trop de requêtes. Réessayez dans 1 minute."
+msgstr "طلبات كثيرة جدًا. أعد المحاولة خلال دقيقة."
+
+msgid "Créer le premier sujet"
+msgstr "إنشاء أول موضوع"
+
+msgid "vous connecter"
+msgstr "تسجيل الدخول"
+
+msgid "Vous devez %s pour créer un sujet."
+msgstr "يجب عليك %s لإنشاء موضوع."
+
+msgid "sujets"
+msgstr "مواضيع"
+
+msgid "réponses"
+msgstr "ردود"
+
+msgid "réponse"
+msgstr "رد"
+
+msgid "Dernier :"
+msgstr "آخر:"
+
+msgid "Bienvenue sur notre forum communautaire. Participez aux discussions !"
+msgstr "مرحبًا بكم في منتدى مجتمعنا. شاركوا في النقاشات!"
+
+msgid "Forum de discussion"
+msgstr "منتدى النقاش"
+
+msgid "Utilisateurs en ligne"
+msgstr "المستخدمون المتصلون"
+
+msgid "en ligne"
+msgstr "متصل"
+
+msgid "%d utilisateurs en ligne"
+msgstr "%d مستخدم متصل"
+
+msgid "Comment souhaitez-vous qu'on vous identifie ?"
+msgstr "كيف ترغب أن نعرفك؟"
+
+msgid "Choisissez votre avatar par défaut :"
+msgstr "اختر صورتك الرمزية الافتراضية:"
+
+msgid "Finalisez votre inscription en un clic :"
+msgstr "أكمل تسجيلك بنقرة واحدة:"
+
+
+msgid "Votre compte et vos données personnelles ont été supprimés."
+msgstr "تم حذف حسابك وبياناتك الشخصية."
+
+msgid "Vos messages restent visibles de façon anonyme."
+msgstr "تبقى رسائلك مرئية بشكل مجهول."
+
+msgid "Confirmez votre mot de passe :"
+msgstr "أكد كلمة المرور الخاصة بك:"
+
+msgid "Je comprends que cette action est définitive."
+msgstr "أفهم أن هذا الإجراء نهائي."
+
+msgid "Supprimer définitivement mon compte"
+msgstr "حذف حسابي نهائيًا"
+
+msgid "Mot de passe incorrect. Le compte n'a pas été supprimé."
+msgstr "كلمة المرور غير صحيحة. لم يتم حذف الحساب."
+
+msgid "Confirmation manquante. Le compte n'a pas été supprimé."
+msgstr "التأكيد مفقود. لم يتم حذف الحساب."
+
+msgid "Lien de confirmation expiré. Rechargez la page et recommencez."
+msgstr "انتهت صلاحية رابط التأكيد. أعد تحميل الصفحة وحاول مرة أخرى."
+
+msgid "Ce compte ne peut pas être supprimé depuis le profil."
+msgstr "لا يمكن حذف هذا الحساب من الملف الشخصي."
+
+msgid "S'abonner"
+msgstr "اشترك"
+
+msgid "Partager"
+msgstr "مشاركة"
+
+msgid "Sauvegarder"
+msgstr "حفظ"
+
+msgid "Suivre"
+msgstr "متابعة"
+
+msgid "Plus d'actions"
+msgstr "المزيد من الإجراءات"
+
+msgid "Répondre"
+msgstr "رد"
+
+msgid "Profil"
+msgstr "الملف الشخصي"
+
+msgid "Aucune réponse."
+msgstr "لا توجد ردود."
+
+msgid "Aucun sujet."
+msgstr "لا توجد مواضيع."
+
+msgid "commentaires"
+msgstr "تعليقات"
+
+msgid "par"
+msgstr "بواسطة"
+
+msgid "Réponse à"
+msgstr "رد على"
+
+msgid "Sécurité"
+msgstr "الأمان"
+
+msgid "Sujets"
+msgstr "المواضيع"
+
+msgid "Réponses"
+msgstr "الردود"
+
+msgid "Votes"
+msgstr "الأصوات"
+
+msgid "Images"
+msgstr "الصور"
+
+msgid "Utilisateurs"
+msgstr "المستخدمون"
+
+msgid "Overview"
+msgstr "نظرة عامة"
+
+msgid "Réglages"
+msgstr "الإعدادات"
+
+msgid "Grades"
+msgstr "الرتب"
+
+msgid "Accès refusé."
+msgstr "تم رفض الوصول."
+
+msgid "Accès refusé — permissions insuffisantes."
+msgstr "تم رفض الوصول — صلاحيات غير كافية."
+
+msgid "Recherche..."
+msgstr "بحث..."
+
+msgid "Rechercher"
+msgstr "بحث"
+
+msgid "#%d"
+msgstr "#%d"
+
+msgid "#1 (auteur)"
+msgstr "#1 (الكاتب)"
+
+msgid "%1$s — discussions et entraide sur %2$s."
+msgstr "%1$s — نقاشات ومساعدة على %2$s."
+
+msgid "%d commentaire"
+msgstr "%d تعليق"
+
+msgid "%d commentaires"
+msgstr "%d تعليقات"
+
+msgid "%d notification non lue"
+msgstr "%d إشعار غير مقروء"
+
+msgid "%d notifications non lues"
+msgstr "%d إشعارات غير مقروءة"
+
+msgid "%d résultat trouvé"
+msgstr "%d نتيجة"
+
+msgid "%d résultats trouvés"
+msgstr "%d نتائج"
+
+msgid "%s membres"
+msgstr "%s أعضاء"
+
+msgid "%s élément"
+msgstr "%s عنصر"
+
+msgid "%s éléments"
+msgstr "%s عناصر"
+
+msgid "%s — forum communautaire : discussions, entraide et partage."
+msgstr "%s — منتدى مجتمعي: نقاشات ومساعدة ومشاركة."
+
+msgid "&mdash; Sans forum &mdash;"
+msgstr "&mdash; بدون منتدى &mdash;"
+
+msgid "(%d utilisateurs actifs)"
+msgstr "(%d مستخدمين نشطين)"
+
+msgid "(manuel)"
+msgstr "(يدوي)"
+
+msgid "24 dernières heures"
+msgstr "آخر 24 ساعة"
+
+msgid "30 derniers jours"
+msgstr "آخر 30 يوماً"
+
+msgid "7 derniers jours"
+msgstr "آخر 7 أيام"
+
+msgid "Abonnements"
+msgstr "الاشتراكات"
+
+msgid "Abonnements de %s"
+msgstr "اشتراكات %s"
+
+msgid "Abonné"
+msgstr "مشترك"
+
+msgid "Accorder à cet utilisateur les privilèges super-admin du réseau."
+msgstr "منح هذا المستخدم صلاحيات المدير العام للشبكة."
+
+msgid "Action"
+msgstr "إجراء"
+
+msgid "Action effectuée."
+msgstr "تم تنفيذ الإجراء."
+
+msgid "Actions"
+msgstr "إجراءات"
+
+msgid "Activer la collecte RUM anonymisée (Core Web Vitals)"
+msgstr "تفعيل جمع بيانات الأداء (Core Web Vitals)"
+
+msgid "Activer la modale d\\'Onboarding Reddit (3 étapes)"
+msgstr ""
+
+msgid "Activer la montée automatique"
+msgstr "تفعيل الترقية التلقائية"
+
+msgid "Activer le cache de pages anonyme sur disque"
+msgstr "تفعيل تخزين الصفحات المجهولة على القرص"
+
+msgid "Activer le digest"
+msgstr "تفعيل الملخص"
+
+msgid "Activer le système de Votes & Karma"
+msgstr "تفعيل نظام الأصوات والسمعة"
+
+msgid "Activer les boutons upvote/downvote sur les sujets"
+msgstr "تفعيل أزرار التصويت الإيجابي/السلبي على المواضيع"
+
+msgid "Activité (7 jours)"
+msgstr "النشاط (7 أيام)"
+
+msgid "Admin"
+msgstr "مدير"
+
+msgid "Affiche les sujets les plus populaires (votes + réponses)."
+msgstr "يعرض أكثر المواضيع شعبية (أصوات + ردود)."
+
+msgid "Affiche les sujets les plus populaires du forum (par réponses ou par votes)."
+msgstr "يعرض أكثر مواضيع المنتدى شعبية (حسب الردود أو الأصوات)."
+
+msgid "Afficher l\\'auteur"
+msgstr ""
+
+msgid "Afficher le compteur de votes"
+msgstr "عرض عداد الأصوات"
+
+msgid "Afficher les avatars des membres"
+msgstr "عرض صور الأعضاء"
+
+msgid "Afficher les badges de grade (Rookie à VIP)"
+msgstr ""
+
+msgid "Afficher les votes"
+msgstr "عرض الأصوات"
+
+msgid "Affiché à côté du copyright. Laisser vide pour masquer."
+msgstr "يظهر بجوار حقوق النشر. اتركه فارغاً للإخفاء."
+
+msgid "Affichée dans la carte \\\"À propos\\\" du forum."
+msgstr ""
+
+msgid "Ajouter une image"
+msgstr "إضافة صورة"
+
+msgid "Aller au contenu"
+msgstr "تخطي إلى المحتوى"
+
+msgid "Annuaire des Subreddits"
+msgstr "دليل المنتديات الفرعية"
+
+msgid "Annuaire visuel des sous-forums."
+msgstr "دليل مرئي للمنتديات الفرعية."
+
+msgid "Annuler le changement de mot de passe"
+msgstr "إلغاء تغيير كلمة المرور"
+
+msgid "Anonyme"
+msgstr "مجهول"
+
+msgid "Aperçu"
+msgstr "معاينة"
+
+msgid "Apparaît sur les pages du blog"
+msgstr "يظهر على صفحات المدونة"
+
+msgid "Apparaît sur les pages du forum"
+msgstr "يظهر على صفحات المنتدى"
+
+msgid "Apparence"
+msgstr "المظهر"
+
+msgid "Approuvées"
+msgstr "معتمدة"
+
+msgid "Archives de %s"
+msgstr "أرشيف %s"
+
+msgid "Archives du %s"
+msgstr "أرشيف %s"
+
+msgid "Arrondi des Cartes (Border Radius)"
+msgstr "استدارة البطاقات"
+
+msgid "Article"
+msgstr "مقال"
+
+msgid "Articles"
+msgstr "مقالات"
+
+msgid "Articles dans %s"
+msgstr "مقالات في %s"
+
+msgid "Athlète"
+msgstr "رياضي"
+
+msgid "Attribuer des grades"
+msgstr "منح الرتب"
+
+msgid "Aucun article trouvé."
+msgstr "لم يتم العثور على مقالات."
+
+msgid "Aucun badge personnalisé créé. Vous pouvez en définir ici."
+msgstr "لم يتم إنشاء شارات مخصصة. يمكنك تعريفها هنا."
+
+msgid "Aucun choix ? Vous aurez automatiquement votre initiale sur fond bleu."
+msgstr "لا اختيار؟ ستحصل تلقائياً على الحرف الأول على خلفية زرقاء."
+
+msgid "Aucun fichier envoyé."
+msgstr "لم يتم إرسال أي ملف."
+
+msgid "Aucun forum n\\'a été créé pour le moment."
+msgstr ""
+
+msgid "Aucun résultat trouvé"
+msgstr "لم يتم العثور على نتائج"
+
+msgid "Aucun résultat trouvé. Essayez avec d\\'autres mots-clés."
+msgstr ""
+
+msgid "Aucun signalement en attente. Excellent !"
+msgstr "لا توجد بلاغات معلقة. ممتاز!"
+
+msgid "Aucun sujet chaud pour le moment."
+msgstr "لا توجد مواضيع رائجة حالياً."
+
+msgid "Aucun sujet dans cette liste pour le moment."
+msgstr "لا توجد مواضيع في هذه القائمة حالياً."
+
+msgid "Aucun sujet pour le moment."
+msgstr "لا توجد مواضيع حالياً."
+
+msgid "Aucun sujet sauvegardé."
+msgstr "لا توجد مواضيع محفوظة."
+
+msgid "Aucun sujet trouvé."
+msgstr "لم يتم العثور على مواضيع."
+
+msgid "Aucun trophée pour le moment. Participez pour en débloquer ! 🏆"
+msgstr "لا توجد جوائز حالياً. شارك لفتحها! 🏆"
+
+msgid "Aucun utilisateur actif."
+msgstr "لا يوجد مستخدمون نشطون."
+
+msgid "Aucun utilisateur."
+msgstr "لا يوجد مستخدمون."
+
+msgid "Aucun vote négatif."
+msgstr "لا توجد أصوات سلبية."
+
+msgid "Aucun vote."
+msgstr "لا توجد أصوات."
+
+msgid "Aucune action enregistrée."
+msgstr "لا توجد إجراءات مسجلة."
+
+msgid "Aucune activité récente à afficher."
+msgstr "لا يوجد نشاط حديث لعرضه."
+
+msgid "Aucune image en attente"
+msgstr "لا توجد صور في الانتظار"
+
+msgid "Aucune image."
+msgstr "لا توجد صور."
+
+msgid "Aucune notification"
+msgstr "لا توجد إشعارات"
+
+msgid "Aucune notification pour le moment."
+msgstr "لا توجد إشعارات حالياً."
+
+msgid "Aucune réponse cette semaine."
+msgstr "لا توجد ردود هذا الأسبوع."
+
+msgid "Aucune réponse pour le moment. Soyez le premier à répondre !"
+msgstr "لا توجد ردود حالياً. كن أول من يرد!"
+
+msgid "Aucune réponse reçue pour le moment."
+msgstr "لم يتم استلام أي ردود بعد."
+
+msgid "Aucune réponse trouvée."
+msgstr "لم يتم العثور على ردود."
+
+msgid "Audit Log"
+msgstr "سجل التدقيق"
+
+msgid "Auteur"
+msgstr "الكاتب"
+
+msgid "Auteur ID :"
+msgstr "معرف الكاتب:"
+
+msgid "Auto (selon préférence système)"
+msgstr "تلقائي (حسب تفضيل النظام)"
+
+msgid "Auto dès %1$s — plancher import %2$s"
+msgstr "تلقائي من %1$s — حد الاستيراد %2$s"
+
+msgid "Auto-promotion"
+msgstr "الترقية التلقائية"
+
+msgid "Avatar"
+msgstr "الصورة الرمزية"
+
+msgid "Badges Custom"
+msgstr "شارات مخصصة"
+
+msgid "Balises %s et attributs autorisés :"
+msgstr "الوسوم %s والسمات المسموح بها:"
+
+msgid "Bandeau CTA Onboarding (Modale 1 clic)"
+msgstr "بانر ترحيب (نافذة بنقرة واحدة)"
+
+msgid "Barre de Recherche Héroïque"
+msgstr "شريط البحث الرئيسي"
+
+msgid "Barre latérale"
+msgstr "الشريط الجانبي"
+
+msgid "Barre latérale du forum"
+msgstr "الشريط الجانبي للمنتدى"
+
+msgid "Batch processing :"
+msgstr "المعالجة بالدفعات:"
+
+msgid "Blocage après X images rejetées en 24h."
+msgstr "الحظر بعد X صورة مرفوضة خلال 24 ساعة."
+
+msgid "Blog"
+msgstr "المدونة"
+
+msgid "Bonjour"
+msgstr "مرحباً"
+
+msgid "Bonjour %s,\\n\\n"
+msgstr "مرحباً %s،\\n\\n"
+
+msgid "Bonus karma de %s"
+msgstr "مكافأة سمعة: %s"
+
+msgid "Cache SwiftBoard vidé : %d page(s)."
+msgstr "تم تفريغ ذاكرة SwiftBoard: %d صفحة."
+
+msgid "Ce forum est fermé aux nouveaux contenus, mais vos permissions vous permettent tout de même de publier."
+msgstr "هذا المنتدى مغلق للمحتوى الجديد، لكن صلاحياتك تسمح لك بالنشر."
+
+msgid "Ce forum est marqué comme fermé aux nouveaux sujets."
+msgstr "هذا المنتدى مغلق للمواضيع الجديدة."
+
+msgid "Ce grade vous débloque de nouvelles permissions (uploads, votes, création de sujets...).\\n"
+msgstr "هذه الرتبة تفتح صلاحيات جديدة (رفع الصور، التصويت، إنشاء المواضيع...).\\n"
+
+msgid "Ce sujet est marqué comme fermé aux nouvelles réponses."
+msgstr "هذا الموضوع مغلق للردود الجديدة."
+
+msgid "Cela ne supprime pas vos sujets. Seul le mot-clé est supprimé."
+msgstr "هذا لا يحذف مواضيعك. فقط الكلمة المفتاحية تُحذف."
+
+msgid "Cette action est irréversible."
+msgstr "هذا الإجراء لا يمكن التراجع عنه."
+
+msgid "Cette année"
+msgstr "هذه السنة"
+
+msgid "Cette image a déjà été uploadée."
+msgstr "تم رفع هذه الصورة من قبل."
+
+msgid "Cette réponse n\\'appartient pas à ce sujet."
+msgstr ""
+
+msgid "Changer de thème"
+msgstr "تغيير النمط"
+
+msgid "Changer le grade"
+msgstr "تغيير الرتبة"
+
+msgid "Changez les noms"
+msgstr "غيّر الأسماء"
+
+msgid "Chargement…"
+msgstr ""
+
+msgid "Chef"
+msgstr "زعيم"
+
+msgid "Chercher"
+msgstr "بحث"
+
+msgid "Choisissez un mot de passe robuste (min. 8 caractères)."
+msgstr "اختر كلمة مرور قوية (8 أحرف على الأقل)."
+
+msgid "Choisissez un nouveau mot de passe."
+msgstr "اختر كلمة مرور جديدة."
+
+msgid "Choisissez votre avatar"
+msgstr "اختر صورتك الرمزية"
+
+msgid "Choisissez votre avatar :"
+msgstr "اختر صورتك الرمزية:"
+
+msgid "Clair"
+msgstr "فاتح"
+
+msgid "Classement réputation"
+msgstr "ترتيب السمعة"
+
+msgid "Clés de sécurité"
+msgstr ""
+
+msgid "Combien de points vaut 1 réponse reçue sur un de mes sujets. Défaut : 1."
+msgstr "كم نقطة يساوي رد واحد على موضوعاتي. الافتراضي: 1."
+
+msgid "Combien de points vaut 1 upvote reçu. Défaut : 1."
+msgstr "كم نقطة يساوي تصويت إيجابي واحد. الافتراضي: 1."
+
+msgid "Commentaires"
+msgstr "التعليقات"
+
+msgid "Commenter"
+msgstr "تعليق"
+
+msgid "Composant actif"
+msgstr "المكون النشط"
+
+msgid "Compte"
+msgstr "الحساب"
+
+msgid "Configuration"
+msgstr "التكوين"
+
+msgid "Confirmation manquante. Le compte n\\'a pas été supprimé."
+msgstr ""
+
+msgid "Confirmer le mot de passe"
+msgstr "تأكيد كلمة المرور"
+
+msgid "Connectez-vous pour participer aux discussions."
+msgstr "سجّل الدخول للمشاركة في النقاشات."
+
+msgid "Connecté en tant que %1$s %2$s. %3$s"
+msgstr "متصل باسم %1$s %2$s. %3$s"
+
+msgid "Contenu"
+msgstr "المحتوى"
+
+msgid "Contenu & Personnalisation"
+msgstr "المحتوى والتخصيص"
+
+msgid "Contenu de la page"
+msgstr "محتوى الصفحة"
+
+msgid "Contenu du forum"
+msgstr "محتوى المنتدى"
+
+msgid "Contenu invalide."
+msgstr "محتوى غير صالح."
+
+msgid "Copier les abonnés vers le nouveau sujet"
+msgstr "نسخ المشتركين إلى الموضوع الجديد"
+
+msgid "Copier les favoris vers le nouveau sujet"
+msgstr "نسخ المفضلة إلى الموضوع الجديد"
+
+msgid "Copier les mots-clés vers le nouveau sujet"
+msgstr "نسخ الكلمات المفتاحية إلى الموضوع الجديد"
+
+msgid "Corbeille"
+msgstr "المهملات"
+
+msgid "Couleur Primaire (Boutons & Liens)"
+msgstr "اللون الأساسي (الأزرار والروابط)"
+
+msgid "Couleur Secondaire (Badges & Accents)"
+msgstr "اللون الثانوي (الشارات واللمسات)"
+
+msgid "Couleur accent"
+msgstr "لون اللمسة"
+
+msgid "Couleur d\\'Accentuation"
+msgstr ""
+
+msgid "Couleur d\\'accent"
+msgstr ""
+
+msgid "Couleur des boutons, liens actifs, upvotes (défaut : rouge Reddit)."
+msgstr "لون الأزرار والروابط النشطة والأصوات (الافتراضي: أحمر Reddit)."
+
+msgid "Couleur principale du forum (badges, hero, liens actifs)."
+msgstr "اللون الرئيسي للمنتدى (الشارات، الواجهة، الروابط النشطة)."
+
+msgid "Création d\\'un topic + 1 réponse (pour déclencher le hook"
+msgstr ""
+
+msgid "Création de 3 utilisateurs (1 auteur + 2 votants) au grade Rookie"
+msgstr "إنشاء 3 مستخدمين (1 كاتب + 2 مصوتين) برتبة مبتدئ"
+
+msgid "Créer"
+msgstr "إنشاء"
+
+msgid "Créer le forum"
+msgstr "إنشاء المنتدى"
+
+msgid "Créer un compte"
+msgstr "إنشاء حساب"
+
+msgid "Créer un forum dans « %s »"
+msgstr "إنشاء منتدى في «%s»"
+
+msgid "Créer un nouveau forum"
+msgstr "إنشاء منتدى جديد"
+
+msgid "Créer un sujet"
+msgstr "إنشاء موضوع"
+
+msgid "Créer un sujet dans ce forum"
+msgstr "إنشاء موضوع في هذا المنتدى"
+
+msgid "Créez des trophées sur mesure (ex: Bug Hunter, Fondateur, Expert WP) à décerner à vos membres."
+msgstr "أنشئ جوائز مخصصة (مثل: صائد الأخطاء، المؤسس، خبير WP) لمنحها للأعضاء."
+
+msgid "Date"
+msgstr ""
+
+msgid "Dates étalées"
+msgstr "تواريخ متوزعة"
+
+msgid "Derniers Sujets Résolus (✔ Solved)"
+msgstr "آخر المواضيع المحلولة (✔ تم الحل)"
+
+msgid "Derniers Sujets par Forum ID"
+msgstr "آخر المواضيع حسب معرف المنتدى"
+
+msgid "Derniers sujets filtrés par Forum ID (' . $limit . ' sujets)."
+msgstr "آخر المواضيع المصفاة حسب معرف المنتدى"
+
+msgid "Dernière activité %s"
+msgstr "آخر نشاط %s"
+
+msgid "Dernière activité : %s"
+msgstr "آخر نشاط: %s"
+
+msgid "Description :"
+msgstr "الوصف:"
+
+msgid "Description étendue"
+msgstr "وصف موسع"
+
+msgid "Destination"
+msgstr "الوجهة"
+
+msgid "Dimensions trop grandes (max 10000×10000)."
+msgstr "الأبعاد كبيرة جداً (الحد الأقصى 10000×10000)."
+
+msgid "Discord Dark"
+msgstr "داكن Discord"
+
+msgid "Disposition Forum par Défaut"
+msgstr "تخطيط المنتدى الافتراضي"
+
+msgid "Downvotes"
+msgstr "أصوات سلبية"
+
+msgid "Déconnexion"
+msgstr ""
+
+msgid "Décrivez votre question en une phrase…"
+msgstr "صف سؤالك في جملة واحدة…"
+
+msgid "Démarré par"
+msgstr "بدأه"
+
+msgid "Démarré par : %1$s"
+msgstr "بدأه: %1$s"
+
+msgid "Déplacer"
+msgstr "نقل"
+
+msgid "Déplacer la réponse"
+msgstr "نقل الرد"
+
+msgid "Déplacer la réponse « %s »"
+msgstr "نقل الرد «%s»"
+
+msgid "Déplacé : %s"
+msgstr "تم النقل: %s"
+
+msgid "Désabonnement confirmé"
+msgstr "تم تأكيد إلغاء الاشتراك"
+
+msgid "Désolé, la page que vous cherchez n\\'existe pas ou a été déplacée."
+msgstr ""
+
+msgid "Désépingler"
+msgstr "إلغاء التثبيت"
+
+msgid "Détaillez votre question…"
+msgstr "فصّل سؤالك…"
+
+msgid "E-mail"
+msgstr "البريد الإلكتروني"
+
+msgid "Email"
+msgstr "البريد الإلكتروني"
+
+msgid "Email (non publié) (requis) :"
+msgstr "البريد الإلكتروني (غير منشور) (مطلوب):"
+
+msgid "Email digest"
+msgstr "ملخص البريد"
+
+msgid "Emails envoyés par cycle (5-100). Défaut :"
+msgstr "رسائل لكل دورة (5-100). الافتراضي:"
+
+msgid "Emoji ou URL d\\'image carrée (64×64 recommandé)."
+msgstr ""
+
+msgid "En réponse à :"
+msgstr "رداً على:"
+
+msgid "Encore %1$d points pour atteindre %2$s"
+msgstr "%1$d نقطة أخرى للوصول إلى %2$s"
+
+msgid "Enregistrer le bonus"
+msgstr "حفظ المكافأة"
+
+msgid "Enregistrer les modifications"
+msgstr "حفظ التغييرات"
+
+msgid "Envoyés"
+msgstr "مرسلة"
+
+msgid "Erreur de base de données."
+msgstr "خطأ في قاعدة البيانات."
+
+msgid "Erreur de chargement"
+msgstr "خطأ في التحميل"
+
+msgid "Essayez une autre recherche."
+msgstr "جرب بحثاً آخر."
+
+msgid "Favoris"
+msgstr "المفضلة"
+
+msgid "Favoris de %s"
+msgstr "مفضلة %s"
+
+msgid "Femme mature"
+msgstr "امرأة ناضجة"
+
+msgid "Fermer"
+msgstr "إغلاق"
+
+msgid "Fermé"
+msgstr "مغلق"
+
+msgid "Fichier CSV ou XLSX :"
+msgstr "ملف CSV أو XLSX:"
+
+msgid "Fichier corrompu ou non image."
+msgstr "ملف تالف أو ليس صورة."
+
+msgid "Fichier trop volumineux (max 10 Mo)."
+msgstr "الملف كبير جداً (الحد الأقصى 10 ميجابايت)."
+
+msgid "Fil d\\'ariane"
+msgstr ""
+
+msgid "Fil d\\'ariane du forum"
+msgstr ""
+
+msgid "Filtrer"
+msgstr "تصفية"
+
+msgid "Filtrer par date"
+msgstr "تصفية حسب التاريخ"
+
+msgid "Filtrer par forum"
+msgstr "تصفية حسب المنتدى"
+
+msgid "Flux des dernières discussions marquées ✔ Résolu."
+msgstr "تدفق آخر النقاشات المعلمة ✔ تم الحل."
+
+msgid "Footer"
+msgstr "التذييل"
+
+msgid "Forcer HTTPS"
+msgstr "فرض HTTPS"
+
+msgid "Format attendu :"
+msgstr "الصيغة المتوقعة:"
+
+msgid "Forum (ID, 0 = tous) :"
+msgstr "المنتدى (المعرف، 0 = الكل):"
+
+msgid "Forum :"
+msgstr "المنتدى:"
+
+msgid "Forum de discussion —"
+msgstr "منتدى نقاش —"
+
+msgid "Forum parent :"
+msgstr "المنتدى الرئيسي:"
+
+msgid "Forums de %s — discussions et entraide."
+msgstr "منتديات %s — نقاشات ومساعدة."
+
+msgid "Forums suivis"
+msgstr "المنتديات المتابعة"
+
+msgid "Fusionner"
+msgstr "دمج"
+
+msgid "Fusionner avec ce sujet :"
+msgstr "دمج مع هذا الموضوع:"
+
+msgid "Fusionner le mot-clé"
+msgstr "دمج الكلمة المفتاحية"
+
+msgid "Fusionner le sujet"
+msgstr "دمج الموضوع"
+
+msgid "Fusionner le sujet « %s »"
+msgstr "دمج الموضوع «%s»"
+
+msgid "Fusionner les abonnés au sujet"
+msgstr "دمج المشتركين في الموضوع"
+
+msgid "Fusionner les favoris"
+msgstr "دمج المفضلة"
+
+msgid "Fusionner les mots-clés"
+msgstr "دمج الكلمات المفتاحية"
+
+msgid "Félicitations ! Vous venez d'être promu au grade %s sur %s.\\n"
+msgstr "تهانينا! تمت ترقيتك إلى رتبة %s على %s.\\n"
+
+msgid "Félicitations, vous avez été promu !"
+msgstr "تهانينا، تمت ترقيتك!"
+
+msgid "Garder un journal de cette modification"
+msgstr "احتفظ بسجل لهذا التعديل"
+
+msgid "Gardien"
+msgstr "حارس"
+
+msgid "Grade"
+msgstr "الرتبة"
+
+msgid "Grade actuel"
+msgstr "الرتبة الحالية"
+
+msgid "Grade de %s"
+msgstr "رتبة %s"
+
+msgid "Grade de départ (0 karma)"
+msgstr "رتبة البداية (0 سمعة)"
+
+msgid "Grade final :"
+msgstr "الرتبة النهائية:"
+
+msgid "Grade initial :"
+msgstr "الرتبة الأولية:"
+
+msgid "Grade maximal atteint — félicitations !"
+msgstr "تم بلوغ أعلى رتبة — تهانينا!"
+
+msgid "Grade maximum atteint 🎉"
+msgstr "تم بلوغ أعلى رتبة 🎉"
+
+msgid "Grade précédent : %s\\n"
+msgstr "الرتبة السابقة: %s\\n"
+
+msgid "Grades & karma"
+msgstr "الرتب والسمعة"
+
+msgid "Grille d\\'Avatars des Membres (Wall)"
+msgstr ""
+
+msgid "Grille visuelle d\\'avatars des membres de la communauté."
+msgstr ""
+
+msgid "Guide de création du Service Account"
+msgstr "دليل إنشاء Service Account"
+
+msgid "Générer un mot de passe"
+msgstr "توليد كلمة مرور"
+
+msgid "Gérer le mot-clé « %s »"
+msgstr "إدارة الكلمة المفتاحية «%s»"
+
+msgid "Hebdomadaire"
+msgstr "أسبوعي"
+
+msgid "Heure d\\'envoi"
+msgstr ""
+
+msgid "Heure locale du serveur."
+msgstr ""
+
+msgid "Hot"
+msgstr "رائج"
+
+msgid "Icône du forum"
+msgstr "أيقونة المنتدى"
+
+msgid "Identifiant"
+msgstr "المعرّف"
+
+msgid "Identifiant ou e-mail"
+msgstr "المعرّف أو البريد الإلكتروني"
+
+msgid "Identifiants incorrects. Réessayez."
+msgstr "بيانات الدخول غير صحيحة. حاول مرة أخرى."
+
+msgid "Identité"
+msgstr "الهوية"
+
+msgid "Il n\\'y a aucun autre sujet dans ce forum avec lequel fusionner."
+msgstr ""
+
+msgid "Image"
+msgstr "صورة"
+
+msgid "Image ID"
+msgstr "معرف الصورة"
+
+msgid "Image approuvée. Elle est maintenant visible."
+msgstr "تمت الموافقة على الصورة. أصبحت مرئية الآن."
+
+msgid "Image convertie en AVIF et en attente de modération. Économie : %d%% (%s → %s)"
+msgstr "تم تحويل الصورة إلى AVIF وفي انتظار المراجعة. التوفير: %d%% (%s → %s)"
+
+msgid "Image de bannière en haut du forum (recommandé : 1200×200)."
+msgstr "صورة بانر أعلى المنتدى (موصى به: 1200×200)."
+
+msgid "Image de couverture"
+msgstr "صورة الغلاف"
+
+msgid "Image en attente de modération"
+msgstr "صورة في انتظار المراجعة"
+
+msgid "Image introuvable ou déjà modérée."
+msgstr "الصورة غير موجودة أو تمت مراجعتها."
+
+msgid "Image rejetée et supprimée du serveur."
+msgstr "تم رفض الصورة وحذفها من الخادم."
+
+msgid "Image trop petite (min 50×50 pixels)."
+msgstr "الصورة صغيرة جداً (الحد الأدنى 50×50 بكسل)."
+
+msgid "Images approuvées"
+msgstr "صور معتمدة"
+
+msgid "Images en attente"
+msgstr "صور في الانتظار"
+
+msgid "Images en attente de validation"
+msgstr "صور في انتظار التحقق"
+
+msgid "Images forum"
+msgstr "صور المنتدى"
+
+msgid "Import en cours. Veuillez patienter ~30 secondes pour que les forums et profils démo s\\'installent."
+msgstr ""
+
+msgid "Import en masse"
+msgstr "استيراد جماعي"
+
+msgid "Impossible de convertir l\\'image. Contactez l\\'administrateur."
+msgstr ""
+
+msgid "Impossible de modifier le vote."
+msgstr "تعذر تعديل التصويت."
+
+msgid "Impossible de retirer le vote."
+msgstr "تعذر إلغاء التصويت."
+
+msgid "Impossible d’enregistrer le vote (conflit ou erreur base)."
+msgstr ""
+
+msgid "Indiquez votre e-mail pour réinitialiser votre mot de passe."
+msgstr "أدخل بريدك الإلكتروني لإعادة تعيين كلمة المرور."
+
+msgid "Informations sur l\\'auteur"
+msgstr ""
+
+msgid "Inscrit depuis : %s"
+msgstr "مسجل منذ: %s"
+
+msgid "Inscrit le"
+msgstr "تاريخ التسجيل"
+
+msgid "Inscrit le %s"
+msgstr "مسجل في %s"
+
+msgid "Installez bbPress pour activer le forum."
+msgstr "ثبّت bbPress لتفعيل المنتدى."
+
+msgid "Inter (Moderne sans-serif)"
+msgstr "Inter (حديث بدون زخرفة)"
+
+msgid "Intervalle entre votes (secondes)"
+msgstr "الفاصل بين الأصوات (ثوانٍ)"
+
+msgid "JPEG, PNG, WebP ou AVIF — %d image par jour, modérée avant publication."
+msgstr "JPEG، PNG، WebP أو AVIF — %d صورة يومياً، مراجعة قبل النشر."
+
+msgid "JPEG, PNG, WebP ou AVIF — %d images par jour, modérées avant publication."
+msgstr "JPEG، PNG، WebP أو AVIF — %d صورة يومياً، مراجعة قبل النشر."
+
+msgid "Jour d\\'envoi"
+msgstr ""
+
+msgid "Journal des révisions"
+msgstr "سجل المراجعات"
+
+msgid "Karma (bonus)"
+msgstr "السمعة (مكافأة)"
+
+msgid "Kunoichi rose"
+msgstr "كونويتشي وردي"
+
+msgid "Kunoichi tresses"
+msgstr "كونويتشي بضفائر"
+
+msgid "La fusion de mots-clés est irréversible."
+msgstr "دمج الكلمات المفتاحية لا يمكن التراجع عنه."
+
+msgid "La suppression d\\'un mot-clé est définitive."
+msgstr ""
+
+msgid "Laisser un commentaire"
+msgstr "اترك تعليقاً"
+
+msgid "Laissez le slug vide pour en générer un automatiquement."
+msgstr "اتترك الرابط فارغاً لإنشائه تلقائياً."
+
+msgid "Le forum « %s » est fermé aux nouveaux contenus."
+msgstr "المنتدى «%s» مغلق للمحتوى الجديد."
+
+msgid "Le mot de passe doit faire au moins 8 caractères."
+msgstr "يجب أن تكون كلمة المرور 8 أحرف على الأقل."
+
+msgid "Le nom d\\'utilisateur ne peut pas être modifié."
+msgstr ""
+
+msgid "Le plugin bbPress n\\'est pas installé ou activé."
+msgstr ""
+
+msgid "Le type de fichier ne correspond pas à son contenu."
+msgstr "نوع الملف لا يتطابق مع محتواه."
+
+msgid "Les mots de passe ne correspondent pas."
+msgstr "كلمتا المرور غير متطابقتين."
+
+msgid "Les nouveaux utilisateurs reçoivent ce grade automatiquement."
+msgstr "يحصل المستخدمون الجدد على هذه الرتبة تلقائياً."
+
+msgid "Les réponses des deux sujets sont fusionnées chronologiquement, selon leur date de publication. Les sujets peuvent être décalés d\\'une seconde pour maintenir l\\'ordre chronologique."
+msgstr ""
+
+msgid "Lien de désabonnement invalide ou expiré."
+msgstr "رابط إلغاء الاشتراك غير صالح أو منتهي الصلاحية."
+
+msgid "Liens, hover (défaut : bleu Reddit)."
+msgstr "الروابط، التمرير (الافتراضي: أزرق Reddit)."
+
+msgid "Limit login attempts"
+msgstr "تقييد محاولات الدخول"
+
+msgid "Limite de votes quotidienne atteinte."
+msgstr "تم بلوغ حد التصويت اليومي."
+
+msgid "Limite quotidienne atteinte (%d images/jour). Réessayez demain."
+msgstr "تم بلوغ الحد اليومي (%d صورة/يوم). حاول غداً."
+
+msgid "Limite quotidienne par utilisateur"
+msgstr "الحد اليومي للمستخدم"
+
+msgid "Limite totale par utilisateur"
+msgstr "الحد الإجمالي للمستخدم"
+
+msgid "Limite uploads / jour"
+msgstr "حد الرفع/يوم"
+
+msgid "Limite uploads totale"
+msgstr "حد الرفع الإجمالي"
+
+msgid "Liste des discussions les plus actives de la communauté."
+msgstr "قائمة أكثر النقاشات نشاطاً في المجتمع."
+
+msgid "M\\'avertir des nouvelles réponses par email"
+msgstr ""
+
+msgid "Manuel — annoncé %1$s — plancher import %2$s"
+msgstr "يدوي — معلن %1$s — حد الاستيراد %2$s"
+
+msgid "Masquer"
+msgstr "إخفاء"
+
+msgid "Masquer le mot de passe"
+msgstr "إخفاء كلمة المرور"
+
+msgid "Membre supprimé"
+msgstr "عضو محذوف"
+
+msgid "Membres"
+msgstr "الأعضاء"
+
+msgid "Membres votants"
+msgstr "الأعضاء المصوتون"
+
+msgid "Menu"
+msgstr "القائمة"
+
+msgid "Menu utilisateur"
+msgstr "قائمة المستخدم"
+
+msgid "Mes notifications"
+msgstr "إشعاراتي"
+
+msgid "Mes subreddits"
+msgstr "منتدياتي الفرعية"
+
+msgid "Mes sujets"
+msgstr "مواضيعي"
+
+msgid "Message"
+msgstr "رسالة"
+
+msgid "Messages minimum pour uploader"
+msgstr "الحد الأدنى من الرسائل للرفع"
+
+msgid "Messages minimum requis"
+msgstr "الحد الأدنى المطلوب من الرسائل"
+
+msgid "Mettre à jour"
+msgstr "تحديث"
+
+msgid "Mettre à jour l\\'utilisateur"
+msgstr ""
+
+msgid "Mettre à jour le profil"
+msgstr "تحديث الملف الشخصي"
+
+msgid "Minimal Light"
+msgstr "فاتح بسيط"
+
+msgid "Mode clair/sombre"
+msgstr "الوضع الفاتح/الداكن"
+
+msgid "Modification de « %s »"
+msgstr "تعديل «%s»"
+
+msgid "Modifier le profil de %s"
+msgstr "تعديل ملف %s الشخصي"
+
+msgid "Modifier le slug change son permalien. Les liens vers l\\'ancien slug cesseront de fonctionner."
+msgstr ""
+
+msgid "Modifier le sujet"
+msgstr "تعديل الموضوع"
+
+msgid "Modo"
+msgstr "مشرف"
+
+msgid "Modérateurs du forum :"
+msgstr "مشرفو المنتدى:"
+
+msgid "Modération images"
+msgstr "مراجعة الصور"
+
+msgid "Modérer maintenant →"
+msgstr "راجع الآن ←"
+
+msgid "Mon profil"
+msgstr "ملفي الشخصي"
+
+msgid "Mot de passe"
+msgstr "كلمة المرور"
+
+msgid "Mot de passe incorrect. Le compte n\\'a pas été supprimé."
+msgstr ""
+
+msgid "Mot de passe oublié"
+msgstr "نسيت كلمة المرور"
+
+msgid "Mot-clé existant :"
+msgstr "كلمة مفتاحية موجودة:"
+
+msgid "Mots de passe admin"
+msgstr "كلمات مرور المسؤول"
+
+msgid "Mots-clés"
+msgstr "الكلمات المفتاحية"
+
+msgid "Mots-clés :"
+msgstr "الكلمات المفتاحية:"
+
+msgid "Médecin"
+msgstr "طبيب"
+
+msgid "Méthode de déplacement"
+msgstr "طريقة النقل"
+
+msgid "Méthode de scission"
+msgstr "طريقة التقسيم"
+
+msgid "Navigation des commentaires"
+msgstr "تصفح التعليقات"
+
+msgid "Navigation profil"
+msgstr "تنقل الملف الشخصي"
+
+msgid "Navigation rapide"
+msgstr "تنقل سريع"
+
+msgid "Ninja argenté"
+msgstr "نينجا فضي"
+
+msgid "Ninja flamme"
+msgstr "نينجا لهيب"
+
+msgid "Ninja joyeux"
+msgstr "نينجا مرح"
+
+msgid "Ninja masqué"
+msgstr "نينجا مقنّع"
+
+msgid "Ninja orange"
+msgstr "نينجا برتقالي"
+
+msgid "Ninja sage"
+msgstr "نينجا حكيم"
+
+msgid "Ninja sensei"
+msgstr "نينجا سينسي"
+
+msgid "Ninja étudiant"
+msgstr "نينجا طالب"
+
+msgid "Nom"
+msgstr "الاسم"
+
+msgid "Nom (requis) :"
+msgstr "الاسم (مطلوب):"
+
+msgid "Nom :"
+msgstr ""
+
+msgid "Nom d\\'utilisateur"
+msgstr ""
+
+msgid "Nom du forum (longueur max : %d) :"
+msgstr "اسم المنتدى (الحد الأقصى: %d):"
+
+msgid "Nom expéditeur"
+msgstr "اسم المرسل"
+
+msgid "Nombre d\\'éléments à afficher"
+msgstr ""
+
+msgid "Nombre de sujets :"
+msgstr "عدد المواضيع:"
+
+msgid "Nombre maximum d\\'images qu\\'un utilisateur peut uploader par jour."
+msgstr ""
+
+msgid "Nombre total maximum d\\'images par utilisateur (toutes confondues)."
+msgstr ""
+
+msgid "Non"
+msgstr "لا"
+
+msgid "Note"
+msgstr "ملاحظة"
+
+msgid "Note Hostinger :"
+msgstr "ملاحظة Hostinger:"
+
+msgid "Notification email"
+msgstr "إشعار بالبريد"
+
+msgid "Nouveau"
+msgstr "جديد"
+
+msgid "Nouveau forum"
+msgstr "منتدى جديد"
+
+msgid "Nouveau grade : %s\\n"
+msgstr "الرتبة الجديدة: %s\\n"
+
+msgid "Nouveau sujet dans %s intitulé :"
+msgstr "موضوع جديد في %s بعنوان:"
+
+msgid "Nouveau sujet de discussion"
+msgstr "موضوع نقاش جديد"
+
+msgid "Offset"
+msgstr "الإزاحة"
+
+msgid "Opt-in utilisateur :"
+msgstr "موافقة المستخدم:"
+
+msgid "Options -Indexes"
+msgstr "خيارات -Indexes"
+
+msgid "Options supplémentaires"
+msgstr "خيارات إضافية"
+
+msgid "Oui"
+msgstr "نعم"
+
+msgid "Ouvert"
+msgstr "مفتوح"
+
+msgid "Ouvrir"
+msgstr "فتح"
+
+msgid "Page %1$s / %2$s"
+msgstr "الصفحة %1$s / %2$s"
+
+msgid "Page introuvable"
+msgstr "الصفحة غير موجودة"
+
+msgid "Page non trouvée"
+msgstr "الصفحة غير موجودة"
+
+msgid "Page précédente"
+msgstr "الصفحة السابقة"
+
+msgid "Page suivante"
+msgstr "الصفحة التالية"
+
+msgid "Pagination de la page"
+msgstr "ترقيم الصفحات"
+
+msgid "Participations"
+msgstr "المشاركات"
+
+msgid "Participations de %s"
+msgstr "مشاركات %s"
+
+msgid "Permissions insuffisantes."
+msgstr "صلاحيات غير كافية."
+
+msgid "Permissions personnalisées"
+msgstr "صلاحيات مخصصة"
+
+msgid "Personnalisez les couleurs, polices, dispositions et modules de votre forum Reddit-like."
+msgstr "خصص ألوان وخطوط وتخطيطات ووحدات منتداك بأسلوب Reddit."
+
+msgid "Pertinence"
+msgstr "الصلة"
+
+msgid "Pied de page"
+msgstr "تذييل الصفحة"
+
+msgid "Plugins"
+msgstr "الإضافات"
+
+msgid "Plus anciens"
+msgstr "الأقدم"
+
+msgid "Plus de réponses"
+msgstr "المزيد من الردود"
+
+msgid "Plus de sujets"
+msgstr "المزيد من المواضيع"
+
+msgid "Plus de votes"
+msgstr "المزيد من الأصوات"
+
+msgid "Plus d’actions"
+msgstr ""
+
+msgid "Plus récents"
+msgstr "الأحدث"
+
+msgid "Plus récents (activité)"
+msgstr "الأحدث (النشاط)"
+
+msgid "Plus récents (création)"
+msgstr "الأحدث (الإنشاء)"
+
+msgid "Poids d\\'un upvote reçu"
+msgstr ""
+
+msgid "Poids d\\'une réponse reçue"
+msgstr ""
+
+msgid "Police d\\'écriture du Forum"
+msgstr ""
+
+msgid "Poppins (Géométrique)"
+msgstr "Poppins (هندسي)"
+
+msgid "Post"
+msgstr "منشور"
+
+msgid "Posté par"
+msgstr "نشر بواسطة"
+
+msgid "Pour : %s"
+msgstr "إلى: %s"
+
+msgid "Pour conserver ce sujet comme sujet principal, ouvrez l\\'autre sujet et utilisez l\\'outil de fusion depuis celui-ci."
+msgstr ""
+
+msgid "Pour vous désabonner,"
+msgstr "لإلغاء الاشتراك،"
+
+msgid "Preset Design (10/10)"
+msgstr "تصميم جاهز (10/10)"
+
+msgid "Profil de %1$s – %2$s"
+msgstr "ملف %1$s الشخصي – %2$s"
+
+msgid "Profil de %s"
+msgstr "ملف %s الشخصي"
+
+msgid "Progression vers le grade suivant"
+msgstr "التقدم نحو الرتبة التالية"
+
+msgid "Propulsé par"
+msgstr "مدعوم بـ"
+
+msgid "Protection"
+msgstr "الحماية"
+
+msgid "Protégé"
+msgstr "محمي"
+
+msgid "Précédent"
+msgstr "السابق"
+
+msgid "Prénom"
+msgstr "الاسم الأول"
+
+msgid "Pseudo"
+msgstr "الاسم المستعار"
+
+msgid "Publier"
+msgstr "نشر"
+
+msgid "Publier la réponse"
+msgstr "نشر الرد"
+
+msgid "Publier le sujet"
+msgstr "نشر الموضوع"
+
+msgid "Publié par"
+msgstr "نشر بواسطة"
+
+msgid "Publiées"
+msgstr "منشورة"
+
+msgid "Publiés"
+msgstr "منشورون"
+
+msgid "Période :"
+msgstr "الفترة:"
+
+msgid "Qualité AVIF"
+msgstr "جودة AVIF"
+
+msgid "Qualité AVIF (0-100)"
+msgstr "جودة AVIF (0-100)"
+
+msgid "Quelqu\\'un"
+msgstr ""
+
+msgid "Quitter"
+msgstr "خروج"
+
+msgid "Quota horaire :"
+msgstr ""
+
+msgid "Rafraîchir les stats"
+msgstr "تحديث الإحصائيات"
+
+msgid "Raison (optionnel)"
+msgstr "السبب (اختياري)"
+
+msgid "Rang"
+msgstr "الترتيب"
+
+msgid "Recherche"
+msgstr "بحث"
+
+msgid "Recherche de réponses"
+msgstr "البحث عن ردود"
+
+msgid "Recherche de sujets"
+msgstr "البحث عن مواضيع"
+
+msgid "Rechercher :"
+msgstr "بحث:"
+
+msgid "Rechercher dans le forum"
+msgstr "ابحث في المنتدى"
+
+msgid "Rechercher dans le forum :"
+msgstr "ابحث في المنتدى:"
+
+msgid "Rechercher dans le forum…"
+msgstr "ابحث في المنتدى…"
+
+msgid "Rechercher dans les réponses…"
+msgstr "ابحث في الردود…"
+
+msgid "Rechercher dans les sujets…"
+msgstr "ابحث في المواضيع…"
+
+msgid "Rechercher des réponses :"
+msgstr "ابحث عن ردود:"
+
+msgid "Rechercher des sujets :"
+msgstr "ابحث عن مواضيع:"
+
+msgid "Rechercher sur le forum..."
+msgstr "ابحث في المنتدى..."
+
+msgid "Rechercher sur le site"
+msgstr "ابحث في الموقع"
+
+msgid "Rechercher…"
+msgstr "بحث…"
+
+msgid "Recommandé : 50-70."
+msgstr "موصى به: 50-70."
+
+msgid "Reddit Blue (Default)"
+msgstr "أزرق Reddit (الافتراضي)"
+
+msgid "Reformulez"
+msgstr "أعد الصياغة"
+
+msgid "Rejetées"
+msgstr "مرفوضة"
+
+msgid "Rejoignez la communauté en quelques secondes."
+msgstr "انضم إلى المجتمع في ثوانٍ."
+
+msgid "Rejoindre"
+msgstr "انضمام"
+
+msgid "Rejoindre la communauté en 1 clic"
+msgstr "انضم إلى المجتمع بنقرة واحدة"
+
+msgid "Renommer"
+msgstr "إعادة تسمية"
+
+msgid "Renommer le mot-clé"
+msgstr "إعادة تسمية الكلمة المفتاحية"
+
+msgid "Replier le fil"
+msgstr "طي المناقشة"
+
+msgid "Rester"
+msgstr "البقاء"
+
+msgid "Rester connecté"
+msgstr "البقاء متصلاً"
+
+msgid "Retour au forum"
+msgstr "العودة إلى المنتدى"
+
+msgid "Rising"
+msgstr "صاعد"
+
+msgid "Roboto (Classique Clean)"
+msgstr "Roboto (كلاسيكي نظيف)"
+
+msgid "Règles du forum"
+msgstr "قواعد المنتدى"
+
+msgid "Rédigez votre réponse…"
+msgstr "اكتب ردك…"
+
+msgid "Réglages SwiftBoard (Envato)"
+msgstr "إعدادات SwiftBoard"
+
+msgid "Réglages enregistrés."
+msgstr "تم حفظ الإعدادات."
+
+msgid "Réglages upload"
+msgstr "إعدادات الرفع"
+
+msgid "Réinitialiser mon mot de passe"
+msgstr "إعادة تعيين كلمة المرور"
+
+msgid "Répartition"
+msgstr "التوزيع"
+
+msgid "Répondre à : %s"
+msgstr "الرد على: %s"
+
+msgid "Répondre à la discussion"
+msgstr "الرد على النقاش"
+
+msgid "Réponse du forum"
+msgstr "رد المنتدى"
+
+msgid "Réponses (7j)"
+msgstr "ردود (7 أيام)"
+
+msgid "Réponses anonymes"
+msgstr "ردود مجهولة"
+
+msgid "Réponses créées"
+msgstr "ردود منشأة"
+
+msgid "Réponses créées : %s"
+msgstr "ردود منشأة: %s"
+
+msgid "Réponses créées par %s"
+msgstr "ردود أنشأها %s"
+
+msgid "Réponses créées sur le forum"
+msgstr "ردود منشأة في المنتدى"
+
+msgid "Réponses reçues"
+msgstr "ردود مستلمة"
+
+msgid "Réponses récentes"
+msgstr "ردود حديثة"
+
+msgid "Réponses spam"
+msgstr "ردود مزعجة"
+
+msgid "Répéter le nouveau mot de passe"
+msgstr "كرر كلمة المرور الجديدة"
+
+msgid "Résultats de recherche"
+msgstr "نتائج البحث"
+
+msgid "Résultats de recherche pour : %s"
+msgstr "نتائج البحث عن: %s"
+
+msgid "Résultats pour : %s"
+msgstr "نتائج: %s"
+
+msgid "Rôle du blog"
+msgstr "دور المدونة"
+
+msgid "Rôle du forum"
+msgstr "دور المنتدى"
+
+msgid "Rôle réseau"
+msgstr "دور الشبكة"
+
+msgid "Rôle sur le forum : %s"
+msgstr "الدور في المنتدى: %s"
+
+msgid "Rôle utilisateur"
+msgstr "دور المستخدم"
+
+msgid "S\\'inscrire"
+msgstr ""
+
+msgid "Saisissez des mots-clés pour rechercher dans le forum."
+msgstr "أدخل كلمات مفتاحية للبحث في المنتدى."
+
+msgid "Saisissez un titre..."
+msgstr "أدخل عنواناً..."
+
+msgid "Saisissez à nouveau votre nouveau mot de passe."
+msgstr "أدخل كلمة المرور الجديدة مرة أخرى."
+
+msgid "Sauvegardes"
+msgstr "المحفوظات"
+
+msgid "Sauvegardés"
+msgstr "محفوظة"
+
+msgid "Scinder"
+msgstr "تقسيم"
+
+msgid "Scinder le sujet"
+msgstr "تقسيم الموضوع"
+
+msgid "Scinder le sujet « %s »"
+msgstr "تقسيم الموضوع «%s»"
+
+msgid "Scinder un sujet le coupe en deux à partir de la réponse sélectionnée. Vous pouvez en faire un nouveau sujet, ou fusionner ces réponses avec un sujet existant."
+msgstr "تقسيم موضوع يقسمه إلى جزأين من الرد المحدد. يمكنك إنشاء موضوع جديد أو دمج الردود مع موضوع موجود."
+
+msgid "Scission : %s"
+msgstr "تقسيم: %s"
+
+msgid "Score"
+msgstr "النقاط"
+
+msgid "Score de réputation : %d points\\n"
+msgstr "نقاط السمعة: %d نقطة\\n"
+
+msgid "Score final :"
+msgstr ""
+
+msgid "Score minimum pour passer de Membre à Pro. Défaut : 500 (échelle annoncée v5.3.8)."
+msgstr "الحد الأدنى للانتقال من عضو إلى محترف. الافتراضي: 500."
+
+msgid "Score minimum pour passer de Rookie à Membre. Défaut : 5."
+msgstr "الحد الأدنى للانتقال من مبتدئ إلى عضو. الافتراضي: 5."
+
+msgid "Score réputation"
+msgstr "نقاط السمعة"
+
+msgid "Se connecter"
+msgstr "تسجيل الدخول"
+
+msgid "Se déconnecter ?"
+msgstr "تسجيل الخروج؟"
+
+msgid "Search Console"
+msgstr "Search Console"
+
+msgid "Section privée."
+msgstr "قسم خاص."
+
+msgid "Service Account JSON"
+msgstr "Service Account JSON"
+
+msgid "Seuil Membre → Pro"
+msgstr "حد العضو → محترف"
+
+msgid "Seuil Rookie → Membre"
+msgstr "حد المبتدئ → عضو"
+
+msgid "Seuil de rejets (anti-spam)"
+msgstr "حد الرفض (مكافحة الرسائل المزعجة)"
+
+msgid "Si vous choisissez l\\'option « sujet existant », les réponses seront fusionnées chronologiquement selon leur date de publication."
+msgstr ""
+
+msgid "Si vous choisissez un sujet existant, les réponses seront ordonnées par leur date de création."
+msgstr "إذا اخترت موضوعاً موجوداً، سترتب الردود حسب تاريخ الإنشاء."
+
+msgid "Sidebar Blog"
+msgstr "شريط المدونة الجانبي"
+
+msgid "Sidebar Forum"
+msgstr "شريط المنتدى الجانبي"
+
+msgid "Signalement envoyé aux modérateurs."
+msgstr "تم إرسال البلاغ إلى المشرفين."
+
+msgid "Signalements"
+msgstr "البلاغات"
+
+msgid "Site web :"
+msgstr "الموقع الإلكتروني:"
+
+msgid "Site web : %s"
+msgstr "الموقع الإلكتروني: %s"
+
+msgid "Skip si vide :"
+msgstr "تخطي إذا كان فارغاً:"
+
+msgid "Slug :"
+msgstr "الرابط:"
+
+msgid "Sombre"
+msgstr "داكن"
+
+msgid "Soumission automatique"
+msgstr "إرسال تلقائي"
+
+msgid "Sous-forums : ✅"
+msgstr "المنتديات الفرعية: ✅"
+
+msgid "Sous-forums : ❌"
+msgstr "المنتديات الفرعية: ❌"
+
+msgid "Spam"
+msgstr ""
+
+msgid "Statistiques Animées du Forum"
+msgstr "إحصائيات متحركة للمنتدى"
+
+msgid "Statistiques du forum"
+msgstr "إحصائيات المنتدى"
+
+msgid "Status"
+msgstr "الحالة"
+
+msgid "Statut"
+msgstr "الحالة"
+
+msgid "Statut :"
+msgstr "الحالة:"
+
+msgid "Style & Apparence (Reddit-like)"
+msgstr "النمط والمظهر (أسلوب Reddit)"
+
+msgid "Suivant"
+msgstr "التالي"
+
+msgid "Sujet :"
+msgstr "الموضوع:"
+
+msgid "Sujet de l\\'email"
+msgstr ""
+
+msgid "Sujet du forum"
+msgstr "موضوع المنتدى"
+
+msgid "Sujet introuvable"
+msgstr "الموضوع غير موجود"
+
+msgid "Sujet parent"
+msgstr "الموضوع الأصلي"
+
+msgid "Sujets : ✅"
+msgstr "المواضيع: ✅"
+
+msgid "Sujets : ❌"
+msgstr "المواضيع: ❌"
+
+msgid "Sujets Chauds (Hot Feed)"
+msgstr "مواضيع رائجة"
+
+msgid "Sujets créés"
+msgstr "مواضيع منشأة"
+
+msgid "Sujets créés : %s"
+msgstr "مواضيع منشأة: %s"
+
+msgid "Sujets créés par %s"
+msgstr "مواضيع أنشأها %s"
+
+msgid "Sujets créés sur le forum"
+msgstr "مواضيع منشأة في المنتدى"
+
+msgid "Sujets en attente"
+msgstr "مواضيع معلقة"
+
+msgid "Sujets favoris"
+msgstr "المواضيع المفضلة"
+
+msgid "Sujets les plus populaires triés par score de réputation."
+msgstr "أكثر المواضيع شعبية مرتبة حسب نقاط السمعة."
+
+msgid "Sujets où l\\'utilisateur a participé"
+msgstr ""
+
+msgid "Sujets populaires"
+msgstr "مواضيع شائعة"
+
+msgid "Sujets récents"
+msgstr "مواضيع حديثة"
+
+msgid "Sujets suivis"
+msgstr "المواضيع المتابعة"
+
+msgid "Supprimer le mot-clé"
+msgstr "حذف الكلمة المفتاحية"
+
+msgid "Supprimé"
+msgstr "محذوف"
+
+msgid "SwiftBoard"
+msgstr "SwiftBoard"
+
+msgid "SwiftBoard :"
+msgstr "SwiftBoard:"
+
+msgid "SwiftBoard : Annuaire Subreddits"
+msgstr "SwiftBoard: دليل المنتديات الفرعية"
+
+msgid "SwiftBoard : Barre de Recherche Héroïque"
+msgstr "SwiftBoard: شريط البحث الرئيسي"
+
+msgid "SwiftBoard : Statistiques Forum"
+msgstr "SwiftBoard: إحصائيات المنتدى"
+
+msgid "SwiftBoard : Sujets Chauds"
+msgstr "SwiftBoard: مواضيع رائجة"
+
+msgid "SwiftBoard : Top Contributeurs"
+msgstr "SwiftBoard: أفضل المساهمين"
+
+msgid "SwiftBoard Dashboard"
+msgstr "لوحة تحكم SwiftBoard"
+
+msgid "SwiftBoard Forum"
+msgstr "SwiftBoard للمنتديات"
+
+msgid "SwiftBoard Forum (Reddit-like)"
+msgstr "SwiftBoard للمنتديات (أسلوب Reddit)"
+
+msgid "SwiftBoard v2.0.0 — Thème WordPress forum ultra-performant, design Reddit-inspired, SEO + LLM-ready."
+msgstr "SwiftBoard v2.0.0 — قالب ووردبريس للمنتديات فائق الأداء، تصميم بأسلوب Reddit، جاهز لـ SEO و LLM."
+
+msgid "SwiftBoard · Sujets populaires"
+msgstr "SwiftBoard · مواضيع شائعة"
+
+msgid "SwiftBoard — Réglages"
+msgstr "SwiftBoard — الإعدادات"
+
+msgid "SwiftBoard — Sujets chauds"
+msgstr "SwiftBoard — مواضيع رائجة"
+
+msgid "System de votes"
+msgstr "نظام التصويت"
+
+msgid "Système par défaut (Ultra rapide - 0 requête)"
+msgstr "النظام الافتراضي (سريع جداً - 0 طلب)"
+
+msgid "Sélectionnez le sujet avec lequel fusionner. Le sujet de destination restera le sujet principal, et celui-ci deviendra une réponse."
+msgstr "اختر الموضوع للدمج معه. سيبقى الموضوع الوجهة هو الرئيسي، وسيصبح هذا رداً."
+
+msgid "Sélectionnez un avatar (facultatif) :"
+msgstr "اختر صورة رمزية (اختياري):"
+
+msgid "Séparés par des virgules"
+msgstr "مفصولة بفواصل"
+
+msgid "Tableau de Réputation & Grades"
+msgstr "جدول السمعة والرتب"
+
+msgid "Taille AVIF"
+msgstr "حجم AVIF"
+
+msgid "Taille de batch"
+msgstr "حجم الدفعة"
+
+msgid "Taille originale"
+msgstr "الحجم الأصلي"
+
+msgid "Tendances"
+msgstr "اتجاهات"
+
+msgid "Test auto-promotion"
+msgstr "اختبار الترقية التلقائية"
+
+msgid "Testez d\\'abord avec"
+msgstr ""
+
+msgid "Tests & maintenance"
+msgstr "اختبارات وصيانة"
+
+msgid "Texte du Bouton (Ouvre la Modale d\\'Onboarding)"
+msgstr ""
+
+msgid "Texte personnalisé du footer"
+msgstr "نص مخصص للتذييل"
+
+msgid "Thème par défaut"
+msgstr ""
+
+msgid "Titre"
+msgstr "العنوان"
+
+msgid "Titre :"
+msgstr "العنوان:"
+
+msgid "Titre du Widget"
+msgstr "عنوان الوحدة"
+
+msgid "Titre du sujet"
+msgstr "عنوان الموضوع"
+
+msgid "Top"
+msgstr "الأفضل"
+
+msgid "Top Contributeurs"
+msgstr "أفضل المساهمين"
+
+msgid "Top contributeurs communautaires (Karma & Grades)."
+msgstr "أفضل المساهمين في المجتمع (السمعة والرتب)."
+
+msgid "Top semaine"
+msgstr "أفضل الأسبوع"
+
+msgid "Topic ID :"
+msgstr ""
+
+msgid "Total"
+msgstr "المجموع"
+
+msgid "Total : %1$s (▲%2$s reçus + 💬%3$s reçues)"
+msgstr "المجموع: %1$s (▲%2$s مستلمة + 💬%3$s مستلمة)"
+
+msgid "Total activité"
+msgstr "إجمالي النشاط"
+
+msgid "Total traité"
+msgstr "إجمالي المعالج"
+
+msgid "Total votes"
+msgstr "إجمالي الأصوات"
+
+msgid "Tous"
+msgstr "الكل"
+
+msgid "Tous droits réservés."
+msgstr "جميع الحقوق محفوظة."
+
+msgid "Tous les derniers sujets de discussion du forum."
+msgstr "جميع آخر مواضيع النقاش في المنتدى."
+
+msgid "Tous les forums"
+msgstr "جميع المنتديات"
+
+msgid "Tous les liens pointant vers ce mot-clé cesseront de fonctionner."
+msgstr "جميع الروابط指向 هذه الكلمة المفتاحية ستتوقف عن العمل."
+
+msgid "Tous les statuts"
+msgstr "جميع الحالات"
+
+msgid "Tout lire"
+msgstr "قراءة الكل"
+
+msgid "Tout marquer comme lu"
+msgstr "تحديد الكل كمقروء"
+
+msgid "Toutes"
+msgstr "الكل"
+
+msgid "Toutes les dates"
+msgstr "كل التواريخ"
+
+msgid "Toutes les images ont été modérées."
+msgstr "تمت مراجعة جميع الصور."
+
+msgid "Trier les résultats"
+msgstr "ترتيب النتائج"
+
+msgid "Trier les sujets"
+msgstr "ترتيب المواضيع"
+
+msgid "Trier par :"
+msgstr "ترتيب حسب:"
+
+msgid "Trois modèles prêts à remplir dans Excel :"
+msgstr "ثلاثة نماذج جاهزة للتعبئة في Excel:"
+
+msgid "Trop d\\'images rejetées récemment. Contactez un administrateur."
+msgstr ""
+
+msgid "Trop d\\'uploads. Attendez 1 minute entre chaque image."
+msgstr ""
+
+msgid "Trop de requêtes. Réessayez dans une minute."
+msgstr "طلبات كثيرة جدًا. أعد المحاولة خلال دقيقة."
+
+msgid "Trop de tentatives échouées. Réessayez dans 15 minutes."
+msgstr "محاولات فاشلة كثيرة. أعد المحاولة خلال 15 دقيقة."
+
+msgid "Two Factor"
+msgstr "المصادقة الثنائية"
+
+msgid "Type de forum :"
+msgstr "نوع المنتدى:"
+
+msgid "Une erreur est survenue."
+msgstr "حدث خطأ."
+
+msgid "Une fois par semaine"
+msgstr "مرة في الأسبوع"
+
+msgid "Une règle par ligne. Numérotation automatique."
+msgstr ""
+
+msgid "Updates"
+msgstr "التحديثات"
+
+msgid "Upload d\\'images"
+msgstr ""
+
+msgid "Uploads :"
+msgstr "الرفع:"
+
+msgid "Uploads illimités"
+msgstr "رفع غير محدود"
+
+msgid "Uploads total :"
+msgstr "إجمالي الرفع:"
+
+msgid "Uploads/jour :"
+msgstr "رفع/يوم:"
+
+msgid "Upvotes"
+msgstr "أصوات إيجابية"
+
+msgid "Upvotes reçus"
+msgstr "أصوات إيجابية مستلمة"
+
+msgid "Utile"
+msgstr "مفيد"
+
+msgid "Utilisateur"
+msgstr "المستخدم"
+
+msgid "Utilisateurs enregistrés"
+msgstr "المستخدمون المسجلون"
+
+msgid "Utiliser un sujet existant dans ce forum :"
+msgstr "استخدام موضوع موجود في هذا المنتدى:"
+
+msgid "Variable :"
+msgstr "المتغير:"
+
+msgid "Vers"
+msgstr "إلى"
+
+msgid "Veuillez patienter entre deux votes."
+msgstr "يرجى الانتظار بين كل تصويت."
+
+msgid "Vider le cache SwiftBoard"
+msgstr "تفريغ ذاكرة SwiftBoard"
+
+msgid "Visibilité :"
+msgstr "الظهور:"
+
+msgid "Voici le résumé de votre activité sur le forum cette semaine."
+msgstr "إليك ملخص نشاطك في المنتدى هذا الأسبوع."
+
+msgid "Voir"
+msgstr "عرض"
+
+msgid "Voir le sujet"
+msgstr "عرض الموضوع"
+
+msgid "Voir tous les sujets →"
+msgstr "عرض جميع المواضيع ←"
+
+msgid "Vos informations :"
+msgstr "معلوماتك:"
+
+msgid "Votes :"
+msgstr "الأصوات:"
+
+msgid "Votes illimités"
+msgstr "أصوات غير محدودة"
+
+msgid "Votes réalistes"
+msgstr "أصوات واقعية"
+
+msgid "Votes/jour :"
+msgstr "أصوات/يوم:"
+
+msgid "Votre compte peut publier du contenu HTML sans restriction."
+msgstr "يمكن لحسابك نشر محتوى HTML دون قيود."
+
+msgid "Votre identifiant doit être unique et ne pourra pas être modifié ultérieurement."
+msgstr "يجب أن يكون معرفك فريداً ولا يمكن تغييره لاحقاً."
+
+msgid "Votre réponse"
+msgstr "ردك"
+
+msgid "Votre réponse a été publiée"
+msgstr "تم نشر ردك"
+
+msgid "Votre sujet a été publié"
+msgstr "تم نشر موضوعك"
+
+msgid "Voulez-vous vraiment fusionner le mot-clé « %s » dans celui spécifié ?"
+msgstr "هل تريد فعلاً دمج الكلمة المفتاحية «%s» في المحدد؟"
+
+msgid "Voulez-vous vraiment supprimer le mot-clé « %s » ? Cette action est définitive."
+msgstr "هل تريد فعلاً حذف الكلمة المفتاحية «%s»؟ هذا الإجراء نهائي."
+
+msgid "Vous avez atteint votre limite totale de %d images. Contactez un administrateur."
+msgstr "بلغت حدك الإجمالي البالغ %d صورة. اتصل بالمشرف."
+
+msgid "Vous devez %s pour répondre à ce sujet."
+msgstr "يجب %s للرد على هذا الموضوع."
+
+msgid "Vous devez avoir au moins %d messages pour uploader des images."
+msgstr "يجب أن يكون لديك %d رسالة على الأقل لرفع الصور."
+
+msgid "Vous devez être connecté pour créer de nouveaux forums."
+msgstr "يجب تسجيل الدخول لإنشاء منتديات جديدة."
+
+msgid "Vous devez être connecté pour voter."
+msgstr "يجب تسجيل الدخول للتصويت."
+
+msgid "Vous n\\'avez pas la permission d\\'accéder à cette page."
+msgstr ""
+
+msgid "Vous n\\'avez pas la permission de modifier ce sujet."
+msgstr ""
+
+msgid "Vous n\\'avez pas la permission de modifier cette réponse."
+msgstr ""
+
+msgid "Vous ne pouvez pas créer de nouveaux forums."
+msgstr "لا يمكنك إنشاء منتديات جديدة."
+
+msgid "Vous ne pouvez pas modifier ce sujet."
+msgstr "لا يمكنك تعديل هذا الموضوع."
+
+msgid "Vous ne pouvez pas modifier cette réponse."
+msgstr "لا يمكنك تعديل هذا الرد."
+
+msgid "Vous ne recevrez plus le digest hebdomadaire. Vous pouvez vous réabonner à tout moment depuis votre profil."
+msgstr "لن تتلقى الملخص الأسبوعي بعد الآن. يمكنك إعادة الاشتراك في أي وقت من ملفك الشخصي."
+
+msgid "Vous ne suivez aucun sujet."
+msgstr "لا تتابع أي موضوع."
+
+msgid "Vous pouvez transformer cette réponse en nouveau sujet, ou la fusionner dans un sujet existant."
+msgstr "يمكنك تحويل هذا الرد إلى موضوع جديد أو دمجه في موضوع موجود."
+
+msgid "Vous êtes maintenant"
+msgstr "أنت الآن"
+
+msgid "Vue Cartes (Reddit-style)"
+msgstr "عرض البطاقات (أسلوب Reddit)"
+
+msgid "Vue Compacte (Dense)"
+msgstr "عرض مضغوط (كثيف)"
+
+msgid "Vue d\\'ensemble de l\\'activité de la communauté."
+msgstr ""
+
+msgid "Vue d\\'ensemble de votre forum communautaire"
+msgstr ""
+
+msgid "[%s] 🎉 Vous êtes maintenant %s !"
+msgstr "[%s] 🎉 أنت الآن %s!"
+
+msgid "a répondu à"
+msgstr "رد على"
+
+msgid "dans : %1$s"
+msgstr "في: %1$s"
+
+msgid "dans le forum"
+msgstr "في المنتدى"
+
+msgid "dans un forum de groupe"
+msgstr "في منتدى مجموعة"
+
+msgid "dès %d"
+msgstr "من %d"
+
+msgid "en réponse à :"
+msgstr "رداً على:"
+
+msgid "inscrit le"
+msgstr "مسجل في"
+
+msgid "participants"
+msgstr "المشاركون"
+
+msgid "À propos"
+msgstr "حول"
+
+msgid "Échelle des grades : Rookie 0 • Membre 5 • Pro 500 • Modérateur 2000 • VIP 5000."
+msgstr "سلّم الرتب: مبتدئ 0 • عضو 5 • محترف 500 • مشرف 2000 • مميز 5000."
+
+msgid "Économie"
+msgstr "التوفير"
+
+msgid "Économie AVIF ("
+msgstr "توفير AVIF ("
+
+msgid "Éditer"
+msgstr "تعديل"
+
+msgid "Édition du profil"
+msgstr "تعديل الملف الشخصي"
+
+msgid "Épingler"
+msgstr "تثبيت"
+
+msgid "État"
+msgstr "الحالة"
+
+msgid "État des protections de sécurité actives sur votre site."
+msgstr "حالة حمايات الأمان النشطة على موقعك."
+
+msgid "à l\\'instant"
+msgstr ""
+
+msgid "— Aucun parent —"
+msgstr "— بدون أصل —"
+
+msgid "— L'équipe %s"
+msgstr "— فريق %s"
+
+msgid "← Retour au forum"
+msgstr "← العودة إلى المنتدى"
+
+msgid "▲ 1 upvote reçu = %1$d karma — sur un sujet OU un commentaire, même valeur · 💬 1 commentaire reçu sur vos sujets = %2$d karma · les partages ne comptent pas"
+msgstr "▲ تصويت إيجابي = %1$d سمعة — على موضوع أو تعليق · 💬 تعليق على مواضيعك = %2$d سمعة · المشاركات لا تحتسب"
+
+msgid "⚙️ Réglages"
+msgstr "⚙️ الإعدادات"
+
+msgid "🎨 Personnalisation SwiftBoard"
+msgstr "🎨 تخصيص SwiftBoard"
+
+msgid "🏅 Grades"
+msgstr "🏅 الرتب"
+
+msgid "🏆 Badges Custom"
+msgstr "🏆 شارات مخصصة"
+
+msgid "🏆 Gamification : Création de Badges Custom"
+msgstr "🏆 التحفيز: إنشاء شارات مخصصة"
+
+msgid "🏆 Top semaine"
+msgstr "🏆 أفضل الأسبوع"
+
+msgid "💬 Dernières réponses à mes sujets"
+msgstr "💬 آخر الردود على مواضيعي"
+
+msgid "📊 Classement"
+msgstr "📊 الترتيب"
+
+msgid "📥 Import en masse"
+msgstr "📥 استيراد جماعي"
+
+msgid "📧 Email digest"
+msgstr "📧 ملخص البريد"
+
+msgid "🔍 Search Console"
+msgstr "🔍 Search Console"
+
+msgid "🔥 Sujets Chauds"
+msgstr "🔥 مواضيع رائجة"
+
+msgid "🔥 Sujets chauds"
+msgstr "🔥 مواضيع رائجة"
+
+msgid "🚩 Modération : Contenus Signalés"
+msgstr "🚩 مراجعة: محتوى مبلّغ عنه"
+
+msgid "🚩 Signalements"
+msgstr "🚩 البلاغات"
+
+msgid "🧪 Test auto-promo"
+msgstr "🧪 اختبار الترقية التلقائية"
+
+msgid "Discussions"
+msgstr "النقاشات"
+
+msgid "S'inscrire"
+msgstr "التسجيل"
+
+msgid "Récents"
+msgstr "الأحدث"
+
+msgid "Subreddits populaires"
+msgstr "المنتديات الفرعية الشائعة"
+
+msgid "Trier par"
+msgstr "ترتيب حسب"
+
+msgid "Bienvenue sur SwiftBoard !"
+msgstr "مرحباً بك في SwiftBoard !"
+
+msgid "commentaire"
+msgstr "تعليق"
+
+msgid "Par"
+msgstr "بواسطة"
+
+msgid "Voir tous les sujets"
+msgstr "عرض جميع المواضيع"
+
+msgid "Rejoignez la communauté"
+msgstr "انضم إلى المجتمع"
+
+msgid "Homme"
+msgstr "ذكر"
+
+msgid "Femme"
+msgstr "أنثى"
+
+msgid "Autre / Préfère ne pas le dire"
+msgstr "أخرى / أفضل عدم الذكر"
+
+msgid "Passer cette étape"
+msgstr "تخطي هذه الخطوة"
+
+msgid "Continuer avec Google"
+msgstr "المتابعة مع Google"
+
+msgid "Continuer avec GitHub"
+msgstr "المتابعة مع GitHub"
+
+msgid "Continuer avec Facebook"
+msgstr "المتابعة مع Facebook"
+
+msgid "Adresse e-mail"
+msgstr "البريد الإلكتروني"
+
+msgid "Continuer avec mon e-mail"
+msgstr "المتابعة ببريدي الإلكتروني"
+
+msgid "Retour au choix du genre"
+msgstr "العودة إلى اختيار الجنس"
+
+msgid "Retour au choix d'avatar"
+msgstr "العودة إلى اختيار الصورة الرمزية"

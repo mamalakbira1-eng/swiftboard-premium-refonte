@@ -1,0 +1,14 @@
+{
+  "mods": {
+    "swiftboard_primary_color": "#006cbd",
+    "swiftboard_secondary_color": "#1877f2",
+    "swiftboard_font_family": "system",
+    "swiftboard_default_view": "card",
+    "swiftboard_preset": "reddit-blue",
+    "swiftboard_enable_votes": true,
+    "swiftboard_enable_onboarding": true,
+    "swiftboard_enable_page_cache": true,
+    "swiftboard_enable_rum": true
+  },
+  "version": "7.0.0"
+}

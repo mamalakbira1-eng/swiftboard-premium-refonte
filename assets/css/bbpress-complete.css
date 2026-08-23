@@ -1,0 +1,877 @@
+@charset "UTF-8";
+/* ==========================================================================
+   22. CLASSES BBPRESS COMPLÉMENTAIRES (100% coverage)
+   ==========================================================================
+   Toutes les classes bbPress 2.6.14 non couvertes par les sections précédentes.
+   Généré à partir de l'audit exhaustif des 57 templates bbPress.
+   ========================================================================== */
+
+/* ==========================================================================
+   ALERTS (alert-topic-lock.php)
+   ========================================================================== */
+.bbp-alert-outer {
+    position: fixed;
+    inset: 0;
+    background: rgb(0 0 0 / 0.6);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.bbp-alert-inner {
+    background: var(--color-bg-card);
+    border-radius: var(--radius-lg);
+    padding: var(--space-2xl);
+    max-width: 32rem;
+    width: 90%;
+    box-shadow: var(--shadow-lg);
+    text-align: center;
+}
+
+.bbp-alert-description {
+    color: var(--color-text);
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: var(--space-lg);
+}
+
+.bbp-alert-actions {
+    display: flex;
+    gap: var(--space-sm);
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.bbp-alert-actions .button,
+.bbp-alert-actions a {
+    background: var(--color-primary);
+    color: #fff;
+    border: none;
+    padding: var(--space-sm) var(--space-lg);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-weight: 600;
+    text-decoration: none;
+    font-family: var(--font-sans);
+}
+
+.bbp-alert-actions .button:hover,
+.bbp-alert-actions a:hover {
+    background: var(--color-primary-hover);
+}
+
+.bbp-alert-close {
+    position: absolute;
+    top: var(--space-md);
+    inset-inline-end: var(--space-md);
+    background: transparent;
+    border: none;
+    color: var(--color-text-muted);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: var(--space-xs);
+    line-height: 1;
+}
+
+.bbp-alert-close:hover {
+    color: var(--color-text);
+}
+
+/* ==========================================================================
+   FORUM ROWS (loop-forums, loop-single-forum)
+   ========================================================================== */
+.bbp-forums,
+.bbp-topics,
+.bbp-replies,
+.bbp-topics-front {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.bbp-header,
+.bbp-footer {
+    background: var(--color-bg-alt);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-md);
+    padding: var(--space-sm) var(--space-md);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    display: flex;
+    gap: var(--space-md);
+    align-items: center;
+}
+
+.bbp-body .bbp-header,
+.bbp-body .bbp-footer {
+    border-radius: 0;
+    border-inline-start: none;
+    border-inline-end: none;
+}
+
+.bbp-forum-content,
+.bbp-topic-content {
+    color: var(--color-text-light);
+    font-size: 0.875rem;
+    line-height: 1.5;
+    padding: var(--space-sm) 0;
+}
+
+.bbp-forum-freshness,
+.bbp-topic-freshness,
+.bbp-topic-freshness-author,
+.bbp-topic-freshness-link {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+}
+
+.bbp-topic-freshness-author a,
+.bbp-topic-freshness-link a {
+    color: var(--color-text-light);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.bbp-forum-permalink,
+.bbp-topic-permalink,
+.bbp-reply-permalink {
+    color: var(--color-text);
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.bbp-forum-permalink:hover,
+.bbp-topic-permalink:hover,
+.bbp-reply-permalink:hover {
+    color: var(--color-accent);
+}
+
+.bbp-forum-post-date,
+.bbp-topic-post-date,
+.bbp-reply-post-date {
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+}
+
+.bbp-forum-closed,
+.bbp-topic-closed,
+.bbp-reply-closed {
+    color: var(--color-danger);
+    font-style: italic;
+    font-size: 0.8rem;
+}
+
+.bbp-forum-author,
+.bbp-topic-author,
+.bbp-author-name {
+    font-weight: 600;
+    color: var(--color-text);
+}
+
+.bbp-author-name a,
+.bbp-forum-author a,
+.bbp-topic-author a {
+    color: var(--color-accent);
+    text-decoration: none;
+}
+
+.bbp-author-ip,
+.bbp-topic-ip,
+.bbp-reply-ip {
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+    font-family: var(--font-mono);
+}
+
+.bbp-row-actions {
+    display: flex;
+    gap: var(--space-sm);
+    font-size: 0.7rem;
+    margin-top: var(--space-xs);
+}
+
+.bbp-row-actions a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    padding: 2px var(--space-xs);
+    border-radius: var(--radius-sm);
+}
+
+.bbp-row-actions a:hover {
+    background: var(--color-bg-hover);
+    color: var(--color-primary);
+}
+
+.bbp-topic-counts,
+.bbp-topic-reply-count,
+.bbp-topic-voice-count {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    text-align: center;
+    font-weight: 600;
+}
+
+.bbp-topic-started-by,
+.bbp-topic-started-in {
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+}
+
+.bbp-topic-started-by a,
+.bbp-topic-started-in a {
+    color: var(--color-text-light);
+    text-decoration: none;
+}
+
+.bbp-topic-tags {
+    display: inline-flex;
+    gap: var(--space-xs);
+    flex-wrap: wrap;
+    margin-top: var(--space-xs);
+}
+
+.bbp-topic-tags a {
+    background: var(--color-bg-alt);
+    color: var(--color-text-light);
+    padding: 2px var(--space-sm);
+    border-radius: var(--radius-full);
+    font-size: 0.7rem;
+    text-decoration: none;
+    border: 1px solid var(--color-border-light);
+}
+
+.bbp-topic-tags a:hover {
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+.bbp-topic-title-meta {
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+    margin-top: 2px;
+}
+
+.bbp-topic-admin-links,
+.bbp-reply-admin-links {
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+    display: inline-flex;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+    margin-top: var(--space-xs);
+}
+
+.bbp-topic-admin-links a,
+.bbp-reply-admin-links a {
+    color: var(--color-text-muted);
+    text-decoration: none;
+    padding: 2px var(--space-xs);
+    border-radius: var(--radius-sm);
+}
+
+.bbp-topic-admin-links a:hover,
+.bbp-reply-admin-links a:hover {
+    background: var(--color-bg-hover);
+    color: var(--color-primary);
+}
+
+/* ==========================================================================
+   LEAD TOPIC (content-single-topic-lead)
+   ========================================================================== */
+.bbp-lead-topic {
+    background: var(--color-bg-card);
+    border: 2px solid var(--color-primary);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--space-lg);
+}
+
+/* ========================================================================== */
+
+/* THREADED REPLIES                                                            */
+
+/* ========================================================================== */
+.bbp-threaded-replies {
+    margin-inline-start: var(--space-lg);
+    padding-inline-start: var(--space-md);
+    border-inline-start: 2px solid var(--color-border-light);
+}
+
+.bbp-reply-to {
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-xs);
+}
+
+.bbp-reply-to a {
+    color: var(--color-accent);
+    text-decoration: none;
+}
+
+.bbp-reply-title {
+    font-size: 1rem;
+    font-weight: 700;
+    margin: 0 0 var(--space-xs);
+}
+
+.bbp-topic-revision-log,
+.bbp-reply-revision-log {
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+    background: var(--color-bg-alt);
+    border-radius: var(--radius-sm);
+    padding: var(--space-xs) var(--space-sm);
+    margin-top: var(--space-sm);
+}
+
+/* ==========================================================================
+   TOPIC PAGINATION (inline)
+   ========================================================================== */
+.bbp-topic-pagination {
+    display: inline-flex;
+    gap: 2px;
+    font-size: 0.7rem;
+    margin-inline-start: var(--space-sm);
+}
+
+.bbp-topic-pagination a,
+.bbp-topic-pagination span {
+    padding: 1px 6px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    text-decoration: none;
+    color: var(--color-text-light);
+}
+
+.bbp-topic-pagination a:hover {
+    background: var(--color-bg-hover);
+}
+
+.bbp-topic-pagination .current {
+    background: var(--color-primary);
+    color: #fff;
+    border-color: var(--color-primary);
+}
+
+/* ==========================================================================
+   SEARCH RESULTS (loop-search)
+   ========================================================================== */
+.bbp-search-results,
+.bbp-search-form {
+    margin-bottom: var(--space-md);
+}
+
+.bbp-search-author {
+    font-size: 0.8rem;
+    color: var(--color-text-light);
+    font-weight: 600;
+}
+
+.bbp-search-author a {
+    color: var(--color-accent);
+    text-decoration: none;
+}
+
+.bbp-search-content {
+    font-size: 0.875rem;
+    color: var(--color-text-light);
+    line-height: 1.5;
+    margin-top: var(--space-xs);
+}
+
+/* ==========================================================================
+   STATISTICS (content-statistics)
+   ========================================================================== */
+.bbp-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+    gap: var(--space-md);
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-md);
+    padding: var(--space-xl);
+}
+
+.bbp-stats dt {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: var(--space-xs);
+}
+
+.bbp-stats dd {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--color-primary);
+}
+
+.bbp-stats dd strong {
+    color: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+}
+
+/* ========================================================================== */
+
+/* USER PROFILE (user-details, user-profile, user-favorites, etc.)            */
+
+/* ========================================================================== */
+.bbp-user-profile,
+.bbp-user-favorites,
+.bbp-user-subscriptions,
+.bbp-user-engagements,
+.bbp-user-topics-created,
+.bbp-user-replies-created {
+    padding: var(--space-lg);
+}
+
+.bbp-user-profile .bbp-user-section,
+.bbp-user-favorites .bbp-user-section,
+.bbp-user-subscriptions .bbp-user-section {
+    margin-top: var(--space-md);
+}
+
+.bbp-user-description {
+    font-size: 0.9375rem;
+    color: var(--color-text-light);
+    line-height: 1.6;
+    margin-top: var(--space-sm);
+}
+
+.bbp-user-forum-role,
+.bbp-user-last-activity {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    margin-top: var(--space-xs);
+}
+
+.bbp-user-forum-role strong,
+.bbp-user-last-activity strong {
+    color: var(--color-text);
+    font-weight: 700;
+}
+
+.bbp-user-edit-link {
+    font-size: 0.75rem;
+    margin-inline-start: var(--space-sm);
+}
+
+.bbp-user-edit-link a {
+    color: var(--color-accent);
+    text-decoration: none;
+}
+
+.bbp-user-favorites-link,
+.bbp-user-subscriptions-link,
+.bbp-user-engagements-created-link {
+    display: inline-block;
+    padding: var(--space-xs) var(--space-md);
+    background: var(--color-bg-alt);
+    color: var(--color-text-light);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-inline-end: var(--space-xs);
+    margin-bottom: var(--space-xs);
+    border: 1px solid var(--color-border-light);
+}
+
+.bbp-user-favorites-link:hover,
+.bbp-user-subscriptions-link:hover,
+.bbp-user-engagements-created-link:hover {
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+    text-decoration: none;
+}
+
+.bbp-user-mention {
+    color: var(--color-accent);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.bbp-user-mention:hover {
+    text-decoration: underline;
+}
+
+.bbp-user-capabilities {
+    list-style: none;
+    padding: 0;
+    margin-top: var(--space-md);
+}
+
+.bbp-user-capabilities li {
+    padding: var(--space-xs) 0;
+    font-size: 0.85rem;
+    border-bottom: 1px solid var(--color-border-light);
+}
+
+.bbp-user-capabilities li:last-child {
+    border-bottom: none;
+}
+
+/* ========================================================================== */
+
+/* FORMS (login, register, lost-pass, topic-tag, forum, reply-move)          */
+
+/* ========================================================================== */
+.bbp-login-form,
+.bbp-login-links {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+}
+
+.bbp-login-links {
+    display: flex;
+    gap: var(--space-md);
+    justify-content: center;
+    flex-wrap: wrap;
+    background: transparent;
+    border: none;
+    padding: var(--space-md) 0 0;
+    margin-top: var(--space-md);
+}
+
+.bbp-login-links a {
+    color: var(--color-accent);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+
+.bbp-login-links a:hover {
+    text-decoration: underline;
+}
+
+.bbp-remember-me,
+.bbp-email,
+.bbp-password,
+.bbp-login-form .bbp-form-field,
+.bbp-register-form .bbp-form-field {
+    margin-bottom: var(--space-md);
+}
+
+.bbp-remember-me label {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-weight: 500;
+    font-size: 0.875rem;
+}
+
+.bbp-remember-me input[type="checkbox"],
+.bbp-email input[type="checkbox"],
+.bbp-password input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--color-primary);
+    cursor: pointer;
+}
+
+.bbp-no-forum,
+.bbp-no-topic {
+    text-align: center;
+    padding: var(--space-2xl);
+    color: var(--color-text-light);
+    font-size: 1rem;
+    background: var(--color-bg-alt);
+    border: 1px dashed var(--color-border);
+    border-radius: var(--radius-md);
+}
+
+/* ========================================================================== */
+
+/* TOPIC MERGE / SPLIT / MOVE                                                 */
+
+/* ========================================================================== */
+.bbp-topic-merge,
+.bbp-topic-split,
+.bbp-reply-move {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    margin-bottom: var(--space-md);
+}
+
+.bbp-topic-merge .bbp-form-attributes,
+.bbp-topic-split .bbp-form-attributes {
+    margin-top: var(--space-md);
+}
+
+.bbp-topic-tag-form {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    margin-top: var(--space-md);
+}
+
+.bbp-forum-form,
+.bbp-forum-form-attributes {
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-border-light);
+    border-radius: var(--radius-md);
+    padding: var(--space-lg);
+    margin-bottom: var(--space-md);
+}
+
+/* ========================================================================== */
+
+/* EDITOR / TINYMCE WRAPPER                                                   */
+
+/* ========================================================================== */
+.bbp-the-content-wrapper,
+.bbp-the-content {
+    margin-bottom: var(--space-md);
+}
+
+.bbp-the-content-wrapper .wp-editor-container {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+/* ========================================================================== */
+
+/* JS / NO-JS STATES                                                          */
+
+/* ========================================================================== */
+.bbp-js .hide-if-js,
+.bbp-no-js .hide-if-no-js,
+.hide-if-js,
+.bbp-no-js {
+    display: none !important;
+}
+
+.bbp-js .hide-if-no-js,
+.bbp-no-js .hide-if-js {
+    display: block;
+}
+
+/* ========================================================================== */
+
+/* PAGINATION (replies, search, topics)                                       */
+
+/* ========================================================================== */
+.bbp-pagination-count {
+    color: var(--color-text-muted);
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: var(--space-sm);
+}
+
+/* ========================================================================== */
+
+/* RESPONSIVE                                                                 */
+
+/* ========================================================================== */
+@media (width <= 768px) {
+    .bbp-header,
+    .bbp-footer {
+        flex-wrap: wrap;
+        gap: var(--space-sm);
+    }
+
+    .bbp-forum-freshness,
+    .bbp-topic-freshness,
+    .bbp-topic-freshness-author {
+        display: block;
+        width: 100%;
+        text-align: start;
+    }
+
+    .bbp-threaded-replies {
+        margin-inline-start: var(--space-md);
+        padding-inline-start: var(--space-sm);
+    }
+
+    .bbp-stats {
+        grid-template-columns: repeat(2, 1fr);
+        padding: var(--space-md);
+    }
+
+    .bbp-login-links {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .bbp-row-actions,
+    .bbp-topic-admin-links,
+    .bbp-reply-admin-links {
+        flex-wrap: wrap;
+    }
+}
+
+@media (width <= 480px) {
+    .bbp-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .bbp-alert-inner {
+        padding: var(--space-lg);
+    }
+}
+
+/* ==========================================================================
+   23. CLASSES FINALES MANQUANTES (100% coverage)
+   ========================================================================== */
+
+/* Wrapper principal bbPress */
+.bbpress-wrapper {
+    font-family: var(--font-sans);
+    color: var(--color-text);
+    line-height: 1.5;
+}
+
+/* Backdrop d'alerte (sous le modal) */
+.bbp-alert-back {
+    position: fixed;
+    inset: 0;
+    background: rgb(0 0 0 / 0.6);
+    z-index: 9998;
+}
+
+/* Liens profil utilisateur (navigation) */
+.bbp-user-profile-link,
+.bbp-user-topics-created-link,
+.bbp-user-replies-created-link,
+.bbp-user-topics-started {
+    display: inline-block;
+    padding: var(--space-xs) var(--space-md);
+    background: var(--color-bg-alt);
+    color: var(--color-text-light);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-inline-end: var(--space-xs);
+    margin-bottom: var(--space-xs);
+    border: 1px solid var(--color-border-light);
+}
+
+.bbp-user-profile-link:hover,
+.bbp-user-topics-created-link:hover,
+.bbp-user-replies-created-link:hover,
+.bbp-user-topics-started:hover {
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+    text-decoration: none;
+}
+
+/* Compteurs utilisateur */
+.bbp-user-topic-count,
+.bbp-user-reply-count {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    font-weight: 600;
+    margin-top: var(--space-xs);
+}
+
+.bbp-user-topic-count strong,
+.bbp-user-reply-count strong {
+    color: var(--color-primary);
+    font-size: 1rem;
+    font-weight: 800;
+}
+
+/* Username et website dans le profil */
+.bbp-username {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: var(--space-xs);
+}
+
+.bbp-user-website {
+    font-size: 0.85rem;
+    margin-top: var(--space-xs);
+}
+
+.bbp-user-website a {
+    color: var(--color-accent);
+    text-decoration: none;
+}
+
+.bbp-user-website a:hover {
+    text-decoration: underline;
+}
+
+
+/* v11.0.3 QA hardening: keep bbPress auth forms inside narrow mobile viewports. */
+@media (max-width: 600px) {
+    #bbpress-forums fieldset.bbp-form,
+    #bbpress-forums form.bbp-login-form,
+    #bbpress-forums .bbp-form {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+    }
+
+    #bbpress-forums .bbp-form * {
+        max-width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+    }
+
+    #bbpress-forums .bbp-form input,
+    #bbpress-forums .bbp-form select,
+    #bbpress-forums .bbp-form textarea {
+        width: 100%;
+    }
+}
+
+/* v11.0.3: shortcode auth forms render in the page entry-content wrapper. */
+@media (max-width: 600px) {
+    .entry-content fieldset.bbp-form,
+    .entry-content form.bbp-login-form,
+    .entry-content .bbp-form {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+    }
+
+    .entry-content .bbp-form,
+    .entry-content .bbp-form * {
+        min-width: 0;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    .entry-content .bbp-form input,
+    .entry-content .bbp-form select,
+    .entry-content .bbp-form textarea {
+        width: 100%;
+    }
+}
+
+/* v11.0.3: reset fieldset intrinsic min-inline-size in narrow layouts. */
+@media (max-width: 600px) {
+    .entry-content fieldset.bbp-form,
+    .entry-content fieldset.bbp-form > *,
+    .entry-content fieldset.bbp-form .bbp-template-notice,
+    .entry-content fieldset.bbp-form .bbp-form-field {
+        inline-size: 100%;
+        min-inline-size: 0;
+        max-inline-size: 100%;
+        overflow-wrap: anywhere;
+    }
+
+    .entry-content fieldset.bbp-form {
+        padding-inline: 0;
+    }
+}
