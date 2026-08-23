@@ -113,7 +113,7 @@ function swiftboard_render_reddit_profile( $user_id, $tab ) {
 	do_action( 'bbp_template_before_user_details' );
 
 	?>
-	<div class="sb-profile">
+		<main class="sb-profile" role="main" aria-label="<?php esc_attr_e( 'Profil utilisateur', 'swiftboard' ); ?>">
 
 		<!-- Hero -->
 		<div class="sb-profile-hero">
@@ -304,9 +304,9 @@ function swiftboard_render_reddit_profile( $user_id, $tab ) {
 			}
 			?>
 		</div>
-	</div>
-	<?php
-}
+		</main>
+		<?php
+	}
 
 
 

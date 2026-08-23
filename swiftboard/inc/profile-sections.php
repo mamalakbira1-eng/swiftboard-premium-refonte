@@ -23,18 +23,18 @@ if ( ! defined( 'ABSPATH' )) exit;
 function swiftboard_profile_render_overview( $user_id ) {
 	// Mix : 5 derniers sujets + 5 dernières réponses
 	echo '<div class="sb-profile-section">';
-	echo '<h3 class="sb-profile-section-title">' . esc_html__( 'Sujets récents', 'swiftboard' ) . '</h3>';
+	echo '<h2 class="sb-profile-section-title">' . esc_html__( 'Sujets récents', 'swiftboard' ) . '</h2>';
 	swiftboard_profile_render_posts( $user_id, 5 );
 	echo '</div>';
 	echo '<div class="sb-profile-section">';
-	echo '<h3 class="sb-profile-section-title">' . esc_html__( 'Réponses récentes', 'swiftboard' ) . '</h3>';
+	echo '<h2 class="sb-profile-section-title">' . esc_html__( 'Réponses récentes', 'swiftboard' ) . '</h2>';
 	swiftboard_profile_render_comments( $user_id, 5 );
 	echo '</div>';
 
 	// EXI-MBR-03 : reponses RECUES (ce que les autres ont ecrit sur mes sujets)
 	echo '<div class="sb-profile-section">';
-	echo '<h3 class="sb-profile-section-title">'
-		. esc_html__( '💬 Dernières réponses à mes sujets', 'swiftboard' ) . '</h3>';
+	echo '<h2 class="sb-profile-section-title">'
+		. esc_html__( '💬 Dernières réponses à mes sujets', 'swiftboard' ) . '</h2>';
 	swiftboard_profile_render_received_replies( $user_id, 10 );
 	echo '</div>';
 }
@@ -145,7 +145,7 @@ function swiftboard_profile_render_posts( $user_id, $limit = 20 ) {
 				▲ <?php echo esc_html( swiftboard_format_count( $votes ) ); ?>
 			</div>
 			<div class="sb-profile-list-content">
-				<h4><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h4>
+				<h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
 				<div class="sb-profile-list-meta">
 					<?php if ( $forum_id ) : ?>
 					<a href="<?php echo esc_url( get_permalink( $forum_id ) ); ?>">r/<?php echo esc_html( get_the_title( $forum_id ) ); ?></a>
@@ -233,7 +233,7 @@ function swiftboard_profile_render_saved( $user_id ) {
 		<article class="sb-profile-list-item">
 			<div class="sb-profile-list-votes">▲ <?php echo esc_html( swiftboard_format_count( $t['votes'] ) ); ?></div>
 			<div class="sb-profile-list-content">
-				<h4><a href="<?php echo esc_url( $t['url'] ); ?>"><?php echo esc_html( $t['title'] ); ?></a></h4>
+				<h3><a href="<?php echo esc_url( $t['url'] ); ?>"><?php echo esc_html( $t['title'] ); ?></a></h3>
 				<div class="sb-profile-list-meta">
 					par <?php echo esc_html( $t['author_name'] ); ?> · 💬 <?php echo (int) $t['replies']; ?> commentaires
 				</div>
@@ -262,7 +262,7 @@ function swiftboard_profile_render_following( $user_id ) {
 		<article class="sb-profile-list-item">
 			<div class="sb-profile-list-votes">▲ <?php echo esc_html( swiftboard_format_count( $t['votes'] ) ); ?></div>
 			<div class="sb-profile-list-content">
-				<h4><a href="<?php echo esc_url( $t['url'] ); ?>"><?php echo esc_html( $t['title'] ); ?></a></h4>
+				<h3><a href="<?php echo esc_url( $t['url'] ); ?>"><?php echo esc_html( $t['title'] ); ?></a></h3>
 				<div class="sb-profile-list-meta">
 					par <?php echo esc_html( $t['author_name'] ); ?> · 💬 <?php echo (int) $t['replies']; ?> commentaires
 				</div>
@@ -399,7 +399,7 @@ function swiftboard_profile_render_notifications( $user_id, $limit = 30 ) {
 
 	echo '<div class="sb-profile-notifs-head">';
 	printf(
-		'<h3>%s</h3>',
+		'<h2>%s</h2>',
 		esc_html(
 			$unread > 0
 				? sprintf(

@@ -4,6 +4,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
+ * WordPress 6.8+ injecte un bloc inline `speculationrules`. Avec une CSP
+ * stricte et un cache HTML, son empreinte varie selon le coeur et le contexte
+ * de requete. On desactive cette optimisation de prefetch plutot que
+ * d'introduire `unsafe-inline` dans script-src.
+ *
+ * @param array<string, string>|null $config Configuration Core ou null.
+ * @return null
+ */
+function swiftboard_disable_speculation_rules( $config ) {
+	unset( $config );
+	return null;
+}
+add_filter( 'wp_speculation_rules_configuration', 'swiftboard_disable_speculation_rules', 20 );
+
+/**
  * SwiftBoard — En-tetes de securite HTTP et Content-Security-Policy.
  *
  * EXI-ARCH-01 : extrait de inc/security.php. La CSP est emise en `enforce`

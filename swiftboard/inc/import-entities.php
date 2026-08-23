@@ -221,6 +221,7 @@ function swiftboard_create_reply_from_row( $row, &$imported, &$log ): void {
 	$date        = trim( $row['date'] ?? '' );
 	$grade       = trim( $row['grade'] ?? '' );
 	$reply_to_id = (int) ( $row['_reply_to_id'] ?? 0 );
+	$source_key  = sanitize_text_field( (string) ( $row['source_key'] ?? '' ) );
 
 	// Trouver le topic par titre
 	$topic_id = $imported['topics'][ $topic_title ] ?? null;
@@ -243,10 +244,38 @@ function swiftboard_create_reply_from_row( $row, &$imported, &$log ): void {
 	$forum_id  = wp_get_post_parent_id( $topic_id );
 	$author_id = swiftboard_get_or_create_user( $author_name, $log, $imported, $grade );
 
-	// v5.3.5-bis — IDEMPOTENCE REPONSES : un re-upload (ou une relecture apres
-	// echec partiel) ne doit pas dupliquer les commentaires. Meme auteur +
-	// meme texte dans ce sujet → doublon signale, rien de cree.
-	if ( $author_id ) {
+	// Idempotence par identifiant de ligne lorsque la source en fournit un.
+	// Deux contributions différentes peuvent légitimement partager le même
+	// auteur et le même texte : leur source_key les distingue.
+	if ( $source_key ) {
+		$existing_by_key = get_posts(
+			array(
+				'post_type'      => 'reply',
+				'post_parent'    => $topic_id,
+				'posts_per_page' => 1,
+				'post_status'    => 'any',
+				'fields'         => 'ids',
+				'meta_query'     => array(
+					array(
+						'key'   => '_swiftboard_import_source_key',
+						'value' => $source_key,
+					),
+				),
+			)
+		);
+		if ( ! empty( $existing_by_key ) ) {
+			$log[] = array(
+				'time'    => current_time( 'mysql' ),
+				'msg'     => '♻️ Doublon ignoré : source_key ' . $source_key . ' déjà présent (#' . (int) $existing_by_key[0] . ')',
+				'success' => true,
+			);
+			return;
+		}
+	}
+
+	// v5.3.5-bis — IDEMPOTENCE REPONSES : pour les imports historiques sans
+	// identifiant de ligne, le re-upload reste protégé par auteur + texte.
+	if ( $author_id && ! $source_key ) {
 		$signature = trim( wp_strip_all_tags( html_entity_decode( $content_r, ENT_QUOTES, 'UTF-8' ) ) );
 		$existants = get_posts(
 			array(
@@ -323,6 +352,9 @@ function swiftboard_create_reply_from_row( $row, &$imported, &$log ): void {
 		bbp_update_topic_voice_count( $topic_id );
 	}
 
+	if ( $source_key ) {
+		update_post_meta( $reply_id, '_swiftboard_import_source_key', $source_key );
+	}
 	$imported['replies'][] = $reply_id;
 	// m-10 fix: Tracker pour threading par (topic_title, author_name, position_index)
 	// au lieu de juste (topic_title, author_name) — évite les collisions

@@ -263,13 +263,14 @@ add_action(
 			return;
 		}
 
-		wp_enqueue_script(
-			'swiftboard-sse',
-			SWIFTBOARD_ASSETS . '/js/sse-notifications.js',
-			array(),
-			SWIFTBOARD_VERSION,
-			true
-		);
+					wp_enqueue_script(
+				'swiftboard-sse',
+				SWIFTBOARD_ASSETS . '/js/sse-notifications.js',
+				array(),
+				SWIFTBOARD_VERSION,
+				true
+			);
+
 	},
 	100
 );
@@ -303,7 +304,8 @@ add_action(
 		add_action(
 			'wp_footer',
 			static function () {
-				echo '<div id="swiftboard-sse-config" hidden data-active="1"></div>';
+									echo '<div id="swiftboard-sse-config" hidden data-active="1" data-url="' . esc_attr( rest_url( 'swiftboard/v1/notifications/stream' ) ) . '" data-nonce="' . esc_attr( wp_create_nonce( 'wp_rest' ) ) . '"></div>';
+
 			},
 			4
 		);

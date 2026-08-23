@@ -83,7 +83,7 @@ foreach ( $topics as $topic ) {
 }
 
 fputcsv( $handle, array( '---REPLIES---' ) );
-fputcsv( $handle, array( 'topic_title', 'content', 'author', 'grade', 'votes', 'reply_to', 'date' ) );
+fputcsv( $handle, array( 'topic_title', 'content', 'author', 'grade', 'votes', 'reply_to', 'date', 'source_key' ) );
 foreach ( $replies as $reply ) {
     $parent_author = '';
     if ( (int) $reply['repond_a'] > 0 ) {
@@ -97,6 +97,7 @@ foreach ( $replies as $reply ) {
         $reply['upvotes'],
         $parent_author,
         '',
+        'reddit:' . (string) $reply['sujet_id'] . ':' . (string) $reply['ordre'],
     ) );
 }
 fclose( $handle );

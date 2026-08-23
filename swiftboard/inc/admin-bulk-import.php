@@ -182,19 +182,36 @@ function swiftboard_import_creer_topics( array $rows, array &$imported, array &$
 		clean_post_cache( $topic_id );
 
 		if ( $image_url ) {
+			// Les CSV de démo peuvent contenir une URL absolue issue d’un autre
+			// staging (par exemple http://127.0.0.1:8088). Si le chemin cible un
+			// asset du thème, on le réduit à un chemin relatif afin que l’origine
+			// HTTPS courante soit toujours utilisée au rendu.
+			$sb_image_path = wp_parse_url( $image_url, PHP_URL_PATH );
+			if ( is_string( $sb_image_path ) && preg_match( '#/assets/img/(.+)$#', $sb_image_path, $sb_image_match ) ) {
+				$image_url = 'assets/img/' . ltrim( $sb_image_match[1], '/' );
+			}
+
 			// URL externe (http/https)
 			if ( filter_var( $image_url, FILTER_VALIDATE_URL ) ) {
 				update_post_meta( $topic_id, '_swiftboard_has_image', 1 );
 				update_post_meta( $topic_id, '_swiftboard_image_url', esc_url_raw( $image_url ) );
 			} else {
-				// Chemin relatif → construire l'URL depuis le thème
-				$full_url = SWIFTBOARD_URI . '/assets/img/' . ltrim( $image_url, '/' );
-				// Si ça commence par assets/img/ déjà, ne pas doubler
+				// Chemin relatif → construire l'URL depuis le thème. Les images
+				// de sujets de la démo vivent dans assets/img/sujets/ ; les CSV
+				// historiques ne portent que le nom du fichier.
 				if ( strpos( $image_url, 'assets/img/' ) === 0 ) {
 					$full_url = SWIFTBOARD_URI . '/' . $image_url;
-				}
-				update_post_meta( $topic_id, '_swiftboard_has_image', 1 );
-				update_post_meta( $topic_id, '_swiftboard_image_url', esc_url_raw( $full_url ) );
+				} elseif ( strpos( $image_url, '/' ) === false ) {
+					$full_url = SWIFTBOARD_URI . '/assets/img/sujets/' . ltrim( $image_url, '/' );
+									} else {
+						$full_url = SWIFTBOARD_URI . '/assets/img/' . ltrim( $image_url, '/' );
+					}
+					// Le rendu public doit rester HTTPS même lorsque WP-CLI est
+					// lancé sans l’en-tête forwarded-proto du reverse proxy.
+					$full_url = set_url_scheme( $full_url, 'https' );
+					update_post_meta( $topic_id, '_swiftboard_has_image', 1 );
+					update_post_meta( $topic_id, '_swiftboard_image_url', esc_url_raw( $full_url ) );
+
 			}
 		}
 		if ( $votes > 0 ) {

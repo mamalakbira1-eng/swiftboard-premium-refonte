@@ -98,14 +98,14 @@ $hot_topics = function_exists('swiftboard_get_hot_topics') ? swiftboard_get_hot_
          se posent au-dessus de la sidebar, pas dans le feed. Le hero vit donc
          HORS de .sb-home-container, qui ne porte que les trois colonnes.
          ============================================================================ -->
-    <header class="sb-subreddit-hero">
+    <div class="sb-subreddit-hero" role="region" aria-labelledby="sb-subreddit-title">
         <div class="sb-subreddit-banner" aria-hidden="true"></div>
         <div class="sb-subreddit-bar">
             <div class="sb-subreddit-identity">
                 <span class="sb-subreddit-avatar" aria-hidden="true"><?php
                     echo esc_html( mb_strtoupper( mb_substr( $forum_title, 0, 1 ) ) );
                 ?></span>
-                <h1 class="sb-subreddit-title">
+                <h1 id="sb-subreddit-title" class="sb-subreddit-title">
                     <span class="sb-subreddit-r">r/</span><?php echo esc_html($forum_title); ?>
                 </h1>
             </div>
@@ -139,7 +139,7 @@ $hot_topics = function_exists('swiftboard_get_hot_topics') ? swiftboard_get_hot_
                 <?php esc_html_e( 'À propos', 'swiftboard' ); ?>
             </a>
         </nav>
-    </header>
+    </div>
 
     <div class="sb-home-container<?php echo ( 'apropos' === $sb_vue ) ? ' is-vue-apropos' : ''; ?>">
 

@@ -52,7 +52,14 @@
         }
 
         try {
-            sse = new EventSource('/wp-json/swiftboard/v1/notifications/stream?last_seen_id=' + lastSeenId, {
+            const configEl = document.getElementById('swiftboard-sse-config');
+            const config = configEl ? configEl.dataset : {};
+            const streamUrl = new URL(config.url || '/wp-json/swiftboard/v1/notifications/stream', window.location.origin);
+            streamUrl.searchParams.set('last_seen_id', String(lastSeenId));
+            if (config.nonce) {
+                streamUrl.searchParams.set('_wpnonce', String(config.nonce));
+            }
+            sse = new EventSource(streamUrl.toString(), {
                 withCredentials: true
             });
         } catch(e) {
