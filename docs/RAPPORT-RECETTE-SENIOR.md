@@ -36,6 +36,7 @@ Les Lots 4 à 9 restent hors périmètre d’implémentation dans cette passe. L
 | EN | **1 passé** | Accueil, forum et sujet sur le snapshot anglais dédié |
 | SSE | **1 passé, 5 ignorés par conception** | 20 événements réels, p95 inférieur à 5 secondes |
 | Lint | **PHP et JavaScript validés** | Fichiers modifiés et client SSE |
+| Lighthouse accueil | **100 / 100 / 100 / 100** | Performance / Accessibilité / Bonnes pratiques / SEO après corrections senior |
 
 Les tests ignorés ne sont pas des échecs : ils évitent de répéter les mutations métier sur les six projets navigateur. La recette complète relance toutefois les contrôles anonymes et multi-navigateurs.
 
@@ -56,7 +57,8 @@ La conformité complète au CDC n’est pas encore déclarable pour les raisons 
 
 ## 6. Package de livraison
 
-Le package installable `deliverables/swiftboard-premium-v11.0.6-senior.zip` contient uniquement le dossier du thème, sous la forme `swiftboard/`, et 309 fichiers. Son SHA-256 est `4cd1d21bbf247bcd2d6ccefadb2d6951cea78dc5bdc8952bfd3bbdc869c1a123`. L’archive de preuves `deliverables/swiftboard-senior-evidence.zip` contient les PNG et JSON sélectionnés ; son SHA-256 est `b514ccdfd528ea9554735ae56b7010994c98aebf6a012fd8943b868637e7f474`. Les dumps SQL, logs contenant des informations d’exécution, cookies, mots de passe et fichiers `.env` réels sont exclus des livrables remis et du dépôt public.
+Le package installable `deliverables/swiftboard-premium-v11.0.6-senior.zip` contient uniquement le dossier du thème, sous la forme `swiftboard/`, et 309 fichiers. Son SHA-256 est `d9fc0743d606e4a1886f85d2d04955d46d906deda30df49b86a4ab08fb64b536`. L’archive de preuves `deliverables/swiftboard-senior-evidence.zip` contient les PNG et JSON sélectionnés ; son SHA-256 est `b723ea80206c67447ab3d2c2350f4cee13996feb421765084c6765991bf804d0`.
+ Les dumps SQL, logs contenant des informations d’exécution, cookies, mots de passe et fichiers `.env` réels sont exclus des livrables remis et du dépôt public.
 
 La branche de travail doit être taguée après la passe finale et le commit public doit rester dépourvu de données privées. Le déploiement staging recommandé est : sauvegarde, installation du ZIP sur staging, activation, purge des caches, recette stricte, puis décision de promotion ou rollback.
 
