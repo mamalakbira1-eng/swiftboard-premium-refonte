@@ -141,3 +141,87 @@ select:focus {
         animation-iteration-count: 1 !important;
     }
 }
+
+/* Header et navigation : surface stable, hiérarchie nette, recherche intégrée. */
+.site-header {
+    background: color-mix(in srgb, var(--color-bg) 92%, transparent);
+    border-bottom-color: var(--color-border-light);
+    box-shadow: 0 1px 0 rgb(15 23 42 / 0.04);
+    backdrop-filter: blur(14px);
+}
+
+.header-inner {
+    max-width: 80rem;
+    gap: var(--space-lg);
+}
+
+.site-logo {
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.site-logo:hover {
+    transform: translateY(-1px) rotate(-2deg);
+    box-shadow: var(--shadow-md);
+}
+
+.header-search .search-field[type="search"] {
+    background: var(--color-bg-card);
+    border-color: var(--color-border-light);
+    transition: background var(--transition-base), border-color var(--transition-base),
+        box-shadow var(--transition-base);
+}
+
+.header-search .search-field[type="search"]:hover {
+    border-color: var(--color-border);
+}
+
+.header-search .search-field[type="search"]:focus {
+    border-color: var(--color-accent);
+    box-shadow: var(--sb-focus-ring);
+}
+
+.main-navigation a {
+    padding: 8px 10px;
+    transition: background var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+}
+
+.main-navigation a:hover,
+.main-navigation .current-menu-item > a {
+    background: var(--color-primary-light);
+    color: var(--color-primary-text);
+    transform: translateY(-1px);
+}
+
+.sb-r-nav-link {
+    border: 1px solid transparent;
+    transition: background var(--transition-fast), border-color var(--transition-fast),
+        color var(--transition-fast), transform var(--transition-fast);
+}
+
+.sb-r-nav-link:hover,
+.sb-r-nav-link:focus-visible,
+.sb-r-nav-link[aria-current="page"] {
+    border-color: var(--color-border-light);
+    transform: translateX(2px);
+}
+
+.sb-home-sidebar,
+.sb-r-nav {
+    scrollbar-color: var(--color-border-dark) transparent;
+}
+
+@media (width <= 768px) {
+    .site-header {
+        backdrop-filter: none;
+    }
+
+    .header-inner {
+        gap: var(--space-sm);
+        padding-inline: var(--space-md);
+    }
+
+    .header-search {
+        min-width: 0;
+    }
+}
