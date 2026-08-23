@@ -119,9 +119,18 @@ function swiftboard_enqueue_assets() {
 				},
 				4
 			);
-	}
+        }
 
-	// JS principal — defer, footer, zero dependance.
+        // Couche premium des composants — chargée en dernier pour limiter les
+        // régressions de cascade tout en réutilisant les contrats .sb-*.
+        wp_enqueue_style(
+            'swiftboard-premium-ui',
+            SWIFTBOARD_ASSETS . '/css/premium-ui.css',
+            array( 'swiftboard-reddit-refonte' ),
+            SWIFTBOARD_VERSION
+        );
+
+        // JS principal — defer, footer, zero dependance.
 	// Le handle est deja DECLARE par swiftboard_enregistrer_scripts_tot()
 	// (priorite 1) : on se contente ici de l'enfiler, ce qui preserve les
 	// scripts inline que les modules y ont attaches entre-temps.

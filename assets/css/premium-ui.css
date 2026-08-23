@@ -1,0 +1,143 @@
+/*
+ * SwiftBoard — Premium UI layer
+ * Lot 2 : composants de base.
+ * Cette couche arrive après les CSS historiques afin de limiter le risque de
+ * régression, tout en conservant les classes et contrats JavaScript .sb-*.
+ */
+
+:root {
+    --sb-surface-raised: var(--color-bg-card);
+    --sb-border-subtle: var(--color-border-light);
+    --sb-focus-ring: 0 0 0 3px color-mix(in srgb, var(--color-accent) 22%, transparent);
+}
+
+/* Cartes : surface claire, élévation légère, feedback de survol non intrusif. */
+.sb-home-card,
+.sb-post-card {
+    margin-block: 10px;
+    padding: 16px;
+    border: 1px solid var(--sb-border-subtle);
+    border-radius: var(--radius-lg);
+    background: var(--sb-surface-raised);
+    box-shadow: var(--shadow-sm);
+    transition: background var(--transition-base), border-color var(--transition-base),
+        box-shadow var(--transition-base), transform var(--transition-fast);
+}
+
+@media (hover: hover) {
+    .sb-home-card:hover,
+    .sb-post-card:hover {
+        border-color: var(--color-border);
+        background: var(--sb-surface-raised);
+        box-shadow: var(--shadow-md);
+        transform: translateY(-1px);
+    }
+}
+
+.sb-sidebar-card {
+    background: var(--sb-surface-raised);
+    border-color: var(--sb-border-subtle);
+    box-shadow: var(--shadow-sm);
+    transition: border-color var(--transition-base), box-shadow var(--transition-base);
+}
+
+.sb-post-title {
+    font-size: clamp(1.05rem, 1rem + .25vw, 1.2rem);
+    letter-spacing: -0.01em;
+}
+
+/* Actions : zones cliquables régulières, sans modifier la structure des votes. */
+.sb-post-actions > *,
+.sb-r-action,
+.sb-sort-tab,
+.sb-r-chip,
+.sb-sort-pill {
+    transition: background var(--transition-fast), border-color var(--transition-fast),
+        color var(--transition-fast), transform var(--transition-fast);
+}
+
+.sb-r-action,
+.sb-sort-tab,
+.sb-r-chip,
+.sb-sort-pill {
+    border: 1px solid transparent;
+}
+
+.sb-r-action:hover,
+.sb-sort-tab:hover,
+.sb-r-chip:hover,
+.sb-sort-pill:hover {
+    border-color: var(--color-border-light);
+    transform: translateY(-1px);
+}
+
+.sb-post-actions > .sb-post-votes {
+    border: 1px solid var(--color-border-light);
+    box-shadow: var(--shadow-sm);
+}
+
+.sb-post-actions > .sb-post-votes .sb-vote-btn:focus-visible,
+.sb-vote-btn:focus-visible {
+    box-shadow: var(--sb-focus-ring);
+}
+
+/* Boutons : états lisibles et feedback premium, sans toucher aux attributs ARIA. */
+.btn-primary,
+.btn-secondary,
+.sb-r-join,
+.sb-r-signup-btn-header {
+    transition: background var(--transition-base), border-color var(--transition-base),
+        color var(--transition-base), box-shadow var(--transition-base), transform var(--transition-fast);
+}
+
+.btn-primary:hover,
+.btn-secondary:hover,
+.sb-r-join:hover,
+.sb-r-signup-btn-header:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
+}
+
+.btn-primary:active,
+.btn-secondary:active,
+.sb-r-join:active,
+.sb-r-signup-btn-header:active {
+    transform: translateY(0);
+}
+
+.btn-primary:focus-visible,
+.btn-secondary:focus-visible,
+.sb-r-join:focus-visible,
+.sb-r-signup-btn-header:focus-visible {
+    box-shadow: var(--sb-focus-ring);
+}
+
+/* Formulaires : cohérence de hauteur et de focus avec les cartes. */
+input:not([type="checkbox"]):not([type="radio"]),
+textarea,
+select {
+    border-color: var(--color-border);
+    border-radius: var(--radius-md);
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast),
+        background var(--transition-fast);
+}
+
+input:not([type="checkbox"]):not([type="radio"]):focus,
+textarea:focus,
+select:focus {
+    border-color: var(--color-accent);
+    box-shadow: var(--sb-focus-ring);
+    outline: none;
+}
+
+/* Les animations décoratives respectent la préférence système. */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+    }
+}
