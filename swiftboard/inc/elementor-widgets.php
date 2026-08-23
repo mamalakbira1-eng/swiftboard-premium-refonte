@@ -196,7 +196,7 @@ add_action(
 				$badges   = ( $settings['show_badges'] === 'yes' );
 
 				echo '<div class="sb-elementor-widget sb-widget-' . esc_attr( $this->sb_slug ) . ' sb-card">';
-				echo '<h3 class="sb-widget-title">' . $title . '</h3>';
+				echo '<h2 class="sb-widget-title">' . $title . '</h2>';
 
 				switch ( $this->sb_slug ) {
 					case 'hot-topics':

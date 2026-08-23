@@ -19,11 +19,10 @@ if (!defined("ABSPATH")) exit;
 <body <?php body_class(); ?> itemscope itemtype="https://schema.org/WebPage">
 <?php wp_body_open(); ?>
 
-<a href="#main-content" class="skip-link screen-reader-text">
-    <?php esc_html_e('Aller au contenu', 'swiftboard'); ?>
-</a>
-
 <header id="site-header" class="site-header" role="banner" itemscope itemtype="https://schema.org/WPHeader">
+    <a href="#main-content" class="skip-link screen-reader-text">
+        <?php esc_html_e('Aller au contenu', 'swiftboard'); ?>
+    </a>
     <div class="header-inner">
         <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="primary-menu" aria-label="<?php esc_attr_e('Ouvrir le menu principal', 'swiftboard'); ?>">
             <svg class="menu-toggle-icon" aria-hidden="true" viewBox="0 0 24 24" width="20" height="20" focusable="false"><path d="M3 6h18M3 12h18M3 18h18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>

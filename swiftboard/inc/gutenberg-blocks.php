@@ -65,7 +65,7 @@ function swiftboard_render_gutenberg_block( $attributes, $content, $block ) {
 		$html .= '<div class="sb-stat-item"><span class="sb-stat-num">80</span><span class="sb-stat-label">' . esc_html__( 'Réponses', 'swiftboard' ) . '</span></div>';
 		$html .= '</div>';
 	} elseif ( $name === 'hot-topics' ) {
-		$html .= '<div class="sb-hot-topics-block"><h3 class="sb-block-title">' . esc_html__( '🔥 Sujets Chauds', 'swiftboard' ) . '</h3><p>' . esc_html__( 'Liste des discussions les plus actives de la communauté.', 'swiftboard' ) . '</p></div>';
+		$html .= '<div class="sb-hot-topics-block"><h2 class="sb-block-title">' . esc_html__( '🔥 Sujets Chauds', 'swiftboard' ) . '</h2><p>' . esc_html__( 'Liste des discussions les plus actives de la communauté.', 'swiftboard' ) . '</p></div>';
 	} else {
 		$html .= '<div class="sb-block-generic-content"><p><strong>' . esc_html( ucwords( str_replace( '-', ' ', $name ) ) ) . '</strong> — ' . esc_html__( 'Composant actif', 'swiftboard' ) . '</p></div>';
 	}

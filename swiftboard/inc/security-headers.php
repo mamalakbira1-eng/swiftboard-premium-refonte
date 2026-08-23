@@ -19,6 +19,98 @@ function swiftboard_disable_speculation_rules( $config ) {
 add_filter( 'wp_speculation_rules_configuration', 'swiftboard_disable_speculation_rules', 20 );
 
 /**
+ * Retourne le nonce CSP de la requete courante.
+ *
+ * Elementor 4.x imprime une configuration frontend variable dans un script
+ * inline. Le nonce n’est utilisé que pour ces scripts inline et les pages
+ * Elementor sont exclues du page-cache afin que le nonce du HTML corresponde
+ * toujours à celui de l’en-tête.
+ *
+ * @return string
+ */
+function swiftboard_csp_nonce() {
+	static $nonce = null;
+	if ( null === $nonce ) {
+		$nonce = rtrim( strtr( base64_encode( random_bytes( 18 ) ), '+/', '-_' ), '=' );
+	}
+	return $nonce;
+}
+
+/**
+ * Indique si la page courante est un document Elementor.
+ *
+ * @return bool
+ */
+function swiftboard_is_elementor_page() {
+	if ( ! function_exists( 'is_singular' ) || ! is_singular() ) {
+		return false;
+	}
+	$post_id = (int) get_queried_object_id();
+	if ( $post_id > 0 && (bool) get_post_meta( $post_id, '_elementor_edit_mode', true ) ) {
+		return true;
+	}
+	// Elementor peut charger sa configuration frontend sur une page singulière
+	// standard dès que le plugin est actif ; dans ce cas le nonce et le bypass
+	// cache restent nécessaires même sans méta _elementor_edit_mode.
+	return did_action( 'elementor/loaded' ) > 0;
+}
+
+/**
+ * Ajoute le nonce aux scripts inline d’une page Elementor.
+ *
+ * Elementor et certaines extensions WordPress impriment plusieurs blocs inline
+ * variables. Le nonce est limité à ces pages, qui sont exclues du page-cache ;
+ * les pages ordinaires conservent leur stratégie par empreintes SHA-256.
+ *
+ * @param array<string, string|bool> $attributes Attributs du script.
+ * @param string                     $data       Contenu inline.
+ * @return array<string, string|bool>
+ */
+function swiftboard_nonce_elementor_inline_script( $attributes, $data ) {
+	unset( $data );
+	if ( swiftboard_is_elementor_page() ) {
+		$attributes['nonce'] = swiftboard_csp_nonce();
+	}
+	return $attributes;
+}
+add_filter( 'wp_inline_script_attributes', 'swiftboard_nonce_elementor_inline_script', 10, 2 );
+
+/**
+ * Ajoute le nonce aux scripts inline tiers qui ne passent pas par le filtre
+ * WordPress `wp_inline_script_attributes` (par exemple des sorties directes
+ * Elementor ou BuddyPress). Ce buffer ne s’active que sur une page Elementor,
+ * laquelle est explicitement exclue du page-cache.
+ *
+ * @param string $html HTML final de la page.
+ * @return string
+ */
+function swiftboard_nonce_inline_output_buffer( $html ) {
+	if ( ! swiftboard_is_elementor_page() ) {
+		return $html;
+	}
+	$nonce = esc_attr( swiftboard_csp_nonce() );
+	return (string) preg_replace_callback(
+		'#<script(?![^>]*\\bsrc=)(?![^>]*\\bnonce=)([^>]*)>#i',
+		static function ( $match ) use ( $nonce ) {
+			return '<script nonce="' . $nonce . '"' . $match[1] . '>';
+		},
+		$html
+	);
+}
+
+/**
+ * Démarre le buffer après le contrôle du page-cache (priorité 0/1).
+ *
+ * @return void
+ */
+function swiftboard_start_elementor_nonce_buffer() {
+	if ( swiftboard_is_elementor_page() && function_exists( 'ob_start' ) ) {
+		ob_start( 'swiftboard_nonce_inline_output_buffer' );
+	}
+}
+add_action( 'template_redirect', 'swiftboard_start_elementor_nonce_buffer', 2 );
+
+/**
  * SwiftBoard — En-tetes de securite HTTP et Content-Security-Policy.
  *
  * EXI-ARCH-01 : extrait de inc/security.php. La CSP est emise en `enforce`
@@ -281,9 +373,10 @@ function swiftboard_envoyer_csp() {
 	// figure dans la MEME directive : c'est pourquoi script-src et style-src
 	// restent strictement separees.
 	$hashes = implode( ' ', swiftboard_csp_hashes_inline() );
+	$nonce  = "'nonce-" . swiftboard_csp_nonce() . "'";
 
 	$csp = "default-src 'self'; "
-		. "script-src 'self' {$hashes}; "
+		. "script-src 'self' {$hashes} {$nonce}; "
 		. "style-src 'self' 'unsafe-inline'; "
 		. "img-src 'self' data: https:; "
 		. "font-src 'self' data: ; "

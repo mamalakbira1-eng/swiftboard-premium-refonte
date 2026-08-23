@@ -135,6 +135,22 @@ function swiftboard_page_cache_eligible() {
 }
 
 /**
+ * Les pages construites avec Elementor contiennent une configuration inline
+ * variable. Elles sont servies sans le page-cache afin que leur nonce CSP
+ * reste aligné avec le HTML généré pour chaque requête.
+ *
+ * @param bool $eligible Éligibilité déjà calculée.
+ * @return bool
+ */
+function swiftboard_exclude_elementor_pages_from_cache( $eligible ) {
+	if ( ! $eligible || ! function_exists( 'swiftboard_is_elementor_page' ) ) {
+		return (bool) $eligible;
+	}
+	return ! swiftboard_is_elementor_page();
+}
+add_filter( 'swiftboard_page_cache_eligible', 'swiftboard_exclude_elementor_pages_from_cache', 20 );
+
+/**
  * Chemin du fichier de cache pour l'URL courante.
  *
  * @return string

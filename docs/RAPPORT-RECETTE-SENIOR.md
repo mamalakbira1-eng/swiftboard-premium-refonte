@@ -1,67 +1,80 @@
 # Rapport de recette senior — SwiftBoard
 
-**Version auditée :** SwiftBoard 11.0.6 avec Lots 1 à 3 et corrections de conformité senior
+**Version auditée :** SwiftBoard 11.0.6, Lots 1 à 3 déjà appliqués, corrections senior de conformité et validations avancées sandbox.
 
-**Environnement :** WordPress 6.8.3, PHP 8.3, MariaDB, bbPress 2.6.14, Docker Compose, Chromium, Firefox et WebKit
+**Environnements :** WordPress 6.8.3, PHP 8.3, MariaDB 10.11, bbPress 2.6.14, BuddyPress 14.5.2, Elementor 4.2.3, Docker Compose, Chromium, Firefox et WebKit.
 
-**Date de recette :** 23 août 2026
+**Date de recette :** 23 août 2026.
 
 ## 1. Décision
 
-La version locale est **validée pour une mise en staging contrôlée**, mais elle ne doit pas encore être présentée comme totalement conforme à l’ensemble des Lots 1 à 9. Les Lots 1 à 3 sont présents et validés. Les scénarios supplémentaires relatifs au commentaire réel, au profil VIP, au clavier, au RTL et au SSE ont désormais une preuve automatisée locale.
+La version locale reste **PASS pour un staging contrôlé** et **NO-GO pour une mise en production immédiate**. Les corrections CSP/HTTPS/accessibilité, l’import à 160 réponses, le runtime strict, les scénarios métier, les locales FR/EN/AR, le SSE, le multisite, le rendu d’un vrai shortcode/bloc et le rendu d’un vrai widget Elementor ont maintenant une validation sandbox ciblée.
 
-Les Lots 4 à 9 restent hors périmètre d’implémentation dans cette passe. Le staging utilisateur ne doit être envisagé qu’après sauvegarde confirmée et sur une copie de recette, jamais directement sur la production.
+La conformité complète du CDC v3 n’est pas déclarée. Les fonctionnalités déjà présentes dans la source et rattachées aux Lots 4 à 9 doivent encore être rapprochées des critères détaillés du CDC v3, lot par lot, avec leurs preuves dédiées. OAuth fournisseur réel n’est pas validé sans identifiants de développement et URL de callback appartenant à l’utilisateur. Aucun accès au WordPress utilisateur n’a été effectué.
 
 ## 2. Corrections senior appliquées
 
 | Domaine | Correction | Vérification |
 |---|---|---|
-| CSP | Désactivation propre des règles WordPress `speculationrules` sous CSP stricte, sans ajout de `unsafe-inline` à `script-src` | Aucun bloc `speculationrules` et aucune erreur CSP dans la suite stricte |
-| SSE | Passage de l’URL et du nonce REST par attributs `data-*`, puis lecture par EventSource | 20 notifications reçues, p95 mesuré à 37,8 ms dans la recette locale |
-| HTTPS | Normalisation des URLs absolues issues d’un autre staging vers l’origine courante ; correction du chemin `assets/img/sujets/` | 0 métadonnée image HTTP restante et asset sujet-08 en HTTP 200 |
-| CSS | Ajout de `@charset "UTF-8";` dans `premium-ui.css` | Lint et chargement CSS validés |
-| Accessibilité | Suppression du second landmark `banner`, ajout d’une région nommée pour le hero communauté, main unique par page et hiérarchie h1/h2/h3 du profil | Axe sans violation sur les pages runtime contrôlées |
-| Import | Normalisation durable dans `inc/admin-bulk-import.php`, pas uniquement dans la base de recette | Les prochains imports utilisent l’origine et le dossier d’assets corrects |
-| QA | Ajout d’une suite stricte qui bloque sur console error, pageerror, requête échouée, réponse 4xx/5xx et violations axe | 6 projets navigateur réussis |
+| CSP WordPress | Désactivation propre des règles `speculationrules` sous CSP stricte, sans `unsafe-inline` dans `script-src` | Aucun bloc de spéculation injecté dans le runtime contrôlé |
+| CSP Elementor | Nonce par requête pour les scripts inline Elementor, buffer ciblé pour les sorties tierces et exclusion des pages Elementor du page-cache | 7 scripts inline contrôlés, tous porteurs d’un nonce ; aucune erreur CSP dans la suite d’intégration |
+| Compatibilité multisite | Guard sur les fonctions bbPress absentes afin d’éviter un fatal sur une installation réseau sans bbPress encore chargé | HTTP 200 sur le réseau principal et le sous-site ; aucun nouveau log PHP |
+| HTTPS/import | Normalisation des URLs absolues et correction du dossier `assets/img/sujets/` | Zéro métadonnée d’image de thème en HTTP ; assets en HTTP 200 |
+| CSS | Ajout de `@charset "UTF-8"` à `premium-ui.css` | Lint et chargement CSS validés |
+| Accessibilité | Main unique, région nommée, placement du skip-link dans un landmark et hiérarchie h1/h2/h3 corrigée | Axe vert sur les pages strictes et intégrations contrôlées, hors barre tierce BuddyPress documentée |
+| Import | Clé stable `reddit:sujet_id:ordre` pour distinguer deux réponses légitimement identiques | 160 réponses créées ; second import idempotent à 160 |
+| QA | Suites strictes pour console, pageerror, réseau, statuts HTTP, axe, locales, extensions, multisite et OAuth contractuel | Résultats détaillés ci-dessous |
 
 ## 3. Résultats de validation
 
 | Suite | Résultat | Périmètre |
 |---|---:|---|
-| Strict runtime | **6 passés, 0 échec** | Accueil, forum, sujet, profil, recherche ; console, réseau et axe |
-| Runtime bbPress | **12 passés, 0 échec** | Pages clés et interactions sur Chromium, Firefox et WebKit |
-| Fonctionnel CDC | **3 passés, 15 ignorés par conception** | Commentaire réel, profil VIP, clavier ; mutation exécutée une seule fois sur Chromium desktop |
-| RTL arabe | **1 passé, 5 ignorés par conception** | Accueil, forum et sujet sur le snapshot arabe dédié |
-| FR | **1 passé** | Accueil, forum et sujet sur le snapshot français dédié |
-| EN | **1 passé** | Accueil, forum et sujet sur le snapshot anglais dédié |
-| SSE | **1 passé, 5 ignorés par conception** | 20 événements réels, p95 inférieur à 5 secondes |
-| Lint | **PHP et JavaScript validés** | Fichiers modifiés et client SSE |
-| Lighthouse accueil | **100 / 100 / 100 / 100** | Performance / Accessibilité / Bonnes pratiques / SEO après corrections senior |
+| Régression primaire finale | **36 passés, 0 échec** | Baseline, Lot 1, runtime et strict runtime sur Chromium, Firefox et WebKit |
+| Strict runtime | **6 passés, 0 échec** | Accueil, forum, sujet, profil, recherche ; console, réseau, axe et landmark main |
+| Runtime bbPress | **12 passés, 0 échec** | Pages clés et interactions |
+| Fonctionnel CDC | **3 passés, 15 ignorés par conception** | Commentaire réel, profil VIP, clavier et thème |
+| Locales FR/EN/AR | **3 passés, 15 ignorés par conception** | Smoke-tests LTR français/anglais et RTL arabe, sans débordement |
+| SSE | **1 passé, 5 ignorés par conception** | 20 notifications reçues, p95 local de 37,8 ms |
+| Gutenberg / shortcode / Elementor | **1 passé, 0 échec** | Trois pages WordPress réelles rendues avec axe, CSP, réseau et captures PNG |
+| Multisite | **1 passé, 0 échec** | Réseau principal et sous-site `/community/`, assets et thème SwiftBoard |
+| OAuth contractuel | **1 passé, 0 échec** | Routes non configurées, state navigateur, anti-rejeu et erreurs attendues 500/403 |
+| Lighthouse accueil | **100 / 100 / 100 / 100** | Performance / Accessibilité / Bonnes pratiques / SEO après corrections |
+| Lint | **PASS** | PHP du thème et fichiers modifiés |
 
-Les tests ignorés ne sont pas des échecs : ils évitent de répéter les mutations métier sur les six projets navigateur. La recette complète relance toutefois les contrôles anonymes et multi-navigateurs.
+Les tests ignorés évitent de répéter les mutations métier sur les six projets navigateur. Ils ne représentent pas des échecs.
 
-## 4. Preuves fonctionnelles
+## 4. Installations sandbox avancées
 
-Le pipeline d’import local conserve **10 forums, 40 sujets, 160 réponses et 15 membres** après l’import corrigé. L’écart initial venait de deux contributions légitimes du même auteur avec le même texte sur le sujet 26 ; l’anti-doublon historique les confondait. L’import de démonstration porte désormais une clé stable `reddit:sujet_id:ordre` : les 160 réponses sont créées, puis un second import sans reset reste à 160 grâce à l’idempotence par clé. Les assets locaux restent en HTTPS, avec zéro métadonnée de thème en HTTP. Le compte standard a publié une réponse réelle depuis le formulaire bbPress. Le compte VIP a affiché son profil, son grade et ses onglets. La baseline arabe a été exécutée dans une base séparée avec `lang="ar"`, `dir="rtl"` et sans débordement horizontal.
+Une stack d’extension isolée est disponible sur `http://127.0.0.1:8090`, avec volumes Docker distincts, baseline Reddit privée et les plugins bbPress, BuddyPress et Elementor aux versions contrôlées. Trois pages publiées réellement ont été testées : une page Gutenberg utilisant `<!-- wp:swiftboard/hot-topics /-->`, une page shortcode utilisant `[swiftboard_block name="hot-topics"]` et une page Elementor contenant le widget `swiftboard_hot-topics`. Le rendu serveur, les captures, l’axe et la CSP stricte sont validés.
 
-Le SSE est opt-in, conformément à la contrainte d’hébergement mutualisé. Une exécution dédiée a activé temporairement `SWIFTBOARD_ENABLE_SSE`, injecté 20 notifications locales, vérifié la réception via EventSource et restauré automatiquement la baseline Reddit. Le p95 mesuré est de **37,8 ms** sur cette exécution locale ; ce résultat ne constitue pas une promesse de performance de production et devra être remesuré sur l’infrastructure de staging.
+Une seconde stack multisite isolée est disponible sur `http://127.0.0.1:8091`. Elle contient un réseau en sous-répertoires, le site principal et le sous-site `/community/`. Le thème SwiftBoard est activé sur les deux sites, les assets du sous-site sont servis en HTTP 200 et les deux pages passent le test navigateur axe/runtime. Les règles Apache multisite de recette sont locales à cette stack et ne sont pas incluses automatiquement dans le ZIP du thème.
 
-## 5. Réserves restantes
+Le contrat OAuth est validé sans fournisseur externe : GitHub non configuré renvoie l’erreur attendue, le callback sans state renvoie 403, le challenge Google crée un state lié au navigateur, et la vérification d’un faux token est rejetée lorsque le Client ID n’est pas configuré. Une authentification réelle Google/GitHub/Facebook nécessite des credentials de développement, une redirect URI autorisée et une décision explicite avant toute redirection externe.
 
-La conformité complète au CDC n’est pas encore déclarable pour les raisons suivantes :
+## 5. Preuves fonctionnelles et import
 
-1. Les Lots 4 à 9 n’ont pas encore été implémentés dans cette passe.
-2. Le multisite, un vrai widget Elementor/Gutenberg, OAuth, la sauvegarde/restauration de production et le test de charge SSE n’ont pas encore été validés sur une infrastructure de staging.
-3. Les preuves locales ne remplacent pas une recette sur le domaine, le cache, le CDN, le PHP-FPM et la base de données réels de l’utilisateur.
-4. Les informations d’identification utilisées pour les comptes de recette sont locales et temporaires ; elles ne doivent jamais être réutilisées en staging ou en production.
+Le pipeline local conserve **10 forums, 40 sujets, 160 réponses et 15 membres** après import corrigé. Deux réponses légitimement identiques du sujet 26 sont désormais distinguées par leur ordre source. Un second import sans reset reste à 160 grâce à l’idempotence par clé stable. Les assets locaux utilisent HTTPS.
 
-## 6. Package de livraison
+Le compte standard a publié une réponse réelle depuis le formulaire bbPress. Le compte VIP a affiché son profil, son grade et ses onglets. La baseline arabe a été exécutée sur une base séparée avec `lang="ar"`, `dir="rtl"` et sans débordement horizontal. Le SSE reste opt-in et a été restauré automatiquement après sa mesure.
 
-Le package installable `deliverables/swiftboard-premium-v11.0.6-senior.zip` contient uniquement le dossier du thème, sous la forme `swiftboard/`, et 309 fichiers. Son SHA-256 est `d9fc0743d606e4a1886f85d2d04955d46d906deda30df49b86a4ab08fb64b536`. L’archive de preuves `deliverables/swiftboard-senior-evidence.zip` contient les PNG et JSON sélectionnés ; son SHA-256 est `b723ea80206c67447ab3d2c2350f4cee13996feb421765084c6765991bf804d0`.
- Les dumps SQL, logs contenant des informations d’exécution, cookies, mots de passe et fichiers `.env` réels sont exclus des livrables remis et du dépôt public.
+## 6. Réserves restantes
 
-La branche de travail doit être taguée après la passe finale et le commit public doit rester dépourvu de données privées. Le déploiement staging recommandé est : sauvegarde, installation du ZIP sur staging, activation, purge des caches, recette stricte, puis décision de promotion ou rollback.
+La conformité complète au CDC v3 reste conditionnelle aux points suivants :
 
-## 7. Conclusion
+1. Les critères détaillés des Lots 4 à 9 doivent être rejoués et signés lot par lot ; les modules existants ne suffisent pas à eux seuls comme preuve de conformité.
+2. OAuth fournisseur réel n’est pas démontré sans credentials de développement fournis par l’utilisateur. Le contrat local ne doit pas être présenté comme une connexion réelle.
+3. La recette multisite, Elementor et Gutenberg est validée dans la sandbox dédiée ; elle doit être rejouée sur l’infrastructure de staging réelle avec son cache, son CDN, son PHP-FPM, ses règles Apache/Nginx et ses extensions.
+4. Le p95 SSE de 37,8 ms est un résultat local et ne constitue pas une garantie de production ; il doit être remesuré sur staging.
+5. Les mots de passe, cookies, dumps SQL et logs privés restent exclus du dépôt public et du package remis.
 
-**Décision senior : PASS pour staging contrôlé ; NO-GO pour production immédiate ; conformité CDC complète encore en cours.** Les corrections prioritaires ont été appliquées, la régression finale consolidée est passée, le ZIP installable et l’archive de preuves sont générés, et le code assaini est publié sur GitHub. Les Lots 4 à 9 ne doivent commencer qu’après confirmation de la stratégie de staging.
+## 7. Package et traçabilité
+
+Le package installable précédent contient uniquement le thème sous la forme `swiftboard/`. Les nouveaux fichiers de recette avancée sont conservés dans la sandbox afin de permettre la validation et seront synchronisés au dépôt public uniquement après audit de secrets et commit séparé.
+
+Les preuves locales sont dans `reports/extensions/`, `reports/multisite/`, `reports/oauth/` et les suites Playwright correspondantes. Le plan d’extension est documenté dans `reports/sandbox-extension-plan.md`. Les snapshots SQL et les volumes Docker restent privés.
+
+La procédure staging recommandée est : sauvegarde vérifiée, installation du ZIP sur une copie staging, activation de bbPress et des extensions prévues, correction des règles multisite si nécessaire, purge des caches, recette stricte, mesure Lighthouse/SSE, puis décision de promotion ou rollback.
+
+## 8. Conclusion senior
+
+**Verdict : PASS pour staging contrôlé ; NO-GO pour production immédiate ; conformité CDC complète non déclarée.** Les intégrations réelles demandées sont maintenant installées et testées dans la sandbox. La prochaine étape rationnelle est la revue détaillée des Lots 4 à 9, puis la génération d’un nouveau package et d’un commit public intégrant uniquement les changements approuvés et assainis.

@@ -310,6 +310,9 @@ add_filter(
  * @return void
  */
 function swiftboard_externalize_bbpress_engagement_config() {
+	if ( ! function_exists( 'bbp_is_single_forum' ) || ! function_exists( 'bbp_is_single_topic' ) ) {
+		return;
+	}
 	if ( ! ( bbp_is_single_forum() || bbp_is_single_topic() ) ) {
 		return;
 	}
