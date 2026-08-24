@@ -4,14 +4,24 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 
 const outDir = path.resolve('../reports/cdc-lots-4-9');
-const topicPath = '/forums/topic/comment-prolonger-la-batterie-d-un-portable/';
-const functionalTopicPath = '/forums/topic/par-ou-commencer-une-epargne-d-urgence/';
-const forumPath = '/forums/forum/finances/';
-const profilePath = '/forums/users/sbvip/';
+const topicPath = process.env.SB_TOPIC_PATH || '/forums/topic/comment-prolonger-la-batterie-d-un-portable/';
+const functionalTopicPath = process.env.SB_FUNCTIONAL_TOPIC_PATH || '/forums/topic/par-ou-commencer-une-epargne-d-urgence/';
+const forumPath = process.env.SB_FORUM_PATH || '/forums/forum/finances/';
+const profilePath = process.env.SB_PROFILE_PATH || '/forums/users/sbvip/';
 
 async function writeResult(name, result) {
   await fs.mkdir(outDir, { recursive: true });
   await fs.writeFile(path.join(outDir, `${name}.json`), JSON.stringify(result, null, 2));
+}
+
+async function dismissLanguagePopup(page, waitMs = 0) {
+  const overlay = page.locator('#sb-lang-popup-overlay');
+  if (waitMs > 0) await overlay.waitFor({ state: 'attached', timeout: waitMs }).catch(() => {});
+  if (await overlay.count() && await overlay.isVisible().catch(() => false)) {
+    const stayButton = page.locator('#sb-lang-stay');
+    if (await stayButton.count()) await stayButton.click();
+    await expect(overlay).toBeHidden();
+  }
 }
 
 function assertCleanRuntime(issues, label = 'runtime') {
@@ -30,6 +40,12 @@ function attachRuntimeIssues(page) {
     // WordPress annule son script zxcvbn lors de la navigation wp-login sur
     // WebKit ; c’est une annulation cœur attendue, non une erreur SwiftBoard.
     if (request.url().includes('/wp-includes/js/zxcvbn.min.js') && /cancelled|aborted/i.test(error)) {
+      return;
+    }
+    // Les navigateurs annulent parfois les images lazy et le beacon vitals
+    // lors d’un changement de page; ce n’est pas un échec HTTP du produit.
+    if (/cancelled|aborted/i.test(error)
+      && (request.resourceType() === 'image' || request.url().includes('/wp-json/swiftboard/v1/vitals'))) {
       return;
     }
     issues.failedRequests.push({ url: request.url(), error });
@@ -57,20 +73,34 @@ async function auditPage(page, url, label, theme = null) {
   const issues = attachRuntimeIssues(page);
   const canBustCache = process.env.SB_QA_BUST_QUERY === '1' && url !== '/login/' && !url.startsWith('/wp-login.php');
   const targetUrl = canBustCache
-    ? (() => { const target = new URL(url, page.url()); target.searchParams.set('sbqa', `${label}-${Date.now()}`); return target.toString(); })()
+    ? (() => {
+      const base = page.url().startsWith('http') ? page.url() : (process.env.SWIFTBOARD_BASE_URL || 'http://localhost/');
+      const target = new URL(url, base);
+      target.searchParams.set('sbqa', `${label}-${Date.now()}`);
+      return target.toString();
+    })()
     : url;
   let response;
   for (let attempt = 0; attempt < 3; attempt += 1) {
-    response = await page.goto(targetUrl, { waitUntil: 'networkidle', timeout: 30000 });
-    if (response?.status() !== 502 && response?.status() !== 503 && response?.status() !== 504) break;
+    try {
+      response = await page.goto(targetUrl, { waitUntil: 'domcontentloaded', timeout: 30000 });
+      await page.waitForLoadState('networkidle', { timeout: 10000 }).catch(() => {});
+      if (response?.status() !== 502 && response?.status() !== 503 && response?.status() !== 504) break;
+    } catch (error) {
+      // hcdn peut détacher une frame pendant un renouvellement de cache; on
+      // réessaie la même URL, puis on laisse l’erreur remonter au dernier essai.
+      if (attempt === 2) throw error;
+    }
     await page.waitForTimeout(750);
   }
   expect(response?.status(), label).toBe(200);
   if (theme) {
     await page.evaluate(value => localStorage.setItem('swiftboard-theme', value), theme);
-    await page.reload({ waitUntil: 'networkidle' });
+    await page.reload({ waitUntil: 'domcontentloaded' });
+    await page.waitForLoadState('networkidle', { timeout: 10000 }).catch(() => {});
     await expect(page.locator('html')).toHaveAttribute('data-theme', theme);
   }
+  await dismissLanguagePopup(page, 3000);
   const axe = await new AxeBuilder({ page }).analyze();
   const overflow = await page.evaluate(() => ({ innerWidth: window.innerWidth, scrollWidth: document.documentElement.scrollWidth }));
   expect(overflow.scrollWidth, `${label} horizontal overflow`).toBeLessThanOrEqual(overflow.innerWidth + 1);
@@ -78,6 +108,7 @@ async function auditPage(page, url, label, theme = null) {
 }
 
 test('Lot 4 — cartes, tri, pagination et responsive du fil', async ({ page }, testInfo) => {
+  test.setTimeout(120_000);
   const result = { project: testInfo.project.name, criteria: {}, runtime: null };
   const runtime = attachRuntimeIssues(page);
   const response = await page.goto('/', { waitUntil: 'networkidle' });
@@ -112,6 +143,7 @@ test('Lot 4 — cartes, tri, pagination et responsive du fil', async ({ page }, 
   result.criteria['L4-02'] = { status: 'PASS', states: sortStates, orderSignatures: Object.fromEntries(Object.entries(orderBySort).map(([key, ids]) => [key, ids.slice(0, 5)])), distinctPairs: ['new/top', 'top/rising'] };
 
   const compact = page.locator('[data-compact-toggle], .sb-compact-view-toggle, [data-view="compact"]');
+  await dismissLanguagePopup(page, 2000);
   if (await compact.count() === 0) {
     result.criteria['L4-03'] = { status: 'N/A justifié', reason: 'Aucun contrôle de vue compacte n’est exposé par le DOM du produit.' };
   } else {
@@ -160,10 +192,13 @@ test('Lot 4 — cartes, tri, pagination et responsive du fil', async ({ page }, 
   result.runtime = runtime;
   await writeResult(`lot4-${testInfo.project.name}`, result);
   expect(axe.violations, JSON.stringify(axe.violations)).toEqual([]);
-  expect(runtime, JSON.stringify(runtime)).toEqual({ consoleErrors: [], pageErrors: [], failedRequests: [], badResponses: [] });
+  assertCleanRuntime(runtime, 'Lot 4 runtime');
 });
 
 test('Lots 5 à 8 — thread, profil, forum et auth', async ({ page }, testInfo) => {
+  // Le staging Hostinger peut dépasser 45 s sur networkidle (CDN/polling),
+  // sans que la page ou l’assertion métier soit en échec.
+  test.setTimeout(120_000);
   const result = { project: testInfo.project.name, criteria: {}, note: 'Les mutations authentifiées sont couvertes par cdc-functional.spec.mjs ; ce scénario exécute les états rendus sur chaque moteur.' };
   let audit = await auditPage(page, topicPath, 'topic');
   const comments = page.locator('.sb-comment');
@@ -184,14 +219,17 @@ test('Lots 5 à 8 — thread, profil, forum et auth', async ({ page }, testInfo)
   expect(commentOrders.new).not.toEqual(commentOrders.old);
   const firstComment = page.locator('.sb-comment').first();
   const collapseBar = firstComment.locator('[data-sb-action="collapse"]');
+  await dismissLanguagePopup(page, 3000);
   await collapseBar.click();
   await expect(firstComment).toHaveClass(/collapsed/);
   await collapseBar.press('Enter');
   await expect(firstComment).not.toHaveClass(/collapsed/);
   const replyButton = firstComment.locator('[data-sb-action="reply-open"]');
+  await dismissLanguagePopup(page, 3000);
   await replyButton.click();
   await expect(firstComment.locator('.sb-comment-reply-form')).toBeVisible();
   await expect(firstComment.locator('.sb-comment-reply-form textarea')).toBeFocused();
+  await dismissLanguagePopup(page, 3000);
   await firstComment.locator('[data-sb-action="reply-cancel"]').click();
   await expect(firstComment.locator('.sb-comment-reply-form')).toBeHidden();
   result.criteria['L5-01'] = { status: 'PASS', comments: await comments.count(), nested: await page.locator('.sb-comment[data-depth="2"], .sb-comment[data-depth="3"]').count() };
@@ -245,10 +283,13 @@ test('Lots 5 à 8 — thread, profil, forum et auth', async ({ page }, testInfo)
   await openOnboarding.click();
   await expect(onboarding).toBeVisible();
   await expect(page.locator('#sb-onb-step-1')).toBeVisible();
+  await dismissLanguagePopup(page, 3000);
   await page.locator('.sb-onb-gender-btn').first().click();
   await expect(page.locator('#sb-onb-step-2')).toBeVisible();
+  await dismissLanguagePopup(page);
   await page.locator('.sb-onb-avatar-btn').first().click();
   await expect(page.locator('#sb-onb-step-3')).toBeVisible();
+  await dismissLanguagePopup(page);
   await expect(page.locator('.sb-onb-social-btn')).toHaveCount(3);
   await page.locator('#sb-onb-email-submit').click();
   await expect(page.locator('.sb-onb-status')).toContainText(/e-mail|email/i);
@@ -295,11 +336,20 @@ test('Lot 9 — pages clés, axe, overflow, thème et états vides', async ({ pa
   await onboardingTrigger.scrollIntoViewIfNeeded();
   await onboardingTrigger.dispatchEvent('click');
   await expect(onboarding).toBeVisible();
+  await dismissLanguagePopup(page, 2000);
   await page.waitForTimeout(400);
   const onboardingAxe = await new AxeBuilder({ page }).include('#sb-onboarding-modal').analyze();
   expect(onboardingAxe.violations, `onboarding: ${JSON.stringify(onboardingAxe.violations)}`).toEqual([]);
   results.onboarding = { status: 'PASS', axeViolations: onboardingAxe.violations };
   await page.screenshot({ path: path.join(outDir, `lot9-onboarding-${testInfo.project.name}.png`), fullPage: false, timeout: 15000, animations: 'disabled', scale: 'css' });
+  // La modale de langue est un état produit indépendant; la fermer proprement
+  // avant la fermeture de l’onboarding évite qu’elle intercepte le clic.
+  const languagePopup = page.locator('#sb-lang-popup-overlay');
+  if (await languagePopup.count() && await languagePopup.isVisible().catch(() => false)) {
+    const stayButton = page.locator('#sb-lang-stay');
+    if (await stayButton.count()) await stayButton.click();
+    await expect(languagePopup).toBeHidden();
+  }
   await onboarding.locator('[data-action="close"]').first().click();
   await expect(onboarding).toBeHidden();
 

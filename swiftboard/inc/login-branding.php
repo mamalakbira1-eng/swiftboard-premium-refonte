@@ -28,7 +28,7 @@ add_action(
 			'swiftboard-login',
 			SWIFTBOARD_ASSETS . '/css/login.css',
 			array(),
-			SWIFTBOARD_VERSION
+			SWIFTBOARD_VERSION . '-a11y1'
 		);
 		// Loader externe et CSP-safe : pose data-theme avant le rendu du formulaire.
 		wp_enqueue_script(

@@ -4881,3 +4881,9 @@ html[data-theme="dark"] .page-header .search-query {
 html[data-theme="dark"] .page-header .search-count {
     color: #525252 !important;
 }
+
+/* Language popup: keep the optional hint WCAG AA even if an older cached
+   language-popup.js still carries its former inline gray value. */
+.sb-lang-popup p:last-child {
+    color: #4b5563 !important;
+}

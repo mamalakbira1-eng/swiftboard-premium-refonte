@@ -107,7 +107,7 @@
             siteFlag + ' ' + cfg.msgStay + ' (' + siteLangName + ')' +
             '</button>' +
             '</div>' +
-            '<p style="margin:12px 0 0;font-size:11px;color:#9ca3af;">' + cfg.msgHint + '</p>';
+            '<p style="margin:12px 0 0;font-size:11px;color:#4b5563;">' + cfg.msgHint + '</p>';
 
         overlay.appendChild(popup);
         document.body.appendChild(overlay);

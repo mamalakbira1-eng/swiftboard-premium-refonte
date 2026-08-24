@@ -48,6 +48,8 @@ body.login h1.wp-login-logo { display: none; }
 }
 
 .sb-login-sitename {
+    /* Le H1 est un repère sémantique obligatoire; l’exposer même si le CSS cœur WP le masque. */
+    display: block !important;
     color: #1a1a1b;
     font-size: 22px;
     font-weight: 700;

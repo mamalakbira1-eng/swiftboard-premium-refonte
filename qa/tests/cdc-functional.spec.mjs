@@ -3,7 +3,8 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 
 const outDir = path.resolve('../reports/cdc-functional');
-const topicPath = '/forums/topic/par-ou-commencer-une-epargne-d-urgence/';
+const topicPath = process.env.SB_FUNCTIONAL_TOPIC_PATH || '/forums/topic/par-ou-commencer-une-epargne-d-urgence/';
+const profilePath = process.env.SB_PROFILE_PATH || '/forums/users/sbvip/';
 const testUser = process.env.SB_TEST_USER;
 const testPassword = process.env.SB_TEST_PASSWORD;
 const vipUser = process.env.SB_VIP_USER;
@@ -41,7 +42,7 @@ test('CDC — profil VIP visible et badge accessible', async ({ page }, testInfo
   test.skip(!vipUser || !vipPassword, 'Définir SB_VIP_USER et SB_VIP_PASSWORD pour la recette VIP.');
   await fs.mkdir(outDir, { recursive: true });
   await login(page, vipUser, vipPassword);
-  await page.goto('/forums/users/sbvip/', { waitUntil: 'networkidle' });
+  await page.goto(profilePath, { waitUntil: 'networkidle' });
   await expect(page.locator('.sb-profile')).toBeVisible();
   await expect(page.locator('.sb-profile-grade')).toBeVisible();
   await expect(page.locator('.sb-profile-tabs')).toBeVisible();
