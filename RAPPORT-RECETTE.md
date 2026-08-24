@@ -1,7 +1,7 @@
 # Rapport de recette senior — SwiftBoard v11.0.6
 
 **Date de la dernière recette :** 24 août 2026.
-**Source finale auditée :** commit GitHub `4db7448b0a3c6e8bc1231b99580f3e57cf23aaf3`, tag immuable `v11.0.6-senior-sandbox-final-r2`; le ZIP de référence est régénéré depuis cet arbre public exact.
+**Source finale auditée :** tag GitHub immuable `v11.0.6-senior-sandbox-final-r3`; le commit résolu par ce tag et l’arbre thème exact sont enregistrés dans le manifeste de release; le ZIP est régénéré depuis ce tag.
 **Environnement :** WordPress 6.8.3, PHP 8.3, MariaDB 10.11, bbPress 2.6.14, Docker Compose, Playwright 1.62.1, axe-core, Lighthouse 13.4.1.
 **URL de recette publique utilisée par les navigateurs :** `https://8088-iusiaz3ltza0hnfunobhr-de99ba16.us5.manus.computer`.
 

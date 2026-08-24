@@ -1,7 +1,7 @@
 # Matrice d’audit CDC — SwiftBoard v11.0.6
 
 **Source contractuelle :** `/home/ubuntu/upload/pasted_content.txt`, cahier des charges « Refonte UX/UI Premium du thème SwiftBoard ».
-**Source finale auditée :** commit GitHub `4db7448b0a3c6e8bc1231b99580f3e57cf23aaf3`, tag immuable `v11.0.6-senior-sandbox-final-r2`; le ZIP de référence est régénéré depuis cet arbre public exact.
+**Source finale auditée :** tag GitHub immuable `v11.0.6-senior-sandbox-final-r3`; le commit résolu par ce tag et l’arbre thème exact sont enregistrés dans le manifeste de release; le ZIP est régénéré depuis ce tag.
 **Règle de statut :** `PASS` exige une preuve reproductible; `N/A justifié` exige une justification; `BLOCKED` signale une limite externe non contournée.
 
 > **Verdict honnête :** la conformité fonctionnelle, responsive, visuelle et d’accessibilité du source dans l’installation WordPress Docker est démontrée par de vrais parcours Playwright. Une conformité « 100 % globale » n’est pas déclarable : le proxy HTTPS public de la sandbox remplace la CSP complète de `wp-login.php` par `Content-Security-Policy: frame-ancestors 'self';`, tandis que la réponse locale de WordPress émet bien la CSP stricte complète. Aucun staging ni environnement de production n’a été touché.
@@ -17,7 +17,7 @@
 | URL navigateur exacte | `https://8088-iusiaz3ltza0hnfunobhr-de99ba16.us5.manus.computer` |
 | Matrice | Chromium, Firefox, WebKit × 375×812, 768×1024, 1440×900, 1920×1080 |
 | Données restaurées | 10 forums, 40 sujets, 162 réponses, 18 utilisateurs |
-| Source public exact | `7ad7f3016ff9c18796a19e885f99ccc59aa4d4f9` + tag `v11.0.6-senior-sandbox-final` |
+| Source public exact | tag `v11.0.6-senior-sandbox-final-r3`; SHA résolu et vérifié dans le manifeste de release |
 | Lint | Tous les PHP sans erreur de syntaxe; specs Node vérifiées avec `node --check` |
 
 ## 2. Lots et commits
