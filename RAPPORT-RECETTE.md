@@ -1,17 +1,18 @@
 # Rapport de recette senior — SwiftBoard v11.0.6
 
 **Date de la dernière recette :** 24 août 2026.
-**Source finale auditée :** tag GitHub immuable `v11.0.6-senior-sandbox-final-r3`; le commit résolu par ce tag et l’arbre thème exact sont enregistrés dans le manifeste de release; le ZIP est régénéré depuis ce tag.
+**Source finale auditée :** tag GitHub public `v11.0.6-senior-staging-final-r4`; le commit résolu, l’arbre thème et le SHA-256 du ZIP sont publiés ensemble dans la release r4.
 **Environnement :** WordPress 6.8.3, PHP 8.3, MariaDB 10.11, bbPress 2.6.14, Docker Compose, Playwright 1.62.1, axe-core, Lighthouse 13.4.1.
-**URL de recette publique utilisée par les navigateurs :** `https://8088-iusiaz3ltza0hnfunobhr-de99ba16.us5.manus.computer`.
+**URL Docker historique :** `https://8088-iusiaz3ltza0hnfunobhr-de99ba16.us5.manus.computer`.
+**URL staging Hostinger :** `https://midnightblue-mantis-446085.hostingersite.com` — installation de test autorisée, sans aucun accès ni changement en production.
 
-> **Décision senior :** le thème est conforme aux scénarios du CDC démontrés dans l’installation Docker locale. Je ne déclare pas « 100 % conforme globalement » : le proxy HTTPS public de la sandbox ne transmet pas la CSP complète de `wp-login.php`, alors que la réponse locale WordPress l’émet. La recette staging/production n’a pas été exécutée, aucun environnement de production n’a été touché et aucun OAuth fournisseur réel n’a été simulé avec de faux secrets.
+> **Décision senior :** la conformité Docker est démontrée et une recette réelle staging a été engagée. Chromium et Firefox passent les 12 scénarios L4–L9 chacun; WebKit reste à rejouer après une indisponibilité hcdn. Je ne déclare pas « 100 % conforme globalement » : la CSP publique Hostinger est remplacée par `upgrade-insecure-requests`, la comparaison Lighthouse staging n’est pas encore disponible et aucun OAuth fournisseur réel n’est activé. La production n’a pas été touchée.
 
 ## 1. Objectif et règle de preuve
 
 Le CDC exige pour chaque lot des fichiers source identifiables, des captures PNG prises par un navigateur réel, un résultat Playwright, des rapports axe-core/Lighthouse et une liste d’erreurs console/PHP. Ce rapport ne considère pas une fonctionnalité comme prouvée par la seule lecture du code. Les preuves sont produites dans `reports/`; les bases SQL, cookies et mots de passe temporaires restent exclus des livrables publics.
 
-La sandbox principale contient deux conteneurs actifs, `swiftboard-wordpress` et `swiftboard-db`. Après restauration contrôlée, la base contient 10 forums, 40 topics, 162 réponses et 18 utilisateurs. Les extensions et le multisite disposent de stacks Docker séparées, testées en localhost uniquement.
+La sandbox principale contient deux conteneurs actifs, `swiftboard-wordpress` et `swiftboard-db`. Après restauration contrôlée, la base contient 10 forums, 40 topics, 162 réponses et 18 utilisateurs. Le staging Hostinger a été préparé avec le forum `Finances`, les deux sujets CDC, des réponses imbriquées, les comptes QA `sbvip` et `sbmember`, puis le ZIP a11y1 a été installé et le cache SwiftBoard purgé. Les extensions et le multisite disposent de stacks Docker séparées, testées en localhost uniquement.
 
 ## 2. Commits isolés et fichiers modifiés
 
@@ -34,7 +35,10 @@ L’arbre Git du thème source est propre au commit final. Les tests et rapports
 |---|---|---:|
 | Lot1 | `playwright test tests/lot1.spec.mjs --workers=1` | 12/12 PASS |
 | Lot4–L9 anonyme final | `SB_QA_BUST_CACHE=1 playwright test tests/cdc-lots-4-9.spec.mjs -g 'Lot 9 — pages clés'` | 12/12 PASS |
-| Lot9 authentifié final | `playwright test tests/cdc-lot9-authenticated.spec.mjs -g 'états membre'` | 12/12 PASS |
+| Staging L4–L9 Chromium | `SWIFTBOARD_BASE_URL=... playwright test tests/cdc-lots-4-9.spec.mjs` | 12/12 PASS |
+| Staging L4–L9 Firefox | même matrice sur 4 viewports | 12/12 PASS |
+| Staging L4–L9 WebKit | même matrice sur 4 viewports | 6/12 initial; post-correctif bloqué hcdn |
+| Lot9 authentifié final Docker | `playwright test tests/cdc-lot9-authenticated.spec.mjs -g 'états membre'` | 12/12 PASS |
 | Notifications vides | compte `sbemptyqa` frais, puis suppression automatique | 1/1 PASS |
 | Fonctionnel complet | publication, profil VIP, clavier, vote/save/menu | 4/4 PASS; 44 skips attendus sur les projets non maîtres |
 | Strict runtime | pages clés, console, réseau, axe, HTTP | 12/12 PASS |
@@ -74,7 +78,7 @@ Login et signup sont testés sur le rendu WordPress Core personnalisé. L’onbo
 
 ### Lot 9 — Responsive, accessibilité, états et RTL
 
-La suite anonyme finale post-CSP exécute 12 projets : Chromium/Firefox/WebKit sur mobile, tablette, desktop et large desktop; elle vérifie accueil, forum, topic, profil, login, signup, recherche vide, onboarding, axe, overflow, focus, captures et persistance du thème. Résultat : 12/12 PASS. La suite authentifiée finale vérifie menu membre, cloche, dropdown, Escape, focus, notifications et absence de flash de thème : 12/12 PASS.
+La suite Docker anonyme finale exécute 12 projets et passe 12/12. Sur le staging Hostinger, la même matrice L4–L9 passe 12/12 sur Chromium et 12/12 sur Firefox. La passe WebKit initiale a passé 6/12; les causes identifiées ont été corrigées dans la recette, mais la vérification post-correctif est bloquée par l’indisponibilité temporaire de hcdn. Le H1 de `/wp-login.php` est désormais visible et la recette Chromium/Firefox ne signale plus la violation `page-has-heading-one`.
 
 L’état vide des notifications est prouvé sur un compte local frais par appel REST HTTP 200, texte `Aucune notification`, zéro élément, axe sans violation, capture `reports/cdc-lot9-authenticated/notifications-empty-chromium-desktop.png`, puis suppression du compte. Le RTL arabe est rejoué sur les trois moteurs desktop avec restauration automatique de la base et résultat 3/3 PASS.
 
@@ -84,7 +88,7 @@ La suite strict-runtime finale est verte 12/12 sur cinq pages clés et six famil
 
 ## 5. Lighthouse final
 
-Le run final a été généré le 24 août 2026 à `03:14:53Z` et se trouve dans `reports/lighthouse-lot10/summary.json`.
+Le run Lighthouse historique Docker a été généré le 24 août 2026 à `03:14:53Z` et se trouve dans `reports/lighthouse-lot10/summary.json`. Aucun run Lighthouse staging comparable n’a encore été obtenu, car hcdn est devenu non joignable après la matrice WebKit; aucune non-régression staging n’est donc revendiquée.
 
 | Page | Performance | Accessibilité | Bonnes pratiques | SEO | FCP/LCP | TBT | CLS |
 |---|---:|---:|---:|---:|---:|---:|---:|
@@ -101,7 +105,7 @@ Le CDC ne définit pas de seuil numérique Lighthouse autre que l’absence de r
 
 Le front local et public transmet une CSP enforce complète contenant `script-src 'self'` et des hashes/nonces, sans `unsafe-inline` dans `script-src`. `style-src 'unsafe-inline'` est volontairement séparé pour les styles historiques WordPress/bbPress. La réponse locale Docker de `wp-login.php` contient une CSP complète avec nonce et les scripts inline Core reçoivent ce nonce; les tests de login/signup restent fonctionnels.
 
-La limite est observable sur l’URL HTTPS publique exacte : `curl` avec et sans `Cache-Control: no-cache` reçoit pour `/wp-login.php`, `?action=register` et `?action=lostpassword` uniquement `Content-Security-Policy: frame-ancestors 'self';`. La réponse locale directe `http://127.0.0.1:8088/wp-login.php` émet la CSP complète. Cette différence est consignée dans `reports/csp-login-final-headers-rerun.txt`, `reports/csp-login-path-detection.txt`, `reports/csp-login-wp-headers-check.txt` et `reports/csp-final.txt`.
+La limite est observable sur l’URL HTTPS publique Hostinger : `curl` avec et sans `Cache-Control: no-cache` a reçu sur l’accueil, le forum, les sujets, `wp-login.php`, `action=register` et `action=lostpassword` une politique réduite `Content-Security-Policy: upgrade-insecure-requests`. La politique stricte générée par SwiftBoard n’est donc pas vérifiable au bord public. Cette différence est consignée dans les rapports `reports/staging-initial-headers.txt` et `reports/staging-csp-after-theme-install.txt`; la réponse locale Docker émet la CSP complète.
 
 Il s’agit d’un **blocage d’infrastructure du proxy HTTPS public**, non d’une preuve de défaut de code local. Tant que le proxy ne transmet pas la politique complète, le rapport ne peut pas certifier la CSP login sur l’URL publique.
 
@@ -113,13 +117,13 @@ Le fournisseur OAuth réel n’est pas activé. La preuve actuelle est volontair
 
 ## 8. Décision finale et conditions de clôture globale
 
-**Conforme dans la sandbox Docker locale pour les scénarios du CDC exécutés. Non déclarable « 100 % conforme globalement » à ce stade.** Le commit audité, le tag et les prochains ZIP sont désormais réalignés sur l’arbre public exact; les réserves CSP proxy, staging/production et Lighthouse restent à clôturer.
+**PASS partiel du staging et conformité Docker démontrée; non déclarable « 100 % conforme globalement ».** Le commit, le tag et le ZIP r4 sont alignés sur l’arbre public exact. Restent à clôturer : la passe WebKit après rétablissement hcdn, la CSP publique Hostinger, le Lighthouse sur la même infrastructure et l’éventuel OAuth réel.
 
 La clôture globale exige encore :
 
-1. que l’administrateur du proxy corrige la transmission de la CSP complète sur les chemins `wp-login.php`;
-2. qu’une recette soit exécutée sur le staging réel de l’utilisateur avec ses règles Apache/Nginx, CDN, cache, PHP-FPM et extensions;
+1. que l’administrateur Hostinger/CDN transmette la CSP stricte sur tous les chemins publics, notamment `wp-login.php`;
+2. que la matrice WebKit staging soit rejouée après rétablissement de hcdn;
 3. que l’utilisateur fournisse, s’il veut cette portée, des credentials OAuth de développement et une redirect URI autorisée;
-4. qu’une nouvelle mesure Lighthouse soit comparée dans la même infrastructure après correction du proxy, car la performance publique n’est pas numériquement stable entre les exécutions.
+4. qu’une mesure Lighthouse staging soit comparée dans la même infrastructure, sans comparer artificiellement Docker et Hostinger.
 
 Aucun déploiement production n’a été effectué. Les mots de passe temporaires, cookies, dumps SQL et logs privés ne sont pas inclus dans les livrables publics.

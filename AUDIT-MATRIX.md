@@ -1,10 +1,10 @@
 # Matrice d’audit CDC — SwiftBoard v11.0.6
 
 **Source contractuelle :** `/home/ubuntu/upload/pasted_content.txt`, cahier des charges « Refonte UX/UI Premium du thème SwiftBoard ».
-**Source finale auditée :** tag GitHub immuable `v11.0.6-senior-sandbox-final-r3`; le commit résolu par ce tag et l’arbre thème exact sont enregistrés dans le manifeste de release; le ZIP est régénéré depuis ce tag.
+**Source finale auditée :** le tag GitHub public `v11.0.6-senior-staging-final-r4` et son commit résolu; le ZIP de thème et son SHA-256 sont publiés dans la release correspondante et régénérés depuis cet arbre exact.
 **Règle de statut :** `PASS` exige une preuve reproductible; `N/A justifié` exige une justification; `BLOCKED` signale une limite externe non contournée.
 
-> **Verdict honnête :** la conformité fonctionnelle, responsive, visuelle et d’accessibilité du source dans l’installation WordPress Docker est démontrée par de vrais parcours Playwright. Une conformité « 100 % globale » n’est pas déclarable : le proxy HTTPS public de la sandbox remplace la CSP complète de `wp-login.php` par `Content-Security-Policy: frame-ancestors 'self';`, tandis que la réponse locale de WordPress émet bien la CSP stricte complète. Aucun staging ni environnement de production n’a été touché.
+> **Verdict honnête :** la conformité Docker historique reste démontrée. Une recette réelle a maintenant été exécutée sur le staging WordPress Hostinger autorisé : Chromium et Firefox passent la matrice L4–L9 complète sur leurs quatre viewports; WebKit a encore une passe post-correctif à terminer après une indisponibilité hcdn. Une conformité « 100 % globale » n’est pas déclarable : Hostinger remplace publiquement la CSP par `upgrade-insecure-requests`, et la comparaison Lighthouse staging n’est pas encore prouvée. La production n’a pas été touchée.
 
 ## 1. Environnement vérifié
 
@@ -17,7 +17,7 @@
 | URL navigateur exacte | `https://8088-iusiaz3ltza0hnfunobhr-de99ba16.us5.manus.computer` |
 | Matrice | Chromium, Firefox, WebKit × 375×812, 768×1024, 1440×900, 1920×1080 |
 | Données restaurées | 10 forums, 40 sujets, 162 réponses, 18 utilisateurs |
-| Source public exact | tag `v11.0.6-senior-sandbox-final-r3`; SHA résolu et vérifié dans le manifeste de release |
+| Source public exact | tag `v11.0.6-senior-staging-final-r4`; commit résolu et vérifié dans le manifeste de release |
 | Lint | Tous les PHP sans erreur de syntaxe; specs Node vérifiées avec `node --check` |
 
 ## 2. Lots et commits
@@ -55,13 +55,17 @@
 | Recherche sans résultat | Page `search-empty`, axe et capture | PASS fonctionnel; `noindex` explique le SEO Lighthouse inférieur |
 | RTL arabe | Chromium, Firefox, WebKit desktop | PASS 3/3 |
 | OAuth réel fournisseur | Aucun Client ID/secret fourni; non exécuté | N/A justifié |
-| Staging/production | Aucun accès fourni; aucun déploiement réalisé | N/A hors sandbox |
+| Staging Hostinger | URL de test autorisée; fixtures forum, sujets, réponses, comptes QA et ZIP corrigé installés | Partiel; Chromium 12/12, Firefox 12/12, WebKit post-correctif à rejouer après hcdn | `docs/staging/` |
+| Production | Aucun accès ni déploiement | Aucun changement |
 
 ## 4. Résultats finaux multi-navigateurs
 
 | Suite | Projets exécutés | Résultat |
 |---|---:|---:|
-| Lot 9 anonyme final post-CSP | 12 | 12 passed |
+| Lot 9 anonyme Docker final post-CSP | 12 | 12 passed |
+| Staging Hostinger L4–L9 Chromium | 12 | 12 passed |
+| Staging Hostinger L4–L9 Firefox | 12 | 12 passed |
+| Staging Hostinger L4–L9 WebKit | 12 | post-correctif bloqué par indisponibilité hcdn; passe intermédiaire 6/12 |
 | Lot 9 authentifié final post-CSP | 12 | 12 passed |
 | État vide notifications | 1 Chromium desktop | 1 passed |
 | Strict runtime | 12 | 12 passed |
@@ -83,6 +87,11 @@ La comparaison pixelmatch Lot4 utilise `threshold=0.1`, `includeAA=false` et `ma
 
 ## 6. Lighthouse et CSP
 
+La recette publique staging a confirmé que Hostinger/CDN répond avec une politique réduite `Content-Security-Policy: upgrade-insecure-requests` sur l’accueil, le forum, les sujets, `wp-login.php`, l’inscription et la récupération de mot de passe. La politique stricte générée par SwiftBoard n’est donc pas observable depuis l’URL publique; ce point reste **BLOCKED infrastructure** et aucune désactivation de CSP n’a été faite pour obtenir un faux PASS.
+
+La page `/wp-login.php` staging a par ailleurs été corrigée : le H1 « Se connecter » et le H1 de branding sont visibles, avec `login.css?ver=11.0.6-a11y1`. Les preuves sont dans `docs/staging/staging-login-heading-fixed.md`.
+
+
 Lighthouse final est enregistré dans `reports/lighthouse-lot10/`. Les scores d’accessibilité et de bonnes pratiques sont à 100 sur les pages principales; le profil final observé est Performance 94, et les métriques finales conservent TBT=0 et CLS=0. Les scores de performance restent soumis à la variance du proxy; la comparaison numérique stricte Lot0 n’est donc pas revendiquée comme preuve d’amélioration. La page de recherche vide est `noindex`, ce qui explique son score SEO réduit et ne constitue pas une régression fonctionnelle.
 
 La réponse locale Docker de `wp-login.php` émet une politique enforce avec `script-src 'self' 'nonce-…'`, sans `unsafe-inline` dans `script-src`; les scripts inline Core reçoivent le nonce. Les pages front `home`, `forum` et `topic` émettent également une CSP complète sans `unsafe-inline` dans `script-src`.
@@ -91,4 +100,4 @@ La réponse HTTPS publique exacte transmet bien la CSP complète sur les pages f
 
 ## 7. Décision
 
-**Décision : conforme au CDC dans la sandbox Docker locale, mais non déclarable « 100 % conforme globalement ».** La réserve bloquante est la transmission de la CSP login par le proxy HTTPS public; s’y ajoutent l’absence de credentials OAuth fournisseur réel et l’absence d’une recette staging/production autorisée. Aucun de ces points ne doit être présenté comme validé.
+**Décision : PASS staging partiel et conformité Docker démontrée; non déclarable « 100 % conforme globalement ».** Les blocages restants sont la CSP Hostinger/CDN, la passe WebKit staging à rejouer après rétablissement hcdn, la non-régression Lighthouse sur la même infrastructure et l’absence d’OAuth fournisseur réel. Aucun déploiement de production n’a été effectué.
