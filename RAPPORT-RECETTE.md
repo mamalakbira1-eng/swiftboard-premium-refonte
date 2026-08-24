@@ -1,7 +1,7 @@
 # Rapport de recette senior — SwiftBoard v11.0.6
 
 **Date de la dernière recette :** 24 août 2026.
-**Source finale :** `bff360d340538d804ff255299e352312f591f0a4`.
+**Source finale auditée :** commit GitHub `7ad7f3016ff9c18796a19e885f99ccc59aa4d4f9`, tag immuable `v11.0.6-senior-sandbox-final`; le ZIP de référence est régénéré depuis cet arbre public exact.
 **Environnement :** WordPress 6.8.3, PHP 8.3, MariaDB 10.11, bbPress 2.6.14, Docker Compose, Playwright 1.62.1, axe-core, Lighthouse 13.4.1.
 **URL de recette publique utilisée par les navigateurs :** `https://8088-iusiaz3ltza0hnfunobhr-de99ba16.us5.manus.computer`.
 
@@ -113,7 +113,7 @@ Le fournisseur OAuth réel n’est pas activé. La preuve actuelle est volontair
 
 ## 8. Décision finale et conditions de clôture globale
 
-**Conforme dans la sandbox Docker locale pour les scénarios du CDC exécutés. Non déclarable « 100 % conforme globalement ».**
+**Conforme dans la sandbox Docker locale pour les scénarios du CDC exécutés. Non déclarable « 100 % conforme globalement » à ce stade.** Le commit audité, le tag et les prochains ZIP sont désormais réalignés sur l’arbre public exact; les réserves CSP proxy, staging/production et Lighthouse restent à clôturer.
 
 La clôture globale exige encore :
 
