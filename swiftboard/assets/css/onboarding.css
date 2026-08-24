@@ -244,7 +244,7 @@
 .sb-onb-back-btn {
     background: none;
     border: none;
-    color: #0073aa;
+    color: #003b5c !important;
     font-size: 0.9rem;
     cursor: pointer;
     text-decoration: underline;
@@ -266,4 +266,15 @@
 .sb-onb-status.success {
     background: #e6ffed;
     color: #22863a;
+}
+
+/* La modale conserve une surface blanche contrôlée dans les deux thèmes. */
+html[data-theme="dark"] .sb-modal-content {
+    background: #fff;
+    color: #1e232a;
+}
+
+html[data-theme="dark"] .sb-modal-content .sb-modal-title,
+html[data-theme="dark"] .sb-modal-content .sb-step-title {
+    color: #1e232a !important;
 }

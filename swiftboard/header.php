@@ -232,7 +232,9 @@ if (!defined("ABSPATH")) exit;
                 $sb_inscription_ouverte = (bool) get_option('users_can_register');
                 $sb_url_inscription     = $sb_inscription_ouverte ? wp_registration_url() : wp_login_url();
                 ?>
-                <a href="<?php echo esc_url($sb_url_inscription); ?>" class="btn-primary btn-text sb-r-signup-btn-header"><?php esc_html_e('S\'inscrire', 'swiftboard'); ?></a>
+                <a href="<?php echo esc_url($sb_url_inscription); ?>" class="btn-primary btn-text sb-r-signup-btn-header" data-open-onboarding="true">
+                    <?php esc_html_e('S\'inscrire', 'swiftboard'); ?>
+                </a>
             <?php endif; ?>
         </div>
     </div>

@@ -37,6 +37,108 @@ function swiftboard_csp_nonce() {
 }
 
 /**
+ * CSP stricte pour les écrans d’authentification WordPress Core.
+ *
+ * wp-login.php ne passe pas par le cycle front classique et imprime plusieurs
+ * scripts inline Core. On les autorise par un nonce de requête, ajouté par le
+ * buffer de sortie à ces seuls noeuds inline. Les scripts externes restent
+ * limités à l’origine du site; `unsafe-inline` n’est jamais présent dans
+ * script-src.
+ *
+ * @return void
+ */
+function swiftboard_login_csp() {
+	if ( headers_sent() ) {
+		return;
+	}
+	$nonce = esc_attr( swiftboard_csp_nonce() );
+	$csp   = "default-src 'self'; "
+		. "script-src 'self' 'nonce-{$nonce}'; "
+		. "style-src 'self' 'unsafe-inline'; "
+		. "img-src 'self' data: https:; "
+		. "font-src 'self' data:; "
+		. "connect-src 'self'; "
+		. "frame-ancestors 'self'; "
+		. "base-uri 'self'; "
+		. "form-action 'self'; "
+		. "object-src 'none'";
+	header( 'Content-Security-Policy: ' . $csp );
+	header( 'X-Content-Type-Options: nosniff' );
+	header( 'X-Frame-Options: SAMEORIGIN' );
+	ob_start(
+		static function ( $html ) use ( $nonce ) {
+			return (string) preg_replace_callback(
+				'#<script(?![^>]*\\bsrc=)(?![^>]*\\bnonce=)([^>]*)>#i',
+				static function ( $match ) use ( $nonce ) {
+					return '<script nonce="' . $nonce . '"' . $match[1] . '>';
+				},
+				$html
+			);
+		}
+	);
+}
+add_action( 'login_init', 'swiftboard_login_csp', 0 );
+
+/**
+ * Émet la politique login avant que WordPress Core n’envoie ses headers.
+ * `login_init` est assez tôt pour ouvrir le buffer HTML, mais peut être trop
+ * tard pour modifier les headers sur certaines versions de Core.
+ *
+ * @return void
+ */
+function swiftboard_login_csp_header() {
+	$script_name = isset( $_SERVER['SCRIPT_NAME'] ) ? basename( (string) $_SERVER['SCRIPT_NAME'] ) : '';
+	$request_uri = isset( $_SERVER['REQUEST_URI'] ) ? (string) $_SERVER['REQUEST_URI'] : '';
+	$is_login    = in_array( $GLOBALS['pagenow'] ?? '', array( 'wp-login.php', 'wp-register.php' ), true )
+		|| in_array( $script_name, array( 'wp-login.php', 'wp-register.php' ), true )
+		|| false !== strpos( $request_uri, 'wp-login.php' );
+	if ( ! $is_login || headers_sent() ) {
+		return;
+	}
+	$nonce = esc_attr( swiftboard_csp_nonce() );
+	if ( function_exists( 'header_remove' ) ) {
+		header_remove( 'Content-Security-Policy' );
+	}
+	$csp = "default-src 'self'; "
+		. "script-src 'self' 'nonce-{$nonce}'; "
+		. "style-src 'self' 'unsafe-inline'; "
+		. "img-src 'self' data: https:; "
+		. "font-src 'self' data:; "
+		. "connect-src 'self'; "
+		. "frame-ancestors 'self'; "
+		. "base-uri 'self'; "
+		. "form-action 'self'; "
+		. "object-src 'none'";
+	header( 'Content-Security-Policy: ' . $csp );
+}
+add_action( 'send_headers', 'swiftboard_login_csp_header', 99 );
+// wp-login.php n’exécute pas toujours send_headers avant son propre header de
+// clickjacking; init reste précoce et intervient avant tout rendu HTML.
+add_action( 'init', 'swiftboard_login_csp_header', -999 );
+
+/**
+ * WordPress peut ajouter une politique clickjacking dans le tableau wp_headers
+ * après init; ce filtre la remplace par la politique complète avant émission.
+ *
+ * @param array<string, string> $headers Headers WordPress.
+ * @return array<string, string>
+ */
+function swiftboard_login_wp_headers( $headers ) {
+	$script_name = isset( $_SERVER['SCRIPT_NAME'] ) ? basename( (string) $_SERVER['SCRIPT_NAME'] ) : '';
+	$request_uri = isset( $_SERVER['REQUEST_URI'] ) ? (string) $_SERVER['REQUEST_URI'] : '';
+	$is_login    = in_array( $GLOBALS['pagenow'] ?? '', array( 'wp-login.php', 'wp-register.php' ), true )
+		|| in_array( $script_name, array( 'wp-login.php', 'wp-register.php' ), true )
+		|| false !== strpos( $request_uri, 'wp-login.php' );
+	if ( ! $is_login ) {
+		return $headers;
+	}
+	$nonce = esc_attr( swiftboard_csp_nonce() );
+	$headers['Content-Security-Policy'] = "default-src 'self'; script-src 'self' 'nonce-{$nonce}'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self'; connect-src 'self'; frame-ancestors 'self'; base-uri 'self'; form-action 'self'; object-src 'none'";
+	return $headers;
+}
+add_filter( 'wp_headers', 'swiftboard_login_wp_headers', 100 );
+
+/**
  * Indique si la page courante est un document Elementor.
  *
  * @return bool

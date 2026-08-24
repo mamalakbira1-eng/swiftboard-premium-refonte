@@ -65,3 +65,58 @@ test('CDC — contrat clavier et lien d’évitement', async ({ page }, testInfo
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
   await page.screenshot({ path: path.join(outDir, `keyboard-${testInfo.project.name}.png`), fullPage: true });
 });
+
+
+test('CDC — actions authentifiées vote sauvegarde et overflow', async ({ page }, testInfo) => {
+  test.setTimeout(140_000);
+  onlyChromiumDesktop(testInfo);
+  test.skip(!testUser || !testPassword, 'Définir SB_TEST_USER et SB_TEST_PASSWORD pour la recette authentifiée.');
+  await fs.mkdir(outDir, { recursive: true });
+  await login(page, testUser, testPassword);
+
+  await page.goto('/', { waitUntil: 'networkidle' });
+  const voteButton = page.locator('.sb-post-votes .sb-vote-btn.up:visible, .sb-comment-votes .sb-comment-vote-btn.up:visible').first();
+  await expect(voteButton).toBeVisible();
+  await expect(voteButton).toHaveAttribute('data-post-id', /\d+/);
+  const voteResponse = page.waitForResponse(response => response.url().includes('/wp-json/swiftboard/v1/vote') && response.request().method() === 'POST');
+  await voteButton.click();
+  const votePayload = await voteResponse;
+  expect(votePayload.status()).toBe(200);
+  await expect(voteButton).toHaveAttribute('aria-pressed', 'true');
+  await expect(voteButton).toHaveClass(/is-active/);
+
+  // La route applique l’intervalle métier du grade Rookie (5 secondes).
+  // Une seconde de marge rend la preuve stable sans contourner la limitation.
+  await page.waitForTimeout(6_000);
+  const removeResponse = page.waitForResponse(response => response.url().includes('/wp-json/swiftboard/v1/vote') && response.request().method() === 'POST');
+  await voteButton.click();
+  expect((await removeResponse).status()).toBe(200);
+  await expect(voteButton).toHaveAttribute('aria-pressed', 'false');
+  await expect(voteButton).not.toHaveClass(/is-active/);
+
+  const moreToggle = page.locator('.sb-more-toggle:visible').first();
+  await expect(moreToggle).toBeVisible();
+  await moreToggle.click();
+  await expect(moreToggle).toHaveAttribute('aria-expanded', 'true');
+  await expect(moreToggle.locator('..').locator('.sb-more-menu')).toBeVisible();
+  await page.keyboard.press('Escape');
+  await expect(moreToggle).toHaveAttribute('aria-expanded', 'false');
+
+  await page.goto(topicPath, { waitUntil: 'networkidle' });
+  const saveButton = page.locator('.sb-action-save:visible').first();
+  await expect(saveButton).toBeVisible();
+  const saveResponse = page.waitForResponse(response => response.url().includes('/wp-json/swiftboard/v1/user-action') && response.request().method() === 'POST');
+  await saveButton.click();
+  expect((await saveResponse).status()).toBe(200);
+  await expect(saveButton).toHaveClass(/active/);
+  await expect(saveButton).toHaveAttribute('aria-pressed', 'true');
+  await expect(saveButton).toHaveAttribute('aria-label', /Sauvegardé|Saved/i);
+  const unsaveResponse = page.waitForResponse(response => response.url().includes('/wp-json/swiftboard/v1/user-action') && response.request().method() === 'POST');
+  await saveButton.click();
+  expect((await unsaveResponse).status()).toBe(200);
+  await expect(saveButton).not.toHaveClass(/active/);
+  await expect(saveButton).toHaveAttribute('aria-pressed', 'false');
+  await expect(saveButton).toHaveAttribute('aria-label', /Sauvegarder|Save/i);
+
+  await page.screenshot({ path: path.join(outDir, `authenticated-actions-${testInfo.project.name}.png`), fullPage: true });
+});

@@ -172,7 +172,7 @@ add_filter('pre_get_posts', function($query) {
         <div class="no-results">
             <h2 style="margin-bottom: var(--space-sm);"><?php esc_html_e('Aucun résultat trouvé', 'swiftboard'); ?></h2>
             <p><?php esc_html_e('Essayez une autre recherche.', 'swiftboard'); ?></p>
-            <?php get_search_form(); ?>
+            <?php get_search_form( array( 'aria_label' => __( 'Rechercher dans les résultats', 'swiftboard' ) ) ); ?>
         </div>
     <?php endif; ?>
 

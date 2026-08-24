@@ -24,7 +24,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 function swiftboard_preload_critical_assets() {
 	$critical = array(
-		SWIFTBOARD_ASSETS . '/css/main.css?ver=' . SWIFTBOARD_VERSION,
+		SWIFTBOARD_ASSETS . '/css/main.css?ver=' . SWIFTBOARD_VERSION . '.' . (string) filemtime( SWIFTBOARD_DIR . '/assets/css/main.css' ),
 		// La couche Reddit porte la composition de la page : sans preload elle
 		// arrive apres le premier rendu et provoque un decalage visible.
 		SWIFTBOARD_ASSETS . '/css/reddit-refonte.css?ver=' . SWIFTBOARD_VERSION,
@@ -42,15 +42,18 @@ add_action( 'wp_head', 'swiftboard_preload_critical_assets', 1 );
  * @return void
  */
 function swiftboard_enqueue_assets() {
-	// CSS principal
-	wp_enqueue_style(
+		// CSS principal
+		$sb_main_css_version = file_exists( SWIFTBOARD_DIR . '/assets/css/main.css' )
+			? SWIFTBOARD_VERSION . '.' . (string) filemtime( SWIFTBOARD_DIR . '/assets/css/main.css' )
+			: SWIFTBOARD_VERSION;
+		wp_enqueue_style(
 		'swiftboard-main',
 		SWIFTBOARD_ASSETS . '/css/main.css',
 		array(),
-		SWIFTBOARD_VERSION
-	);
+					$sb_main_css_version
+		);
 
-	// Couche UI Reddit : composition, cartes, pilules de vote et responsive.
+		// Couche UI Reddit : composition, cartes, pilules de vote et responsive.
 	// Chargée APRES main.css dont elle depend pour les tokens --color-*.
 	// Elle ne masque aucun contenu : le mobile reagence, il ne cache pas.
 	wp_enqueue_style(
@@ -91,17 +94,20 @@ function swiftboard_enqueue_assets() {
 	}
 
 	if ( ! is_user_logged_in() ) {
+		$sb_onboarding_version = file_exists( SWIFTBOARD_DIR . '/assets/css/onboarding.css' )
+			? SWIFTBOARD_VERSION . '.' . (string) filemtime( SWIFTBOARD_DIR . '/assets/css/onboarding.css' )
+			: SWIFTBOARD_VERSION;
 		wp_enqueue_style(
 			'swiftboard-onboarding',
 			SWIFTBOARD_ASSETS . '/css/onboarding.css',
 			array( 'swiftboard-main' ),
-			SWIFTBOARD_VERSION
+			$sb_onboarding_version
 		);
 		wp_enqueue_script(
 			'swiftboard-onboarding',
 			SWIFTBOARD_ASSETS . '/js/onboarding.js',
 			array(),
-			SWIFTBOARD_VERSION,
+			$sb_onboarding_version,
 			true
 		);
 

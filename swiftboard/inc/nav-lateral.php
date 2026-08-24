@@ -68,7 +68,7 @@ function swiftboard_render_nav_laterale( $forum_actif = 0 ) {
 		),
 	);
 
-	echo '<nav class="sb-r-nav" aria-label="' . esc_attr__( 'Navigation principale', 'swiftboard' ) . '">';
+	echo '<nav class="sb-r-nav" aria-label="' . esc_attr__( 'Navigation secondaire', 'swiftboard' ) . '">';
 	echo '<ul class="sb-r-nav-list">';
 	foreach ( $liens as $lien ) {
 		printf(
@@ -149,7 +149,7 @@ function swiftboard_render_carte_inscription() {
 			</a>
 		<?php endforeach; ?>
 
-		<a class="sb-r-signup-btn" href="<?php echo esc_url( $url_insc ); ?>">
+		<a class="sb-r-signup-btn" href="<?php echo esc_url( $url_insc ); ?>" data-open-onboarding="true">
 			<span class="sb-r-signup-mark" aria-hidden="true">@</span>
 			<?php esc_html_e( 'Utiliser une adresse e-mail', 'swiftboard' ); ?>
 		</a>

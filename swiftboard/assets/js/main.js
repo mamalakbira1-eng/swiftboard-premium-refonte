@@ -86,6 +86,39 @@
     }
 
     // =========================================================================
+    // 1bis. VUE COMPACTE DU FIL (Lot 4)
+    // =========================================================================
+    function initCompactView() {
+        const buttons = document.querySelectorAll('[data-compact-toggle]');
+        if (!buttons.length) {
+            return;
+        }
+        let active = false;
+        try {
+            active = localStorage.getItem('swiftboard-compact-view') === '1';
+        } catch (e) {}
+
+        function apply(value) {
+            active = Boolean(value);
+            document.body.classList.toggle('sb-compact-view', active);
+            buttons.forEach(function (button) {
+                button.setAttribute('aria-pressed', active ? 'true' : 'false');
+                button.classList.toggle('is-active', active);
+            });
+        }
+
+        apply(active);
+        buttons.forEach(function (button) {
+            button.addEventListener('click', function () {
+                apply(!active);
+                try {
+                    localStorage.setItem('swiftboard-compact-view', active ? '1' : '0');
+                } catch (e) {}
+            });
+        });
+    }
+
+    // =========================================================================
     // 2. MENU MOBILE TOGGLE
     // =========================================================================
     function initMenuToggle() {
@@ -597,10 +630,10 @@
         function agir(cible) {
             const action = cible.getAttribute('data-sb-action');
             if (action === 'collapse') {
-                if (cible.parentElement) {
-                    cible.parentElement.classList.toggle('collapsed');
-                }
-                return true;
+                // Le clic est géré par nested-comments.js, qui persiste aussi
+                // l’identifiant du fil. Retourner false ici évite que les deux
+                // écouteurs délégués se neutralisent en basculant deux fois.
+                return false;
             }
             if (action === 'reply-open') {
                 const bloc = cible.closest('.sb-comment');
@@ -637,13 +670,22 @@
             if (e.key !== 'Enter' && e.key !== ' ') {
                 return;
             }
-            const cible = e.target.closest('[data-sb-action]');
-            if (cible && agir(cible)) {
+                        const cible = e.target.closest('[data-sb-action]');
+            if (!cible) {
+                return;
+            }
+            if (cible.getAttribute('data-sb-action') === 'collapse') {
+                // Réutilise le gestionnaire click de nested-comments.js afin
+                // que le clavier bénéficie de la même persistance localStorage.
+                cible.click();
+                e.preventDefault();
+                return;
+            }
+            if (agir(cible)) {
                 e.preventDefault();
             }
         });
     }
-
     function initDataConfirm() {
         document.addEventListener('click', function(e) {
             var btn = e.target.closest('[data-confirm]');
@@ -656,6 +698,7 @@
 
     function init() {
         initDarkMode();
+        initCompactView();
         initCommentActions();
         initMenuToggle();
         initSkipLink();

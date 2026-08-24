@@ -23,7 +23,7 @@ body.login {
 }
 
 /* --- Logo WordPress masque, remplace par le branding du site --------------- */
-body.login h1 { display: none; }
+body.login h1.wp-login-logo { display: none; }
 
 .sb-login-brand {
     display: flex;
@@ -183,3 +183,52 @@ body.login .message { border-inline-start-color: #006cbd; }
     html[data-theme="dark"] body.login #backtoblog a { color: #4ea1ff; }
 }
 
+
+/* Thème manuel : wp-login ne charge pas main.css, ces overrides restent autonomes. */
+html[data-theme="dark"] body.login {
+    background: #1a1a1b;
+}
+
+html[data-theme="dark"] body.login form {
+    border-color: #343536;
+    background: #272729;
+}
+
+html[data-theme="dark"] body.login label,
+html[data-theme="dark"] body.login .sb-login-sitename {
+    color: #d7dadc;
+}
+
+html[data-theme="dark"] body.login .sb-login-intro {
+    color: #b8bbbf;
+}
+
+html[data-theme="dark"] body.login input[type="text"],
+html[data-theme="dark"] body.login input[type="password"],
+html[data-theme="dark"] body.login input[type="email"] {
+    border-color: #444;
+    background: #1a1a1b;
+    color: #d7dadc;
+}
+
+html[data-theme="dark"] body.login #nav a,
+html[data-theme="dark"] body.login #backtoblog a {
+    color: #4ea1ff;
+}
+
+html[data-theme="dark"] body.login input[type="submit"],
+html[data-theme="dark"] body.login .button {
+    border-color: #006cbd;
+    background: #006cbd;
+    color: #fff;
+}
+
+/* Extensions SwiftBoard rendues dans le formulaire Signup cœur WordPress. */
+html[data-theme="dark"] body.login .sb-profile-section-title {
+    color: #d7dadc !important;
+}
+
+html[data-theme="dark"] body.login .sb-avatar-picker p,
+html[data-theme="dark"] body.login #reg_passmail {
+    color: #b8bbbf !important;
+}

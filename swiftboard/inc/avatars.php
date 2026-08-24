@@ -167,7 +167,7 @@ function swiftboard_avatar_picker(): void {
 	$avatars = swiftboard_get_avatars_list();
 	?>
 	<div class="sb-avatar-picker">
-		<h3 class="sb-profile-section-title"><?php esc_html_e( 'Avatar', 'swiftboard' ); ?></h3>
+		<h2 class="sb-profile-section-title"><?php esc_html_e( 'Avatar', 'swiftboard' ); ?></h2>
 		<p style="font-size:13px;color:var(--color-text-muted);margin:0 0 12px;">
 			<?php esc_html_e( 'Choisissez votre avatar :', 'swiftboard' ); ?>
 		</p>
@@ -264,7 +264,7 @@ add_action(
 		$avatars = swiftboard_get_avatars_list();
 		?>
 	<div class="sb-avatar-picker sb-avatar-register">
-		<h3 class="sb-profile-section-title"><?php esc_html_e( 'Choisissez votre avatar', 'swiftboard' ); ?></h3>
+		<h2 class="sb-profile-section-title"><?php esc_html_e( 'Choisissez votre avatar', 'swiftboard' ); ?></h2>
 		<p style="font-size:13px;color:var(--color-text-muted);margin:0 0 12px;">
 			<?php esc_html_e( 'Sélectionnez un avatar (facultatif) :', 'swiftboard' ); ?>
 		</p>

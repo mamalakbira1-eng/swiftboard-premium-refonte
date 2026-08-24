@@ -44,44 +44,82 @@ if (!in_array($home_sort, ['hot', 'new', 'top', 'rising'], true)) {
     $home_sort = 'hot';
 }
 
-// Hot topics (forum) — utilises aussi par la sidebar, toujours en '7d'
-// Anti-N+1: precharger les auteurs en un seul lot
-$hot_topics = function_exists('swiftboard_get_hot_topics') ? swiftboard_get_hot_topics('all', 8) : [];
-if (!empty($hot_topics)) {
-    $sb_hot_author_ids = array_unique(array_filter(wp_list_pluck($hot_topics, 'author_id')));
-    if (!empty($sb_hot_author_ids)) cache_users($sb_hot_author_ids);
-}
-
-// Source des sujets selon le tri choisi (meme format que swiftboard_get_hot_topics)
-$sb_page = max(1, (int) ($_GET['paged'] ?? get_query_var('paged') ?: 1));
+// Hot topics pour la sidebar et le flux principal.
+// Le flux principal reçoit assez de lignes pour assurer sa pagination locale ;
+// la sidebar reste limitée à huit éléments.
+$sb_page = max(1, (int) ($_GET['sb_paged'] ?? 1));
 $sb_per_page = 15;
+$hot_topics = function_exists('swiftboard_get_hot_topics') ? swiftboard_get_hot_topics('all', 8) : [];
+$hot_feed_topics = function_exists('swiftboard_get_hot_topics') ? swiftboard_get_hot_topics('all', $sb_per_page * 3) : [];
 
-if ($home_sort === 'rising') {
-    $feed_topics = function_exists('swiftboard_get_hot_topics') ? swiftboard_get_hot_topics('all', $sb_per_page * 3) : [];
-} elseif ($home_sort === 'top') {
-    $feed_topics = function_exists('swiftboard_get_hot_topics') ? swiftboard_get_hot_topics('all', $sb_per_page * 3) : [];
-} elseif ($home_sort === 'new') {
-    $feed_topics = [];
-    foreach (get_posts(['post_type' => 'topic', 'post_status' => 'publish', 'posts_per_page' => $sb_per_page * 3, 'orderby' => 'date', 'order' => 'DESC']) as $sb_t) {
+// Normalise les sujets WordPress afin que chaque mode de tri utilise la même
+// structure. Les modes sont volontairement distincts :
+// hot = score Reddit (votes + réponses pondérées), top = votes nets,
+// rising = activité récente, new = date de publication.
+$sb_build_feed_topics = static function ($posts) {
+    $topics = [];
+    foreach ($posts as $sb_t) {
         $sb_f = get_post($sb_t->post_parent);
-        $feed_topics[] = [
-            'id' => $sb_t->ID,
+        $votes = function_exists('swiftboard_get_vote_count') ? (int) swiftboard_get_vote_count($sb_t->ID) : (int) get_post_meta($sb_t->ID, '_swiftboard_vote_score', true);
+        $replies = function_exists('bbp_get_topic_reply_count') ? (int) bbp_get_topic_reply_count($sb_t->ID, true) : 0;
+        $activity = get_post_meta($sb_t->ID, '_bbp_last_active_time', true) ?: $sb_t->post_modified;
+        $age_hours = max(1, (current_time('timestamp') - (int) get_post_timestamp($sb_t->ID)) / HOUR_IN_SECONDS);
+        $hot_score = $votes + ($replies * 2);
+        $topics[] = [
+            'id' => (int) $sb_t->ID,
             'title' => $sb_t->post_title,
             'url' => get_permalink($sb_t->ID),
             'author_id' => (int) $sb_t->post_author,
             'author_name' => get_the_author_meta('display_name', $sb_t->post_author),
             'date' => $sb_t->post_date,
-            'time_ago' => swiftboard_time_ago(get_the_date('c', $sb_t->ID)),
-            'vote_score' => function_exists('swiftboard_get_vote_count') ? swiftboard_get_vote_count($sb_t->ID) : 0,
-            'reply_count' => function_exists('bbp_get_topic_reply_count') ? bbp_get_topic_reply_count($sb_t->ID, true) : 0,
+            'activity_date' => $activity,
+            'time_ago' => function_exists('swiftboard_time_ago') ? swiftboard_time_ago(get_the_date('c', $sb_t->ID)) : '',
+            'vote_score' => $votes,
+            'reply_count' => $replies,
+            'hot_score' => $hot_score,
+            // Rising favorise l’engagement récent plutôt qu’un simple total
+            // de votes : score chaud amorti par l’âge du sujet.
+            'rising_score' => $hot_score / sqrt($age_hours),
             'forum_name' => $sb_f ? $sb_f->post_title : '',
             'forum_url' => $sb_f ? get_permalink($sb_f->ID) : '',
             'forum_id' => $sb_f ? (int) $sb_f->ID : 0,
             'excerpt' => wp_trim_words(wp_strip_all_tags($sb_t->post_content), 30, '…'),
         ];
     }
+    return $topics;
+};
+
+if ($home_sort === 'hot') {
+    $feed_topics = $hot_feed_topics;
+} elseif ($home_sort === 'new') {
+    $feed_topics = $sb_build_feed_topics(get_posts([
+        'post_type' => 'topic', 'post_status' => 'publish',
+        'posts_per_page' => $sb_per_page * 3, 'orderby' => 'date', 'order' => 'DESC',
+    ]));
 } else {
-    $feed_topics = $hot_topics;
+    // top/rising travaillent sur le même univers complet puis appliquent
+    // chacun sa clé de classement : aucune paire d’onglets ne partage un
+    // fallback silencieux vers hot.
+    $feed_topics = $sb_build_feed_topics(get_posts([
+        'post_type' => 'topic', 'post_status' => 'publish',
+        'posts_per_page' => -1, 'orderby' => 'ID', 'order' => 'DESC',
+    ]));
+    usort($feed_topics, static function ($a, $b) use ($home_sort) {
+        if ($home_sort === 'top') {
+            $key_a = (int) $a['vote_score'];
+            $key_b = (int) $b['vote_score'];
+        } else {
+            $key_a = (float) ($a['rising_score'] ?? 0);
+            $key_b = (float) ($b['rising_score'] ?? 0);
+        }
+        return $key_a === $key_b ? ((int) $b['id'] <=> (int) $a['id']) : ($key_b <=> $key_a);
+    });
+}
+
+// Anti-N+1 : précharger les auteurs utilisés par les deux surfaces.
+$sb_hot_author_ids = array_unique(array_filter(wp_list_pluck(array_merge($hot_topics, $feed_topics), 'author_id')));
+if (!empty($sb_hot_author_ids)) {
+    cache_users($sb_hot_author_ids);
 }
 
 // Top répondeurs
@@ -117,6 +155,9 @@ if (!empty($feed_topics)) {
             'forum_id' => $t['forum_id'] ?? 0,
             'excerpt' => $t['excerpt'] ?? '',
             'views' => (int) get_post_meta($t['id'], '_bbp_voice_count', true),
+            'hot_score' => (int) ($t['hot_score'] ?? (($t['vote_score'] ?? 0) + (($t['reply_count'] ?? 0) * 2))),
+            'rising_score' => (float) ($t['rising_score'] ?? 0),
+            'activity_date' => $t['activity_date'] ?? $t['date'],
             'image' => $sb_get_preview_image( (int) $t['id'] ),
         ];
     }
@@ -140,6 +181,8 @@ if ($blog_posts->have_posts()) {
             'time_ago' => function_exists('swiftboard_time_ago') ? swiftboard_time_ago(strtotime(get_post_field('post_date'))) : '',
             'votes' => function_exists('swiftboard_get_vote_count') ? swiftboard_get_vote_count(get_the_ID()) : 0,
             'replies' => get_comments_number(),
+            'hot_score' => (int) (function_exists('swiftboard_get_vote_count') ? swiftboard_get_vote_count(get_the_ID()) : 0),
+            'activity_date' => get_post_modified_time('c'),
             'forum_name' => 'Blog',
             'forum_url' => home_url('/blog/'),
             'excerpt' => wp_trim_words(wp_strip_all_tags(get_the_content()), 30, '…'),
@@ -149,19 +192,27 @@ if ($blog_posts->have_posts()) {
     wp_reset_postdata();
 }
 
-// Trier le mix : « new » par date, hot/top/rising par score puis date
-if ($home_sort === 'new') {
-    usort($mixed_feed, function ($a, $b) {
-        return strtotime($b['date']) - strtotime($a['date']);
-    });
-} else {
-    usort($mixed_feed, function ($a, $b) {
-        if ($a['votes'] !== $b['votes']) {
-            return $b['votes'] - $a['votes'];
-        }
-        return strtotime($b['date']) - strtotime($a['date']);
-    });
-}
+// Trier le mix selon la clé propre à l’onglet sélectionné.
+usort($mixed_feed, function ($a, $b) use ($home_sort) {
+    if ($home_sort === 'new') {
+        $key_a = strtotime($a['date']);
+        $key_b = strtotime($b['date']);
+    } elseif ($home_sort === 'rising') {
+        $key_a = (float) ($a['rising_score'] ?? 0);
+        $key_b = (float) ($b['rising_score'] ?? 0);
+    } elseif ($home_sort === 'top') {
+        $key_a = (int) $a['votes'];
+        $key_b = (int) $b['votes'];
+    } else {
+        $key_a = (int) ($a['hot_score'] ?? $a['votes']);
+        $key_b = (int) ($b['hot_score'] ?? $b['votes']);
+    }
+    if ($key_a !== $key_b) {
+        return $key_b <=> $key_a;
+    }
+    $date_compare = strtotime($b['date']) <=> strtotime($a['date']);
+    return $date_compare ?: ((int) $b['id'] <=> (int) $a['id']);
+});
 
 // Pagination : slice selon la page courante (pas de limite artificielle)
 $sb_total_feed = count($mixed_feed);
@@ -201,7 +252,7 @@ $forum_url = function_exists('bbp_get_forums_url') ? bbp_get_forums_url() : home
             <div class="sb-home-hero-actions">
                 <a href="<?php echo esc_url(wp_login_url()); ?>" class="sb-home-btn-secondary">Connexion</a>
                 <?php if (get_option('users_can_register')): ?>
-                <a href="<?php echo esc_url(wp_registration_url()); ?>" class="sb-home-btn-primary">S'inscrire</a>
+                <a href="<?php echo esc_url(wp_registration_url()); ?>" class="sb-home-btn-primary" data-open-onboarding="true">S'inscrire</a>
                 <?php endif; ?>
             </div>
         </div>
@@ -262,6 +313,10 @@ $forum_url = function_exists('bbp_get_forums_url') ? bbp_get_forums_url() : home
                         ?><span><?php echo esc_html($sb_label); ?></span></a>
                     <?php endforeach; ?>
                 </div>
+                <button type="button" class="sb-compact-view-toggle" data-compact-toggle data-view="compact" aria-pressed="false">
+                    <span aria-hidden="true">▤</span>
+                    <span><?php esc_html_e( 'Vue compacte', 'swiftboard' ); ?></span>
+                </button>
             </div>
 
             <?php
@@ -444,8 +499,8 @@ $forum_url = function_exists('bbp_get_forums_url') ? bbp_get_forums_url() : home
             <nav class="pagination sb-home-pagination">
                 <?php
                 echo paginate_links([
-                    'base' => home_url('/?sort=' . $home_sort . '&paged=%#%'),
-                    'format' => '&paged=%#%',
+                    'base' => home_url('/?sort=' . $home_sort . '&sb_paged=%#%'),
+                    'format' => '&sb_paged=%#%',
                     'current' => $sb_page,
                     'total' => $sb_total_pages,
                     'prev_text' => '‹ ' . __('Précédent', 'swiftboard'),

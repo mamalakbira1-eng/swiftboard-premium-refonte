@@ -4857,3 +4857,27 @@ textarea:focus-visible {
 
 /* Fin de main.css — la couche UI Reddit vit dans assets/css/reddit-refonte.css,
    enqueuée après ce fichier (voir inc/enqueue.php). */
+
+/* Contraste WCAG AA des valeurs de statistiques en thème sombre. */
+html[data-theme="dark"] .sb-profile-stat-value {
+    color: #78c8ff !important;
+}
+
+/* En-tête de résultats : surface explicite pour un contraste déterministe en dark/WebKit. */
+html[data-theme="dark"] .page-header {
+    background: #fff;
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+}
+
+html[data-theme="dark"] .page-header .page-title {
+    color: #1e232a !important;
+}
+
+html[data-theme="dark"] .page-header .search-query {
+    color: #005a9e !important;
+}
+
+html[data-theme="dark"] .page-header .search-count {
+    color: #525252 !important;
+}

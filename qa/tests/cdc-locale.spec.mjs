@@ -8,7 +8,7 @@ const expectedDir = process.env.SB_EXPECT_DIR || (expectedLocale === 'ar' ? 'rtl
 
 test('CDC — smoke locale et direction document', async ({ page }, testInfo) => {
   test.skip(!expectedLocale, 'Définir SB_EXPECT_LOCALE et SB_EXPECT_DIR sur un snapshot de locale dédié.');
-  test.skip(testInfo.project.name !== 'chromium-desktop', 'Smoke locale exécuté une fois sur Chromium desktop.');
+  test.skip(process.env.SB_EXPECT_RTL !== '1' && testInfo.project.name !== 'chromium-desktop', 'Smoke locale LTR exécuté une fois sur Chromium desktop; RTL est rejoué sur les trois moteurs.');
   await fs.mkdir(outDir, { recursive: true });
   for (const url of ['/', '/forums/forum/finances/', '/forums/topic/par-ou-commencer-une-epargne-d-urgence/']) {
     await page.goto(url, { waitUntil: 'networkidle' });

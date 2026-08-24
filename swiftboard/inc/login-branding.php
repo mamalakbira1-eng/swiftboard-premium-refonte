@@ -30,11 +30,38 @@ add_action(
 			array(),
 			SWIFTBOARD_VERSION
 		);
+		// Loader externe et CSP-safe : pose data-theme avant le rendu du formulaire.
+		wp_enqueue_script(
+			'swiftboard-login-theme',
+			SWIFTBOARD_ASSETS . '/js/anti-fouc.js',
+			array(),
+			SWIFTBOARD_VERSION,
+			false
+		);
 	}
 );
 
 // ============================================================================
-// 2. LOGO : pointe vers l'accueil du site, pas vers wordpress.org
+// 2. LANDMARK PRINCIPAL — wp-login.php ne charge pas header.php du thème.
+// ============================================================================
+add_action(
+	'login_header',
+	function () {
+		echo '<main id="sb-login-main" class="sb-login-main" role="main" aria-label="' . esc_attr__( 'Authentification', 'swiftboard' ) . '">';
+	},
+	1
+);
+
+add_action(
+	'login_footer',
+	function () {
+		echo '</main>';
+	},
+	99
+);
+
+// ============================================================================
+// 3. LOGO : pointe vers l'accueil du site, pas vers wordpress.org
 // ============================================================================
 add_filter(
 	'login_headerurl',
@@ -51,7 +78,7 @@ add_filter(
 );
 
 // ============================================================================
-// 3. MESSAGE D'ACCUEIL CONTEXTUEL (login / register / lostpassword)
+// 4. MESSAGE D'ACCUEIL CONTEXTUEL (login / register / lostpassword)
 // ============================================================================
 add_filter(
 	'login_message',
@@ -71,7 +98,7 @@ add_filter(
 		$out  = '<div class="sb-login-brand">';
 		$out .= '<span class="sb-login-logo" aria-hidden="true">'
 			. esc_html( mb_substr( get_bloginfo( 'name' ), 0, 1 ) ) . '</span>';
-		$out .= '<span class="sb-login-sitename">' . esc_html( get_bloginfo( 'name' ) ) . '</span>';
+		$out .= '<h1 class="sb-login-sitename">' . esc_html( get_bloginfo( 'name' ) ) . '</h1>';
 		$out .= '</div>';
 
 		// Notre accroche seulement si WP n'affiche pas deja ses propres consignes
@@ -84,7 +111,7 @@ add_filter(
 );
 
 // ============================================================================
-// 4. REDIRECTION APRES CONNEXION
+// 5. REDIRECTION APRES CONNEXION
 // Les membres vont sur leur profil, les admins gardent wp-admin.
 // ============================================================================
 add_filter(
@@ -112,7 +139,7 @@ add_filter(
 );
 
 // ============================================================================
-// 5. MESSAGE D'ERREUR NEUTRE
+// 6. MESSAGE D'ERREUR NEUTRE
 // Ne pas reveler si c'est l'identifiant ou le mot de passe qui est faux
 // (evite l'enumeration de comptes).
 // ============================================================================
@@ -140,7 +167,7 @@ add_filter(
 );
 
 // ============================================================================
-// 6. LIEN DE RETOUR AU SITE
+// 7. LIEN DE RETOUR AU SITE
 // ============================================================================
 add_filter(
 	'login_site_html_link',
