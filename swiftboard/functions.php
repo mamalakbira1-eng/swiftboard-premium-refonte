@@ -57,7 +57,15 @@ if ( ! defined( 'SWIFTBOARD_DIR' ) ) {
 	define( 'SWIFTBOARD_DIR', $sb_dir );
 }
 if ( ! defined( 'SWIFTBOARD_URI' ) ) {
-	define( 'SWIFTBOARD_URI', get_template_directory_uri() );
+	$swiftboard_uri = get_template_directory_uri();
+	if ( is_multisite() && function_exists( 'network_site_url' ) ) {
+		// En réseau sous-directory, site_url() inclut /community/ alors que
+		// wp-content reste à la racine du réseau. Les assets doivent donc
+		// utiliser l’URL réseau, sinon chaque JS/CSS du sous-site devient 404.
+		$theme_relative = str_replace( wp_normalize_path( WP_CONTENT_DIR ), '', wp_normalize_path( get_template_directory() ) );
+		$swiftboard_uri = network_site_url( '/wp-content/' . trim( $theme_relative, '/' ) );
+	}
+	define( 'SWIFTBOARD_URI', untrailingslashit( $swiftboard_uri ) );
 }
 if ( ! defined( 'SWIFTBOARD_ASSETS' ) ) {
 	define( 'SWIFTBOARD_ASSETS', SWIFTBOARD_URI . '/assets' );

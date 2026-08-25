@@ -303,10 +303,8 @@
         const sseConfig = document.getElementById('swiftboard-sse-config');
         const sseActif = (sseConfig && sseConfig.getAttribute('data-active') === '1')
             || window.swiftboardSSEActive;
-        if (sseActif) {
-            return;
-        }
-
+        // SSE désactive uniquement le polling périodique ; le dropdown et
+        // le chargement à la demande restent nécessaires dans tous les modes.
         const bell = document.getElementById('sb-notif-bell');
         if (!bell) {
             return;
@@ -519,8 +517,10 @@
             });
         }
 
-        // Start
-        startPolling();
+        // Start : le flux SSE remplace seulement le polling périodique.
+        if (!sseActif) {
+            startPolling();
+        }
     }
 
     // =========================================================================

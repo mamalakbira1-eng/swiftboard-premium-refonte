@@ -3,12 +3,9 @@ import AxeBuilder from '@axe-core/playwright';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
-const enabled = process.env.SB_EXPECT_EXTENSIONS === '1';
 const outDir = path.resolve('../reports/extensions');
 
 test('CDC — rendu réel Gutenberg, shortcode et Elementor', async ({ page }, testInfo) => {
-  test.skip(!enabled, 'Lancer avec SB_EXPECT_EXTENSIONS=1 sur la stack isolée des extensions.');
-  test.skip(testInfo.project.name !== 'chromium-desktop', 'Validation des extensions exécutée une fois sur Chromium desktop.');
   await fs.mkdir(outDir, { recursive: true });
   const failures = [];
   page.on('console', msg => { if (msg.type() === 'error') failures.push(`console: ${msg.text()}`); });

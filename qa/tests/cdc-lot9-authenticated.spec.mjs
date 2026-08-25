@@ -15,11 +15,27 @@ async function login(page) {
   await expect(page).not.toHaveURL(/wp-login\.php/);
 }
 
+async function dismissLanguagePopup(page) {
+  const overlay = page.locator('#sb-lang-popup-overlay');
+  try {
+    await overlay.waitFor({ state: 'visible', timeout: 2_000 });
+    const stay = page.locator('#sb-lang-stay');
+    if (await stay.isVisible()) await stay.click();
+  } catch (_) {
+    // Popup conditionnelle à la langue du navigateur et au cookie de session.
+  }
+}
+
 async function audit(page, url, label) {
   const issues = { consoleErrors: [], pageErrors: [], failedRequests: [], badResponses: [] };
   page.on('console', msg => { if (msg.type() === 'error') issues.consoleErrors.push(msg.text()); });
   page.on('pageerror', error => issues.pageErrors.push(String(error)));
-  page.on('requestfailed', request => issues.failedRequests.push({ url: request.url(), error: request.failure()?.errorText || 'unknown' }));
+  page.on('requestfailed', request => {
+    // Une navigation ou la fermeture du contexte annule normalement la
+    // connexion persistante SSE. Ce n’est pas une erreur réseau produit.
+    if (request.url().includes('/wp-json/swiftboard/v1/notifications/stream')) return;
+    issues.failedRequests.push({ url: request.url(), error: request.failure()?.errorText || 'unknown' });
+  });
   page.on('response', response => { if (response.status() >= 400) issues.badResponses.push({ url: response.url(), status: response.status() }); });
   const response = await page.goto(url, { waitUntil: 'networkidle' });
   expect(response?.status(), label).toBe(200);
@@ -31,12 +47,13 @@ async function audit(page, url, label) {
 }
 
 test('Lot 9 — états membre, notifications, focus et thème sans flash', async ({ page }, testInfo) => {
-  test.skip(!password, 'SB_VIP_PASSWORD requis pour la passe authentifiée locale.');
+  expect(password, 'SB_VIP_PASSWORD requis pour la passe authentifiée locale.').toBeTruthy();
   await fs.mkdir(outDir, { recursive: true });
   await login(page);
 
   const results = {};
   results.home = await audit(page, '/', 'home-auth');
+  await dismissLanguagePopup(page);
   const menuToggle = page.locator('.sb-user-menu-toggle');
   await expect(menuToggle).toBeVisible();
   await menuToggle.focus();
@@ -89,10 +106,9 @@ test('Lot 9 — états membre, notifications, focus et thème sans flash', async
 
 
 test('Lot 9 — état vide notifications sur compte frais', async ({ page }, testInfo) => {
-  test.skip(testInfo.project.name !== 'chromium-desktop', 'État métier exécuté une fois sur Chromium desktop; le dropdown responsive est couvert par la matrice L9.');
-  const emptyUser = process.env.SB_EMPTY_USER;
+  const emptyUser = process.env.SB_EMPTY_USER || 'sbempty';
   const emptyPassword = process.env.SB_EMPTY_PASSWORD;
-  test.skip(!emptyUser || !emptyPassword, 'Définir SB_EMPTY_USER et SB_EMPTY_PASSWORD pour la preuve d’état vide.');
+  expect(emptyPassword, 'SB_EMPTY_PASSWORD requis pour la preuve d’état vide.').toBeTruthy();
   await fs.mkdir(outDir, { recursive: true });
   await page.goto('/wp-login.php', { waitUntil: 'networkidle' });
   await page.locator('#user_login').fill(emptyUser);
@@ -101,6 +117,7 @@ test('Lot 9 — état vide notifications sur compte frais', async ({ page }, tes
   await expect(page).not.toHaveURL(/wp-login\.php/);
 
   await page.goto('/', { waitUntil: 'networkidle' });
+  await dismissLanguagePopup(page);
   const bell = page.locator('#sb-notif-bell');
   const bellButton = bell.locator('.sb-notif-btn');
   await expect(bellButton).toBeVisible();

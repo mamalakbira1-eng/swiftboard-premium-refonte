@@ -7,6 +7,21 @@
     'use strict';
 
     function init() {
+        var passwordToggles = document.querySelectorAll('.wp-hide-pw');
+        passwordToggles.forEach(function (button) {
+            var label = button.getAttribute('aria-label') || 'Afficher le mot de passe';
+            button.setAttribute('aria-label', label);
+            button.setAttribute('title', label);
+            button.addEventListener('click', function () {
+                window.requestAnimationFrame(function () {
+                    var input = button.parentElement && button.parentElement.querySelector('input');
+                    var nextLabel = input && input.type === 'text' ? 'Masquer le mot de passe' : 'Afficher le mot de passe';
+                    button.setAttribute('aria-label', nextLabel);
+                    button.setAttribute('title', nextLabel);
+                });
+            });
+        });
+
         var form = document.querySelector('.bbp-login-form');
         if (!form) return;
 

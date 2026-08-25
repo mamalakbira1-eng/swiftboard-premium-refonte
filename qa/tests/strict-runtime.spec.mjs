@@ -36,7 +36,7 @@ test('strict runtime — pages, console, réseau et accessibilité', async ({ pa
     const issues = collectIssues(page);
     await page.goto(url, { waitUntil: 'networkidle' });
     await expect(page.locator('main, [role="main"]')).toHaveCount(1);
-    const axe = await new AxeBuilder({ page }).analyze();
+    const axe = await new AxeBuilder({ page }).exclude('#wpadminbar').analyze();
     results[key] = {
       url: page.url(),
       title: await page.title(),

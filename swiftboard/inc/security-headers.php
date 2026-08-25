@@ -144,25 +144,28 @@ add_filter( 'wp_headers', 'swiftboard_login_wp_headers', 100 );
  * @return bool
  */
 function swiftboard_is_elementor_page() {
+	if ( function_exists( 'is_admin' ) && is_admin() ) {
+		return false;
+	}
+	// Elementor peut injecter des scripts inline sur tout document public,
+	// notamment l’accueil, les profils et les recherches, même sans méta de
+	// page Elementor. Le nonce doit donc couvrir le document public complet.
+	if ( did_action( 'elementor/loaded' ) > 0 ) {
+		return true;
+	}
 	if ( ! function_exists( 'is_singular' ) || ! is_singular() ) {
 		return false;
 	}
 	$post_id = (int) get_queried_object_id();
-	if ( $post_id > 0 && (bool) get_post_meta( $post_id, '_elementor_edit_mode', true ) ) {
-		return true;
-	}
-	// Elementor peut charger sa configuration frontend sur une page singulière
-	// standard dès que le plugin est actif ; dans ce cas le nonce et le bypass
-	// cache restent nécessaires même sans méta _elementor_edit_mode.
-	return did_action( 'elementor/loaded' ) > 0;
+	return $post_id > 0 && (bool) get_post_meta( $post_id, '_elementor_edit_mode', true );
 }
 
 /**
  * Ajoute le nonce aux scripts inline d’une page Elementor.
  *
  * Elementor et certaines extensions WordPress impriment plusieurs blocs inline
- * variables. Le nonce est limité à ces pages, qui sont exclues du page-cache ;
- * les pages ordinaires conservent leur stratégie par empreintes SHA-256.
+ * variables. Le nonce couvre tout document public lorsque Elementor est actif ;
+ * ces pages sont exclues du page-cache afin que le nonce corresponde à l’en-tête.
  *
  * @param array<string, string|bool> $attributes Attributs du script.
  * @param string                     $data       Contenu inline.
@@ -201,7 +204,8 @@ function swiftboard_nonce_inline_output_buffer( $html ) {
 }
 
 /**
- * Démarre le buffer après le contrôle du page-cache (priorité 0/1).
+ * Démarre le buffer après le contrôle du page-cache (priorité 0/1). Il couvre
+ * tout document public Elementor pour maintenir la cohérence nonce/HTML.
  *
  * @return void
  */

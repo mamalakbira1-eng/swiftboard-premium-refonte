@@ -3,12 +3,9 @@ import AxeBuilder from '@axe-core/playwright';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
-const enabled = process.env.SB_EXPECT_MULTISITE === '1';
 const outDir = path.resolve('../reports/multisite');
 
 test('CDC — multisite principal et sous-site', async ({ page }, testInfo) => {
-  test.skip(!enabled, 'Lancer avec SB_EXPECT_MULTISITE=1 sur la stack multisite isolée.');
-  test.skip(testInfo.project.name !== 'chromium-desktop', 'Le multisite est testé une fois sur Chromium desktop.');
   await fs.mkdir(outDir, { recursive: true });
   const failures = [];
   page.on('console', msg => { if (msg.type() === 'error') failures.push(`console: ${msg.text()}`); });

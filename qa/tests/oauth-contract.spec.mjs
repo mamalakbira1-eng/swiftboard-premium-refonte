@@ -2,12 +2,9 @@ import { test, expect } from '@playwright/test';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
-const enabled = process.env.SB_EXPECT_OAUTH === '1';
 const outDir = path.resolve('../reports/oauth');
 
 test('CDC — contrat OAuth non configuré et state anti-rejeu', async ({ page, context }, testInfo) => {
-  test.skip(!enabled, 'Lancer avec SB_EXPECT_OAUTH=1 sur une sandbox isolée.');
-  test.skip(testInfo.project.name !== 'chromium-desktop', 'Le contrat OAuth est exécuté une fois sur Chromium desktop.');
   await fs.mkdir(outDir, { recursive: true });
   const base = '/wp-json/swiftboard/v1/auth';
 
@@ -31,6 +28,12 @@ test('CDC — contrat OAuth non configuré et state anti-rejeu', async ({ page, 
   });
   expect(verify.status()).toBe(500);
   expect((await verify.json()).code).toBe('not_configured');
+
+  const replay = await page.request.post(`${base}/google-verify`, {
+    form: { id_token: 'fake-id-token', state },
+  });
+  expect(replay.status()).toBe(403);
+  expect((await replay.json()).code).toBe('invalid_oauth_state');
 
   await page.screenshot({ path: path.join(outDir, `oauth-contract-${testInfo.project.name}.png`), fullPage: true });
 });

@@ -206,9 +206,9 @@ function swiftboard_import_creer_topics( array $rows, array &$imported, array &$
 									} else {
 						$full_url = SWIFTBOARD_URI . '/assets/img/' . ltrim( $image_url, '/' );
 					}
-					// Le rendu public doit rester HTTPS même lorsque WP-CLI est
-					// lancé sans l’en-tête forwarded-proto du reverse proxy.
-					$full_url = set_url_scheme( $full_url, 'https' );
+					// Respecter le schéma réellement servi par l’environnement :
+					// HTTP en QA locale, HTTPS dès que le staging possède son certificat.
+					$full_url = set_url_scheme( $full_url );
 					update_post_meta( $topic_id, '_swiftboard_has_image', 1 );
 					update_post_meta( $topic_id, '_swiftboard_image_url', esc_url_raw( $full_url ) );
 
@@ -527,10 +527,18 @@ function swiftboard_process_import( $file ) {
 	if ( ! empty( $sections['membres'] ) ) {
 		swiftboard_import_creer_membres( $sections['membres'], $imported, $log );
 	}
-	swiftboard_import_creer_topics( $sections['topics'], $imported, $log );
-	swiftboard_import_creer_replies( $sections['replies'], $imported, $log );
+			swiftboard_import_creer_topics( $sections['topics'], $imported, $log );
+		swiftboard_import_creer_replies( $sections['replies'], $imported, $log );
 
-	// v7.6 — Articles de blog (section ---BLOG--- du CSV)
+		// Les réponses modifient l’activité : recalculer le score hot après
+		// l’import complet, et non seulement lors de la création du topic.
+		if ( function_exists( 'swiftboard_refresh_hot_score' ) ) {
+			foreach ( $imported['topics'] as $topic_id ) {
+				swiftboard_refresh_hot_score( (int) $topic_id );
+			}
+		}
+
+		// v7.6 — Articles de blog (section ---BLOG--- du CSV)
 	if ( ! empty( $sections['blog'] ) ) {
 		swiftboard_import_creer_blog( $sections['blog'], $imported, $log );
 	}

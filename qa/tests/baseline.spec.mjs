@@ -6,6 +6,17 @@ import path from 'node:path';
 const baselineDir = path.resolve('../baseline');
 const reportsDir = path.resolve('../reports');
 
+async function dismissLanguagePopup(page) {
+  const overlay = page.locator('#sb-lang-popup-overlay');
+  try {
+    await overlay.waitFor({ state: 'visible', timeout: 2_000 });
+    const stay = page.locator('#sb-lang-stay');
+    if (await stay.isVisible()) await stay.click();
+  } catch (_) {
+    // Popup conditionnelle à la langue du navigateur et au cookie de session.
+  }
+}
+
 async function ensureDirs() {
   await fs.mkdir(baselineDir, { recursive: true });
   await fs.mkdir(reportsDir, { recursive: true });
@@ -61,6 +72,7 @@ test.describe('SwiftBoard runtime baseline', () => {
     results.dark = { dimensions: darkState, axeViolations: axeDark.violations };
     results.dark.severeCount = axeDark.violations.filter((v) => ['critical', 'serious'].includes(v.impact)).length;
 
+    await dismissLanguagePopup(page);
     const toggle = page.locator('.theme-toggle');
     if (await toggle.count()) {
       await toggle.click();

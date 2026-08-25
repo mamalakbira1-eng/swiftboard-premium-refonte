@@ -5,11 +5,17 @@ import pixelmatch from 'pixelmatch';
 import { PNG } from 'pngjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
-const baselineDir = path.join(root, 'reports/cdc-lots-4-9/baseline-parent');
+const baselineDir = process.env.SWIFTBOARD_LOT4_BASELINE_DIR
+  ? path.resolve(process.env.SWIFTBOARD_LOT4_BASELINE_DIR)
+  : path.join(root, 'reports/cdc-lots-4-9/baseline-parent');
 const finalDir = path.join(root, 'reports/cdc-lots-4-9');
 const diffDir = path.join(finalDir, 'visual-diff');
 await fs.mkdir(diffDir, { recursive: true });
-const projects = ['chromium-mobile', 'chromium-tablet', 'chromium-desktop', 'chromium-large', 'firefox-desktop', 'webkit-desktop'];
+const projects = [
+  'chromium-mobile', 'chromium-tablet', 'chromium-desktop', 'chromium-large',
+  'firefox-mobile', 'firefox-tablet', 'firefox-desktop', 'firefox-large',
+  'webkit-mobile', 'webkit-tablet', 'webkit-desktop', 'webkit-large',
+];
 const pixelmatchThreshold = 0.1;
 const maxDiffPercent = 1;
 const results = [];
@@ -33,6 +39,14 @@ for (const project of projects) {
     results.push(result);
   }
 }
-const summary = { generatedAt: new Date().toISOString(), baselineCommit: '4c92c94', comparison: 'working tree Lot 4 versus parent baseline', pixelmatchThreshold, maxDiffPercent, results };
+const summary = {
+  generatedAt: new Date().toISOString(),
+  baselineCommit: process.env.SWIFTBOARD_LOT4_BASELINE_COMMIT || 'non documenté',
+  baselineDir,
+  comparison: 'captures finales Lot 4 versus baseline locale fournie',
+  pixelmatchThreshold,
+  maxDiffPercent,
+  results,
+};
 await fs.writeFile(path.join(diffDir, 'summary.json'), JSON.stringify(summary, null, 2));
 console.log(JSON.stringify(summary, null, 2));

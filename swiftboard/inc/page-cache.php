@@ -83,6 +83,11 @@ function swiftboard_page_cache_dir() {
  * @return bool
  */
 function swiftboard_page_cache_eligible() {
+	// La CSP stricte peut contenir un nonce propre à la requête. Ne jamais
+	// servir un HTML mis en cache avec un nonce ou des empreintes périmés.
+	if ( function_exists( 'swiftboard_envoyer_csp' ) ) {
+		return false;
+	}
 	if ( ! SWIFTBOARD_PAGE_CACHE ) {
 		return false;
 	}

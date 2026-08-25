@@ -5,6 +5,17 @@ import path from 'node:path';
 
 const outDir = path.resolve('../reports/lot1');
 
+async function dismissLanguagePopup(page) {
+  const overlay = page.locator('#sb-lang-popup-overlay');
+  try {
+    await overlay.waitFor({ state: 'visible', timeout: 2_000 });
+    const stay = page.locator('#sb-lang-stay');
+    if (await stay.isVisible()) await stay.click();
+  } catch (_) {
+    // Popup conditionnelle à la langue du navigateur et au cookie de session.
+  }
+}
+
 async function runAxe(page) {
   const result = await new AxeBuilder({ page }).analyze();
   const severe = result.violations.filter((v) => ['critical', 'serious'].includes(v.impact));
@@ -27,6 +38,7 @@ test('Lot 1 — tokens, CTA contrast and theme persistence', async ({ page }, te
   const darkAxe = await runAxe(page);
   await page.screenshot({ path: path.join(outDir, `homepage-dark-${testInfo.project.name}.png`), fullPage: true });
 
+  await dismissLanguagePopup(page);
   const toggle = page.locator('.theme-toggle');
   await expect(toggle).toBeVisible();
   await toggle.click();

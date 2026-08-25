@@ -30,13 +30,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 // 1. CRÉATION DE LA TABLE À L'ACTIVATION
 // ============================================================================
 global $wpdb;
-$swiftboard_votes_db_version = '1.0.0';
+$swiftboard_votes_db_version = '1.1.0';
 
 /**
  * @return void
  */
 function swiftboard_create_votes_table() {
-	global $wpdb, $swiftboard_votes_db_version;
+	global $wpdb;
+	$swiftboard_votes_db_version = '1.1.0';
 	$table_name      = swiftboard_table( 'votes' );
 	$charset_collate = $wpdb->get_charset_collate();
 
@@ -61,9 +62,26 @@ function swiftboard_create_votes_table() {
     ) {$charset_collate};";
 
 	require_once ABSPATH . 'wp-admin/includes/upgrade.php';
-	dbDelta( $sql );
+		dbDelta( $sql );
 
-	update_option( 'swiftboard_votes_db_version', $swiftboard_votes_db_version );
+		// Réparer les schémas issus de versions antérieures sans supposer que la
+		// colonne historique « vote » existe encore.
+		$columns = $wpdb->get_results( "SHOW COLUMNS FROM {$table_name}", ARRAY_A );
+		$names   = array();
+		foreach ( (array) $columns as $column ) {
+			if ( isset( $column['Field'] ) ) {
+				$names[ $column['Field'] ] = true;
+			}
+		}
+		if ( ! isset( $names['vote_type'] ) ) {
+			$wpdb->query( "ALTER TABLE {$table_name} ADD COLUMN vote_type VARCHAR(10) NOT NULL DEFAULT 'up' AFTER post_author" );
+			if ( isset( $names['vote'] ) ) {
+				$wpdb->query( "UPDATE {$table_name} SET vote_type = CASE WHEN LOWER(CAST(vote AS CHAR)) IN ('down', '-1', 'no') THEN 'down' ELSE 'up' END" );
+			}
+		}
+		$wpdb->query( "ALTER TABLE {$table_name} MODIFY vote_type VARCHAR(10) NOT NULL DEFAULT 'up'" );
+		$wpdb->query( "UPDATE {$table_name} SET vote_type = 'up' WHERE vote_type IS NULL OR vote_type NOT IN ('up', 'down')" );
+		update_option( 'swiftboard_votes_db_version', $swiftboard_votes_db_version );
 }
 // Crée la table au prochain chargement admin si absente
 add_action(
@@ -72,9 +90,10 @@ add_action(
 		global $wpdb;
 		$table  = swiftboard_table( 'votes' );
 		$exists = $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $table ) ) === $table;
-		if ( ! $exists ) {
-			swiftboard_create_votes_table();
-		}
+			$version = get_option( 'swiftboard_votes_db_version', '0' );
+			if ( ! $exists || version_compare( (string) $version, '1.1.0', '<' ) ) {
+				swiftboard_create_votes_table();
+			}
 	}
 );
 // Aussi au changement de thème (activation)
@@ -305,7 +324,8 @@ function swiftboard_cast_vote( $post_id, $vote_type ) {
 	}
 
 	// Rate limit : marquer le dernier vote
-	set_transient( $rl_key, time(), 5 * MINUTE_IN_SECONDS );
+	// L’intervalle métier est exprimé en secondes (rookie 5 s, membre 3 s).
+	set_transient( $rl_key, time(), max( 1, $min_interval ) );
 
 	// Compteur quotidien
 	if ( $user_id && $action_taken === 'inserted' ) {

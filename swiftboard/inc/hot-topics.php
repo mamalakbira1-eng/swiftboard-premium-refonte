@@ -174,7 +174,7 @@ function swiftboard_get_hot_topics( $period = '7d', $limit = 5 ) {
  */
 function swiftboard_normalize_period( $period ) {
 	$allowed = array( '24h', '7d', '30d', 'all' );
-	return in_array( $period, $allowed, true ) ?  : 'all';
+	return in_array( $period, $allowed, true ) ? $period : 'all';
 }
 
 // ============================================================================

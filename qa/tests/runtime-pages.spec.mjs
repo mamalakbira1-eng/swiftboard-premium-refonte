@@ -11,6 +11,17 @@ const paths = {
   search: '/?s=teletravail',
 };
 
+async function dismissLanguagePopup(page) {
+  const overlay = page.locator('#sb-lang-popup-overlay');
+  try {
+    await overlay.waitFor({ state: 'visible', timeout: 2_000 });
+    const stay = page.locator('#sb-lang-stay');
+    if (await stay.isVisible()) await stay.click();
+  } catch (_) {
+    // Popup conditionnelle à la langue du navigateur et au cookie de session.
+  }
+}
+
 async function checkPage(page, key, testInfo) {
   const errors = [];
   page.on('console', (message) => {
@@ -38,6 +49,7 @@ test('interactions header, vote, sauvegarde et menus', async ({ page }, testInfo
   await page.goto('/', { waitUntil: 'networkidle' });
   await page.evaluate(() => localStorage.setItem('swiftboard-theme', 'light'));
   await page.reload({ waitUntil: 'networkidle' });
+  await dismissLanguagePopup(page);
   await expect(page.locator('.theme-toggle')).toBeVisible();
   await page.locator('.theme-toggle').click();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');

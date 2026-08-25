@@ -7,8 +7,8 @@ const username = process.env.SB_TEST_USER;
 const password = process.env.SB_TEST_PASSWORD;
 
 test('CDC — SSE : 20 notifications et p95 de livraison', async ({ page }, testInfo) => {
-  test.skip(testInfo.project.name !== 'chromium-desktop', 'Mesure SSE exécutée une seule fois sur Chromium desktop.');
-  test.skip(!username || !password, 'Définir SB_TEST_USER et SB_TEST_PASSWORD pour la recette SSE.');
+  expect(username, 'SB_TEST_USER requis pour la preuve SSE.').toBeTruthy();
+  expect(password, 'SB_TEST_PASSWORD requis pour la preuve SSE.').toBeTruthy();
   await fs.mkdir(outDir, { recursive: true });
   await page.goto('/wp-login.php', { waitUntil: 'networkidle' });
   await page.locator('#user_login').fill(username);
@@ -42,4 +42,32 @@ test('CDC — SSE : 20 notifications et p95 de livraison', async ({ page }, test
   expect(result.received).toBeGreaterThanOrEqual(20);
   expect(result.p95).toBeLessThan(5_000);
   await fs.writeFile(path.join(outDir, `sse-${testInfo.project.name}.json`), JSON.stringify({ ...result, generatedAt: new Date().toISOString() }, null, 2));
+});
+
+test('CDC — SSE : reconnexion et fallback polling après erreurs', async ({ page }, testInfo) => {
+  expect(username, 'SB_TEST_USER requis pour la preuve SSE.').toBeTruthy();
+  expect(password, 'SB_TEST_PASSWORD requis pour la preuve SSE.').toBeTruthy();
+  let fallbackRequests = 0;
+  await page.addInitScript(() => {
+    const nativeTimeout = window.setTimeout.bind(window);
+    const nativeInterval = window.setInterval.bind(window);
+    window.setTimeout = (fn, delay, ...args) => nativeTimeout(fn, Math.min(Number(delay) || 0, 50), ...args);
+    window.setInterval = (fn, delay, ...args) => nativeInterval(fn, Math.min(Number(delay) || 0, 50), ...args);
+  });
+  await page.route('**/wp-json/swiftboard/v1/notifications/stream**', route => route.abort());
+  page.on('request', request => {
+    if (request.url().includes('/wp-json/swiftboard/v1/notifications/unread-count')) fallbackRequests++;
+  });
+  await page.goto('/wp-login.php', { waitUntil: 'networkidle' });
+  await page.locator('#user_login').fill(username);
+  await page.locator('#user_pass').fill(password);
+  await page.locator('#wp-submit').click();
+  await expect(page).not.toHaveURL(/wp-login\.php/);
+  await page.goto('/', { waitUntil: 'domcontentloaded' });
+  await expect.poll(() => fallbackRequests, { timeout: 20_000, intervals: [100, 250, 500] }).toBeGreaterThan(0);
+  await fs.mkdir(outDir, { recursive: true });
+  await fs.writeFile(
+    path.join(outDir, `sse-fallback-${testInfo.project.name}.json`),
+    JSON.stringify({ fallbackRequests, streamAborted: true, generatedAt: new Date().toISOString() }, null, 2)
+  );
 });

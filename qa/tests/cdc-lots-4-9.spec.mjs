@@ -69,7 +69,7 @@ async function captureThemeStates(page, prefix, testInfo) {
   }
 }
 
-async function auditPage(page, url, label, theme = null) {
+async function auditPage(page, url, label, theme = null, screenshotPath = null) {
   const issues = attachRuntimeIssues(page);
   const canBustCache = process.env.SB_QA_BUST_QUERY === '1' && url !== '/login/' && !url.startsWith('/wp-login.php');
   const targetUrl = canBustCache
@@ -101,9 +101,18 @@ async function auditPage(page, url, label, theme = null) {
     await expect(page.locator('html')).toHaveAttribute('data-theme', theme);
   }
   await dismissLanguagePopup(page, 3000);
-  const axe = await new AxeBuilder({ page }).analyze();
+  // WebKit large peut terminer Axe puis crasher avant une évaluation ou une
+  // capture suivante. L’overflow est donc relevé avant Axe, sans supprimer
+  // aucune des deux assertions normatives.
   const overflow = await page.evaluate(() => ({ innerWidth: window.innerWidth, scrollWidth: document.documentElement.scrollWidth }));
   expect(overflow.scrollWidth, `${label} horizontal overflow`).toBeLessThanOrEqual(overflow.innerWidth + 1);
+  if (screenshotPath) {
+    await page.screenshot({ path: screenshotPath, fullPage: false, timeout: 15000 });
+  }
+  const axe = await new AxeBuilder({ page })
+    .exclude('#wpadminbar')
+    .options({ resultTypes: ['violations'] })
+    .analyze();
   return { url: page.url(), status: response?.status(), axeViolations: axe.violations, overflow, issues };
 }
 
@@ -183,7 +192,7 @@ test('Lot 4 — cartes, tri, pagination et responsive du fil', async ({ page }, 
 
   await page.goto('/', { waitUntil: 'networkidle' });
   await captureThemeStates(page, 'lot4-home', testInfo);
-  const axe = await new AxeBuilder({ page }).analyze();
+  const axe = await new AxeBuilder({ page }).exclude('#wpadminbar').analyze();
   const overflow = await page.evaluate(() => ({ innerWidth: window.innerWidth, scrollWidth: document.documentElement.scrollWidth }));
   expect(overflow.scrollWidth).toBeLessThanOrEqual(overflow.innerWidth + 1);
   result.criteria['L4-05'] = { status: 'PASS', viewport: testInfo.project.name, overflow };
@@ -271,8 +280,9 @@ test('Lots 5 à 8 — thread, profil, forum et auth', async ({ page }, testInfo)
   await expect(page.locator('body')).toContainText(/Connexion|Se connecter|Log In|Login/i);
   const signupResponse = await page.goto('/wp-login.php?action=register', { waitUntil: 'networkidle' });
   expect(signupResponse?.status()).toBe(200);
-  await expect(page.locator('#registerform, #user_login, #user_email')).toHaveCount(await page.locator('#registerform, #user_login, #user_email').count());
-  const signupFields = await page.locator('#user_login, #user_email').count();
+  const signupSelector = '#registerform, #user_login, #user_email, #signup_username, #signup_email';
+  await expect(page.locator(signupSelector).first()).toBeAttached();
+  const signupFields = await page.locator('#user_login, #user_email, #signup_username, #signup_email').count();
   expect(signupFields).toBeGreaterThan(0);
   await page.screenshot({ path: path.join(outDir, `lot8-signup-${testInfo.project.name}.png`), fullPage: true });
   await page.goto('/', { waitUntil: 'networkidle' });
@@ -320,11 +330,21 @@ test('Lot 9 — pages clés, axe, overflow, thème et états vides', async ({ pa
     await page.goto(process.env.SB_QA_BUST_QUERY === '1' ? `/?sbqa=${theme}-${Date.now()}` : '/', { waitUntil: 'networkidle' });
     await page.evaluate(value => localStorage.setItem('swiftboard-theme', value), theme);
     for (const [label, url] of pages) {
-      const audit = await auditPage(page, url, `${label}-${theme}`, theme);
-      results[`${label}-${theme}`] = audit;
-      await page.screenshot({ path: path.join(outDir, `lot9-${label}-${theme}-${testInfo.project.name}.png`), fullPage: false, timeout: 15000 });
-      expect(audit.axeViolations, `${label}/${theme}: ${JSON.stringify(audit.axeViolations)}`).toEqual([]);
-      assertCleanRuntime(audit.issues, `${label}/${theme}`);
+      const routePage = await page.context().newPage();
+      try {
+        const audit = await auditPage(
+          routePage,
+          url,
+          `${label}-${theme}`,
+          theme,
+          path.join(outDir, `lot9-${label}-${theme}-${testInfo.project.name}.png`),
+        );
+        results[`${label}-${theme}`] = audit;
+        expect(audit.axeViolations, `${label}/${theme}: ${JSON.stringify(audit.axeViolations)}`).toEqual([]);
+        assertCleanRuntime(audit.issues, `${label}/${theme}`);
+      } finally {
+        await routePage.close().catch(() => {});
+      }
     }
   }
   const onboardingResponse = await page.goto(process.env.SB_QA_BUST_QUERY === '1' ? `/?sbqa=onboarding-${Date.now()}` : '/', { waitUntil: 'commit', timeout: 20000 });

@@ -137,14 +137,14 @@ add_filter(
 		global $wpdb;
 		$sort = swiftboard_get_current_sort();
 
-		if ( in_array( $sort, array( 'hot', 'top' ), true ) ) {
+		if ( $sort === 'hot' ) {
 			if ( strpos( $join, 'sb_mt_hot' ) === false ) {
 				$join .= " LEFT JOIN {$wpdb->postmeta} sb_mt_hot ON (sb_mt_hot.post_id = {$wpdb->posts}.ID AND sb_mt_hot.meta_key = '_swiftboard_hot_score') ";
 			}
 			return $join;
 		}
 
-		// rising : score net uniquement
+		// top et rising : score net de votes uniquement
 		if ( strpos( $join, 'sb_mt_score' ) === false ) {
 			$join .= " LEFT JOIN {$wpdb->postmeta} sb_mt_score ON (sb_mt_score.post_id = {$wpdb->posts}.ID AND sb_mt_score.meta_key = '_swiftboard_vote_score') ";
 		}
@@ -172,8 +172,11 @@ add_filter(
 
 		switch ( $sort ) {
 			case 'hot':
-			case 'top':
 				return 'COALESCE(sb_mt_hot.meta_value+0, 0) DESC, '
+				. "{$wpdb->posts}.post_date DESC, {$wpdb->posts}.ID DESC";
+
+			case 'top':
+				return 'COALESCE(sb_mt_score.meta_value+0, 0) DESC, '
 				. "{$wpdb->posts}.post_date DESC, {$wpdb->posts}.ID DESC";
 
 			case 'rising':

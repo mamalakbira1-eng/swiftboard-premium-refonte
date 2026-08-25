@@ -24,6 +24,8 @@ if ( ! defined( 'ABSPATH' )) exit;
  */
 // phpcs:disable WordPress.DB.PreparedSQL.NotPrepared — SQL queries use internal $wpdb->prefix variables (safe)
 
+$swiftboard_notifications_db_version = '1.1.0';
+
 // ============================================================================
 // 1. CRÉATION DE LA TABLE
 // ============================================================================
@@ -32,6 +34,7 @@ if ( ! defined( 'ABSPATH' )) exit;
  */
 function swiftboard_create_notifications_table() {
 	global $wpdb;
+	$swiftboard_notifications_db_version = '1.1.0';
 	$table           = swiftboard_table( 'notifications' );
 	$charset_collate = $wpdb->get_charset_collate();
 
@@ -53,14 +56,34 @@ function swiftboard_create_notifications_table() {
     ) {$charset_collate};";
 
 	require_once ABSPATH . 'wp-admin/includes/upgrade.php';
-	dbDelta( $sql );
+		dbDelta( $sql );
+		$columns = $wpdb->get_results( "SHOW COLUMNS FROM {$table}", ARRAY_A );
+		$names   = array();
+		foreach ( (array) $columns as $column ) {
+			if ( isset( $column['Field'] ) ) {
+				$names[ $column['Field'] ] = true;
+			}
+		}
+		if ( ! isset( $names['is_read'] ) ) {
+			$wpdb->query( "ALTER TABLE {$table} ADD COLUMN is_read TINYINT(1) NOT NULL DEFAULT 0 AFTER excerpt" );
+		}
+		if ( ! isset( $names['created_at'] ) ) {
+			$wpdb->query( "ALTER TABLE {$table} ADD COLUMN created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER is_read" );
+		}
+		$wpdb->query( "ALTER TABLE {$table} MODIFY is_read TINYINT(1) NOT NULL DEFAULT 0" );
+		$wpdb->query( "ALTER TABLE {$table} MODIFY created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP" );
+		$wpdb->query( "UPDATE {$table} SET is_read = 0 WHERE is_read IS NULL OR is_read NOT IN (0, 1)" );
+		$wpdb->query( "UPDATE {$table} SET created_at = CURRENT_TIMESTAMP WHERE created_at IS NULL OR created_at = '0000-00-00 00:00:00'" );
+		update_option( 'swiftboard_notifications_db_version', $swiftboard_notifications_db_version );
 }
 add_action(
 	'admin_init',
 	function () {
 		global $wpdb;
-		$table = swiftboard_table( 'notifications' );
-		if ( $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $table ) ) !== $table ) {
+		$table  = swiftboard_table( 'notifications' );
+		$exists = $wpdb->get_var( $wpdb->prepare( 'SHOW TABLES LIKE %s', $table ) ) === $table;
+		$version = get_option( 'swiftboard_notifications_db_version', '0' );
+		if ( ! $exists || version_compare( (string) $version, '1.1.0', '<' ) ) {
 			swiftboard_create_notifications_table();
 		}
 	}

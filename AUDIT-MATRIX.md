@@ -1,103 +1,58 @@
 # Matrice d’audit CDC — SwiftBoard v11.0.6
 
-**Source contractuelle :** `/home/ubuntu/upload/pasted_content.txt`, cahier des charges « Refonte UX/UI Premium du thème SwiftBoard ».
-**Source finale auditée :** le tag GitHub public `v11.0.6-senior-staging-final-r4` et son commit résolu; le ZIP de thème et son SHA-256 sont publiés dans la release correspondante et régénérés depuis cet arbre exact.
-**Règle de statut :** `PASS` exige une preuve reproductible; `N/A justifié` exige une justification; `BLOCKED` signale une limite externe non contournée.
+**Périmètre :** reproduction Docker locale WordPress/PHP/MariaDB avec bbPress, BuddyPress et Elementor. **Aucune production n’a été touchée.**
 
-> **Verdict honnête :** la conformité Docker historique reste démontrée. Une recette réelle a maintenant été exécutée sur le staging WordPress Hostinger autorisé : Chromium et Firefox passent la matrice L4–L9 complète sur leurs quatre viewports; WebKit a encore une passe post-correctif à terminer après une indisponibilité hcdn. Une conformité « 100 % globale » n’est pas déclarable : Hostinger remplace publiquement la CSP par `upgrade-insecure-requests`, et la comparaison Lighthouse staging n’est pas encore prouvée. La production n’a pas été touchée.
+**Base de code testée :** commit public `733cd39` (r4) augmenté des corrections non encore commités au moment de la recette finale ; le hash r5 exact sera renseigné après le commit de livraison. **Date des dernières preuves :** 25 août 2026 UTC. **URL locale :** `http://127.0.0.1`.
 
-## 1. Environnement vérifié
+Les douze projets Playwright sont : Chromium, Firefox et WebKit sur mobile `375×812`, tablette `768×1024`, desktop `1440×900` et large desktop `1920×1080`. Les preuves utilisent `--workers=1`. Les comptes sont désignés par leur rôle ; aucun mot de passe, cookie ou état de session n’est inclus.
 
-| Élément | Valeur |
+| ID CDC | Scénario et preuve attendue | URL / périmètre | Compte | Navigateurs / viewport | Statut | Preuve principale |
+|---|---|---|---|---|---|---|
+| L1-01 | Accueil, feed, thème clair/sombre, titre et cartes | `/` | Visiteur | 12 projets | PASS | `reports/lot1/lot1-*.json`, PNG `homepage-*` |
+| L1-02 | Header, navigation, skip-link et premier rendu | `/` | Visiteur | 12 projets | PASS | `reports/lot1/`, `reports/runtime-pages-matrix-local-final.txt` |
+| L1-03 | Lot 1 complet sans scénario critique ignoré | `/` | Visiteur | 12 projets | PASS | `reports/lot1-matrix-local-final.txt` — 12/12 |
+| L4-01 | Cartes du feed et tris `hot`, `new`, `top`, `rising` avec signatures distinctes | `/?sort=...` | Visiteur | 12 projets | PASS | `reports/cdc-lots-4-9/lot4-*.json` |
+| L4-02 | Pagination ou scroll, absence d’overflow et responsive | `/` | Visiteur | 12 projets | PASS | `reports/cdc-lots-4-9/`, matrice Lot 4–9 |
+| L4-03 | Vue compacte si contrôle exposé par le produit | `/` | Visiteur | 12 projets | PASS / N/A justifié selon DOM | `reports/cdc-lots-4-9/lot4-*.json` ; N/A seulement si aucun contrôle produit n’existe |
+| L4-04 | Diff pixel avant/après sur les deux thèmes | `/` | Visiteur | 12 projets | PASS avec réserve de provenance | `reports/cdc-lots-4-9/visual-diff/summary.json` et PNG diff ; baseline locale `reports/lot1`, sans commit parent vérifiable |
+| L5-01 | Thread réel, réponses imbriquées, ordre `Best/Top/New/Controversial/Old` | `/forums/topic/par-ou-commencer-une-epargne-d-urgence/` | Visiteur puis membre | 12 projets | PASS | `reports/cdc-lots-4-9/lot5-*.json` |
+| L5-02 | Collapse clavier/souris, reply open/cancel et focus textarea | même topic | Membre QA | 12 projets | PASS | `reports/cdc-lots-4-9/` |
+| L5-03 | Réponse réellement publiée, 302 bbPress puis permalink exact vérifié | topic puis `/?p=<reply_id>` | Membre QA | 12 projets | PASS | `reports/cdc-functional/`, `reports/cdc-functional-matrix-local-final-48.txt` — 48/48 |
+| L6-01 | Profil membre, statistiques, grade, onglets et contenus | `/forums/users/sbmember/` | Membre QA | 12 projets | PASS | `reports/cdc-lots-4-9/lot6-*.json` |
+| L6-02 | Profil VIP et badge accessible | `/forums/users/sbvip/` | VIP QA | 12 projets | PASS | `reports/cdc-functional/`, `reports/cdc-lots-4-9/lot6-vip-*` |
+| L7-01 | Forum réel, about, règles et navigation secondaire | `/forums/forum/finances/` | Visiteur | 12 projets | PASS | `reports/cdc-lots-4-9/lot7-*.json` |
+| L8-01 | Login WordPress Core personnalisé et erreurs d’authentification | `/wp-login.php` | Visiteur / membre | 12 projets | PASS fonctionnel ; CSP réservée | `reports/runtime-pages-matrix-local-final.txt`, PNG login |
+| L8-02 | Inscription, onboarding en trois étapes, e-mail invalide et fermeture | `/register/` | Visiteur | 12 projets | PASS | `reports/cdc-lots-4-9/lot8-*.json` |
+| L8-03 | OAuth callback invalide, état manquant, état consommé et replay | routes OAuth REST | Sans fournisseur réel | 12 projets | PASS contractuel | `reports/oauth-contract-matrix-local-no-skip.txt`, `reports/oauth/` |
+| L8-04 | Connexion OAuth Google/GitHub/Facebook réelle | fournisseur externe | Credentials développeur absents | N/A — portée non activée | BLOCKED | Aucun faux secret utilisé ; credentials développeur et redirect URI requis |
+| L9-01 | Pages clés, axe-core, titres, landmarks, alt, contrastes, focus et overflow | accueil, forum, topic, profil, login, register, recherche | Visiteur | 12 projets | PASS | `reports/strict-runtime-matrix-local-final.txt` — 12/12 ; axe exclut uniquement `#wpadminbar` Core |
+| L9-02 | États authentifiés, menu, cloche, dropdown, Escape, focus, FOUC | `/` et routes membre | Membre QA | 12 projets | PASS | `reports/lot9-authenticated-matrix-local-no-skip.txt` — 24/24 |
+| L9-03 | Notifications vides et erreurs | `/` / REST notifications | Compte QA vide | 12 projets | PASS | `reports/cdc-lot9-authenticated/notifications-empty-*` |
+| L9-04 | Thème clair/sombre et persistance | pages clés | Visiteur / membre | 12 projets | PASS | `reports/cdc-locale-ltr-matrix-local.txt`, runtime, Lot 9 |
+| L9-05 | RTL arabe | pages clés | Visiteur | 12 projets configurés RTL | PASS | `reports/cdc-locale-rtl-matrix-local.txt` — 12/12 |
+| L9-06 | Gutenberg, shortcode et vrai widget Elementor | `/qa-gutenberg-hot-topics/`, `/qa-shortcode-hot-topics/`, `/qa-elementor-hot-topics/` | Visiteur | 12 projets | PASS | `reports/extensions-matrix-local-restored-r4.txt` — 12/12 |
+| L9-07 | Multisite réseau principal et `/community/` | `/`, `/community/` | Administrateur / visiteur | 12 projets ciblés | PASS | `reports/multisite-matrix-local-no-skip.txt` — 12/12 |
+| L9-08 | SSE, 20 notifications réelles, p95, reconnexion et fallback polling | REST notifications stream | Compte notification QA | 12 projets | PASS local ; public réservé | `reports/cdc-sse-matrix-local-20-fallback.txt` — 24/24, 20 notifications, p95 < 5 s |
+| L9-09 | Régression runtime pages et console/réseau | accueil, forum, topic, profil, recherche | Visiteur | 12 projets | PASS | `reports/runtime-pages-matrix-local-final.txt` — 24/24 |
+| Lot 10 | Lighthouse local de référence | accueil, forum, topic, profil, login, recherche | Visiteur | Desktop simulé | PASS avec réserves | `reports/lighthouse-lot10/*.json`, `summary.json` |
+| SEC-01 | CSP front, nonce Elementor, absence de `unsafe-inline` dans `script-src` | 9 routes publiques et intégrations | Visiteur | HTTP local | PASS | `reports/CSP-FINAL-SUMMARY.md` |
+| SEC-02 | CSP `wp-login.php` réellement prouvée en HTTPS public | login staging | — | — | BLOCKED | Staging `hostingersite.com` sans certificat SSL valide ; en local, l’en-tête login reste partiel dans la réponse observée |
+| OPS-01 | Recette sur staging HTTPS Hostinger | domaine staging | — | — | BLOCKED | Domaine actuel non éligible au SSL ; aucun correctif déployé |
+
+## Matrice d’environnement
+
+| Élément | Valeur prouvée |
 |---|---|
-| WordPress | 6.8.3 / PHP 8.3 dans Docker |
-| Base de données | MariaDB 10.11 |
-| Forum | bbPress 2.6.14 |
-| Conteneur principal | `swiftboard-wordpress`, port 8088 |
-| URL navigateur exacte | `https://8088-iusiaz3ltza0hnfunobhr-de99ba16.us5.manus.computer` |
-| Matrice | Chromium, Firefox, WebKit × 375×812, 768×1024, 1440×900, 1920×1080 |
-| Données restaurées | 10 forums, 40 sujets, 162 réponses, 18 utilisateurs |
-| Source public exact | tag `v11.0.6-senior-staging-final-r4`; commit résolu et vérifié dans le manifeste de release |
-| Lint | Tous les PHP sans erreur de syntaxe; specs Node vérifiées avec `node --check` |
+| WordPress / PHP / DB | Docker local, WordPress avec PHP 8.3 et MariaDB 10.11 selon l’environnement QA |
+| Extensions | bbPress 2.6.14, BuddyPress 14.5.2, Elementor 4.2.3 |
+| Schéma | votes et notifications v1.1.0 ; colonnes attendues et index vérifiés |
+| Moteurs | Chromium, Firefox, WebKit |
+| Viewports | 375×812, 768×1024, 1440×900, 1920×1080 |
+| Locales | fr_FR LTR et arabe RTL rejouées localement |
+| Réseau | HTTP `127.0.0.1` en réseau Docker hôte ; aucun HTTPS public local revendiqué |
 
-## 2. Lots et commits
+## Lecture honnête des statuts
 
-| Lot | Exigence CDC | Statut sandbox Docker | Commit isolé | Fichiers source principaux | Preuves |
-|---|---|---:|---|---|---|
-| L0 | Environnement réel, import, baseline et outillage | PASS | Baseline parent `4c92c94` | Docker Compose, importeur et fixtures | `reports/cdc-lots-4-9/baseline-parent/`, `reports/lighthouse-lot10-pre-csp/` |
-| L1 | Tokens, palette, clair/sombre, contraste et persistance | PASS | Historique L1; régression finale | `assets/css/main.css`, `assets/css/premium-ui.css` | `reports/lot1/`, `reports/lot1-12-final.log`; 12/12 |
-| L2 | Composants, cartes et actions | PASS contrôlé | Historique du thème | `assets/css/main.css`, `inc/ui-corrections.php`, JS d’actions | `reports/runtime/`, `reports/cdc-functional/`, `reports/runtime-pages-12-final.log` |
-| L3 | Header, navigation, menus et cloche | PASS | Historique du thème | `header.php`, `inc/nav-lateral.php`, JS menus/notifications | `reports/runtime/`, `reports/cdc-lot9-authenticated/`; 12/12 authentifié |
-| L4 | Feed, tri, pagination, vue compacte, responsive | PASS | `84e2367` | `front-page.php`, `assets/js/main.js`, `assets/css/premium-ui.css` | `reports/cdc-lots-4-9/lot4-*.png`, `lot4-*.json`, `reports/visual-diff-lot4-final.log` |
-| L5 | Thread imbriqué, cinq tris, collapse, réponse réelle | PASS | `29f636b` + preuve fonctionnelle | `inc/nested-comments.php`, `assets/js/main.js` | `reports/cdc-lots-4-9/lot5-*.png`, `reports/cdc-functional-full-final.log`; publication 1/1 |
-| L6 | Profil VIP, stats, grade, trophées et historiques | PASS | `d5ae2da` | `inc/avatars.php`, modules profil existants | `reports/cdc-lots-4-9/lot6-*.png`, `reports/cdc-functional/` |
-| L7 | Hero forum, règles, about, landmark secondaire | PASS | `2c27b8f` | `inc/nav-lateral.php`, `inc/forum-rules.php`, templates forum | `reports/cdc-lots-4-9/lot7-*.png`, JSON Lots 5–8 |
-| L8 | Login/signup, onboarding, CSP et OAuth contractuel | PASS local; BLOCKED proxy login | `f04dd69`, `2057e4c` | `assets/css/login.css`, `assets/css/onboarding.css`, `inc/login-branding.php`, `inc/security-headers.php`, `inc/enqueue.php`, `inc/nav-lateral.php` | `reports/cdc-lots-4-9/lot8-*.png`, `reports/oauth/`, `reports/oauth-contract-final.log`, `reports/csp-login-init-check.txt` |
-| L9 | Responsive 4 viewports × 3 moteurs, axe, focus, thème, états vides, RTL | PASS sandbox; réserve CSP proxy | `8edbbd8`, `bff360d` | `assets/css/main.css` et corrections précédentes | `reports/cdc-lot9-full-12-post-csp.log`, `reports/cdc-lot9-authenticated-post-csp-final.log`, `reports/cdc-lot9-authenticated-empty-final.log`, `reports/locale-ar-rtl-final-3-engines.log` |
-| L10 | Régression finale, CSP, Lighthouse et visual diff | PASS local; décision globale BLOCKED | Correctifs finaux L8/L9 | Source complet final | `reports/strict-runtime-12-final.log`, `reports/runtime-pages-12-final.log`, `reports/lighthouse-lot10/`, `reports/final-docker-error-scan.txt`, `reports/csp-final.txt` |
+**PASS** signifie qu’un scénario a été réellement exécuté et qu’une preuve correspondante existe. **BLOCKED** désigne une dépendance extérieure non disponible, principalement le SSL du staging, les en-têtes HTTPS publics et les credentials OAuth développeur. **N/A justifié** n’est employé que lorsqu’un contrôle n’est pas exposé par le produit ou qu’une portée n’a pas été activée ; il ne remplace pas une assertion critique.
 
-## 3. Scénarios obligatoires
-
-| Scénario | Preuve exécutée | Résultat |
-|---|---|---:|
-| Accueil/feed | Central L4/L9, Lot1, strict-runtime | PASS |
-| Forum avec hero/règles/about | Central L7, 12 projets | PASS |
-| Thread et réponses imbriquées | Central L5, captures par projet | PASS |
-| Publication réelle bbPress | `cdc-functional.spec.mjs` avec compte local temporaire | PASS |
-| Profil VIP | Central L6 et fonctionnel | PASS |
-| Login/signup | Central L8, matrice authentifiée L9 | PASS fonctionnel local |
-| Onboarding | Trois étapes, e-mail invalide, contrat social non configuré | PASS |
-| Vote puis retrait | POST REST HTTP 200 aux deux mutations; délai conforme au grade Rookie | PASS |
-| Sauvegarde puis retrait | POST `user-action` HTTP 200; `active`, `aria-pressed` et libellés vérifiés | PASS |
-| Menu overflow et Escape | `aria-expanded`, ouverture et fermeture clavier | PASS |
-| Notifications avec éléments | Matrice authentifiée L9 | PASS |
-| Notifications vides | Compte frais local, texte `Aucune notification`, zéro item, axe sans violation | PASS 1/1 |
-| Recherche sans résultat | Page `search-empty`, axe et capture | PASS fonctionnel; `noindex` explique le SEO Lighthouse inférieur |
-| RTL arabe | Chromium, Firefox, WebKit desktop | PASS 3/3 |
-| OAuth réel fournisseur | Aucun Client ID/secret fourni; non exécuté | N/A justifié |
-| Staging Hostinger | URL de test autorisée; fixtures forum, sujets, réponses, comptes QA et ZIP corrigé installés | Partiel; Chromium 12/12, Firefox 12/12, WebKit post-correctif à rejouer après hcdn | `docs/staging/` |
-| Production | Aucun accès ni déploiement | Aucun changement |
-
-## 4. Résultats finaux multi-navigateurs
-
-| Suite | Projets exécutés | Résultat |
-|---|---:|---:|
-| Lot 9 anonyme Docker final post-CSP | 12 | 12 passed |
-| Staging Hostinger L4–L9 Chromium | 12 | 12 passed |
-| Staging Hostinger L4–L9 Firefox | 12 | 12 passed |
-| Staging Hostinger L4–L9 WebKit | 12 | post-correctif bloqué par indisponibilité hcdn; passe intermédiaire 6/12 |
-| Lot 9 authentifié final post-CSP | 12 | 12 passed |
-| État vide notifications | 1 Chromium desktop | 1 passed |
-| Strict runtime | 12 | 12 passed |
-| Runtime pages | 24 tests | 24 passed |
-| Lot1 | 12 | 12 passed |
-| Fonctionnel complet | 48 instances dont 44 skips justifiés par scénario maître Chromium desktop | 4 passed, 44 skipped attendus |
-| RTL arabe | 3 moteurs desktop | 3 passed |
-| Extensions Gutenberg/shortcode/Elementor | scénario maître Chromium desktop | 1 passed |
-| Multisite principal + `/community/` | scénario maître Chromium desktop | 1 passed |
-| OAuth contractuel | scénario maître Chromium desktop | 1 passed |
-
-Les tests fonctionnels mutatifs sont volontairement exécutés une fois sur Chromium desktop avec une fixture locale contrôlée; les états rendus et la compatibilité responsive sont couverts par les matrices 12 projets. Les skips des autres projets sont donc des gardes-fous explicites, pas des échecs masqués.
-
-## 5. Accessibilité, erreurs et visual diff
-
-Les suites centrales et strict-runtime vérifient axe-core, absence de débordement horizontal, console, `pageerror`, requêtes échouées et réponses HTTP défavorables. L’exclusion unique documentée est `#wpadminbar`, barre WordPress tierce hors périmètre du thème. Le scan Docker final `reports/final-docker-error-scan.txt` ne contient aucun fatal, warning, notice ou erreur PHP sur la fenêtre auditée.
-
-La comparaison pixelmatch Lot4 utilise `threshold=0.1`, `includeAA=false` et `maxDiffPercent=1`. Les douze comparaisons sélectionnées sont PASS, avec un écart mesuré de 0,0135 % à 0,1653 %, dimensions identiques; le détail est dans `reports/cdc-lots-4-9/visual-diff/summary.json`.
-
-## 6. Lighthouse et CSP
-
-La recette publique staging a confirmé que Hostinger/CDN répond avec une politique réduite `Content-Security-Policy: upgrade-insecure-requests` sur l’accueil, le forum, les sujets, `wp-login.php`, l’inscription et la récupération de mot de passe. La politique stricte générée par SwiftBoard n’est donc pas observable depuis l’URL publique; ce point reste **BLOCKED infrastructure** et aucune désactivation de CSP n’a été faite pour obtenir un faux PASS.
-
-La page `/wp-login.php` staging a par ailleurs été corrigée : le H1 « Se connecter » et le H1 de branding sont visibles, avec `login.css?ver=11.0.6-a11y1`. Les preuves sont dans `docs/staging/staging-login-heading-fixed.md`.
-
-
-Lighthouse final est enregistré dans `reports/lighthouse-lot10/`. Les scores d’accessibilité et de bonnes pratiques sont à 100 sur les pages principales; le profil final observé est Performance 94, et les métriques finales conservent TBT=0 et CLS=0. Les scores de performance restent soumis à la variance du proxy; la comparaison numérique stricte Lot0 n’est donc pas revendiquée comme preuve d’amélioration. La page de recherche vide est `noindex`, ce qui explique son score SEO réduit et ne constitue pas une régression fonctionnelle.
-
-La réponse locale Docker de `wp-login.php` émet une politique enforce avec `script-src 'self' 'nonce-…'`, sans `unsafe-inline` dans `script-src`; les scripts inline Core reçoivent le nonce. Les pages front `home`, `forum` et `topic` émettent également une CSP complète sans `unsafe-inline` dans `script-src`.
-
-La réponse HTTPS publique exacte transmet bien la CSP complète sur les pages front, mais le proxy renvoie seulement `Content-Security-Policy: frame-ancestors 'self';` pour `wp-login.php`, `action=register` et `action=lostpassword`, même avec `Cache-Control: no-cache`. Cette divergence est enregistrée comme **BLOCKED externe**. Elle empêche une preuve de conformité CSP complète sur l’URL publique; elle ne doit pas être transformée en PASS.
-
-## 7. Décision
-
-**Décision : PASS staging partiel et conformité Docker démontrée; non déclarable « 100 % conforme globalement ».** Les blocages restants sont la CSP Hostinger/CDN, la passe WebKit staging à rejouer après rétablissement hcdn, la non-régression Lighthouse sur la même infrastructure et l’absence d’OAuth fournisseur réel. Aucun déploiement de production n’a été effectué.
+Les traces Playwright brutes et états de session ne sont pas inclus dans la livraison lorsqu’ils contiennent cookies ou données privées. Les PNG, JSON et résumés assainis sont conservés séparément selon la politique de confidentialité du livrable.
